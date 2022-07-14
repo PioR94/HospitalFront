@@ -6,6 +6,8 @@ export const CreateDoctorForm = () => {
 
     const [loading, setLoading] = useState(false);
     const [login, setLogin] = useState('');
+    const [err, setErr] = useState(false);
+
 
     const [form, setForm] = useState({
         login: '',
@@ -27,10 +29,17 @@ export const CreateDoctorForm = () => {
     if (loading) {
         return <h2>Uploading</h2>;
     }
+
     if (login) {
         return <>
             <h2>Dodano pomyślnie</h2>
-            <Btn text="Zaluguj się"/>
+            <a href="/doctor">Zaloguj się</a>
+        </>
+    }
+
+    if (err) {
+        return<>
+            <h2>Login lub hasło są zajęte</h2>
         </>
     }
 
@@ -53,9 +62,20 @@ export const CreateDoctorForm = () => {
                });
 
                const data = await res.json();
+
                setLogin(data.login);
 
-           } finally {
+           } catch {
+               setErr(true);
+
+               setTimeout(() => {
+                   setErr(false);
+               }, 3000)
+
+           }
+
+
+           finally {
                setLoading(false);
            }
     };
