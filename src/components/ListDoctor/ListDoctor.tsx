@@ -1,6 +1,6 @@
 import React, {SyntheticEvent, useState} from 'react';
 import {OneDoctor} from "../OneDoctor/OneDoctor";
-
+import "./ListDoctor.css"
 
 interface Props {
     idPt: string,
@@ -32,7 +32,7 @@ export const ListDoctor = (props: Props) => {
       const data = await res.json();
 
          const dataDr = data.map((one: DataDr) =>
-             <OneDoctor key={one.idDr} idDr={one.idDr} name={one.nameDr} lastName={one.lastNameDr} specialization={one.specialization} idPt={props.idPt}/>
+            <li className="listAllLi"> <OneDoctor key={one.idDr} idDr={one.idDr} name={one.nameDr} lastName={one.lastNameDr} specialization={one.specialization} idPt={props.idPt}/> </li>
          )
 
             setList(dataDr);
@@ -43,8 +43,8 @@ export const ListDoctor = (props: Props) => {
 
 
     return  <>
-        <button onClick={listAll}>Lista lekarzy</button>
-        {on && <ul>{list}</ul>}
+        <button onClick={listAll} className="listAllButton">Lista lekarzy</button>
+        {on && <ul className="listAllUl">{list}</ul>}
     </>
 
 

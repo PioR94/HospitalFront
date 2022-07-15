@@ -28,14 +28,15 @@ export const OneDoctor = (props: Props) => {
 
 
 
-return on ? <>
-    <p className="oneDr">Dr {props.name} {props.lastName} spec. {props.specialization} <button onClick={onClick}>Wróć</button> </p>
+return on ? <div className="divVisit">
+        <p className="pDr">Dr {props.name} {props.lastName} spec. {props.specialization}  </p> <button className="btnDr" onClick={onClick}>Wróć</button>
         <AdVisitForm idDr={props.idDr} idPt={props.idPt}/>
-    <hr/>
-    </> :
-    <>
-        <p className="oneDr">Dr {props.name} {props.lastName} spec. {props.specialization} <button onClick={onClick}>Zarezerwuj wizytę</button> </p>
+         <hr className="hrVisit"/>
+    </div>
+
+          : <div className="divDr">
+        <p className="pDr">Dr {props.name} {props.lastName} spec. {props.specialization} </p> <button className="btnDr" onClick={onClick}>Zarezerwuj wizytę</button>
         <hr/>
-    </>
+    </div>
 
 }

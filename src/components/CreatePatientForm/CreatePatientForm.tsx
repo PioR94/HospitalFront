@@ -1,6 +1,6 @@
 import React, {SyntheticEvent, useEffect, useState} from 'react';
-import { Patient, User } from 'types';
 import {Btn} from "../Btn/Btn";
+import "./CreatePatientForm.css"
 
 
 export const CreatePatientForm = () => {
@@ -29,21 +29,24 @@ export const CreatePatientForm = () => {
     };
 
     if (loading) {
-        return <h2>Uploading</h2>;
+        return <div className="bg">
+            <h2 className="infCreate">Uploading</h2>
+        </div>
     }
 
     if (login) {
-        return <>
-            <h2>OK</h2>
-            <a href="/patient">Zaloguj się</a>
-        </>
+        return <div className="bg">
+            <h2 className="infCreate">Konto zostało poprawnie utworzone</h2>
+            <a href="/patient" className="log">Zaloguj się</a>
+        </div>
     }
 
 
     if (err) {
         return<>
-            <h2>Login lub hasło są zajęte</h2>
-            <Btn text="Wróć" to="."/>
+            <div className="bg">
+            <h2 className="infCreate">Login lub email są zajęte</h2>
+            </div>
         </>
     }
 
@@ -91,7 +94,10 @@ export const CreatePatientForm = () => {
 
 
     return <>
-        <form action="" onSubmit={sendForm}>
+        <div className="bg">
+        <form action="" onSubmit={sendForm} className="formRegister">
+            <h2>Rejestracja</h2>
+
             <p>
                 <label>
                     Login: <br/>
@@ -162,5 +168,6 @@ export const CreatePatientForm = () => {
             <button>Wyslij</button>
 
         </form>
+        </div>
     </>
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {VisitsDoctor} from "../VisitsDoctor/VisitsDoctor";
+import "./AccountDoctor.css";
 
 interface Props {
     idDr: string,
@@ -8,8 +9,10 @@ interface Props {
 
 export const AccountDoctor = (props: Props) => {
 
-    return <>
-        <h2> Konto: {props.loginDr}</h2>
+    return <div className="bgAccountDoctor">
+        <header className="headerAccountDoctor">
+        <h2 className="h2AccountDoctor">{props.loginDr}</h2>
         <VisitsDoctor idDr={props.idDr}/>
-    </>
+        </header>
+    </div>
 }

@@ -2,7 +2,7 @@ import React, {SyntheticEvent, useEffect, useState} from 'react';
 import { Btn } from '../Btn/Btn';
 import {AccountPatient} from "../AccountPatient/AccountPatient";
 import {AccountDoctor} from "../AccountDoctor/AccountDoctor";
-
+import "./LoginDoctor.css"
 
 
 export const LoginDoctor = () => {
@@ -55,7 +55,10 @@ export const LoginDoctor = () => {
     }
 
 
-    return  logged ? <AccountDoctor loginDr={login} idDr={id}/> : <form action=""  onSubmit={sendForm}>
+    return  logged ? <AccountDoctor loginDr={login} idDr={id}/>
+                   :   <div className="bg">
+
+        <form action=""  onSubmit={sendForm} className="formLogin">
 
         <h2>Zaloguj się</h2>
         <p>
@@ -82,7 +85,7 @@ export const LoginDoctor = () => {
         </p>
         <Btn text="Zaloguj" onClick={click}/>  <Btn text="Rejestracja" to="ad"/>
     </form>
-
+        </div>
 
 
 

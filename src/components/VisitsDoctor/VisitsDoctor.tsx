@@ -1,5 +1,6 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import {OneVisit} from "../OneVisit/OneVisit";
+import "./VisitDoctor.css"
 
 
 interface Props {
@@ -52,7 +53,7 @@ export const VisitsDoctor =  (props: Props) => {
 
 
     return  <>
-        <button onClick={listAll}>Wizyty</button>
+        <button className="buttonListAllDoctor" onClick={listAll}>Wizyty</button>
         {on && <ul>{list}</ul>}
     </>
 
