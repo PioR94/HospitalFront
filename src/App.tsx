@@ -1,18 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {} from 'types';
 import {CreateDoctorForm} from "./components/CreateDoctorForm/CreateDoctorForm";
-import {Route, Routes} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
+import {CreatePatientForm} from "./components/CreatePatientForm/CreatePatientForm";
+import { BrowserRouter } from "react-router-dom";
+import {MainComponent} from "./components/MainComponent/MainComponent";
+import { LoginPatient } from './components/LoginPatient/LoginPatient';
+import {AdVisitForm} from "./components/AdVisitForm/AdVisitForm";
+import {AccountPatient} from "./components/AccountPatient/AccountPatient";
+import {LoginDoctor} from "./components/LoginDoctor/LoginDoctor";
 
-export function App() {
-  return  <>
-    <CreateDoctorForm/>
-     {/* <Routes>*/}
-     {/*   <Route path="/create" element={<CreateDoctorForm/>}/>*/}
 
-     {/*</Routes>*/}
+
+
+export default function App() {
+  return <>
+      <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<MainComponent />}/>
+              <Route path="patient/ad" element={<CreatePatientForm />} />
+              <Route path="patient" element={<LoginPatient />} />
+              <Route path="doctor/ad" element={<CreateDoctorForm />} />
+              <Route path="doctor" element={<LoginDoctor />} />
+
+          </Routes>
+      </BrowserRouter>
   </>
+
+
 }
 
-export default App;
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+.bgAccountDoctor {
+
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background: #999;
+}
+
+.headerAccountDoctor {
+    position: relative;
+    width: 100%;
+    background-color: #111;
+    height: 10vh;
+    line-height: 10vh;
+    color: snow;
+}
+
+.h2AccountDoctor {
+    font-size: 30px;
+}
+

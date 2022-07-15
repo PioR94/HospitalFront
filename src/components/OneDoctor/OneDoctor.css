@@ -1,0 +1,33 @@
+.divDr {
+    position: relative;
+    width: 70vw;
+    margin: 0;
+    /*background: chocolate;*/
+}
+
+.pDr {
+    display: block;
+    width: 70vw;
+    font-size: 30px;
+    margin-right: 50px;
+}
+
+.btnDr {
+    position: absolute;
+    left: 80%;
+    top: 30%;
+    width:200px;
+}
+
+.divVisit {
+    position: relative;
+    height: 37vh;
+    width: 70vw;
+}
+
+.hrVisit {
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+}

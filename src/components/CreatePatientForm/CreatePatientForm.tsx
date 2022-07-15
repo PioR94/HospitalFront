@@ -1,14 +1,13 @@
 import React, {SyntheticEvent, useEffect, useState} from 'react';
 import {Btn} from "../Btn/Btn";
-import "./CreateDoctorForm.css"
+import "./CreatePatientForm.css"
 
 
-export const CreateDoctorForm = () => {
+export const CreatePatientForm = () => {
 
     const [loading, setLoading] = useState(false);
     const [login, setLogin] = useState('');
     const [err, setErr] = useState(false);
-
 
     const [form, setForm] = useState({
         login: '',
@@ -17,8 +16,10 @@ export const CreateDoctorForm = () => {
         name: '',
         lastName: '',
         address: '',
-        specialization: '',
     });
+
+
+
 
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
@@ -36,62 +37,67 @@ export const CreateDoctorForm = () => {
     if (login) {
         return <div className="bg">
             <h2 className="infCreate">Konto zostało poprawnie utworzone</h2>
-            <a href="/doctor" className="log">Zaloguj się</a>
+            <a href="/patient" className="log">Zaloguj się</a>
         </div>
     }
+
 
     if (err) {
         return<>
             <div className="bg">
-                <h2 className="infCreate">Login lub email są zajęte</h2>
+            <h2 className="infCreate">Login lub email są zajęte</h2>
             </div>
         </>
     }
 
 
     const sendForm = async (e: SyntheticEvent) => {
-           e.preventDefault();
+        e.preventDefault();
 
-           setLoading(true);
+        setLoading(true);
 
-           try {
+        try {
 
-               const res = await fetch('http://localhost:3001/doctor/ad', {
-                   method: 'POST',
-                   headers: {
-                       'Content-Type': 'application/json',
-                   },
-                   body: JSON.stringify({
-                       ...form,
-                   }),
-               });
+            const res = await fetch('http://localhost:3001/patient/ad', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...form,
+                }),
+            });
 
-               const data = await res.json();
+            const data = await res.json();
 
-               setLogin(data.login);
-
-           } catch {
-               setErr(true);
-
-               setTimeout(() => {
-                   setErr(false);
-               }, 3000)
-
-           }
+            setLogin(data.login);
 
 
-           finally {
-               setLoading(false);
-           }
+        } catch {
+
+            setErr(true);
+
+            setTimeout(() => {
+                 setErr(false);
+            }, 3000)
+
+        }
+
+
+        finally {
+            setLoading(false);
+        }
     };
 
 
 
 
 
-    return <div className="bg">
+    return <>
+        <div className="bg">
         <form action="" onSubmit={sendForm} className="formRegister">
             <h2>Rejestracja</h2>
+
             <p>
                 <label>
                     Login: <br/>
@@ -158,21 +164,10 @@ export const CreateDoctorForm = () => {
                     />
                 </label>
             </p>
-            <p>
-                <label>
-                    Specjalizacja: <br/>
-                    <input
-                        type="text"
-                        name="specialization"
-                        value={form.specialization}
-                        onChange={e => updateForm('specialization', e.target.value)}
-                    />
-                </label>
-            </p>
 
             <button>Wyslij</button>
 
         </form>
-    </div>
-
+        </div>
+    </>
 }
