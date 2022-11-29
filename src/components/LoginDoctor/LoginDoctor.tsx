@@ -8,8 +8,8 @@ import "./LoginDoctor.css"
 export const LoginDoctor = () => {
 
     const [form, setForm] = useState({
-        login: '',
-        password: '',
+        login: 'michał123',
+        password: '12345678',
     });
     const [logged, setLogged] = useState(false)
     const [id, setId] = useState('');

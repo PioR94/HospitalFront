@@ -1,0 +1,19 @@
+._divWeek {
+
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    width: 600px;
+    background-color: cornsilk;
+    margin-top: 30px;
+    left: 25%;
+    float: left;
+
+
+}
+
+._div {
+    float: left;
+    background-color: chartreuse;
+}

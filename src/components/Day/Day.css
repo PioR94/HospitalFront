@@ -1,0 +1,16 @@
+
+._divDay {
+    width: 75px;
+    /*background-color: cornflowerblue;*/
+    text-align: center;
+}
+
+._div-date {
+    width: 75px;
+    height: 40px;
+    margin-bottom: 10px;
+    border: black solid 1px;
+    font-size: 15px;
+}
+
+
