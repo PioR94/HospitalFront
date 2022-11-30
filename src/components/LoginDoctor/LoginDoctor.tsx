@@ -13,7 +13,9 @@ export const LoginDoctor = () => {
     });
     const [logged, setLogged] = useState(false)
     const [id, setId] = useState('');
-    const [login, setLogin] = useState('')
+    const [login, setLogin] = useState('');
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
@@ -44,7 +46,9 @@ export const LoginDoctor = () => {
             .then(data => {
                 setLogged(data.log);
                 setId(data.id);
-                setLogin(data.login)
+                setLogin(data.login);
+                setName(data.name);
+                setLastName(data.lastName);
             });
     }
 
