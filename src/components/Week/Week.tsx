@@ -62,7 +62,7 @@ export const Week = () => {
         const days = [];
         for (let i = 0; i < 28; i++) {
             days[i] =
-                <Day dayOfWeek={getDayName(dayOfWeek)} month={getMonthName(month)} numberDay={numberDay.toString()}/>
+                <Day dayOfWeek={getDayName(dayOfWeek)} month={getMonthName(month)} numberDay={numberDay.toString()} year={year}/>
             dayOfWeek++;
             numberDay++;
             if (dayOfWeek === 7) dayOfWeek = 0;

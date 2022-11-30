@@ -3,18 +3,21 @@ import './Hour.css'
 
 interface Props {
     hour: string;
+    dayOfWeek: any;
+    numberDay: string;
+    month: any;
 }
 
 export const Hour = (props: Props) => {
 
 
-    const clickDiv = () => {
+    const addTerm= () => {
         console.log("hello");
         return;
     }
 
     return <>
-        <div onClick={clickDiv} className="_hour-div">
+        <div onClick={addTerm} className="_hour-div">
 
                 <p>{props.hour}</p>
 
