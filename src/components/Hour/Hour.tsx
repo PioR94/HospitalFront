@@ -6,6 +6,11 @@ interface Props {
     dayOfWeek: any;
     numberDay: string;
     month: any;
+    year: number;
+    idDr: string,
+    loginDr: string,
+    nameDr: string;
+    lastNameDr: string;
 }
 
 export const Hour = (props: Props) => {

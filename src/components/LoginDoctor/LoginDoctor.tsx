@@ -59,7 +59,7 @@ export const LoginDoctor = () => {
     }
 
 
-    return  logged ? <AccountDoctor loginDr={login} idDr={id}/>
+    return  logged ? <AccountDoctor loginDr={login} idDr={id} nameDr={name} lastNameDr={lastName}/>
                    :   <div className="bg">
 
         <form action=""  onSubmit={sendForm} className="formLogin">

@@ -1,12 +1,13 @@
 import React from 'react';
 import {VisitsDoctor} from "../VisitsDoctor/VisitsDoctor";
 import "./AccountDoctor.css";
-import {Day} from "../Day/Day";
 import {Week} from "../Week/Week";
 
 interface Props {
     idDr: string,
     loginDr: string,
+    nameDr: string;
+    lastNameDr: string;
 }
 
 export const AccountDoctor = (props: Props) => {
@@ -17,7 +18,7 @@ export const AccountDoctor = (props: Props) => {
         <VisitsDoctor idDr={props.idDr}/>
         </header>
 
-        <Week/>
+        <Week idDr={props.idDr} loginDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
 
 
     </div>

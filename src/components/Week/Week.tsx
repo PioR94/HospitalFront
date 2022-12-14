@@ -2,9 +2,14 @@ import React from  "react"
 import {Day} from "../Day/Day";
 import './Week.css'
 
+interface Props {
+    idDr: string,
+    loginDr: string,
+    nameDr: string;
+    lastNameDr: string;
+}
 
-
-export const Week = () => {
+export const Week = (props: Props) => {
 
     const date = new Date();
     const dayOfWeek = date.getDay();
@@ -62,9 +67,11 @@ export const Week = () => {
         const days = [];
         for (let i = 0; i < 28; i++) {
             days[i] =
-                <Day dayOfWeek={getDayName(dayOfWeek)} month={getMonthName(month)} numberDay={numberDay.toString()} year={year}/>
+                <Day dayOfWeek={getDayName(dayOfWeek)} month={getMonthName(month)} numberDay={numberDay.toString()} year={year} idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
+
             dayOfWeek++;
             numberDay++;
+
             if (dayOfWeek === 7) dayOfWeek = 0;
 
             if ((month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9 || month === 11) && (numberDay === 32)) {
