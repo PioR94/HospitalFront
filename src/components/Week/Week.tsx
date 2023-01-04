@@ -67,7 +67,7 @@ export const Week = (props: Props) => {
         const days = [];
         for (let i = 0; i < 28; i++) {
             days[i] =
-                <Day dayOfWeek={getDayName(dayOfWeek)} month={getMonthName(month)} numberDay={numberDay.toString()} year={year} idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
+                <Day dayOfWeek={`${getDayName(dayOfWeek)}`} month={`${getMonthName(month)}`} numberDay={numberDay.toString()} year={year.toString()} idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
 
             dayOfWeek++;
             numberDay++;

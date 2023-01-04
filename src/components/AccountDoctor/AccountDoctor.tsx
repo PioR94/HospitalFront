@@ -18,7 +18,7 @@ export const AccountDoctor = (props: Props) => {
         <VisitsDoctor idDr={props.idDr}/>
         </header>
 
-        <Week idDr={props.idDr} loginDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
+        <Week idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
 
 
     </div>

@@ -5,10 +5,10 @@ import "./Day.css"
 
 
 interface Props {
-   dayOfWeek: any;
+   dayOfWeek: string;
    numberDay: string;
-   month: any;
-   year: number;
+   month: string;
+   year: string;
    idDr: string,
    loginDr: string;
    nameDr: string;

@@ -54,8 +54,6 @@ export const LoginDoctor = () => {
 
     const click = async () => {
 
-
-
     }
 
 
@@ -64,7 +62,7 @@ export const LoginDoctor = () => {
 
         <form action=""  onSubmit={sendForm} className="formLogin">
 
-        <h2>Zaloguj się</h2>
+        <h2>Zaloguj się</  h2>
         <p>
             <label>
                 Login: <br/>
