@@ -8,12 +8,14 @@ import "./LoginDoctor.css"
 export const LoginDoctor = () => {
 
     const [form, setForm] = useState({
-        login: '',
-        password: '',
+        login: 'michał123',
+        password: '12345678',
     });
     const [logged, setLogged] = useState(false)
     const [id, setId] = useState('');
-    const [login, setLogin] = useState('')
+    const [login, setLogin] = useState('');
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
@@ -44,23 +46,23 @@ export const LoginDoctor = () => {
             .then(data => {
                 setLogged(data.log);
                 setId(data.id);
-                setLogin(data.login)
+                setLogin(data.login);
+                setName(data.name);
+                setLastName(data.lastName);
             });
     }
 
     const click = async () => {
 
-
-
     }
 
 
-    return  logged ? <AccountDoctor loginDr={login} idDr={id}/>
+    return  logged ? <AccountDoctor loginDr={login} idDr={id} nameDr={name} lastNameDr={lastName}/>
                    :   <div className="bg">
 
         <form action=""  onSubmit={sendForm} className="formLogin">
 
-        <h2>Zaloguj się</h2>
+        <h2>Zaloguj się</  h2>
         <p>
             <label>
                 Login: <br/>

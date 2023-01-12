@@ -4,6 +4,8 @@ import {LoginPatient} from "../LoginPatient/LoginPatient";
 import {ListDoctor} from "../ListDoctor/ListDoctor";
 import {VisitsPatient} from "../VisitPatient/VisitPatient";
 import "./AccountPatient.css";
+import {Hour} from "../Hour/Hour";
+import {Day} from "../Day/Day";
 
 interface Props {
     idPt: string;
@@ -19,5 +21,6 @@ export const AccountPatient = (props: Props) => {
         <ListDoctor idPt={props.idPt}/>
         <VisitsPatient idPt={props.idPt}/>
         </header>
+
     </div>
 }
