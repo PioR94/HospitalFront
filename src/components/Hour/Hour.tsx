@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Term } from "types";
 import './Hour.css'
 
 
-export const Hour = (props: Omit<Term, 'id'>) => {
+export const Hour = (props: Term) => {
 
-    const term: Omit<Term, 'id'> = {
+    const [active, setActive] = useState(false);
+
+
+    const term: Term = {
+        id: props.id,
         hour: props.hour,
         dayOfWeek: props.dayOfWeek,
         numberDay: props.numberDay,
@@ -15,7 +19,9 @@ export const Hour = (props: Omit<Term, 'id'>) => {
         loginDr: props.loginDr,
         nameDr: props.nameDr,
         lastNameDr: props.lastNameDr,
-    }
+    };
+
+    const termId = props.id;
 
 
     const addTerm = async () => {
@@ -29,12 +35,33 @@ export const Hour = (props: Omit<Term, 'id'>) => {
                 ...term,
             })
         })
+        active ? setActive(false) : setActive(true);
+    }
+    (async () => {
+        await fetch('http://localhost:3001/term/term-id', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                termId,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.r)
+                setActive(data);
+            })
+    })();
+
+    const changeClassName = () => {
+        return active ? "_hour-div-active" : "_hour-div"
     }
 
     return <>
-        <div onClick={addTerm} className="_hour-div">
+        <div onClick={addTerm} className={changeClassName()}>
 
-                <p>{props.hour}</p>
+                <div>{props.hour}</div>
 
         </div>
     </>
