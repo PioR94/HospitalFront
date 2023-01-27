@@ -1,7 +1,6 @@
 import React from 'react';
 import {Hour} from "../Hour/Hour";
-import "./Day.css"
-
+import "./Day.css";
 
 
 interface Props {
@@ -30,7 +29,7 @@ export const Day = (props: Props) => {
             if (minutes === 0) zero = '0'
 
             hours[i] =
-                <Hour hour={`${hour}:${minutes}${zero}`} dayOfWeek={props.dayOfWeek} numberDay={props.numberDay} month={props.month} year={props.year} idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} />
+                <Hour id={`${hour}${minutes}${props.numberDay}${props.month}${props.year}${props.loginDr}`} hour={`${hour}:${minutes}${zero}`} dayOfWeek={props.dayOfWeek} numberDay={props.numberDay} month={props.month} year={props.year} idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} />
 
             zero = '';
             minutes += 15;
@@ -47,10 +46,12 @@ export const Day = (props: Props) => {
 
 
     return <>
+
         <div className="_divDay">
-        <div className="_div-date"><p>{props.dayOfWeek} {props.numberDay} {props.month}</p></div>
+        <div className="_div-date"><div>{props.dayOfWeek}</div> <div>{props.numberDay}</div> <div>{props.month}</div></div>
             {renderHours()}
         </div>
+
     </>
 
 }

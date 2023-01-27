@@ -1,12 +1,29 @@
 ._hour-div {
 
     display: block;
+
     height: 40px;
     width: 75px;
     margin-bottom: 10px;
     background-color: chocolate;
     border: black solid 1px;
     line-height: 40px;
+    cursor: pointer;
+
+
+}
+
+._hour-div-active {
+
+    display: block;
+    height: 40px;
+    width: 75px;
+    margin-bottom: 10px;
+    background-color: springgreen;
+    border: black solid 1px;
+    line-height: 40px;
+    cursor: pointer;
+
 
 }
 

@@ -11,7 +11,7 @@ export const LoginDoctor = () => {
         login: 'michał123',
         password: '12345678',
     });
-    const [logged, setLogged] = useState(false)
+    const [logged, setLogged] = useState(false);
     const [id, setId] = useState('');
     const [login, setLogin] = useState('');
     const [name, setName] = useState('');

@@ -1,4 +1,4 @@
-import React from  "react"
+import React, {useEffect, useState} from "react"
 import {Day} from "../Day/Day";
 import './Week.css'
 
@@ -11,6 +11,8 @@ interface Props {
 
 export const Week = (props: Props) => {
 
+    const [positionX, setPositionX] = useState(0);
+
     const date = new Date();
     const dayOfWeek = date.getDay();
     const month = date.getMonth();
@@ -19,19 +21,19 @@ export const Week = (props: Props) => {
 
     const getDayName = (day: number) => {
         if (day === 0) {
-            return 'Niedziela';
+            return 'Nie.';
         } else if (day === 1) {
-            return 'Poniedziałek';
+            return 'Pon.';
         } else if (day === 2) {
-            return 'Wtorek';
+            return 'Wt.';
         } else if (day === 3) {
-            return 'Środa';
+            return 'Śr.';
         } else if (day === 4) {
-            return 'Czwartek';
+            return 'Czw.';
         } else if (day === 5) {
-            return 'Piątek';
+            return 'Pią.';
         } else if (day === 6) {
-            return 'Sobota';
+            return 'Sob.';
         }
     }
 
@@ -98,12 +100,46 @@ export const Week = (props: Props) => {
         }
         return days;
     }
+
+    const moveRight = (): void => {
+        if (positionX > -1995) {
+            setPositionX(positionX - 665);
+        }
+    }
+
+    const moveLeft = (): void => {
+        if (positionX < 0) {
+            setPositionX(positionX + 665);
+        }
+    }
+
+
+    const changeMoveRight = (): string => {
+        return (positionX === -1995) ? '_moveRightNone' : '_moveRight';
+    }
+
+    const changeMoveLeft = (): string => {
+        return (positionX === 0) ? '_moveLeftNone' : '_moveLeft';
+    }
+
     return <>
 
-        <div className="_divWeek">
 
-            {renderDays(dayOfWeek, month, numberDay, year)}
+        <div className="a">
 
+            <div className="_divWeek" style={{
+                translate: positionX,
+
+            }
+            }>
+                {renderDays(dayOfWeek, month, numberDay, year)}
+            </div>
         </div>
+        <div className={changeMoveRight()} onClick={moveRight}> ⇨
+        </div>
+
+        <div className={changeMoveLeft()} onClick={moveLeft}> ⇦
+        </div>
+
     </>
 }
