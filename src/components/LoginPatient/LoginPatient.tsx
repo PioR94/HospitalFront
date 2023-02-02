@@ -7,8 +7,8 @@ import "./LoginPatient.css"
 export const LoginPatient = () => {
 
     const [form, setForm] = useState({
-        login: '',
-        password: '',
+        login: 'Piotrek123',
+        password: '12345678',
     });
     const [logged, setLogged] = useState(false)
     const [id, setId] = useState('');

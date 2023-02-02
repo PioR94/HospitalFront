@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './OneDoctor.css'
 import {Btn} from "../Btn/Btn";
-import {AdVisitForm} from "../AdVisitForm/AdVisitForm";
+
 
 interface Props {
     idDr: string;
@@ -30,7 +30,7 @@ export const OneDoctor = (props: Props) => {
 
 return on ? <div className="divVisit">
         <p className="pDr">Dr {props.name} {props.lastName} spec. {props.specialization}  </p> <button className="btnDr" onClick={onClick}>Wróć</button>
-        <AdVisitForm idDr={props.idDr} idPt={props.idPt}/>
+       
          <hr className="hrVisit"/>
     </div>
 
