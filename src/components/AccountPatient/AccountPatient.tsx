@@ -23,8 +23,5 @@ export const AccountPatient = (props: Props) => {
         <VisitsPatient idPt={props.idPt}/>
         </header>
 
-
-        <Week/>
-
     </div>
 }

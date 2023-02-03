@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './OneDoctor.css'
 import {Btn} from "../Btn/Btn";
+import {FreeTermHour} from "../FreeTermHour/FreeTermHour";
 
 
 interface Props {
@@ -30,7 +31,8 @@ export const OneDoctor = (props: Props) => {
 
 return on ? <div className="divVisit">
         <p className="pDr">Dr {props.name} {props.lastName} spec. {props.specialization}  </p> <button className="btnDr" onClick={onClick}>Wróć</button>
-       
+
+        <FreeTermHour hour="13:00" id="1"/>
          <hr className="hrVisit"/>
     </div>
 

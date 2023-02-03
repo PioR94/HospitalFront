@@ -60,9 +60,7 @@ export const Hour = (props: Term) => {
 
     return <>
         <div onClick={addTerm} className={changeClassName()}>
-
-                <div>{props.hour}</div>
-
+                {props.hour}
         </div>
     </>
 }
