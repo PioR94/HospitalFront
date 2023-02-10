@@ -65,7 +65,7 @@ export const Week = (props: Props) => {
         }
     }
 
-    const renderDays = (dayOfWeek: number, month: number, numberDay: number, year: number) => {
+     const renderDays = (dayOfWeek: number, month: number, numberDay: number, year: number) => {
         const days = [];
         for (let i = 0; i < 28; i++) {
             days[i] =
