@@ -1,13 +1,9 @@
+import React from "react";
+import { FreeTerm } from "types";
 import './FreeTermHour.css'
 
-interface Props {
-    id: string;
-    hour: string;
-}
 
-export const FreeTermHour = (props: Props) => {
-
-
+export const FreeTermHour = (props: FreeTerm) => {
 
 
 

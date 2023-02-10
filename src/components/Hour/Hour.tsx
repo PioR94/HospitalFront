@@ -49,7 +49,6 @@ export const Hour = (props: Term) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data.r)
                 setActive(data);
             })
     })();

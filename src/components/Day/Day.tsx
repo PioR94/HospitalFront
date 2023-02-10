@@ -48,7 +48,11 @@ export const Day = (props: Props) => {
     return <>
 
         <div className="_divDay">
-        <div className="_div-date"><div>{props.dayOfWeek}</div> <div>{props.numberDay}</div> <div>{props.month}</div></div>
+            <div className="_div-date">
+                <div>{props.dayOfWeek}</div>
+                <div>{props.numberDay}</div>
+                <div>{props.month}</div>
+            </div>
             {renderHours()}
         </div>
 
