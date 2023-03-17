@@ -1,10 +1,13 @@
 import React from 'react';
 import {VisitsDoctor} from "../VisitsDoctor/VisitsDoctor";
 import "./AccountDoctor.css";
+import {Week} from "../Week/Week";
 
 interface Props {
     idDr: string,
     loginDr: string,
+    nameDr: string;
+    lastNameDr: string;
 }
 
 export const AccountDoctor = (props: Props) => {
@@ -14,5 +17,9 @@ export const AccountDoctor = (props: Props) => {
         <h2 className="h2AccountDoctor">{props.loginDr}</h2>
         <VisitsDoctor idDr={props.idDr}/>
         </header>
+
+        <Week idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
+
+
     </div>
 }

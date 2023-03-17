@@ -5,6 +5,7 @@ import "./VisitPatient.css"
 interface Props {
     idPt: string
 }
+
 interface Visit {
     idV: string;
     date: string;
@@ -13,16 +14,11 @@ interface Visit {
 }
 
 
-
-
-export const VisitsPatient =  (props: Props) => {
+export const VisitsPatient = (props: Props) => {
 
 
     const [list, setList] = useState([]);
     const [on, setOn] = useState(false);
-
-
-
 
 
     const listAll = async (e: SyntheticEvent) => {
@@ -51,8 +47,7 @@ export const VisitsPatient =  (props: Props) => {
     }
 
 
-
-    return  <>
+    return <>
         <button className="buttonListAllPatient" onClick={listAll}>Wizyty</button>
         {on && <ul>{list}</ul>}
     </>

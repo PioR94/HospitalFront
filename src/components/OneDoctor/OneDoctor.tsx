@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import './OneDoctor.css'
 import {Btn} from "../Btn/Btn";
-import {AdVisitForm} from "../AdVisitForm/AdVisitForm";
+import {FreeTermHour} from "../FreeTermHour/FreeTermHour";
+import {FreeTermDay} from "../FreeTermDay/FreeTermDay";
+import {FreeTermWeek} from "../FreeTermWeek/FreeTermWeek";
+
 
 interface Props {
     idDr: string;
@@ -11,32 +14,41 @@ interface Props {
     specialization: string;
 
 
-
 }
 
 export const OneDoctor = (props: Props) => {
 
-    const [on, setOn] = useState(false);
+    const [wrap, setWrap] = useState(false);
 
 
-
- const onClick = () => {
-     setOn(true);
-     if(on) setOn(false);
+    const changeClassWrap = (): string => {
+        return wrap ? 'wrap-free-term-week-down' : 'wrap-free-term-week';
     }
 
+    const scroll = (): void => {
+        wrap ? setWrap(false) : setWrap(true);
+    }
 
+    const changeClassArrow = (): string => {
+        return wrap ? 'arrow-up' : 'arrow-down';
+    }
 
-
-return on ? <div className="divVisit">
-        <p className="pDr">Dr {props.name} {props.lastName} spec. {props.specialization}  </p> <button className="btnDr" onClick={onClick}>Wróć</button>
-        <AdVisitForm idDr={props.idDr} idPt={props.idPt}/>
-         <hr className="hrVisit"/>
-    </div>
-
-          : <div className="divDr">
-        <p className="pDr">Dr {props.name} {props.lastName} spec. {props.specialization} </p> <button className="btnDr" onClick={onClick}>Zarezerwuj wizytę</button>
+    return <div className="divVisit">
+        <div className="image"/>
+        <div className="pDr">
+            <p>lek. {props.name} {props.lastName} </p>
+            <p>{props.specialization}</p>
+        </div>
         <hr/>
+        <div>
+            <div className={changeClassWrap()}>
+                <FreeTermWeek idDr={props.idDr}/>
+            </div>
+            <div className={changeClassArrow()} onClick={scroll}>🡫</div>
+        </div>
+
+
     </div>
+
 
 }

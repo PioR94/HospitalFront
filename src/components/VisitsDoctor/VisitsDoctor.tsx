@@ -6,6 +6,7 @@ import "./VisitDoctor.css"
 interface Props {
     idDr: string
 }
+
 interface Visit {
     idV: string;
     date: string;
@@ -13,16 +14,11 @@ interface Visit {
 }
 
 
-
-
-export const VisitsDoctor =  (props: Props) => {
+export const VisitsDoctor = (props: Props) => {
 
 
     const [list, setList] = useState([]);
     const [on, setOn] = useState(false);
-
-
-
 
 
     const listAll = async (e: SyntheticEvent) => {
@@ -35,14 +31,14 @@ export const VisitsDoctor =  (props: Props) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              doctorId: props.idDr,
+                doctorId: props.idDr,
             }),
         });
 
         const data = await res.json();
 
         const dataVisits = data.map((one: Visit) =>
-           <OneVisit date={one.date} idPt={one.idPt}/>
+            <OneVisit date={one.date} idPt={one.idPt}/>
         )
 
         setList(dataVisits)
@@ -51,8 +47,7 @@ export const VisitsDoctor =  (props: Props) => {
     }
 
 
-
-    return  <>
+    return <>
         <button className="buttonListAllDoctor" onClick={listAll}>Wizyty</button>
         {on && <ul>{list}</ul>}
     </>
