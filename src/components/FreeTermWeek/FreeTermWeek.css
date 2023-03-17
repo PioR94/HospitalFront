@@ -1,37 +1,21 @@
-
-.a {
-    position: relative;
-    left: calc(50% - 323px);
-    width: 647px;
-    height: auto;
-    overflow: hidden;
-
-}
-
-
-
-._divWeek {
+.free-term-week {
     display: flex;
-    /*position: relative;*/
-    align-items: center;
-    justify-content: space-between;
-
-    margin-top: 30px;
-    /*left: 25%;*/
-    float: left;
-    transition: 2s linear;
-    /*overflow: hidden;*/
+    min-height: 300px;
 
 }
 
-/*button:enabled ._divWeek {*/
-/*   background-color: chartreuse;*/
-/*}*/
+.container-free-term-week {
+    position: relative;
+    left: 10px;
+    width: 350px;
 
-._moveRight {
+
+}
+
+.move-right {
     position: absolute;
-    left: calc(50% + 342px);
-    top: 95px;
+    left: 807px;
+    top: 10px;
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -44,13 +28,13 @@
 
 }
 
-._moveRight:hover {
+.move-right:hover {
     background-color: rgba(5, 246, 218, 0.99);
 }
-._moveRightNone {
+.move-right-none {
     position: absolute;
-    left: calc(50% + 342px);
-    top: 95px;
+    left: 807px;
+    top: 10px;
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -61,10 +45,11 @@
 
 }
 
-._moveLeft {
-    position: absolute;
-    left: calc(50% - 372px);
-    top: 95px;
+.move-left {
+
+   position: absolute;
+    left: 420px;
+    top: 10px;
     height: 30px;
     width: 30px;
     font-size: 22px;
@@ -74,17 +59,17 @@
     cursor: pointer;
     background-color:#eef4fd;
     font-weight: bold;
+    overflow: visible;
 }
-._moveLeft:hover {
+.move-left:hover {
     background-color: rgba(5, 246, 218, 0.99);
 }
 
 
-
-._moveLeftNone {
+.move-left-none {
     position: absolute;
-    left: calc(50% - 372px);
-    top: 95px;
+    left: 420px;
+    top: 10px;
     height: 30px;
     width: 30px;
     font-size: 22px;
@@ -92,4 +77,5 @@
     text-align: center;
     line-height: 25px;
     cursor: no-drop;
+    overflow: visible;
 }

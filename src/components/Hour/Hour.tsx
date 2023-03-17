@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Term } from "types";
+import {Term} from "types";
 import './Hour.css'
 
 
@@ -59,7 +59,7 @@ export const Hour = (props: Term) => {
 
     return <>
         <div onClick={addTerm} className={changeClassName()}>
-                {props.hour}
+            {props.hour}
         </div>
     </>
 }

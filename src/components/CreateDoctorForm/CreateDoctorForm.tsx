@@ -41,7 +41,7 @@ export const CreateDoctorForm = () => {
     }
 
     if (err) {
-        return<>
+        return <>
             <div className="bg">
                 <h2 className="infCreate">Login lub email są zajęte</h2>
             </div>
@@ -50,43 +50,37 @@ export const CreateDoctorForm = () => {
 
 
     const sendForm = async (e: SyntheticEvent) => {
-           e.preventDefault();
+        e.preventDefault();
 
-           setLoading(true);
+        setLoading(true);
 
-           try {
+        try {
 
-               const res = await fetch('http://localhost:3001/doctor/ad', {
-                   method: 'POST',
-                   headers: {
-                       'Content-Type': 'application/json',
-                   },
-                   body: JSON.stringify({
-                       ...form,
-                   }),
-               });
+            const res = await fetch('http://localhost:3001/doctor/ad', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...form,
+                }),
+            });
 
-               const data = await res.json();
+            const data = await res.json();
 
-               setLogin(data.login);
+            setLogin(data.login);
 
-           } catch {
-               setErr(true);
+        } catch {
+            setErr(true);
 
-               setTimeout(() => {
-                   setErr(false);
-               }, 3000)
+            setTimeout(() => {
+                setErr(false);
+            }, 3000)
 
-           }
-
-
-           finally {
-               setLoading(false);
-           }
+        } finally {
+            setLoading(false);
+        }
     };
-
-
-
 
 
     return <div className="bg">

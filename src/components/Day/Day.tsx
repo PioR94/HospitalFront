@@ -4,14 +4,14 @@ import "./Day.css";
 
 
 interface Props {
-   dayOfWeek: string;
-   numberDay: string;
-   month: string;
-   year: string;
-   idDr: string,
-   loginDr: string;
-   nameDr: string;
-   lastNameDr: string;
+    dayOfWeek: string;
+    numberDay: string;
+    month: string;
+    year: string;
+    idDr: string,
+    loginDr: string;
+    nameDr: string;
+    lastNameDr: string;
 }
 
 export const Day = (props: Props) => {
@@ -29,7 +29,10 @@ export const Day = (props: Props) => {
             if (minutes === 0) zero = '0'
 
             hours[i] =
-                <Hour id={`${hour}${minutes}${props.numberDay}${props.month}${props.year}${props.loginDr}`} hour={`${hour}:${minutes}${zero}`} dayOfWeek={props.dayOfWeek} numberDay={props.numberDay} month={props.month} year={props.year} idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} />
+                <Hour id={`${hour}${minutes}${props.numberDay}${props.month}${props.year}${props.loginDr}`}
+                      hour={`${hour}:${minutes}${zero}`} dayOfWeek={props.dayOfWeek} numberDay={props.numberDay}
+                      month={props.month} year={props.year} idDr={props.idDr} loginDr={props.loginDr}
+                      nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
 
             zero = '';
             minutes += 15;

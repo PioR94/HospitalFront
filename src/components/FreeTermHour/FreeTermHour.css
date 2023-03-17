@@ -1,6 +1,10 @@
 .free-term-hour {
     display: block;
-    height: 60px;
-    width: 50px;
+    height: 25px;
+    width: 65px;
+    margin-bottom: 10px;
+    line-height: 25px;
+    text-align: center;
     border: 1px solid black;
+    box-sizing: border-box;
 }

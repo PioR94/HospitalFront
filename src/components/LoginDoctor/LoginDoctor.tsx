@@ -1,5 +1,5 @@
 import React, {SyntheticEvent, useEffect, useState} from 'react';
-import { Btn } from '../Btn/Btn';
+import {Btn} from '../Btn/Btn';
 import {AccountPatient} from "../AccountPatient/AccountPatient";
 import {AccountDoctor} from "../AccountDoctor/AccountDoctor";
 import "./LoginDoctor.css"
@@ -23,9 +23,6 @@ export const LoginDoctor = () => {
             [key]: value,
         }))
     };
-
-
-
 
 
     const sendForm = async (e: SyntheticEvent) => {
@@ -57,38 +54,37 @@ export const LoginDoctor = () => {
     }
 
 
-    return  logged ? <AccountDoctor loginDr={login} idDr={id} nameDr={name} lastNameDr={lastName}/>
-                   :   <div className="bg">
+    return logged ? <AccountDoctor loginDr={login} idDr={id} nameDr={name} lastNameDr={lastName}/>
+        : <div className="bg">
 
-        <form action=""  onSubmit={sendForm} className="formLogin">
+            <form action="" onSubmit={sendForm} className="formLogin">
 
-        <h2>Zaloguj się</  h2>
-        <p>
-            <label>
-                Login: <br/>
-                <input
-                    type="text"
-                    name="login"
-                    value={form.login}
-                    onChange={e => updateForm('login', e.target.value)}
-                />
-            </label>
-        </p>
-        <p>
-            <label>
-                Hasło: <br/>
-                <input
-                    type="password"
-                    name="password"
-                    value={form.password}
-                    onChange={e => updateForm('password', e.target.value)}
-                />
-            </label>
-        </p>
-        <Btn text="Zaloguj" onClick={click}/>  <Btn text="Rejestracja" to="ad"/>
-    </form>
+                <h2>Zaloguj się</  h2>
+                <p>
+                    <label>
+                        Login: <br/>
+                        <input
+                            type="text"
+                            name="login"
+                            value={form.login}
+                            onChange={e => updateForm('login', e.target.value)}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Hasło: <br/>
+                        <input
+                            type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={e => updateForm('password', e.target.value)}
+                        />
+                    </label>
+                </p>
+                <Btn text="Zaloguj" onClick={click}/> <Btn text="Rejestracja" to="ad"/>
+            </form>
         </div>
-
 
 
 }

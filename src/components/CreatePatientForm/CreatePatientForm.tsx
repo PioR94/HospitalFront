@@ -19,8 +19,6 @@ export const CreatePatientForm = () => {
     });
 
 
-
-
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
             ...form,
@@ -43,9 +41,9 @@ export const CreatePatientForm = () => {
 
 
     if (err) {
-        return<>
+        return <>
             <div className="bg">
-            <h2 className="infCreate">Login lub email są zajęte</h2>
+                <h2 className="infCreate">Login lub email są zajęte</h2>
             </div>
         </>
     }
@@ -78,96 +76,90 @@ export const CreatePatientForm = () => {
             setErr(true);
 
             setTimeout(() => {
-                 setErr(false);
+                setErr(false);
             }, 3000)
 
-        }
-
-
-        finally {
+        } finally {
             setLoading(false);
         }
     };
 
 
-
-
-
     return <>
         <div className="bg">
-        <form action="" onSubmit={sendForm} className="formRegister">
-            <h2>Rejestracja</h2>
+            <form action="" onSubmit={sendForm} className="formRegister">
+                <h2>Rejestracja</h2>
 
-            <p>
-                <label>
-                    Login: <br/>
-                    <input
-                        type="text"
-                        name="login"
-                        value={form.login}
-                        onChange={e => updateForm('login', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Hasło: <br/>
-                    <input
-                        type="password"
-                        name="password"
-                        value={form.password}
-                        onChange={e => updateForm('password', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Email: <br/>
-                    <input
-                        type="email"
-                        name="mail"
-                        value={form.mail}
-                        onChange={e => updateForm('mail', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Imie: <br/>
-                    <input
-                        type="text"
-                        name="name"
-                        value={form.name}
-                        onChange={e => updateForm('name', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Nazwisko: <br/>
-                    <input
-                        type="text"
-                        name="lastName"
-                        value={form.lastName}
-                        onChange={e => updateForm('lastName', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Adres: <br/>
-                    <input
-                        type="text"
-                        name="address"
-                        value={form.address}
-                        onChange={e => updateForm('address', e.target.value)}
-                    />
-                </label>
-            </p>
+                <p>
+                    <label>
+                        Login: <br/>
+                        <input
+                            type="text"
+                            name="login"
+                            value={form.login}
+                            onChange={e => updateForm('login', e.target.value)}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Hasło: <br/>
+                        <input
+                            type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={e => updateForm('password', e.target.value)}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Email: <br/>
+                        <input
+                            type="email"
+                            name="mail"
+                            value={form.mail}
+                            onChange={e => updateForm('mail', e.target.value)}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Imie: <br/>
+                        <input
+                            type="text"
+                            name="name"
+                            value={form.name}
+                            onChange={e => updateForm('name', e.target.value)}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Nazwisko: <br/>
+                        <input
+                            type="text"
+                            name="lastName"
+                            value={form.lastName}
+                            onChange={e => updateForm('lastName', e.target.value)}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Adres: <br/>
+                        <input
+                            type="text"
+                            name="address"
+                            value={form.address}
+                            onChange={e => updateForm('address', e.target.value)}
+                        />
+                    </label>
+                </p>
 
-            <button>Wyslij</button>
+                <button>Wyslij</button>
 
-        </form>
+            </form>
         </div>
     </>
 }

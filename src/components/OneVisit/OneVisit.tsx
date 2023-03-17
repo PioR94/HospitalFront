@@ -10,14 +10,14 @@ interface Props {
 export const OneVisit = (props: Props) => {
 
 
-   return props.idPt ?
-       <div className="oneVisit">
-        <p>Termin {props.date} <br/>Pacjent id: {props.idPt}</p>
-           <hr/>
-       </div>
-       :
-       <div className="oneVisit">
-           <p>Termin {props.date} <br/>Dr id: {props.idDr}</p>
-           <hr/>
-       </div>
+    return props.idPt ?
+        <div className="oneVisit">
+            <p>Termin {props.date} <br/>Pacjent id: {props.idPt}</p>
+            <hr/>
+        </div>
+        :
+        <div className="oneVisit">
+            <p>Termin {props.date} <br/>Dr id: {props.idDr}</p>
+            <hr/>
+        </div>
 }
