@@ -1,6 +1,8 @@
 .free-term-week {
     display: flex;
-    min-height: 300px;
+    min-height: 250px;
+    WIDTH: 0;
+
 
 }
 
@@ -8,7 +10,6 @@
     position: relative;
     left: 10px;
     width: 350px;
-
 
 }
 
@@ -22,14 +23,13 @@
     text-align: center;
     line-height: 25px;
     cursor: pointer;
-    font-weight: bold;
     font-size: 22px;
     background-color:#eef4fd;
 
 }
 
 .move-right:hover {
-    background-color: rgba(5, 246, 218, 0.99);
+    background-color: darkcyan;
 }
 .move-right-none {
     position: absolute;
@@ -58,11 +58,11 @@
     line-height: 25px;
     cursor: pointer;
     background-color:#eef4fd;
-    font-weight: bold;
+
     overflow: visible;
 }
 .move-left:hover {
-    background-color: rgba(5, 246, 218, 0.99);
+    background-color: darkcyan;
 }
 
 
@@ -78,4 +78,13 @@
     line-height: 25px;
     cursor: no-drop;
     overflow: visible;
+}
+
+.test {
+    display: inline-block;
+
+    flex-shrink: 0;
+
+
+
 }

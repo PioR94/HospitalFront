@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {FreeTerm} from "types";
 import {FreeTermHour} from "../FreeTermHour/FreeTermHour";
 import './FreeTermDay.css'
@@ -9,13 +9,15 @@ interface Props {
     month: string;
     year: string;
     idDr: string;
+    sendRef: any;
 }
 
-let t: FreeTerm[];
 
 export const FreeTermDay = (props: Props) => {
 
     const [freeTerms, setFreeTerms] = useState([]);
+    const myRef = useRef<HTMLDivElement>(null);
+
 
     const dayData = {
         numberDay: props.numberDay,
@@ -53,18 +55,21 @@ export const FreeTermDay = (props: Props) => {
         getTerms();
     }, [])
 
+    useEffect(() => {
+        const height: number = myRef.current?.getBoundingClientRect().height || 0;
+        props.sendRef(height);
+    })
 
-    const render = (t: any) => {
 
-        return t;
+    const render = (day: any) => {
+        return day;
     }
 
 
     return <>
 
-        <div className="free-term-day">
+        <div ref={myRef} className="free-term-day">
             <div className="ftd-div-date">
-
                 <div className="div-dayOfWeek">{props.dayOfWeek}</div>
                 <div>{props.numberDay} {props.month}</div>
             </div>

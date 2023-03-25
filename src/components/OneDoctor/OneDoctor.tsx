@@ -4,6 +4,7 @@ import {Btn} from "../Btn/Btn";
 import {FreeTermHour} from "../FreeTermHour/FreeTermHour";
 import {FreeTermDay} from "../FreeTermDay/FreeTermDay";
 import {FreeTermWeek} from "../FreeTermWeek/FreeTermWeek";
+import {MdLocationOn} from "react-icons/md"
 
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
     name: string;
     lastName: string;
     specialization: string;
+    address: string;
 
 
 }
@@ -33,22 +35,31 @@ export const OneDoctor = (props: Props) => {
         return wrap ? 'arrow-up' : 'arrow-down';
     }
 
-    return <div className="divVisit">
-        <div className="image"/>
-        <div className="pDr">
-            <p>lek. {props.name} {props.lastName} </p>
-            <p>{props.specialization}</p>
-        </div>
-        <hr/>
-        <div>
-            <div className={changeClassWrap()}>
-                <FreeTermWeek idDr={props.idDr}/>
+    return <>
+
+        <div className="divVisit">
+            <div className="image"/>
+            <div className="pDr">
+                <p>lek. {props.name} {props.lastName} </p>
+                <p>{props.specialization}</p>
             </div>
-            <div className={changeClassArrow()} onClick={scroll}>🡫</div>
+            <div className="address">
+                <div id="adres">Adres</div>
+                <MdLocationOn size={20}/>
+                <p className="p-address">{props.address}</p>
+            </div>
+            <hr/>
+            <div>
+                <div className={changeClassWrap()}>
+                    <FreeTermWeek idDr={props.idDr}/>
+                </div>
+                <div className={changeClassArrow()} onClick={scroll}>🡫</div>
+            </div>
+
+
         </div>
 
 
-    </div>
-
+    </>
 
 }
