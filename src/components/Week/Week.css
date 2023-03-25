@@ -5,7 +5,7 @@
     width: 647px;
     height: auto;
     overflow: hidden;
-    /*background-color: cornflowerblue;*/
+
 }
 
 
@@ -24,10 +24,9 @@
 
 }
 
-button:enabled ._divWeek {
-   background-color: chartreuse;
-
-}
+/*button:enabled ._divWeek {*/
+/*   background-color: chartreuse;*/
+/*}*/
 
 ._moveRight {
     position: absolute;

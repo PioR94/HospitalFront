@@ -1,33 +1,102 @@
-.divDr {
+.divVisit {
+    display: flex;
     position: relative;
-    width: 70vw;
-    margin: 0;
-    /*background: chocolate;*/
+    width: 800px;
+    margin: 20px 0 0 60px;
+    padding-right: 40px;
+    background-color: rgba(245, 245, 245, 1);
+    border-radius: 5px ;
 }
+
 
 .pDr {
-    display: block;
-    width: 70vw;
-    font-size: 30px;
-    margin-right: 50px;
-}
-
-.btnDr {
-    position: absolute;
-    left: 80%;
-    top: 30%;
-    width:200px;
-}
-
-.divVisit {
     position: relative;
-    height: 37vh;
-    width: 70vw;
+    width: 300px;
+    height: 70px;
+    left: 40px;
+    top: 20px;
+    font-size: 17px;
+    margin-right: 50px;
+    line-height: 20px;
+
 }
 
-.hrVisit {
-    width: 100%;
+
+.image {
+    position: relative;
+    height: 80px;
+    width: 80px;
+    border: 1px solid black;
+    border-radius: 50%;
+    left: 20px;
+    top: 10px;
+}
+
+.wrap-free-term-week {
+    margin-left: 50px;
+    height: 250px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+
+
+
+}
+
+.wrap-free-term-week-down {
+    margin-left: 50px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+
+}
+
+.arrow-down {
+    position: relative;
+    left: 50%;
+    width:30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.arrow-up {
+    position: relative;
+    left: 50%;
+    width:30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+#adres {
+    width: 350px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+
+
+}
+.address {
     position: absolute;
-    bottom: 5px;
-    left: 0;
+    top: 120px;
+    left: 10px;
+    width: 300px;
+    line-height: 20px;
+}
+
+.p-address {
+    position: relative;
+    top: -23px;
+    left: 10px
+}
+
+hr {
+
+
 }

@@ -3,14 +3,13 @@
     position: relative;
     height: 100vh;
     width: 100%;
-    background: #999;
 }
 
 .formLogin {
     position: relative;
     height: 200px;
     width:300px;
-    background: #999;
+
     left: calc(50% - 150px);
     top: calc(50% - 100px);
     text-align: center;
@@ -33,7 +32,6 @@ button {
     text-decoration: none;
     color: #0100dd;
     left: 30px;
-    background: #999;
     border: none;
     font-size: 20px;
     cursor: pointer;

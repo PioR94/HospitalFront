@@ -7,7 +7,6 @@ import {CreatePatientForm} from "./components/CreatePatientForm/CreatePatientFor
 import { BrowserRouter } from "react-router-dom";
 import {MainComponent} from "./components/MainComponent/MainComponent";
 import { LoginPatient } from './components/LoginPatient/LoginPatient';
-import {AdVisitForm} from "./components/AdVisitForm/AdVisitForm";
 import {AccountPatient} from "./components/AccountPatient/AccountPatient";
 import {LoginDoctor} from "./components/LoginDoctor/LoginDoctor";
 

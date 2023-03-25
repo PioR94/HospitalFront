@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Term } from "types";
+import {Term} from "types";
 import './Hour.css'
 
 
@@ -49,7 +49,6 @@ export const Hour = (props: Term) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data.r)
                 setActive(data);
             })
     })();
@@ -60,9 +59,7 @@ export const Hour = (props: Term) => {
 
     return <>
         <div onClick={addTerm} className={changeClassName()}>
-
-                <div>{props.hour}</div>
-
+            {props.hour}
         </div>
     </>
 }

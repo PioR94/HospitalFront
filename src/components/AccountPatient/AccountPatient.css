@@ -1,11 +1,9 @@
 
-
 .bg {
     display: block;
     position: relative;
     height: 100%;
     width: 100%;
-    background: #999;
 }
 
 .headerAccountPatient {
@@ -14,8 +12,8 @@
     background-color: #111;
     height: 10vh;
     line-height: 10vh;
-    color: snow;
 }
+
 
 .h2AccountPatient {
     font-size: 30px;

@@ -11,8 +11,8 @@ interface DataDr {
     nameDr: string,
     lastNameDr: string,
     specialization: string,
+    address: string;
 }
-
 
 
 export const ListDoctor = (props: Props) => {
@@ -21,28 +21,26 @@ export const ListDoctor = (props: Props) => {
     const [on, setOn] = useState(false);
 
 
-
-
-
     const listAll = async (e: SyntheticEvent) => {
 
         e.preventDefault();
 
-      const res = await fetch('http://localhost:3001/patient');
-      const data = await res.json();
+        const res = await fetch('http://localhost:3001/patient');
+        const data = await res.json();
 
-         const dataDr = data.map((one: DataDr) =>
-            <li className="listAllLi"> <OneDoctor key={one.idDr} idDr={one.idDr} name={one.nameDr} lastName={one.lastNameDr} specialization={one.specialization} idPt={props.idPt}/> </li>
-         )
+        const dataDr = data.map((one: DataDr) =>
+            <li className="listAllLi"><OneDoctor key={one.idDr} idDr={one.idDr} name={one.nameDr}
+                                                 lastName={one.lastNameDr} specialization={one.specialization}
+                                                 idPt={props.idPt} address={one.address} /></li>
+        )
 
-            setList(dataDr);
+        setList(dataDr);
 
         return on ? setOn(false) : setOn(true);
     }
 
 
-
-    return  <>
+    return <>
         <button onClick={listAll} className="listAllButton">Lista lekarzy</button>
         {on && <ul className="listAllUl">{list}</ul>}
     </>
