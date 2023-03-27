@@ -6,8 +6,13 @@ import './FreeTermHour.css'
 export const FreeTermHour = (props: FreeTerm) => {
 
 
+    const bookTerm = () => {
+
+    }
+
+
     return <>
-        <div className="free-term-hour">
+        <div onClick={bookTerm}  className="free-term-hour">
             {props.hour}
         </div>
     </>

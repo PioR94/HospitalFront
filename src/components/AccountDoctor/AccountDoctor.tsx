@@ -14,8 +14,8 @@ export const AccountDoctor = (props: Props) => {
 
     return <div className="bgAccountDoctor">
         <header className="headerAccountDoctor">
-        <h2 className="h2AccountDoctor">{props.loginDr}</h2>
-        <VisitsDoctor idDr={props.idDr}/>
+            <h2 className="h2AccountDoctor">{props.loginDr}</h2>
+            <VisitsDoctor idDr={props.idDr}/>
         </header>
 
         <Week idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr}/>
