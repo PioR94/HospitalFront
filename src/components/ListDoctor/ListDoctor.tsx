@@ -11,6 +11,7 @@ interface DataDr {
     nameDr: string,
     lastNameDr: string,
     specialization: string,
+    address: string;
 }
 
 
@@ -30,7 +31,7 @@ export const ListDoctor = (props: Props) => {
         const dataDr = data.map((one: DataDr) =>
             <li className="listAllLi"><OneDoctor key={one.idDr} idDr={one.idDr} name={one.nameDr}
                                                  lastName={one.lastNameDr} specialization={one.specialization}
-                                                 idPt={props.idPt}/></li>
+                                                 idPt={props.idPt} address={one.address} /></li>
         )
 
         setList(dataDr);

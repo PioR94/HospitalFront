@@ -23,8 +23,7 @@ export const LoginPatient = () => {
 
     // useEffect(() => {
     //     (async  () => {
-    //         console.log(logged);
-    //         console.log(id);
+    //
     //     })()
     // })
 

@@ -5,15 +5,14 @@
     font-size: 10px;
     line-height: 15px;
     text-align: center;
-    border: 1px solid;
     box-sizing: border-box;
 }
 
-.a {
-    display: flex;
-    flex-direction: row;
+/*.a {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
 
-}
+/*}*/
 
 .div-dayOfWeek {
     font-size: 15px;
@@ -24,4 +23,5 @@
 .free-term-day {
     margin-right: 25px;
     margin-top: 8px;
+
 }
