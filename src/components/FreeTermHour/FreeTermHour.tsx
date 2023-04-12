@@ -1,7 +1,7 @@
 import React from "react";
 import {FreeTerm} from "types";
 import './FreeTermHour.css'
-import {Confirm} from "../Message/Confirm";
+import {Confirm} from "../Confirm/Confirm";
 
 
 export const FreeTermHour = (props: FreeTerm) => {

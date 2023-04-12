@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Day} from "../Day/Day";
 import {FreeTermDay} from "../FreeTermDay/FreeTermDay";
 import './FreeTermWeek.css'
-import {Confirm} from "../Message/Confirm";
+import {Confirm} from "../Confirm/Confirm";
 
 interface Props {
     idDr: string;
