@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Day} from "../Day/Day";
 import {FreeTermDay} from "../FreeTermDay/FreeTermDay";
 import './FreeTermWeek.css'
+import {Confirm} from "../Message/Confirm";
 
 interface Props {
     idDr: string;
@@ -187,6 +188,5 @@ export const FreeTermWeek = (props: Props) => {
 
             </div>
         </div>
-
     </>
 }
