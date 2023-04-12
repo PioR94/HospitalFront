@@ -1,0 +1,18 @@
+button {
+    background-color: transparent;
+}
+
+.yes {
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    width: 30px;
+}
+
+.no {
+    position: absolute;
+    left: 220px;
+    bottom: 10px;
+    width: 30px;
+
+}
