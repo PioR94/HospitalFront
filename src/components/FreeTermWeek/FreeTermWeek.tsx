@@ -23,7 +23,7 @@ export const FreeTermWeek = (props: Props) => {
     useEffect(() => {
 
         getMaxHeight(refElements[count.zero], refElements[count.one], refElements[count.two], refElements[count.three])
-        console.log(refElements[count.zero], refElements[count.one], refElements[count.two], refElements[count.three])
+
     })
 
 
@@ -188,5 +188,6 @@ export const FreeTermWeek = (props: Props) => {
 
             </div>
         </div>
+
     </>
 }
