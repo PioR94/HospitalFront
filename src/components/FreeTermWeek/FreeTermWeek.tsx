@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Day} from "../Day/Day";
 import {FreeTermDay} from "../FreeTermDay/FreeTermDay";
 import './FreeTermWeek.css'
-import {Confirm} from "../Message/Confirm";
+import {Confirm} from "../Confirm/Confirm";
 
 interface Props {
     idDr: string;
@@ -23,7 +23,7 @@ export const FreeTermWeek = (props: Props) => {
     useEffect(() => {
 
         getMaxHeight(refElements[count.zero], refElements[count.one], refElements[count.two], refElements[count.three])
-        console.log(refElements[count.zero], refElements[count.one], refElements[count.two], refElements[count.three])
+
     })
 
 
@@ -188,5 +188,6 @@ export const FreeTermWeek = (props: Props) => {
 
             </div>
         </div>
+
     </>
 }
