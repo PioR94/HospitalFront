@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 interface Props {
     message: string;
     clickNo: any;
+    clickYes: any;
     hour: string;
     numberDay: string;
     month: string;
@@ -21,7 +22,7 @@ export const Confirm = (props: Props) => {
             <div className="confirm">
                 <p className="confirm-date">{`${props.numberDay} ${props.month} ${props.year}r. godz. ${props.hour}`} </p>
                 <p className="confirm-message">{props.message}</p>
-                <Btn text="Tak" class="yes" onClick={console.log('tak')}/>
+                <Btn text="Tak" class="yes" onClick={props.clickYes}/>
                 <Btn text="Nie" class="no" onClick={props.clickNo}/>
             </div>
         </div>,

@@ -9,8 +9,8 @@
     border-radius: 3px;
     box-sizing: border-box;
     background-color: darkcyan;
-
 }
+
 
 .free-term-hour:hover {
     cursor: pointer;
@@ -30,4 +30,18 @@
     border-radius: 5px;
     z-index: 1;
 }
+
+.book-term-hour {
+    display: block;
+    position: relative;
+    height: 25px;
+    width: 65px;
+    margin-bottom: 10px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 3px;
+    box-sizing: border-box;
+    text-decoration: line-through;
+    color: gray;
+    }
 
