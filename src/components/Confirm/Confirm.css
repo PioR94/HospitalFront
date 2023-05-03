@@ -10,10 +10,18 @@
 .confirm {
     position: fixed;
     left: calc(50% - 150px);
-    top: calc(50% - 150px);
+    top: calc(50% - 100px);
     width: 300px;
-    height: 300px;
+    height: 200px;
     background-color: white;
 
 }
 
+
+.confirm-date {
+    position: relative;
+    left: 25px;
+    top: 75px;
+    font-size: 20px;
+    width: 100%;
+}

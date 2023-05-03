@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FreeTerm} from "types";
 import './FreeTermHour.css'
 import {Confirm} from "../Confirm/Confirm";
@@ -7,17 +7,48 @@ import {Confirm} from "../Confirm/Confirm";
 export const FreeTermHour = (props: FreeTerm) => {
 
     const [display, setDisplay] = useState(false);
+    const [free, setFree] = useState(false);
 
-    const bookTerm = () => display ? setDisplay(false) : setDisplay(true)
+    const id: string = props.id;
+
+    const bookTerm = async () => {
+
+        await fetch('http://localhost:3001/term/book-term', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id,
+            })
+        })
+
+        setDisplay(false);
+        setFree(true);
+
+    }
+
+    const changeClass =  () => (props.reservation === 1 || free) ? 'book-term-hour' : 'free-term-hour'
 
 
-    const displayConfirm = () => display ? <Confirm message="Czy chcesz zarezerwować ten termin?" no={offDisplay}/> : false;
+
+    const displayWindow = () => display ? setDisplay(false) : setDisplay(true)
+
+
+    const displayConfirm = () => (display && props.reservation === 0) ?
+        <Confirm message="Czy chcesz zarezerwować ten termin?"
+                 clickNo={offDisplay}
+                 clickYes={bookTerm}
+                 hour={props.hour}
+                 numberDay={props.numberDay}
+                 month={props.month}
+                 year={props.year}/> : false;
 
     const offDisplay = () => setDisplay(false);
 
     return <>
 
-        <div onClick={bookTerm} className="free-term-hour">
+        <div onClick={displayWindow} className={changeClass()}>
             {props.hour}
 
         </div>

@@ -6,7 +6,12 @@ import ReactDOM from "react-dom";
 
 interface Props {
     message: string;
-    no: any;
+    clickNo: any;
+    clickYes: any;
+    hour: string;
+    numberDay: string;
+    month: string;
+    year: string;
 }
 
 export const Confirm = (props: Props) => {
@@ -15,9 +20,10 @@ export const Confirm = (props: Props) => {
     return ReactDOM.createPortal(
         <div className="confirm-bg">
             <div className="confirm">
-                <p>{props.message}</p>
-                <Btn text="Tak" class="yes" onClick={console.log('tak')}/>
-                <Btn text="Nie" class="no" onClick={props.no}/>
+                <p className="confirm-date">{`${props.numberDay} ${props.month} ${props.year}r. godz. ${props.hour}`} </p>
+                <p className="confirm-message">{props.message}</p>
+                <Btn text="Tak" class="yes" onClick={props.clickYes}/>
+                <Btn text="Nie" class="no" onClick={props.clickNo}/>
             </div>
         </div>,
         document.body)
