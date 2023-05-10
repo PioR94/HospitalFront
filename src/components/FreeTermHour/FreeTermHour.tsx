@@ -1,57 +1,57 @@
-import React, {useEffect, useState} from "react";
-import {FreeTerm} from "types";
-import './FreeTermHour.css'
-import {Confirm} from "../Confirm/Confirm";
-
+import React, { useState } from "react";
+import { FreeTerm } from "types";
+import "./FreeTermHour.css";
+import { Confirm } from "../Confirm/Confirm";
 
 export const FreeTermHour = (props: FreeTerm) => {
+  const [display, setDisplay] = useState(false);
+  const [free, setFree] = useState(false);
 
-    const [display, setDisplay] = useState(false);
-    const [free, setFree] = useState(false);
+  const id: string = props.id;
 
-    const id: string = props.id;
+  const bookTerm = async () => {
+    await fetch("http://localhost:3001/term/book-term", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    });
 
-    const bookTerm = async () => {
+    setDisplay(false);
+    setFree(true);
+  };
 
-        await fetch('http://localhost:3001/term/book-term', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id,
-            })
-        })
+  const changeClass = () =>
+    props.reservation === 1 || free ? "book-term-hour" : "free-term-hour";
 
-        setDisplay(false);
-        setFree(true);
+  const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
 
-    }
+  const displayConfirm = () =>
+    display && props.reservation === 0 ? (
+      <Confirm
+        message="Czy chcesz zarezerwować ten termin?"
+        clickNo={offDisplay}
+        clickYes={bookTerm}
+        hour={props.hour}
+        numberDay={props.numberDay}
+        month={props.month}
+        year={props.year}
+      />
+    ) : (
+      false
+    );
 
-    const changeClass =  () => (props.reservation === 1 || free) ? 'book-term-hour' : 'free-term-hour'
+  const offDisplay = () => setDisplay(false);
 
-
-
-    const displayWindow = () => display ? setDisplay(false) : setDisplay(true)
-
-
-    const displayConfirm = () => (display && props.reservation === 0) ?
-        <Confirm message="Czy chcesz zarezerwować ten termin?"
-                 clickNo={offDisplay}
-                 clickYes={bookTerm}
-                 hour={props.hour}
-                 numberDay={props.numberDay}
-                 month={props.month}
-                 year={props.year}/> : false;
-
-    const offDisplay = () => setDisplay(false);
-
-    return <>
-
-        <div onClick={displayWindow} className={changeClass()}>
-            {props.hour}
-
-        </div>
-        {displayConfirm()}
+  return (
+    <>
+      <div onClick={displayWindow} className={changeClass()}>
+        {props.hour}
+      </div>
+      {displayConfirm()}
     </>
-}
+  );
+};

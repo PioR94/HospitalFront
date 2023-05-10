@@ -24,13 +24,14 @@
     line-height: 25px;
     cursor: pointer;
     font-size: 22px;
-    background-color:#eef4fd;
+    background-color: #eef4fd;
 
 }
 
 .move-right:hover {
     background-color: darkcyan;
 }
+
 .move-right-none {
     position: absolute;
     left: 807px;
@@ -47,7 +48,7 @@
 
 .move-left {
 
-   position: absolute;
+    position: absolute;
     left: 420px;
     top: 10px;
     height: 30px;
@@ -57,10 +58,11 @@
     text-align: center;
     line-height: 25px;
     cursor: pointer;
-    background-color:#eef4fd;
+    background-color: #eef4fd;
 
     overflow: visible;
 }
+
 .move-left:hover {
     background-color: darkcyan;
 }
@@ -83,7 +85,6 @@
 .test {
     display: inline-block;
     flex-shrink: 0;
-
 
 
 }

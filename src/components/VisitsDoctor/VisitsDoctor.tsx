@@ -1,55 +1,51 @@
-import React, {SyntheticEvent, useEffect, useState} from "react";
-import {OneVisit} from "../OneVisit/OneVisit";
-import "./VisitDoctor.css"
-
+import React, { SyntheticEvent, useState } from "react";
+import { OneVisit } from "../OneVisit/OneVisit";
+import "./VisitDoctor.css";
 
 interface Props {
-    idDr: string
+  idDr: string;
 }
 
 interface Visit {
-    idV: string;
-    date: string;
-    idPt: string;
+  idV: string;
+  date: string;
+  idPt: string;
 }
-
 
 export const VisitsDoctor = (props: Props) => {
+  const [list, setList] = useState([]);
+  const [on, setOn] = useState(false);
 
+  const listAll = async (e: SyntheticEvent) => {
+    e.preventDefault();
 
-    const [list, setList] = useState([]);
-    const [on, setOn] = useState(false);
+    const res = await fetch("http://localhost:3001/doctor/visits", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        doctorId: props.idDr,
+      }),
+    });
 
+    const data = await res.json();
 
-    const listAll = async (e: SyntheticEvent) => {
+    const dataVisits = data.map((one: Visit) => (
+      <OneVisit date={one.date} idPt={one.idPt} />
+    ));
 
-        e.preventDefault();
+    setList(dataVisits);
 
-        const res = await fetch('http://localhost:3001/doctor/visits', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                doctorId: props.idDr,
-            }),
-        });
+    return on ? setOn(false) : setOn(true);
+  };
 
-        const data = await res.json();
-
-        const dataVisits = data.map((one: Visit) =>
-            <OneVisit date={one.date} idPt={one.idPt}/>
-        )
-
-        setList(dataVisits)
-
-        return on ? setOn(false) : setOn(true);
-    }
-
-
-    return <>
-        <button className="buttonListAllDoctor" onClick={listAll}>Wizyty</button>
-        {on && <ul>{list}</ul>}
+  return (
+    <>
+      <button className="buttonListAllDoctor" onClick={listAll}>
+        Wizyty
+      </button>
+      {on && <ul>{list}</ul>}
     </>
-
-}
+  );
+};

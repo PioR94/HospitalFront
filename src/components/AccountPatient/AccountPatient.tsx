@@ -1,14 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {Patient} from 'types';
-import {LoginPatient} from "../LoginPatient/LoginPatient";
+import React from 'react';
 import {ListDoctor} from "../ListDoctor/ListDoctor";
 import {VisitsPatient} from "../VisitPatient/VisitPatient";
 import "./AccountPatient.css";
-import {Hour} from "../Hour/Hour";
-import {Day} from "../Day/Day";
-import {Week} from "../Week/Week";
-import {FreeTermDay} from "../FreeTermDay/FreeTermDay";
-import {FreeTermHour} from "../FreeTermHour/FreeTermHour";
 
 interface Props {
     idPt: string;
