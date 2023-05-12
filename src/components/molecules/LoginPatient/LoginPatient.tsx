@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
-import { Btn } from "../Btn/Btn";
-import { AccountPatient } from "../AccountPatient/AccountPatient";
+import { Btn } from "../../atoms/Btn/Btn";
+import { AccountPatient } from "../../pages/AccountPatient/AccountPatient";
 import "./LoginPatient.css";
 
 export const LoginPatient = () => {

@@ -1,30 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { FreeTermDay } from "../FreeTermDay/FreeTermDay";
-import "./FreeTermWeek.css";
+import React, { useState } from "react";
+import { Day } from "../../molecules/Day/Day";
+import "./Week.css";
 
 interface Props {
   idDr: string;
+  loginDr: string;
+  nameDr: string;
+  lastNameDr: string;
 }
 
-export const FreeTermWeek = (props: Props) => {
+export const Week = (props: Props) => {
   const [positionX, setPositionX] = useState(0);
-  const [count, setCount] = useState({
-    zero: 0,
-    one: 1,
-    two: 2,
-    three: 3,
-  });
-  const [height, setHeight] = useState(0);
-  let refElements: any[] = [];
-
-  useEffect(() => {
-    getMaxHeight(
-      refElements[count.zero],
-      refElements[count.one],
-      refElements[count.two],
-      refElements[count.three]
-    );
-  });
 
   const date = new Date();
   const dayOfWeek = date.getDay();
@@ -87,16 +73,16 @@ export const FreeTermWeek = (props: Props) => {
     const days = [];
     for (let i = 0; i < 28; i++) {
       days[i] = (
-        <div>
-          <FreeTermDay
-            dayOfWeek={`${getDayName(dayOfWeek)}`}
-            numberDay={numberDay.toString()}
-            month={`${getMonthName(month)}`}
-            year={year.toString()}
-            idDr={props.idDr}
-            sendRef={addHeight}
-          />
-        </div>
+        <Day
+          dayOfWeek={`${getDayName(dayOfWeek)}`}
+          month={`${getMonthName(month)}`}
+          numberDay={numberDay.toString()}
+          year={year.toString()}
+          idDr={props.idDr}
+          loginDr={props.loginDr}
+          nameDr={props.nameDr}
+          lastNameDr={props.lastNameDr}
+        />
       );
 
       dayOfWeek++;
@@ -137,75 +123,49 @@ export const FreeTermWeek = (props: Props) => {
 
       if (month === 12) month = 0;
     }
-
     return days;
   };
 
-  const getMaxHeight = (i1: number, i2: number, i3: number, i4: number) => {
-    let arr: number[] = [i1, i2, i3, i4];
-    const biggest: number = Math.max(...arr);
-    setHeight(biggest);
-  };
-
-  const addHeight = (ref: number): void => {
-    refElements.push(ref);
+  const moveRight = (): void => {
+    if (positionX > -1995) {
+      setPositionX(positionX - 665);
+    }
   };
 
   const moveLeft = (): void => {
     if (positionX < 0) {
-      setPositionX(positionX + 360);
-    }
-    if (count.zero > 0) {
-      setCount({
-        zero: count.zero - 4,
-        one: count.one - 4,
-        two: count.two - 4,
-        three: count.three - 4,
-      });
-    }
-  };
-  const moveRight = (): void => {
-    if (positionX > -1995) {
-      setPositionX(positionX - 360);
-    }
-    if (count.zero < 28) {
-      setCount({
-        zero: count.zero + 4,
-        one: count.one + 4,
-        two: count.two + 4,
-        three: count.three + 4,
-      });
+      setPositionX(positionX + 665);
     }
   };
 
-  const changeMoveLeft = (): string => {
-    return positionX === 0 ? "move-left-none" : "move-left";
-  };
   const changeMoveRight = (): string => {
-    return positionX < -1995 ? "move-right-none" : "move-right";
+    return positionX === -1995 ? "_moveRightNone" : "_moveRight";
+  };
+
+  const changeMoveLeft = (): string => {
+    return positionX === 0 ? "_moveLeftNone" : "_moveLeft";
   };
 
   return (
     <>
-      <div className={changeMoveLeft()} onClick={moveLeft}>
-        {" "}
-        {"<"}
-      </div>
-      <div className={changeMoveRight()} onClick={moveRight}>
-        {" "}
-        {">"}
-      </div>
-
-      <div className="container-free-term-week">
+      <div className="a">
         <div
-          className="free-term-week"
+          className="_divWeek"
           style={{
             translate: positionX,
-            height: height + 15,
           }}
         >
           {renderDays(dayOfWeek, month, numberDay, year)}
         </div>
+      </div>
+      <div className={changeMoveRight()} onClick={moveRight}>
+        {" "}
+        ⇨
+      </div>
+
+      <div className={changeMoveLeft()} onClick={moveLeft}>
+        {" "}
+        ⇦
       </div>
     </>
   );

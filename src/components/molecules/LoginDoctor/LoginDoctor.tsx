@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
-import { Btn } from "../Btn/Btn";
-import { AccountDoctor } from "../AccountDoctor/AccountDoctor";
+import { Btn } from "../../atoms/Btn/Btn";
+import { AccountDoctor } from "../../pages/AccountDoctor/AccountDoctor";
 import "./LoginDoctor.css";
 
 export const LoginDoctor = () => {

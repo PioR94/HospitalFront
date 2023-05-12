@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FreeTerm } from "types";
 import "./FreeTermHour.css";
-import { Confirm } from "../Confirm/Confirm";
+import { Confirm } from "../../molecules/Confirm/Confirm";
 
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);

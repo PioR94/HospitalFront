@@ -1,6 +1,6 @@
 import React from "react";
 import "./Confirm.css";
-import { Btn } from "../Btn/Btn";
+import { Btn } from "../../atoms/Btn/Btn";
 import ReactDOM from "react-dom";
 
 interface Props {
