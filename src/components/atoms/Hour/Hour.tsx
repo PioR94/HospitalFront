@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Term } from "types";
 import "./Hour.css";
+import { sendAndReceiveData, sendData } from "../../../api";
 
 export const Hour = (props: Term) => {
   const [active, setActive] = useState(false);
@@ -18,35 +19,18 @@ export const Hour = (props: Term) => {
     lastNameDr: props.lastNameDr,
   };
 
-  const termId = props.id;
+  const termId: string = props.id;
 
-  const addTerm = async () => {
-    await fetch("http://localhost:3001/term/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...term,
-      }),
-    });
+  useEffect(() => {
+    sendAndReceiveData(termId, "http://localhost:3001/term/term-id").then((r) =>
+      setActive(r)
+    );
+  }, []);
+
+  const addTerm = () => {
+    sendData(term, "http://localhost:3001/term/add");
     active ? setActive(false) : setActive(true);
   };
-  (async () => {
-    await fetch("http://localhost:3001/term/term-id", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        termId,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setActive(data);
-      });
-  })();
 
   const changeClassName = () => {
     return active ? "_hour-div-active" : "_hour-div";

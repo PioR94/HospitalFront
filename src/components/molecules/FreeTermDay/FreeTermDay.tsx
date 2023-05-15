@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FreeTerm } from "types";
 import { FreeTermHour } from "../../atoms/FreeTermHour/FreeTermHour";
 import "./FreeTermDay.css";
+import { sendAndReceiveData } from "../../../api";
 
 interface Props {
   dayOfWeek: string;
@@ -23,19 +24,9 @@ export const FreeTermDay = (props: Props) => {
     idDr: props.idDr,
   };
 
-  const getTerms = async (): Promise<void> => {
-    await fetch("http://localhost:3001/term/free-terms", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        ...dayData,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
+  useEffect(() => {
+    sendAndReceiveData(dayData, "http://localhost:3001/term/free-terms").then(
+      (data) => {
         const r = data.map((term: FreeTerm) => (
           <FreeTermHour
             id={term.id}
@@ -48,11 +39,8 @@ export const FreeTermDay = (props: Props) => {
           />
         ));
         setFreeTerms(r);
-      });
-  };
-
-  useEffect(() => {
-    getTerms();
+      }
+    );
   }, []);
 
   useEffect(() => {
