@@ -31,3 +31,9 @@ export const sendAndReceiveData = (data: any, http: string) => {
     .then((r) => r.json())
     .then((dt) => dt);
 };
+
+export const dwlData = (http: string) => {
+  return fetch(http)
+    .then((r) => r.json())
+    .then((dt) => dt);
+};
