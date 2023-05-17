@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import { OneDoctor } from "../OneDoctor/OneDoctor";
 import "./ListDoctor.css";
-import { dwlData, sendAndReceiveData } from "../../../api";
+import { dwlData } from "../../../api";
 
 interface Props {
   idPt: string;
