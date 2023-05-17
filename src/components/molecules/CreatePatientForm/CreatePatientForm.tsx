@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
 import "./CreatePatientForm.css";
+import { sendAndReceiveData } from "../../../api";
 
 export const CreatePatientForm = () => {
   const [loading, setLoading] = useState(false);
@@ -57,19 +58,9 @@ export const CreatePatientForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3001/patient/ad", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...form,
-        }),
+      sendAndReceiveData(form, "http://localhost:3001/patient/ad").then((r) => {
+        setLogin(r.login);
       });
-
-      const data = await res.json();
-
-      setLogin(data.login);
     } catch {
       setErr(true);
 
