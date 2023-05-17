@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import { OneDoctor } from "../OneDoctor/OneDoctor";
 import "./ListDoctor.css";
+import { dwlData, sendAndReceiveData } from "../../../api";
 
 interface Props {
   idPt: string;
@@ -21,24 +22,22 @@ export const ListDoctor = (props: Props) => {
   const listAll = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:3001/patient");
-    const data = await res.json();
-
-    const dataDr = data.map((one: DataDr) => (
-      <li className="listAllLi">
-        <OneDoctor
-          key={one.idDr}
-          idDr={one.idDr}
-          name={one.nameDr}
-          lastName={one.lastNameDr}
-          specialization={one.specialization}
-          idPt={props.idPt}
-          address={one.address}
-        />
-      </li>
-    ));
-
-    setList(dataDr);
+    dwlData("http://localhost:3001/patient").then((r) => {
+      const dataDr = r.map((one: DataDr) => (
+        <li className="listAllLi">
+          <OneDoctor
+            key={one.idDr}
+            idDr={one.idDr}
+            name={one.nameDr}
+            lastName={one.lastNameDr}
+            specialization={one.specialization}
+            idPt={props.idPt}
+            address={one.address}
+          />
+        </li>
+      ));
+      setList(dataDr);
+    });
 
     return on ? setOn(false) : setOn(true);
   };
