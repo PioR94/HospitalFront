@@ -21,7 +21,6 @@ export const VisitsPatient = (props: Props) => {
   const listAll = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-
     sendAndReceiveData(props.idPt, "http://localhost:3001/patient/visits").then(
       (r) => {
         const dataVisits = r.map((one: Visit) => (
