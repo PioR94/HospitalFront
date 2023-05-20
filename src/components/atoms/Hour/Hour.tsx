@@ -22,7 +22,7 @@ export const Hour = (props: Term) => {
   const termId: string = props.id;
 
   useEffect(() => {
-    sendAndReceiveData(termId, "http://localhost:3001/term/term-id").then((r) =>
+    sendAndReceiveData(termId, baseUrlTerm, "term-id").then((r) =>
       setActive(r)
     );
   }, []);

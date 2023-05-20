@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FreeTerm } from "types";
 import "./FreeTermHour.css";
 import { Confirm } from "../../molecules/Confirm/Confirm";
@@ -8,8 +8,6 @@ export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
   const [reservation, setReservation] = useState(props.reservation);
-
-  console.log(props.reservation);
 
   const id: string = props.id;
 

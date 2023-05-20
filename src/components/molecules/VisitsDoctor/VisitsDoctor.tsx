@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import { OneVisit } from "../OneVisit/OneVisit";
 import "./VisitDoctor.css";
-import { sendAndReceiveData } from "../../../api";
+import { baseUrlDoctor, sendAndReceiveData } from "../../../api";
 
 interface Props {
   idDr: string;
@@ -20,14 +20,12 @@ export const VisitsDoctor = (props: Props) => {
   const listAll = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    sendAndReceiveData(props.idDr, "http://localhost:3001/doctor/visits").then(
-      (r) => {
-        const dataVisits = r.map((one: Visit) => (
-          <OneVisit date={one.date} idPt={one.idPt} />
-        ));
-        setList(dataVisits);
-      }
-    );
+    sendAndReceiveData(props.idDr, baseUrlDoctor, "visits").then((r) => {
+      const dataVisits = r.map((one: Visit) => (
+        <OneVisit date={one.date} idPt={one.idPt} />
+      ));
+      setList(dataVisits);
+    });
 
     return on ? setOn(false) : setOn(true);
   };

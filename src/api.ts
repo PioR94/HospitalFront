@@ -19,8 +19,12 @@ export const sendData = (data: any, baseUrlArgument: string, path: string) => {
   });
 };
 
-export const sendAndReceiveData = (data: any, http: string) => {
-  return fetch(http, {
+export const sendAndReceiveData = (
+  data: any,
+  baseUrlArgument: string,
+  path: string
+) => {
+  return fetch(`${baseUrlArgument}/${path}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
