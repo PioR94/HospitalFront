@@ -1,7 +1,7 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { OneVisit } from "../OneVisit/OneVisit";
 import "./VisitPatient.css";
-import { sendAndReceiveData, sendData } from "../../../api";
+import { sendAndReceiveData } from "../../../api";
 
 interface Props {
   idPt: string;

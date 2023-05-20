@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FreeTerm } from "types";
 import "./FreeTermHour.css";
 import { Confirm } from "../../molecules/Confirm/Confirm";
-import { sendData } from "../../../api";
+import { baseUrlTerm, sendData } from "../../../api";
 
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);
@@ -11,7 +11,7 @@ export const FreeTermHour = (props: FreeTerm) => {
   const id: string = props.id;
 
   const bookTerm = () => {
-    sendData(id, "http://localhost:3001/term/book-term");
+    sendData(id, baseUrlTerm, "book-term");
     setDisplay(false);
     setFree(true);
   };

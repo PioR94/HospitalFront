@@ -1,5 +1,10 @@
-export const sendData = (data: any, http: string) => {
-  fetch(http, {
+const baseUrl = process.env.REACT_APP_BASE_URL;
+export const baseUrlDoctor: string = `${baseUrl}/doctor`;
+export const baseUrlPatient: string = `${baseUrl}/patient`;
+export const baseUrlTerm = `${baseUrl}/term`;
+
+export const sendData = (data: any, baseUrlArgument: string, path: string) => {
+  fetch(`${baseUrlArgument}/${path}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

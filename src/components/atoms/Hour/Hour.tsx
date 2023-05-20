@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Term } from "types";
 import "./Hour.css";
-import { sendAndReceiveData, sendData } from "../../../api";
+import { baseUrlTerm, sendAndReceiveData, sendData } from "../../../api";
 
 export const Hour = (props: Term) => {
   const [active, setActive] = useState(false);
@@ -28,7 +28,7 @@ export const Hour = (props: Term) => {
   }, []);
 
   const addTerm = () => {
-    sendData(term, "http://localhost:3001/term/add");
+    sendData(term, baseUrlTerm, "add");
     active ? setActive(false) : setActive(true);
   };
 
