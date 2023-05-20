@@ -7,22 +7,26 @@ import { baseUrlTerm, sendData } from "../../../api";
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
+  const [reservation, setReservation] = useState(props.reservation);
+
+  console.log(props.reservation);
 
   const id: string = props.id;
 
-  const bookTerm = () => {
+  const bookTerm = async () => {
     sendData(id, baseUrlTerm, "book-term");
     setDisplay(false);
     setFree(true);
+    setReservation(1);
   };
 
   const changeClass = () =>
-    props.reservation === 1 || free ? "book-term-hour" : "free-term-hour";
+    reservation === 1 || free ? "book-term-hour" : "free-term-hour";
 
   const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
 
   const displayConfirm = () =>
-    display && props.reservation === 0 ? (
+    display && reservation === 0 ? (
       <Confirm
         message="Czy chcesz zarezerwować ten termin?"
         clickNo={offDisplay}
