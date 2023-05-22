@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Term } from "types";
 import "./Hour.css";
 import { baseUrlTerm, sendAndReceiveData, sendData } from "../../../api";
+import { Term } from "types";
+import { changeClass } from "../../../utils/function";
 
 export const Hour = (props: Term) => {
   const [active, setActive] = useState(false);
@@ -32,13 +33,12 @@ export const Hour = (props: Term) => {
     active ? setActive(false) : setActive(true);
   };
 
-  const changeClassName = () => {
-    return active ? "_hour-div-active" : "_hour-div";
-  };
-
   return (
     <>
-      <div onClick={addTerm} className={changeClassName()}>
+      <div
+        onClick={addTerm}
+        className={changeClass(active, "_hour-div-active", "_hour-div")}
+      >
         {props.hour}
       </div>
     </>

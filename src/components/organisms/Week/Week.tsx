@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Day } from "../../molecules/Day/Day";
 import "./Week.css";
+import { changeClass } from "../../../utils/function";
 
 interface Props {
   idDr: string;
@@ -138,10 +139,6 @@ export const Week = (props: Props) => {
     }
   };
 
-  const changeMoveRight = (): string => {
-    return positionX === -1995 ? "_moveRightNone" : "_moveRight";
-  };
-
   const changeMoveLeft = (): string => {
     return positionX === 0 ? "_moveLeftNone" : "_moveLeft";
   };
@@ -158,12 +155,22 @@ export const Week = (props: Props) => {
           {renderDays(dayOfWeek, month, numberDay, year)}
         </div>
       </div>
-      <div className={changeMoveRight()} onClick={moveRight}>
+      <div
+        className={changeClass(
+          positionX === -1995,
+          "_moveRightNone",
+          "_moveRight"
+        )}
+        onClick={moveRight}
+      >
         {" "}
         ⇨
       </div>
 
-      <div className={changeMoveLeft()} onClick={moveLeft}>
+      <div
+        className={changeClass(positionX === 0, "_moveLeftNone", "_moveLeft")}
+        onClick={moveLeft}
+      >
         {" "}
         ⇦
       </div>

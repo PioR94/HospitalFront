@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FreeTermDay } from "../../molecules/FreeTermDay/FreeTermDay";
 import "./FreeTermWeek.css";
+import { changeClass } from "../../../utils/function";
 
 interface Props {
   idDr: string;
@@ -178,20 +179,23 @@ export const FreeTermWeek = (props: Props) => {
     }
   };
 
-  const changeMoveLeft = (): string => {
-    return positionX === 0 ? "move-left-none" : "move-left";
-  };
-  const changeMoveRight = (): string => {
-    return positionX < -1995 ? "move-right-none" : "move-right";
-  };
-
   return (
     <>
-      <div className={changeMoveLeft()} onClick={moveLeft}>
+      <div
+        className={changeClass(positionX === 0, "move-left-none", "move-left")}
+        onClick={moveLeft}
+      >
         {" "}
         {"<"}
       </div>
-      <div className={changeMoveRight()} onClick={moveRight}>
+      <div
+        className={changeClass(
+          positionX < -1995,
+          "move-right-none",
+          "move-left"
+        )}
+        onClick={moveRight}
+      >
         {" "}
         {">"}
       </div>
