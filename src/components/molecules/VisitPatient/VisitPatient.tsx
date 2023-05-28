@@ -1,7 +1,7 @@
-import React, { SyntheticEvent, useState } from "react";
-import { OneVisit } from "../OneVisit/OneVisit";
-import "./VisitPatient.css";
-import { baseUrlPatient, sendAndReceiveData } from "../../../api";
+import React, { SyntheticEvent, useState } from 'react';
+import { OneVisit } from '../OneVisit/OneVisit';
+import './VisitPatient.css';
+import { baseUrlPatient, sendAndReceiveData } from '../../../api';
 
 interface Props {
   idPt: string;
@@ -21,10 +21,8 @@ export const VisitsPatient = (props: Props) => {
   const listAll = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    sendAndReceiveData(props.idPt, baseUrlPatient, "visits").then((r) => {
-      const dataVisits = r.map((one: Visit) => (
-        <OneVisit date={one.date} idDr={one.idDr} />
-      ));
+    sendAndReceiveData(props.idPt, baseUrlPatient, 'visits').then((r) => {
+      const dataVisits = r.map((one: Visit) => <OneVisit date={one.date} idDr={one.idDr} />);
       setList(dataVisits);
     });
 

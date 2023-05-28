@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { FreeTerm } from "types";
-import "./FreeTermHour.css";
-import { Confirm } from "../../molecules/Confirm/Confirm";
-import { baseUrlTerm, sendData } from "../../../api";
+import React, { useState } from 'react';
+import { FreeTerm } from 'types';
+import './FreeTermHour.css';
+import { Confirm } from '../../molecules/Confirm/Confirm';
+import { baseUrlTerm, sendData } from '../../../api';
+import { changeClass } from '../../../utils/functions/function';
 
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);
@@ -12,17 +13,13 @@ export const FreeTermHour = (props: FreeTerm) => {
   const id: string = props.id;
 
   const bookTerm = async () => {
-    sendData(id, baseUrlTerm, "book-term");
+    sendData(id, baseUrlTerm, 'book-term');
     setDisplay(false);
     setFree(true);
     setReservation(1);
   };
 
-  const changeClass = () =>
-    reservation === 1 || free ? "book-term-hour" : "free-term-hour";
-
   const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
-
   const displayConfirm = () =>
     display && reservation === 0 ? (
       <Confirm
@@ -42,7 +39,7 @@ export const FreeTermHour = (props: FreeTerm) => {
 
   return (
     <>
-      <div onClick={displayWindow} className={changeClass()}>
+      <div onClick={displayWindow} className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}>
         {props.hour}
       </div>
       {displayConfirm()}

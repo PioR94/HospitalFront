@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "./OneDoctor.css";
-import { FreeTermWeek } from "../FreeTermWeek/FreeTermWeek";
-import { MdLocationOn } from "react-icons/md";
-import { changeClass } from "../../../utils/function";
+import React, { useState } from 'react';
+import './OneDoctor.css';
+import { FreeTermWeek } from '../FreeTermWeek/FreeTermWeek';
+import { MdLocationOn } from 'react-icons/md';
+import { changeClass } from '../../../utils/functions/function';
 
 interface Props {
   idDr: string;
@@ -26,7 +26,7 @@ export const OneDoctor = (props: Props) => {
         <div className="image" />
         <div className="pDr">
           <p>
-            lek. {props.name} {props.lastName}{" "}
+            lek. {props.name} {props.lastName}{' '}
           </p>
           <p>{props.specialization}</p>
         </div>
@@ -37,19 +37,10 @@ export const OneDoctor = (props: Props) => {
         </div>
         <hr />
         <div>
-          <div
-            className={changeClass(
-              wrap,
-              "wrap-free-term-week-down",
-              "wrap-free-term-week"
-            )}
-          >
+          <div className={changeClass(wrap, 'wrap-free-term-week-down', 'wrap-free-term-week')}>
             <FreeTermWeek idDr={props.idDr} />
           </div>
-          <div
-            className={changeClass(wrap, "arrow-up", "arrow-down")}
-            onClick={scroll}
-          >
+          <div className={changeClass(wrap, 'arrow-up', 'arrow-down')} onClick={scroll}>
             🡫
           </div>
         </div>
