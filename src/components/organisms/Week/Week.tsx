@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Day } from "../../molecules/Day/Day";
-import "./Week.css";
+import React, { useState } from 'react';
+import { Day } from '../../molecules/Day/Day';
+import './Week.css';
+import { changeClass, getDayName, getMonthName } from '../../../utils/functions/function';
+import { dayOfWeek, month, numberDay, year } from '../../../utils/get-date';
 
 interface Props {
   idDr: string;
@@ -12,64 +14,7 @@ interface Props {
 export const Week = (props: Props) => {
   const [positionX, setPositionX] = useState(0);
 
-  const date = new Date();
-  const dayOfWeek = date.getDay();
-  const month = date.getMonth();
-  const numberDay = date.getUTCDate();
-  const year = date.getFullYear();
-
-  const getDayName = (day: number) => {
-    if (day === 0) {
-      return "Nie.";
-    } else if (day === 1) {
-      return "Pon.";
-    } else if (day === 2) {
-      return "Wt.";
-    } else if (day === 3) {
-      return "Śr.";
-    } else if (day === 4) {
-      return "Czw.";
-    } else if (day === 5) {
-      return "Pią.";
-    } else if (day === 6) {
-      return "Sob.";
-    }
-  };
-
-  const getMonthName = (month: number) => {
-    if (month === 0) {
-      return "Sty";
-    } else if (month === 1) {
-      return "Lut";
-    } else if (month === 2) {
-      return "Mrz";
-    } else if (month === 3) {
-      return "Kw";
-    } else if (month === 4) {
-      return "Maj";
-    } else if (month === 5) {
-      return "Cz";
-    } else if (month === 6) {
-      return "Lip";
-    } else if (month === 7) {
-      return "Sier";
-    } else if (month === 8) {
-      return "Wrz";
-    } else if (month === 9) {
-      return "Paź";
-    } else if (month === 10) {
-      return "Lis";
-    } else if (month === 11) {
-      return "Gr";
-    }
-  };
-
-  const renderDays = (
-    dayOfWeek: number,
-    month: number,
-    numberDay: number,
-    year: number
-  ) => {
+  const renderDays = (dayOfWeek: number, month: number, numberDay: number, year: number) => {
     const days = [];
     for (let i = 0; i < 28; i++) {
       days[i] = (
@@ -90,23 +35,11 @@ export const Week = (props: Props) => {
 
       if (dayOfWeek === 7) dayOfWeek = 0;
 
-      if (
-        (month === 0 ||
-          month === 2 ||
-          month === 4 ||
-          month === 6 ||
-          month === 7 ||
-          month === 9 ||
-          month === 11) &&
-        numberDay === 32
-      ) {
+      if ((month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9 || month === 11) && numberDay === 32) {
         numberDay = 1;
         month++;
       }
-      if (
-        (month === 3 || month === 5 || month === 8 || month === 10) &&
-        numberDay === 31
-      ) {
+      if ((month === 3 || month === 5 || month === 8 || month === 10) && numberDay === 31) {
         numberDay = 1;
         month++;
       }
@@ -138,14 +71,6 @@ export const Week = (props: Props) => {
     }
   };
 
-  const changeMoveRight = (): string => {
-    return positionX === -1995 ? "_moveRightNone" : "_moveRight";
-  };
-
-  const changeMoveLeft = (): string => {
-    return positionX === 0 ? "_moveLeftNone" : "_moveLeft";
-  };
-
   return (
     <>
       <div className="a">
@@ -158,13 +83,13 @@ export const Week = (props: Props) => {
           {renderDays(dayOfWeek, month, numberDay, year)}
         </div>
       </div>
-      <div className={changeMoveRight()} onClick={moveRight}>
-        {" "}
+      <div className={changeClass(positionX === -1995, '_moveRightNone', '_moveRight')} onClick={moveRight}>
+        {' '}
         ⇨
       </div>
 
-      <div className={changeMoveLeft()} onClick={moveLeft}>
-        {" "}
+      <div className={changeClass(positionX === 0, '_moveLeftNone', '_moveLeft')} onClick={moveLeft}>
+        {' '}
         ⇦
       </div>
     </>

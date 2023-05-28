@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import "./OneDoctor.css";
-import { FreeTermWeek } from "../FreeTermWeek/FreeTermWeek";
-import { MdLocationOn } from "react-icons/md";
+import React, { useState } from 'react';
+import './OneDoctor.css';
+import { FreeTermWeek } from '../FreeTermWeek/FreeTermWeek';
+import { MdLocationOn } from 'react-icons/md';
+import { changeClass } from '../../../utils/functions/function';
 
 interface Props {
   idDr: string;
@@ -15,16 +16,8 @@ interface Props {
 export const OneDoctor = (props: Props) => {
   const [wrap, setWrap] = useState(false);
 
-  const changeClassWrap = (): string => {
-    return wrap ? "wrap-free-term-week-down" : "wrap-free-term-week";
-  };
-
   const scroll = (): void => {
     wrap ? setWrap(false) : setWrap(true);
-  };
-
-  const changeClassArrow = (): string => {
-    return wrap ? "arrow-up" : "arrow-down";
   };
 
   return (
@@ -33,7 +26,7 @@ export const OneDoctor = (props: Props) => {
         <div className="image" />
         <div className="pDr">
           <p>
-            lek. {props.name} {props.lastName}{" "}
+            lek. {props.name} {props.lastName}{' '}
           </p>
           <p>{props.specialization}</p>
         </div>
@@ -44,10 +37,10 @@ export const OneDoctor = (props: Props) => {
         </div>
         <hr />
         <div>
-          <div className={changeClassWrap()}>
+          <div className={changeClass(wrap, 'wrap-free-term-week-down', 'wrap-free-term-week')}>
             <FreeTermWeek idDr={props.idDr} />
           </div>
-          <div className={changeClassArrow()} onClick={scroll}>
+          <div className={changeClass(wrap, 'arrow-up', 'arrow-down')} onClick={scroll}>
             🡫
           </div>
         </div>

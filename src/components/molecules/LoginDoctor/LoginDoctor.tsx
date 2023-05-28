@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useState } from "react";
 import { Btn } from "../../atoms/Btn/Btn";
 import { AccountDoctor } from "../../pages/AccountDoctor/AccountDoctor";
 import "./LoginDoctor.css";
+import { baseUrlDoctor, sendAndReceiveData } from "../../../api";
 
 export const LoginDoctor = () => {
   const [form, setForm] = useState({
@@ -24,23 +25,13 @@ export const LoginDoctor = () => {
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    await fetch("http://localhost:3001/doctor/log", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...form,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setLogged(data.log);
-        setId(data.id);
-        setLogin(data.login);
-        setName(data.name);
-        setLastName(data.lastName);
-      });
+    sendAndReceiveData(form, baseUrlDoctor, "log").then((r) => {
+      setLogged(r.log);
+      setId(r.id);
+      setLogin(r.login);
+      setName(r.name);
+      setLastName(r.lastName);
+    });
   };
 
   const click = async () => {};

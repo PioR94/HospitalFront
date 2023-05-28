@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Term } from "types";
-import "./Hour.css";
+import React, { useEffect, useState } from 'react';
+import './Hour.css';
+import { baseUrlTerm, sendAndReceiveData, sendData } from '../../../api';
+import { Term } from 'types';
+import { changeClass } from '../../../utils/functions/function';
 
 export const Hour = (props: Term) => {
   const [active, setActive] = useState(false);
@@ -18,43 +20,20 @@ export const Hour = (props: Term) => {
     lastNameDr: props.lastNameDr,
   };
 
-  const termId = props.id;
+  const termId: string = props.id;
 
-  const addTerm = async () => {
-    await fetch("http://localhost:3001/term/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...term,
-      }),
-    });
+  useEffect(() => {
+    sendAndReceiveData(termId, baseUrlTerm, 'term-id').then((r) => setActive(r));
+  }, []);
+
+  const addTerm = () => {
+    sendData(term, baseUrlTerm, 'add');
     active ? setActive(false) : setActive(true);
-  };
-  (async () => {
-    await fetch("http://localhost:3001/term/term-id", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        termId,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setActive(data);
-      });
-  })();
-
-  const changeClassName = () => {
-    return active ? "_hour-div-active" : "_hour-div";
   };
 
   return (
     <>
-      <div onClick={addTerm} className={changeClassName()}>
+      <div onClick={addTerm} className={changeClass(active, '_hour-div-active', '_hour-div')}>
         {props.hour}
       </div>
     </>

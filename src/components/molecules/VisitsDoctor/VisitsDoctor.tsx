@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import { OneVisit } from "../OneVisit/OneVisit";
 import "./VisitDoctor.css";
+import { baseUrlDoctor, sendAndReceiveData } from "../../../api";
 
 interface Props {
   idDr: string;
@@ -19,23 +20,12 @@ export const VisitsDoctor = (props: Props) => {
   const listAll = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:3001/doctor/visits", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        doctorId: props.idDr,
-      }),
+    sendAndReceiveData(props.idDr, baseUrlDoctor, "visits").then((r) => {
+      const dataVisits = r.map((one: Visit) => (
+        <OneVisit date={one.date} idPt={one.idPt} />
+      ));
+      setList(dataVisits);
     });
-
-    const data = await res.json();
-
-    const dataVisits = data.map((one: Visit) => (
-      <OneVisit date={one.date} idPt={one.idPt} />
-    ));
-
-    setList(dataVisits);
 
     return on ? setOn(false) : setOn(true);
   };

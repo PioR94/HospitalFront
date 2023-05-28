@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useState } from "react";
 import { Btn } from "../../atoms/Btn/Btn";
 import { AccountPatient } from "../../pages/AccountPatient/AccountPatient";
 import "./LoginPatient.css";
+import { baseUrlPatient, sendAndReceiveData } from "../../../api";
 
 export const LoginPatient = () => {
   const [form, setForm] = useState({
@@ -19,30 +20,14 @@ export const LoginPatient = () => {
     }));
   };
 
-  // useEffect(() => {
-  //     (async  () => {
-  //
-  //     })()
-  // })
-
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    await fetch("http://localhost:3001/patient/log", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...form,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setLogged(data.log);
-        setId(data.id);
-        setLogin(data.login);
-      });
+    sendAndReceiveData(form, baseUrlPatient, "log").then((data) => {
+      setLogged(data.log);
+      setId(data.id);
+      setLogin(data.login);
+    });
   };
 
   const click = async () => {};
