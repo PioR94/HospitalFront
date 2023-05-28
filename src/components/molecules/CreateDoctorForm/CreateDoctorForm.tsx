@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
 import "./CreateDoctorForm.css";
-import { sendAndReceiveData } from "../../../api";
+import { baseUrlDoctor, sendAndReceiveData } from "../../../api";
 
 export const CreateDoctorForm = () => {
   const [loading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ export const CreateDoctorForm = () => {
     setLoading(true);
 
     try {
-      sendAndReceiveData(form, "http://localhost:3001/doctor/ad").then((r) => {
+      sendAndReceiveData(form, baseUrlDoctor, "ad").then((r) => {
         setLogin(r.login);
       });
     } catch {

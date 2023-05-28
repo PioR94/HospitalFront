@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Term } from "types";
-import "./Hour.css";
-import { sendAndReceiveData, sendData } from "../../../api";
+import React, { useEffect, useState } from 'react';
+import './Hour.css';
+import { baseUrlTerm, sendAndReceiveData, sendData } from '../../../api';
+import { Term } from 'types';
+import { changeClass } from '../../../utils/functions/function';
 
 export const Hour = (props: Term) => {
   const [active, setActive] = useState(false);
@@ -22,23 +23,17 @@ export const Hour = (props: Term) => {
   const termId: string = props.id;
 
   useEffect(() => {
-    sendAndReceiveData(termId, "http://localhost:3001/term/term-id").then((r) =>
-      setActive(r)
-    );
+    sendAndReceiveData(termId, baseUrlTerm, 'term-id').then((r) => setActive(r));
   }, []);
 
   const addTerm = () => {
-    sendData(term, "http://localhost:3001/term/add");
+    sendData(term, baseUrlTerm, 'add');
     active ? setActive(false) : setActive(true);
-  };
-
-  const changeClassName = () => {
-    return active ? "_hour-div-active" : "_hour-div";
   };
 
   return (
     <>
-      <div onClick={addTerm} className={changeClassName()}>
+      <div onClick={addTerm} className={changeClass(active, '_hour-div-active', '_hour-div')}>
         {props.hour}
       </div>
     </>

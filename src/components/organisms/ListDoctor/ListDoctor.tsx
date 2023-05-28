@@ -1,7 +1,7 @@
-import React, { SyntheticEvent, useState } from "react";
-import { OneDoctor } from "../OneDoctor/OneDoctor";
-import "./ListDoctor.css";
-import { dwlData } from "../../../api";
+import React, { SyntheticEvent, useState } from 'react';
+import { OneDoctor } from '../OneDoctor/OneDoctor';
+import './ListDoctor.css';
+import { baseUrlPatient, downloadData } from '../../../api';
 
 interface Props {
   idPt: string;
@@ -22,7 +22,7 @@ export const ListDoctor = (props: Props) => {
   const listAll = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    dwlData("http://localhost:3001/patient").then((r) => {
+    downloadData(baseUrlPatient).then((r) => {
       const dataDr = r.map((one: DataDr) => (
         <li className="listAllLi">
           <OneDoctor

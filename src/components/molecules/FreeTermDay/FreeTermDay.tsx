@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FreeTerm } from "types";
 import { FreeTermHour } from "../../atoms/FreeTermHour/FreeTermHour";
 import "./FreeTermDay.css";
-import { sendAndReceiveData } from "../../../api";
+import { baseUrlTerm, sendAndReceiveData } from "../../../api";
 
 interface Props {
   dayOfWeek: string;
@@ -25,22 +25,20 @@ export const FreeTermDay = (props: Props) => {
   };
 
   useEffect(() => {
-    sendAndReceiveData(dayData, "http://localhost:3001/term/free-terms").then(
-      (data) => {
-        const r = data.map((term: FreeTerm) => (
-          <FreeTermHour
-            id={term.id}
-            hour={term.hour}
-            numberDay={term.numberDay}
-            month={term.month}
-            year={term.year}
-            reservation={term.reservation}
-            key={term.id}
-          />
-        ));
-        setFreeTerms(r);
-      }
-    );
+    sendAndReceiveData(dayData, baseUrlTerm, "free-terms").then((data) => {
+      const r = data.map((term: FreeTerm) => (
+        <FreeTermHour
+          id={term.id}
+          hour={term.hour}
+          numberDay={term.numberDay}
+          month={term.month}
+          year={term.year}
+          reservation={term.reservation}
+          key={term.id}
+        />
+      ));
+      setFreeTerms(r);
+    });
   }, []);
 
   useEffect(() => {

@@ -1,28 +1,27 @@
-import React, { useState } from "react";
-import { FreeTerm } from "types";
-import "./FreeTermHour.css";
-import { Confirm } from "../../molecules/Confirm/Confirm";
-import { sendData } from "../../../api";
+import React, { useState } from 'react';
+import { FreeTerm } from 'types';
+import './FreeTermHour.css';
+import { Confirm } from '../../molecules/Confirm/Confirm';
+import { baseUrlTerm, sendData } from '../../../api';
+import { changeClass } from '../../../utils/functions/function';
 
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
+  const [reservation, setReservation] = useState(props.reservation);
 
   const id: string = props.id;
 
-  const bookTerm = () => {
-    sendData(id, "http://localhost:3001/term/book-term");
+  const bookTerm = async () => {
+    sendData(id, baseUrlTerm, 'book-term');
     setDisplay(false);
     setFree(true);
+    setReservation(1);
   };
 
-  const changeClass = () =>
-    props.reservation === 1 || free ? "book-term-hour" : "free-term-hour";
-
   const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
-
   const displayConfirm = () =>
-    display && props.reservation === 0 ? (
+    display && reservation === 0 ? (
       <Confirm
         message="Czy chcesz zarezerwować ten termin?"
         clickNo={offDisplay}
@@ -40,7 +39,7 @@ export const FreeTermHour = (props: FreeTerm) => {
 
   return (
     <>
-      <div onClick={displayWindow} className={changeClass()}>
+      <div onClick={displayWindow} className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}>
         {props.hour}
       </div>
       {displayConfirm()}

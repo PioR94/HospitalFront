@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useState } from "react";
 import { Btn } from "../../atoms/Btn/Btn";
 import { AccountDoctor } from "../../pages/AccountDoctor/AccountDoctor";
 import "./LoginDoctor.css";
-import { sendAndReceiveData } from "../../../api";
+import { baseUrlDoctor, sendAndReceiveData } from "../../../api";
 
 export const LoginDoctor = () => {
   const [form, setForm] = useState({
@@ -25,7 +25,7 @@ export const LoginDoctor = () => {
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    sendAndReceiveData(form, "http://localhost:3001/doctor/log").then((r) => {
+    sendAndReceiveData(form, baseUrlDoctor, "log").then((r) => {
       setLogged(r.log);
       setId(r.id);
       setLogin(r.login);
