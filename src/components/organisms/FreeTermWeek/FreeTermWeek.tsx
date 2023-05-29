@@ -3,6 +3,7 @@ import { FreeTermDay } from '../../molecules/FreeTermDay/FreeTermDay';
 import './FreeTermWeek.css';
 import { changeClass, getDayName, getMonthName } from '../../../utils/functions/function';
 import { dayOfWeek, month, numberDay, year } from '../../../utils/get-date';
+import { renderDaysLogic } from '../../../utils/functions/render-days-logic';
 
 interface Props {
   idDr: string;
@@ -41,28 +42,10 @@ export const FreeTermWeek = (props: Props) => {
 
       dayOfWeek++;
       numberDay++;
-      if (dayOfWeek === 7) dayOfWeek = 0;
-
-      if ((month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9 || month === 11) && numberDay === 32) {
-        numberDay = 1;
-        month++;
-      }
-      if ((month === 3 || month === 5 || month === 8 || month === 10) && numberDay === 31) {
-        numberDay = 1;
-        month++;
-      }
-
-      if (year % 4 === 0 && month === 1 && numberDay === 30) {
-        numberDay = 1;
-        month++;
-      }
-
-      if (year % 4 !== 0 && month === 1 && numberDay === 29) {
-        numberDay = 1;
-        month++;
-      }
-
-      if (month === 12) month = 0;
+      const dateDay = renderDaysLogic(dayOfWeek, month, numberDay, year);
+      dayOfWeek = dateDay._dayOfWeek;
+      numberDay = dateDay._numberDay;
+      month = dateDay._month;
     }
 
     return days;
