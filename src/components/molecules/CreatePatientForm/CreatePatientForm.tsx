@@ -1,20 +1,38 @@
-import React, { SyntheticEvent, useState } from "react";
-import "./CreatePatientForm.css";
-import { baseUrlPatient, sendAndReceiveData } from "../../../api";
+import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import './CreatePatientForm.css';
+import { baseUrlDoctor, baseUrlPatient, sendAndReceiveData } from '../../../api';
+import { createValidation, MESS_OK, showInfoMessage } from '../../../utils/functions/create-validation';
+import { Messages } from 'primereact/messages';
 
 export const CreatePatientForm = () => {
-  const [loading, setLoading] = useState(false);
-  const [login, setLogin] = useState("");
-  const [err, setErr] = useState(false);
+  const [message, setMessage] = useState({
+    id: 0,
+    message: '',
+  });
+  const msgs = useRef<Messages>(null);
 
   const [form, setForm] = useState({
-    login: "",
-    password: "",
-    mail: "",
-    name: "",
-    lastName: "",
-    address: "",
+    login: '',
+    password: '',
+    mail: '',
+    name: '',
+    lastName: '',
+    address: '',
   });
+
+  useEffect(() => {
+    if (message.message === MESS_OK) {
+      sendAndReceiveData(form, baseUrlPatient, 'ad').then((r) => {
+        if (r.login) {
+          setMessage({ id: Date.now(), message: MESS_OK });
+          showInfoMessage(msgs, 'success', 'Ok', message.message);
+          setMessage({ id: 0, message: '' });
+        }
+      });
+    } else if (message.message && message.message !== MESS_OK) {
+      showInfoMessage(msgs, 'error', 'Błąd', message.message);
+    }
+  }, [message]);
 
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
@@ -23,53 +41,10 @@ export const CreatePatientForm = () => {
     }));
   };
 
-  if (loading) {
-    return (
-      <div className="bg">
-        <h2 className="infCreate">Uploading</h2>
-      </div>
-    );
-  }
-
-  if (login) {
-    return (
-      <div className="bg">
-        <h2 className="infCreate">Konto zostało poprawnie utworzone</h2>
-        <a href="/patient" className="log">
-          Zaloguj się
-        </a>
-      </div>
-    );
-  }
-
-  if (err) {
-    return (
-      <>
-        <div className="bg">
-          <h2 className="infCreate">Login lub email są zajęte</h2>
-        </div>
-      </>
-    );
-  }
-
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    setLoading(true);
-
-    try {
-      sendAndReceiveData(form, baseUrlPatient, "ad").then((r) => {
-        setLogin(r.login);
-      });
-    } catch {
-      setErr(true);
-
-      setTimeout(() => {
-        setErr(false);
-      }, 3000);
-    } finally {
-      setLoading(false);
-    }
+    setMessage({ message: createValidation(form.login, form.name, form.lastName, form.address, form.password), id: Date.now() });
   };
 
   return (
@@ -81,73 +56,44 @@ export const CreatePatientForm = () => {
           <p>
             <label>
               Login: <br />
-              <input
-                type="text"
-                name="login"
-                value={form.login}
-                onChange={(e) => updateForm("login", e.target.value)}
-              />
+              <input type="text" name="login" value={form.login} onChange={(e) => updateForm('login', e.target.value)} />
             </label>
           </p>
           <p>
             <label>
               Hasło: <br />
-              <input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={(e) => updateForm("password", e.target.value)}
-              />
+              <input type="password" name="password" value={form.password} onChange={(e) => updateForm('password', e.target.value)} />
             </label>
           </p>
           <p>
             <label>
               Email: <br />
-              <input
-                type="email"
-                name="mail"
-                value={form.mail}
-                onChange={(e) => updateForm("mail", e.target.value)}
-              />
+              <input type="email" name="mail" value={form.mail} onChange={(e) => updateForm('mail', e.target.value)} />
             </label>
           </p>
           <p>
             <label>
               Imie: <br />
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={(e) => updateForm("name", e.target.value)}
-              />
+              <input type="text" name="name" value={form.name} onChange={(e) => updateForm('name', e.target.value)} />
             </label>
           </p>
           <p>
             <label>
               Nazwisko: <br />
-              <input
-                type="text"
-                name="lastName"
-                value={form.lastName}
-                onChange={(e) => updateForm("lastName", e.target.value)}
-              />
+              <input type="text" name="lastName" value={form.lastName} onChange={(e) => updateForm('lastName', e.target.value)} />
             </label>
           </p>
           <p>
             <label>
               Adres: <br />
-              <input
-                type="text"
-                name="address"
-                value={form.address}
-                onChange={(e) => updateForm("address", e.target.value)}
-              />
+              <input type="text" name="address" value={form.address} onChange={(e) => updateForm('address', e.target.value)} />
             </label>
           </p>
 
           <button>Wyslij</button>
         </form>
       </div>
+      <Messages className="messages" ref={msgs} />
     </>
   );
 };
