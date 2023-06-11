@@ -39,7 +39,6 @@ export const FreeTermWeek = (props: Props) => {
           />
         </div>
       );
-
       dayOfWeek++;
       numberDay++;
       const dateDay = renderDaysLogic(dayOfWeek, month, numberDay, year);
