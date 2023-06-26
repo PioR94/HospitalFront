@@ -58,13 +58,21 @@
 }
 
 .png {
-  position: fixed;
-  right: 10%;
+  position: absolute;
   top: 20%;
   background-image: url('/public/doctors12.jpg');
   width: 450px;
   height: 490px;
   background-repeat: no-repeat;
+}
+
+#check-logout {
+  position: absolute;
+  right: 5%;
+}
+#check-register {
+  position: absolute;
+  right: 15%;
 }
 
 @media (max-width: 1000px) {
@@ -144,5 +152,11 @@
   }
   .slogan-h3 {
     font-size: 15px;
+  }
+}
+
+@media (max-height: 720px) {
+  .png {
+    top: 15%;
   }
 }
