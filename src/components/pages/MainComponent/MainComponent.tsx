@@ -18,17 +18,7 @@ export const MainComponent = () => {
       <div className="main-bg">
         <div className="logo" />
         <header className="main-header">
-          <div className="card flex justify-content-center" id="check-logout">
-            <Dropdown
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.value)}
-              options={cities}
-              optionLabel="name"
-              placeholder="Zaloguj"
-              className="w-full md:w-14rem"
-            />
-          </div>
-          <div className="card flex justify-content-center" id="check-register">
+          <div id="check-register">
             <Dropdown
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.value)}
@@ -37,6 +27,17 @@ export const MainComponent = () => {
               placeholder="Rejestracja"
               className="w-full md:w-14rem"
               style={{ border: 'none' }}
+            />
+          </div>
+          <div id="check-logout">
+            <Dropdown
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.value)}
+              options={cities}
+              optionLabel="name"
+              placeholder="Zaloguj"
+              className="test"
+              style={{ borderRadius: 50 }}
             />
           </div>
         </header>
