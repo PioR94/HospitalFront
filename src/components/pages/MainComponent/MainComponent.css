@@ -16,7 +16,6 @@
   width: 100%;
   height: 100vh;
   max-width: 100%;
-
   overflow: hidden;
 }
 
@@ -71,29 +70,34 @@
   background-repeat: no-repeat;
 }
 
-.check-logout {
-  background: chocolate;
-}
-#check-register {
+.check-register {
   margin-right: 20px;
-  /*margin-right: 2%;*/
+  border: none;
 }
-.test {
+
+.check-logout {
   font-weight: bold !important;
   border-color: #345ddd !important;
+  border-radius: 20px;
 }
+.p-dropdown-label {
+  border-radius: 100% !important;
+}
+
 .p-dropdown-trigger {
   margin-left: -20px !important;
 }
-.test > .p-dropdown-trigger {
+.check-logout > .p-dropdown-trigger {
   color: #345ddd !important;
   display: none;
 }
-.test > .p-dropdown-label {
+.check-logout > .p-dropdown-label {
   color: #345ddd !important;
+  border-radius: 50% !important;
 }
-.test > .p-inputtext {
+.check-logout > .p-inputtext {
   margin: -5px 30px !important;
+  font-size: 18px;
 }
 
 @media (max-width: 1000px) {

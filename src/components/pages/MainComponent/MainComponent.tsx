@@ -18,28 +18,22 @@ export const MainComponent = () => {
       <div className="main-bg">
         <div className="logo" />
         <header className="main-header">
-          <div id="check-register">
-            <Dropdown
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.value)}
-              options={cities}
-              optionLabel="name"
-              placeholder="Rejestracja"
-              className="w-full md:w-14rem"
-              style={{ border: 'none' }}
-            />
-          </div>
-          <div id="check-logout">
-            <Dropdown
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.value)}
-              options={cities}
-              optionLabel="name"
-              placeholder="Zaloguj"
-              className="test"
-              style={{ borderRadius: 50 }}
-            />
-          </div>
+          <Dropdown
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.value)}
+            options={cities}
+            optionLabel="name"
+            placeholder="Rejestracja"
+            className="check-register"
+          />
+          <Dropdown
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.value)}
+            options={cities}
+            optionLabel="name"
+            placeholder="Zaloguj"
+            className="check-logout"
+          />
         </header>
 
         <div className="slogan">
