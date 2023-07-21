@@ -72,13 +72,13 @@
 
 .check-register {
   margin-right: 20px;
-  border: none;
+  border: none !important;
 }
 
 .check-logout {
   font-weight: bold !important;
   border-color: #345ddd !important;
-  border-radius: 20px;
+  border-radius: 20px !important;
 }
 .p-dropdown-label {
   border-radius: 100% !important;
@@ -86,11 +86,13 @@
 
 .p-dropdown-trigger {
   margin-left: -20px !important;
+  display: none !important;
 }
-.check-logout > .p-dropdown-trigger {
-  color: #345ddd !important;
-  display: none;
-}
+/*.check-logout > .p-dropdown-trigger {*/
+/*  color: #345ddd !important;*/
+/*  display: none;*/
+/*}*/
+
 .check-logout > .p-dropdown-label {
   color: #345ddd !important;
   border-radius: 50% !important;

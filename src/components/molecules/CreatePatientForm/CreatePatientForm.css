@@ -1,19 +1,7 @@
-.formRegister {
-    position: relative;
-    height: 400px;
-    width:300px;
-
-    left: calc(50% - 150px);
-    top: calc(50% - 250px);
-    text-align: center;
-    color: #0100dd
-
-}
-
 .messages {
-    width: 300px;
-    position: fixed;
-    font-size: 1px;
-    top: 0;
-    right: 10px;
+  width: 300px;
+  position: fixed;
+  font-size: 1px;
+  top: 0;
+  right: 10px;
 }

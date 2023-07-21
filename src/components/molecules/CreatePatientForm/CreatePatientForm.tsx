@@ -49,7 +49,7 @@ export const CreatePatientForm = () => {
 
   return (
     <>
-      <div className="bg">
+      <div className="cc">
         <form action="" onSubmit={sendForm} className="formRegister">
           <h2>Rejestracja</h2>
 
@@ -90,7 +90,7 @@ export const CreatePatientForm = () => {
             </label>
           </p>
 
-          <button>Wyslij</button>
+          <button className="formRegister-button">Wyslij</button>
         </form>
       </div>
       <Messages className="messages" ref={msgs} />
