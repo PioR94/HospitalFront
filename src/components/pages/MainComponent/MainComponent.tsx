@@ -7,25 +7,42 @@ import { baseUrlDoctor, baseUrlPatient } from '../../../api';
 import { Option } from '../../../types/options/option';
 
 export const MainComponent = () => {
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [selectedOption1, setSelectedOption1] = useState<Option | null>(null);
+  const [selectedOption2, setSelectedOption2] = useState<Option | null>(null);
 
-  const options = [
+  const options1 = [
     {
       name: 'doktor',
       link1: `http://localhost:3000/doctor/ad`,
-      link2: `http://localhost:3000/doctor/login`,
     },
     {
       name: 'pacjent',
       link1: `http://localhost:3000/patient/ad`,
-      link2: `http://localhost:3000/patient/login`,
     },
   ];
 
-  const handleOptionChange = (e: { value: Option }) => {
-    setSelectedOption(e.value);
+  const options2 = [
+    {
+      name: 'doktor',
+      link2: `http://localhost:3000/doctor`,
+    },
+    {
+      name: 'pacjent',
+      link2: `http://localhost:3000/patient`,
+    },
+  ];
+
+  const handleOptionChange1 = (e: { value: Option }) => {
+    setSelectedOption1(e.value);
     if (e.value) {
       window.location.href = e.value.link1;
+    }
+  };
+
+  const handleOptionChange2 = (e: { value: Option }) => {
+    setSelectedOption2(e.value);
+    if (e.value) {
+      window.location.href = e.value.link2;
     }
   };
 
@@ -34,15 +51,8 @@ export const MainComponent = () => {
       <div className="main-bg">
         <div className="logo" />
         <header className="main-header">
-          <Dropdown onChange={handleOptionChange} options={options} optionLabel="name" placeholder="Rejestracja" className="check-register" />
-          <Dropdown
-            value={selectedOption}
-            onChange={(e) => setSelectedOption(e.value)}
-            options={options}
-            optionLabel="name"
-            placeholder="Zaloguj"
-            className="check-logout"
-          />
+          <Dropdown onChange={handleOptionChange1} options={options1} optionLabel="name" placeholder="Rejestracja" className="check-register" />
+          <Dropdown onChange={handleOptionChange2} options={options2} optionLabel="name" placeholder="Zaloguj" className="check-logout" />
         </header>
 
         <div className="slogan">

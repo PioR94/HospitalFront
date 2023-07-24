@@ -1,7 +1,7 @@
-import React from "react";
-import { ListDoctor } from "../../organisms/ListDoctor/ListDoctor";
-import { VisitsPatient } from "../../molecules/VisitPatient/VisitPatient";
-import "./AccountPatient.css";
+import React from 'react';
+import { ListDoctor } from '../../organisms/ListDoctor/ListDoctor';
+import { VisitsPatient } from '../../molecules/VisitPatient/VisitPatient';
+import './AccountPatient.css';
 
 interface Props {
   idPt: string;
@@ -10,7 +10,7 @@ interface Props {
 
 export const AccountPatient = (props: Props) => {
   return (
-    <div className="bg">
+    <div className="bg-patient-account">
       <header className="headerAccountPatient">
         <h2 className="h2AccountPatient">{props.loginPt}</h2>
         <ListDoctor idPt={props.idPt} />
