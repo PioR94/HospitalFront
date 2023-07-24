@@ -4,14 +4,18 @@
 }
 
 .main-header {
-  height: 10%;
+  display: flex;
+  position: absolute;
+  right: 7%;
+  top: 3%;
+  align-items: center;
+  /*background: green;*/
 }
 
 .main-bg {
   width: 100%;
   height: 100vh;
   max-width: 100%;
-
   overflow: hidden;
 }
 
@@ -58,13 +62,44 @@
 }
 
 .png {
-  position: fixed;
-  right: 10%;
+  position: absolute;
   top: 20%;
   background-image: url('/public/doctors12.jpg');
   width: 450px;
   height: 490px;
   background-repeat: no-repeat;
+}
+
+.check-register {
+  margin-right: 20px;
+  border: none !important;
+}
+
+.check-logout {
+  font-weight: bold !important;
+  border-color: #345ddd !important;
+  border-radius: 20px !important;
+}
+.p-dropdown-label {
+  border-radius: 100% !important;
+}
+
+.p-dropdown-trigger {
+  margin-left: -20px !important;
+  display: none !important;
+}
+/*.check-logout > .p-dropdown-trigger {*/
+/*  color: #345ddd !important;*/
+/*  display: none;*/
+/*}*/
+
+.check-logout > .p-dropdown-label {
+  color: #345ddd !important;
+  border-radius: 50% !important;
+}
+.check-logout > .p-inputtext {
+  margin: -5px 30px !important;
+  font-size: 18px;
 }
 
 @media (max-width: 1000px) {
@@ -144,5 +179,11 @@
   }
   .slogan-h3 {
     font-size: 15px;
+  }
+}
+
+@media (max-height: 720px) {
+  .png {
+    top: 15%;
   }
 }

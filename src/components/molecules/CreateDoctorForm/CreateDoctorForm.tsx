@@ -49,8 +49,8 @@ export const CreateDoctorForm = () => {
 
   return (
     <>
-      <div className="bg">
-        <form action="" onSubmit={sendForm} className="formRegister">
+      <div className="cc">
+        <form onSubmit={sendForm} className="formRegister">
           <h2>Rejestracja</h2>
           <p>
             <label>
@@ -94,11 +94,10 @@ export const CreateDoctorForm = () => {
               <input type="text" name="specialization" value={form.specialization} onChange={(e) => updateForm('specialization', e.target.value)} />
             </label>
           </p>
-
-          <button>Wyslij</button>
+          <button className="formRegister-button">Wyslij</button>
         </form>
+        <Messages className="messages" ref={msgs} />
       </div>
-      <Messages className="messages" ref={msgs} />
     </>
   );
 };

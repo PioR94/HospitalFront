@@ -1,17 +1,17 @@
-import React, { SyntheticEvent, useState } from "react";
-import { Btn } from "../../atoms/Btn/Btn";
-import { AccountPatient } from "../../pages/AccountPatient/AccountPatient";
-import "./LoginPatient.css";
-import { baseUrlPatient, sendAndReceiveData } from "../../../api";
+import React, { SyntheticEvent, useState } from 'react';
+import { Btn } from '../../atoms/Btn/Btn';
+import { AccountPatient } from '../../pages/AccountPatient/AccountPatient';
+import './LoginPatient.css';
+import { baseUrlPatient, sendAndReceiveData } from '../../../api';
 
 export const LoginPatient = () => {
   const [form, setForm] = useState({
-    login: "Piotrek123",
-    password: "12345678",
+    login: 'Piotrek123',
+    password: '12345678',
   });
   const [logged, setLogged] = useState(false);
-  const [id, setId] = useState("");
-  const [login, setLogin] = useState("");
+  const [id, setId] = useState('');
+  const [login, setLogin] = useState('');
 
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
@@ -23,7 +23,7 @@ export const LoginPatient = () => {
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    sendAndReceiveData(form, baseUrlPatient, "log").then((data) => {
+    sendAndReceiveData(form, baseUrlPatient, 'log').then((data) => {
       setLogged(data.log);
       setId(data.id);
       setLogin(data.login);
@@ -41,26 +41,17 @@ export const LoginPatient = () => {
         <p>
           <label>
             Login: <br />
-            <input
-              type="text"
-              name="login"
-              value={form.login}
-              onChange={(e) => updateForm("login", e.target.value)}
-            />
+            <input type="text" name="login" value={form.login} onChange={(e) => updateForm('login', e.target.value)} />
           </label>
         </p>
         <p>
           <label>
             Hasło: <br />
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={(e) => updateForm("password", e.target.value)}
-            />
+            <input type="password" name="password" value={form.password} onChange={(e) => updateForm('password', e.target.value)} />
           </label>
         </p>
-        <Btn text="Dalej" onClick={click} /> <Btn text="Rejestracja" to="ad" />
+        <Btn text="Dalej" onClick={click} class={'go-button'} />
+        <Btn text="Rejestracja" to="ad" class={'reg-button'} />
       </form>
     </div>
   );
