@@ -11,8 +11,13 @@ import { LoginDoctor } from './components/molecules/LoginDoctor/LoginDoctor';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import { ListDoctor } from './components/organisms/ListDoctor/ListDoctor';
+import { useSelector } from 'react-redux';
+import { AppState } from './types/redux/app-state';
 
 export default function App() {
+  const userActiveLogin = useSelector((state: AppState) => state.activeLogin);
+
   return (
     <>
       <BrowserRouter>
@@ -22,6 +27,7 @@ export default function App() {
           <Route path="patient" element={<LoginPatient />} />
           <Route path="doctor/ad" element={<CreateDoctorForm />} />
           <Route path="doctor" element={<LoginDoctor />} />
+          <Route path="find-doctor" element={<ListDoctor idPt={userActiveLogin} />} />
         </Routes>
       </BrowserRouter>
     </>

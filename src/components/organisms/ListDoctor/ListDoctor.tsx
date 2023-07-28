@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
 import { baseUrlPatient, downloadData } from '../../../api';
@@ -17,11 +17,12 @@ interface DataDr {
 
 export const ListDoctor = (props: Props) => {
   const [list, setList] = useState([]);
-  const [on, setOn] = useState(false);
 
-  const listAll = async (e: SyntheticEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    getDoctors();
+  });
 
+  const getDoctors = async () => {
     downloadData(baseUrlPatient).then((r) => {
       const dataDr = r.map((one: DataDr) => (
         <li className="listAllLi">
@@ -38,16 +39,7 @@ export const ListDoctor = (props: Props) => {
       ));
       setList(dataDr);
     });
-
-    return on ? setOn(false) : setOn(true);
   };
 
-  return (
-    <>
-      <button onClick={listAll} className="listAllButton">
-        Lista lekarzy
-      </button>
-      {on && <ul className="listAllUl">{list}</ul>}
-    </>
-  );
+  return <>{list}</>;
 };

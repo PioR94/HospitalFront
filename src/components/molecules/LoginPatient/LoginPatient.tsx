@@ -1,8 +1,11 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Btn } from '../../atoms/Btn/Btn';
 import { AccountPatient } from '../../pages/AccountPatient/AccountPatient';
 import './LoginPatient.css';
 import { baseUrlPatient, sendAndReceiveData } from '../../../api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '../../../redux/login-slice';
+import { AppState } from '../../../types/redux/app-state';
 
 export const LoginPatient = () => {
   const [form, setForm] = useState({
@@ -11,8 +14,8 @@ export const LoginPatient = () => {
   });
   const [logged, setLogged] = useState(false);
   const [id, setId] = useState('');
-  const [login, setLogin] = useState('');
-
+  const dispatch = useDispatch();
+  const userActiveLogin = useSelector((state: AppState) => state.activeLogin);
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
       ...form,
@@ -20,20 +23,25 @@ export const LoginPatient = () => {
     }));
   };
 
+  useEffect(() => {
+    console.log(userActiveLogin);
+    console.log(logged);
+  });
+
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
     sendAndReceiveData(form, baseUrlPatient, 'log').then((data) => {
       setLogged(data.log);
       setId(data.id);
-      setLogin(data.login);
+      dispatch(setLogin(data.login));
     });
   };
 
   const click = async () => {};
 
   return logged ? (
-    <AccountPatient loginPt={login} idPt={id} />
+    <AccountPatient loginPt={userActiveLogin} idPt={id} />
   ) : (
     <div className="bg">
       <form action="" onSubmit={sendForm} className="formLogin">
