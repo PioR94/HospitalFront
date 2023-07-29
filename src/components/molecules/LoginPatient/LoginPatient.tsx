@@ -4,8 +4,8 @@ import { AccountPatient } from '../../pages/AccountPatient/AccountPatient';
 import './LoginPatient.css';
 import { baseUrlPatient, sendAndReceiveData } from '../../../api';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLogin } from '../../../redux/login-slice';
-import { AppState } from '../../../types/redux/app-state';
+import { setLogin, setId } from '../../../redux/user-slice';
+import { selectActiveLogin, selectUserId } from '../../../redux/selectors';
 
 export const LoginPatient = () => {
   const [form, setForm] = useState({
@@ -13,9 +13,9 @@ export const LoginPatient = () => {
     password: '12345678',
   });
   const [logged, setLogged] = useState(false);
-  const [id, setId] = useState('');
   const dispatch = useDispatch();
-  const userActiveLogin = useSelector((state: AppState) => state.activeLogin);
+  const userActiveLogin = useSelector(selectActiveLogin);
+  const userActiveId = useSelector(selectUserId);
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
       ...form,
@@ -25,23 +25,22 @@ export const LoginPatient = () => {
 
   useEffect(() => {
     console.log(userActiveLogin);
-    console.log(logged);
-  });
+  }, [userActiveLogin]);
 
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
     sendAndReceiveData(form, baseUrlPatient, 'log').then((data) => {
       setLogged(data.log);
-      setId(data.id);
       dispatch(setLogin(data.login));
+      dispatch(setId(data.id));
     });
   };
 
   const click = async () => {};
 
   return logged ? (
-    <AccountPatient loginPt={userActiveLogin} idPt={id} />
+    <AccountPatient loginPt={userActiveLogin} idPt={userActiveId} />
   ) : (
     <div className="bg">
       <form action="" onSubmit={sendForm} className="formLogin">

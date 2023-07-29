@@ -13,10 +13,10 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import { ListDoctor } from './components/organisms/ListDoctor/ListDoctor';
 import { useSelector } from 'react-redux';
-import { AppState } from './types/redux/app-state';
+import { selectActiveLogin } from './redux/selectors';
 
 export default function App() {
-  const userActiveLogin = useSelector((state: AppState) => state.activeLogin);
+  const userActiveLogin = useSelector(selectActiveLogin);
 
   return (
     <>
