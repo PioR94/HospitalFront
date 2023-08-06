@@ -1,21 +1,17 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Btn } from '../../atoms/Btn/Btn';
-import { AccountPatient } from '../../pages/AccountPatient/AccountPatient';
+
 import './LoginPatient.css';
-import { baseUrlPatient, sendAndReceiveData } from '../../../api';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLogin, setId } from '../../../redux/user-slice';
-import { selectActiveLogin, selectUserId } from '../../../redux/selectors';
+import { baseUrlPatient, sendAndReceiveData, sendToken } from '../../../api';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPatient = () => {
   const [form, setForm] = useState({
     login: 'Piotrek123',
     password: '12345678',
   });
-  const [logged, setLogged] = useState(false);
-  const dispatch = useDispatch();
-  const userActiveLogin = useSelector(selectActiveLogin);
-  const userActiveId = useSelector(selectUserId);
+  const [token, setToken] = useState('');
+  const navigate = useNavigate();
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
       ...form,
@@ -24,24 +20,25 @@ export const LoginPatient = () => {
   };
 
   useEffect(() => {
-    console.log(userActiveLogin);
-  }, [userActiveLogin]);
+    if (token) {
+      localStorage.setItem('token', token);
+      navigate('../patient');
+    }
+
+    sendToken(token, baseUrlPatient, 'verify-token');
+  }, [token]);
 
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
     sendAndReceiveData(form, baseUrlPatient, 'log').then((data) => {
-      setLogged(data.log);
-      dispatch(setLogin(data.login));
-      dispatch(setId(data.id));
+      setToken(data.token);
     });
   };
 
   const click = async () => {};
 
-  return logged ? (
-    <AccountPatient loginPt={userActiveLogin} idPt={userActiveId} />
-  ) : (
+  return (
     <div className="bg">
       <form action="" onSubmit={sendForm} className="formLogin">
         <h2>Zaloguj się</h2>
