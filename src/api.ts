@@ -30,3 +30,15 @@ export const downloadData = (http: string) => {
     .then((r) => r.json())
     .then((dt) => dt);
 };
+
+export const sendToken = (token: string | null, baseUrlArgument: string, path: string) => {
+  return fetch(`${baseUrlArgument}/${path}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ token }),
+  })
+    .then((r) => r.json())
+    .then((dt) => dt);
+};

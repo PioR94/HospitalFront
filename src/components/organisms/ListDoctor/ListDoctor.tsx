@@ -1,11 +1,8 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlPatient, downloadData } from '../../../api';
-
-interface Props {
-  idPt: string;
-}
+import { baseUrlPatient, downloadData, sendToken } from '../../../api';
+import { getToken } from '../../../utils/variables';
 
 interface DataDr {
   idDr: string;
@@ -15,39 +12,29 @@ interface DataDr {
   address: string;
 }
 
-export const ListDoctor = (props: Props) => {
+export const ListDoctor = () => {
   const [list, setList] = useState([]);
-  const [on, setOn] = useState(false);
+  const [idPt, setIdPt] = useState('');
 
-  const listAll = async (e: SyntheticEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    getDoctors();
+  });
 
+  useEffect(() => {
+    sendToken(getToken, baseUrlPatient, 'find-doctor').then((r) => setIdPt(r.idPt));
+    console.log(idPt);
+  }, [idPt]);
+
+  const getDoctors = async () => {
     downloadData(baseUrlPatient).then((r) => {
       const dataDr = r.map((one: DataDr) => (
         <li className="listAllLi">
-          <OneDoctor
-            key={one.idDr}
-            idDr={one.idDr}
-            name={one.nameDr}
-            lastName={one.lastNameDr}
-            specialization={one.specialization}
-            idPt={props.idPt}
-            address={one.address}
-          />
+          <OneDoctor key={one.idDr} idDr={one.idDr} name={one.nameDr} lastName={one.lastNameDr} specialization={one.specialization} idPt={idPt} address={one.address} />
         </li>
       ));
       setList(dataDr);
     });
-
-    return on ? setOn(false) : setOn(true);
   };
 
-  return (
-    <>
-      <button onClick={listAll} className="listAllButton">
-        Lista lekarzy
-      </button>
-      {on && <ul className="listAllUl">{list}</ul>}
-    </>
-  );
+  return <>{list}</>;
 };

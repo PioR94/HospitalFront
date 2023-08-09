@@ -1,18 +1,17 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Btn } from '../../atoms/Btn/Btn';
-import { AccountPatient } from '../../pages/AccountPatient/AccountPatient';
+
 import './LoginPatient.css';
-import { baseUrlPatient, sendAndReceiveData } from '../../../api';
+import { baseUrlPatient, sendAndReceiveData, sendToken } from '../../../api';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPatient = () => {
   const [form, setForm] = useState({
     login: 'Piotrek123',
     password: '12345678',
   });
-  const [logged, setLogged] = useState(false);
-  const [id, setId] = useState('');
-  const [login, setLogin] = useState('');
-
+  const [token, setToken] = useState('');
+  const navigate = useNavigate();
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
       ...form,
@@ -20,21 +19,26 @@ export const LoginPatient = () => {
     }));
   };
 
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('token', token);
+      navigate('../patient');
+    }
+
+    sendToken(token, baseUrlPatient, 'verify-token');
+  }, [token]);
+
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
     sendAndReceiveData(form, baseUrlPatient, 'log').then((data) => {
-      setLogged(data.log);
-      setId(data.id);
-      setLogin(data.login);
+      setToken(data.token);
     });
   };
 
   const click = async () => {};
 
-  return logged ? (
-    <AccountPatient loginPt={login} idPt={id} />
-  ) : (
+  return (
     <div className="bg">
       <form action="" onSubmit={sendForm} className="formLogin">
         <h2>Zaloguj się</h2>

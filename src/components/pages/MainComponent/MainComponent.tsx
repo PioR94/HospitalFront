@@ -28,7 +28,7 @@ export const MainComponent = () => {
     },
     {
       name: 'pacjent',
-      link2: `http://localhost:3000/patient`,
+      link2: `http://localhost:3000/patient/log`,
     },
   ];
 
