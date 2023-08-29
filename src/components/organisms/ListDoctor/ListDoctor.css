@@ -1,23 +1,22 @@
-
-.listAllButton {
-    position: absolute;
-    height: 10vh;
-    width: 160px;
-    top: 0;
-    left: 30vw;
-    background: #111;
-
-
+.list-doctor-wrap {
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: #f5f5f5;
 }
 
-.listAllUl {
-    position: absolute;
-    top: 14vh;
+.list-doctor-ul {
+  display: flex;
+  /*background-color: chartreuse;*/
+  flex-direction: column;
+  align-items: center;
 }
 
-.listAllLi {
-    display: block;
-    width: 50vw;
-    /*background: cornflowerblue;*/
+.list-doctor-li {
+  display: block;
+}
 
+.list-doctor-header {
+  width: 100%;
+  height: 70px;
+  background-color: darkcyan;
 }
