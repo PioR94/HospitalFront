@@ -18,7 +18,7 @@ export const ListDoctor = () => {
 
   useEffect(() => {
     getDoctors();
-  });
+  }, []);
 
   useEffect(() => {
     sendToken(getToken, baseUrlPatient, 'find-doctor').then((r) => setIdPt(r.idPt));
@@ -28,13 +28,18 @@ export const ListDoctor = () => {
   const getDoctors = async () => {
     downloadData(baseUrlPatient).then((r) => {
       const dataDr = r.map((one: DataDr) => (
-        <li className="listAllLi">
-          <OneDoctor key={one.idDr} idDr={one.idDr} name={one.nameDr} lastName={one.lastNameDr} specialization={one.specialization} idPt={idPt} address={one.address} />
+        <li className="list-doctor-li" key={one.idDr}>
+          <OneDoctor idDr={one.idDr} name={one.nameDr} lastName={one.lastNameDr} specialization={one.specialization} idPt={idPt} address={one.address} />
         </li>
       ));
       setList(dataDr);
     });
   };
 
-  return <>{list}</>;
+  return (
+    <div className="list-doctor-wrap">
+      <header className="list-doctor-header"></header>
+      <ul className="list-doctor-ul">{list}</ul>
+    </div>
+  );
 };

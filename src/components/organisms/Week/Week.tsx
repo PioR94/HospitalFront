@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
 import { changeClass, getDayName, getMonthName } from '../../../utils/functions/function';
-import { dayOfWeek, month, numberDay, year } from '../../../utils/get-date';
+import { initialDayOfWeek, initialMonth, initialNumberDay, initialYear } from '../../../utils/get-date';
 import { renderDaysLogic } from '../../../utils/functions/render-days-logic';
 
 interface Props {
@@ -63,7 +63,7 @@ export const Week = (props: Props) => {
             translate: positionX,
           }}
         >
-          {renderDays(dayOfWeek, month, numberDay, year)}
+          {renderDays(initialDayOfWeek, initialMonth, initialNumberDay, initialYear)}
         </div>
       </div>
       <div className={changeClass(positionX === -1995, '_moveRightNone', '_moveRight')} onClick={moveRight}>

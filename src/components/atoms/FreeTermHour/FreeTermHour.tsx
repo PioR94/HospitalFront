@@ -18,9 +18,6 @@ export const FreeTermHour = (props: FreeTerm) => {
     termId,
     userActiveId,
   };
-  useEffect(() => {
-    console.log(dataId);
-  }, []);
 
   const bookTerm = async () => {
     sendData(dataId, baseUrlTerm, 'book-term');
@@ -32,15 +29,7 @@ export const FreeTermHour = (props: FreeTerm) => {
   const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
   const displayConfirm = () =>
     display && reservation === 0 ? (
-      <Confirm
-        message="Czy chcesz zarezerwować ten termin?"
-        clickNo={offDisplay}
-        clickYes={bookTerm}
-        hour={props.hour}
-        numberDay={props.numberDay}
-        month={props.month}
-        year={props.year}
-      />
+      <Confirm message="Czy chcesz zarezerwować ten termin?" clickNo={offDisplay} clickYes={bookTerm} hour={props.hour} numberDay={props.numberDay} month={props.month} year={props.year} />
     ) : (
       false
     );

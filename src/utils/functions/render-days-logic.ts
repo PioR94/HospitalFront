@@ -4,6 +4,9 @@ export const renderDaysLogic = (dayOfWeek: number, month: number, numberDay: num
   let _numberDay = numberDay;
 
   if (dayOfWeek === 7) _dayOfWeek = 0;
+  if (dayOfWeek === 8) _dayOfWeek = 1;
+  if (dayOfWeek === 9) _dayOfWeek = 2;
+  if (dayOfWeek === 10) _dayOfWeek = 3;
 
   if ((month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9 || month === 11) && numberDay === 32) {
     _numberDay = 1;
