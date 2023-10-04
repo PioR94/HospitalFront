@@ -9,7 +9,6 @@
   right: 7%;
   top: 3%;
   align-items: center;
-  background: green;
 }
 
 .main-bg {
@@ -80,23 +79,15 @@
   border-color: #345ddd !important;
   border-radius: 20px !important;
 }
-.p-dropdown-label {
-  border-radius: 100% !important;
-}
 
-.p-dropdown-trigger {
-  margin-left: -20px !important;
+.check-logout > .p-dropdown-trigger {
   display: none !important;
 }
-/*.check-logout > .p-dropdown-trigger {*/
-/*  color: #345ddd !important;*/
-/*  display: none;*/
-/*}*/
 
-.check-logout > .p-dropdown-label {
+.check-logout .p-dropdown-label {
   color: #345ddd !important;
-  border-radius: 50% !important;
 }
+
 .check-logout > .p-inputtext {
   margin: -5px 30px !important;
   font-size: 18px;
