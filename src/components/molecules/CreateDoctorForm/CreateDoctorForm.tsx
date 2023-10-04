@@ -1,14 +1,16 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import './CreateDoctorForm.css';
-import { baseUrlDoctor, sendAndReceiveData } from '../../../api';
+import { baseUrlDoctor, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../../api';
 import { Messages } from 'primereact/messages';
 import { createValidation, MESS_OK, showInfoMessage } from '../../../utils/functions/create-validation';
+import { Dropdown } from 'primereact/dropdown';
 
 export const CreateDoctorForm = () => {
   const [message, setMessage] = useState({
     id: 0,
     message: '',
   });
+  const [specializations, setSpecializations] = useState([]);
   const msgs = useRef<Messages>(null);
 
   useEffect(() => {
@@ -33,7 +35,14 @@ export const CreateDoctorForm = () => {
     address: '',
     specialization: '',
   });
-
+  useEffect(() => {
+    downloadData(baseUrlSpecialization).then((r) => {
+      setSpecializations(r);
+    });
+  }, []);
+  useEffect(() => {
+    console.log(specializations);
+  }, [specializations]);
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
       ...form,
@@ -91,7 +100,13 @@ export const CreateDoctorForm = () => {
           <p>
             <label>
               Specjalizacja: <br />
-              <input type="text" name="specialization" value={form.specialization} onChange={(e) => updateForm('specialization', e.target.value)} />
+              <Dropdown
+                value={form.specialization}
+                onChange={(e) => updateForm('specialization', e.target.value)}
+                options={specializations}
+                placeholder="Wybierz specjalizację"
+                className="w-full md:w-14rem"
+              />
             </label>
           </p>
           <button className="formRegister-button">Wyslij</button>

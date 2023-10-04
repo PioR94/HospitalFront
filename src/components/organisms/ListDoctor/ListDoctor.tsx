@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlPatient, downloadData, sendToken } from '../../../api';
+import { baseUrlPatient, downloadData, sendAndReceiveData, sendToken } from '../../../api';
 import { getToken } from '../../../utils/variables';
+
+import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
+import { cities } from '../../../utils/cities';
+import { Dropdown } from 'primereact/dropdown';
 
 interface DataDr {
   idDr: string;
@@ -11,10 +15,15 @@ interface DataDr {
   specialization: string;
   address: string;
 }
+const libs = ['places'];
 
 export const ListDoctor = () => {
   const [list, setList] = useState([]);
   const [idPt, setIdPt] = useState('');
+  const inputRef = useRef<any>(null);
+  const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
+  const [inputText, setInputText] = useState('');
+  const [inputActive, setInputActive] = useState(false);
 
   useEffect(() => {
     getDoctors();
@@ -36,9 +45,31 @@ export const ListDoctor = () => {
     });
   };
 
+  useEffect(() => {
+    sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
+      setSuggestedCities(r);
+      console.log(suggestedCities);
+    });
+  }, [inputText, inputActive]);
+
   return (
     <div className="list-doctor-wrap">
-      <header className="list-doctor-header"></header>
+      <header className="list-doctor-header">
+        <div className="container-search">
+          <AutoComplete
+            value={inputText}
+            suggestions={suggestedCities}
+            completeMethod={(e: AutoCompleteCompleteEvent) => {
+              setInputText(e.query);
+            }}
+            onChange={(e) => setInputText(e.value)}
+            minLength={3}
+            placeholder="Wyszukaj miasto"
+            style={{ alignSelf: 'stretch' }}
+          />
+          <Dropdown placeholder="Wybierz specjalizację" style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box' }} />
+        </div>
+      </header>
       <ul className="list-doctor-ul">{list}</ul>
     </div>
   );
