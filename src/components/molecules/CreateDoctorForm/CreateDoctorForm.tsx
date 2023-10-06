@@ -43,6 +43,7 @@ export const CreateDoctorForm = () => {
   useEffect(() => {
     console.log(specializations);
   }, [specializations]);
+
   const updateForm = (key: string, value: any) => {
     setForm((form) => ({
       ...form,

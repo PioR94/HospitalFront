@@ -21,9 +21,10 @@ export const LoginPatient = () => {
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
       navigate('../patient');
     }
+    console.log(token);
 
     sendToken(token, baseUrlPatient, 'verify-token');
   }, [token]);
@@ -40,7 +41,7 @@ export const LoginPatient = () => {
 
   return (
     <div className="bg">
-      <form action="" onSubmit={sendForm} className="formLogin">
+      <form onSubmit={sendForm} className="formLogin">
         <h2>Zaloguj się</h2>
         <p>
           <label>
