@@ -5,7 +5,8 @@ import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData
 import { getToken } from '../../../utils/variables';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setCity, setSpecialization } from '../../../redux/search-slice';
 
 interface DataDr {
   idDr: string;
@@ -24,22 +25,27 @@ export const ListDoctor = () => {
   const [inputText, setInputText] = useState('');
   const [inputActive, setInputActive] = useState(false);
   const [specializations, setSpecializations] = useState([]);
+  const dispatch = useDispatch();
+  const city = useSelector((state: any) => state.search.city);
   const [form, setForm] = useState({
     city: '',
     specialization: '',
   });
+  const dataSessionStorage = {
+    city: sessionStorage.getItem('city'),
+    specialization: sessionStorage.getItem('specialization'),
+  };
 
   useEffect(() => {
     getDoctors();
-  }, []);
+  }, [dataSessionStorage.city, dataSessionStorage.specialization]);
 
   useEffect(() => {
-    sendToken(getToken, baseUrlPatient, 'find-doctor').then((r) => setIdPt(r.idPt));
-    console.log(idPt);
+    sendToken(getToken, baseUrlPatient, 'get-id').then((r) => setIdPt(r.idPt));
   }, [idPt]);
 
   const getDoctors = async () => {
-    downloadData(baseUrlPatient).then((r) => {
+    sendAndReceiveData(dataSessionStorage, baseUrlPatient, 'find-doctor').then((r) => {
       const dataDr = r.map((one: DataDr) => (
         <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
@@ -78,10 +84,12 @@ export const ListDoctor = () => {
 
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if ((form.city.length || form.specialization.length) < 0) {
-      // sendAndReceiveData(form, baseUrlPatient);
+    if ((form.city.length || form.specialization.length) > 0) {
+      sessionStorage.setItem('city', form.city);
+      sessionStorage.setItem('specialization', form.specialization);
     }
   };
+
 
   return (
     <div className="list-doctor-wrap">
@@ -103,8 +111,9 @@ export const ListDoctor = () => {
             options={specializations}
             onChange={(e) => updateForm('specialization', e.target.value)}
             placeholder="Wybierz specjalizację"
-            style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 200 }}
+            style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
           />
+          <button>aa</button>
         </form>
       </header>
       <ul className="list-doctor-ul">{list}</ul>
