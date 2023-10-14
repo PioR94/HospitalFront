@@ -29,7 +29,15 @@ export const FreeTermHour = (props: FreeTerm) => {
   const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
   const displayConfirm = () =>
     display && reservation === 0 ? (
-      <Confirm message="Czy chcesz zarezerwować ten termin?" clickNo={offDisplay} clickYes={bookTerm} hour={props.hour} numberDay={props.numberDay} month={props.month} year={props.year} />
+      <Confirm
+        message="Czy chcesz zarezerwować ten termin?"
+        clickNo={offDisplay}
+        clickYes={bookTerm}
+        hour={props.hour}
+        numberDay={props.numberDay}
+        month={props.month}
+        year={props.year}
+      />
     ) : (
       false
     );
