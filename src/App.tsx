@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
-import { CreateDoctorForm } from './components/molecules/CreateDoctorForm/CreateDoctorForm';
+import { CreateUserForm } from './components/molecules/CreateUserForm/CreateUserForm';
 import { Route, Routes } from 'react-router-dom';
-import { CreatePatientForm } from './components/molecules/CreatePatientForm/CreatePatientForm';
 import { BrowserRouter } from 'react-router-dom';
 import { MainComponent } from './components/pages/MainComponent/MainComponent';
 import { LoginPatient } from './components/molecules/LoginPatient/LoginPatient';
@@ -20,9 +19,9 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainComponent />} />
-          <Route path="patient/ad" element={<CreatePatientForm />} />
+          <Route path="patient/ad" element={<CreateUserForm role={'patient'} />} />
           <Route path="patient/log" element={<LoginPatient />} />
-          <Route path="doctor/ad" element={<CreateDoctorForm />} />
+          <Route path="doctor/ad" element={<CreateUserForm role={'doctor'} />} />
           <Route path="doctor" element={<LoginDoctor />} />
           <Route
             path="find-doctor"

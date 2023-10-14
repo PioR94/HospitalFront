@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../../api';
+import { baseUrlDoctor, baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../../api';
 import { getToken } from '../../../utils/variables';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
@@ -26,26 +26,27 @@ export const ListDoctor = () => {
   const [inputActive, setInputActive] = useState(false);
   const [specializations, setSpecializations] = useState([]);
   const dispatch = useDispatch();
-  const city = useSelector((state: any) => state.search.city);
-  const [form, setForm] = useState({
-    city: '',
-    specialization: '',
-  });
-  const dataSessionStorage = {
-    city: sessionStorage.getItem('city'),
-    specialization: sessionStorage.getItem('specialization'),
-  };
+  const cityReduxValue = useSelector((state: any) => state.search.city);
+  const specializationReduxValue = useSelector((state: any) => state.search.specialization);
+  const citySessionValue = sessionStorage.getItem('city');
+  const specializationSessionValue = sessionStorage.getItem('specialization');
 
   useEffect(() => {
-    getDoctors();
-  }, [dataSessionStorage.city, dataSessionStorage.specialization]);
+    if (!cityReduxValue && !specializationReduxValue) {
+      getDoctors(citySessionValue, specializationSessionValue);
+    }
+  }, []);
 
   useEffect(() => {
     sendToken(getToken, baseUrlPatient, 'get-id').then((r) => setIdPt(r.idPt));
   }, [idPt]);
 
-  const getDoctors = async () => {
-    sendAndReceiveData(dataSessionStorage, baseUrlPatient, 'find-doctor').then((r) => {
+  const getDoctors = async (city: string | null, specialization: string | null) => {
+    const dataSearch = {
+      city,
+      specialization,
+    };
+    sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
       const dataDr = r.map((one: DataDr) => (
         <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
@@ -75,41 +76,37 @@ export const ListDoctor = () => {
     });
   }, []);
 
-  const updateForm = (key: string, value: any) => {
-    setForm((form) => ({
-      ...form,
-      [key]: value,
-    }));
-  };
-
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if ((form.city.length || form.specialization.length) > 0) {
-      sessionStorage.setItem('city', form.city);
-      sessionStorage.setItem('specialization', form.specialization);
+    if (cityReduxValue || specializationReduxValue) {
+      getDoctors(cityReduxValue, specializationReduxValue);
+      sessionStorage.setItem('city', cityReduxValue);
+      sessionStorage.setItem('specialization', specializationReduxValue);
     }
   };
-
+  useEffect(() => {
+    console.log(cityReduxValue, specializationReduxValue);
+  });
 
   return (
     <div className="list-doctor-wrap">
       <header className="list-doctor-header">
         <form onSubmit={sendForm} className="container-search">
           <AutoComplete
-            value={form.city}
+            value={cityReduxValue}
             suggestions={suggestedCities}
             completeMethod={(e: AutoCompleteCompleteEvent) => {
               setInputText(e.query);
             }}
-            onChange={(e: AutoCompleteChangeEvent) => updateForm('city', e.target.value)}
+            onChange={(e: AutoCompleteChangeEvent) => dispatch(setCity(e.target.value))}
             minLength={3}
             placeholder="Wyszukaj miasto"
             style={{ alignSelf: 'stretch' }}
           />
           <Dropdown
-            value={form.specialization}
+            value={specializationReduxValue}
             options={specializations}
-            onChange={(e) => updateForm('specialization', e.target.value)}
+            onChange={(e) => dispatch(setSpecialization(e.target.value))}
             placeholder="Wybierz specjalizację"
             style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
           />

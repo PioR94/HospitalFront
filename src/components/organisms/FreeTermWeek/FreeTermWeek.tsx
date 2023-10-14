@@ -35,7 +35,13 @@ export const FreeTermWeek = (props: Props) => {
       let year = nextDate.getFullYear();
       days[i] = (
         <div key={`${year}-${month}-${numberDay}`}>
-          <FreeTermDay dayOfWeek={`${getDayName(dayOfWeek)}`} numberDay={numberDay.toString()} month={`${getMonthName(month)}`} year={year.toString()} idDr={props.idDr} />
+          <FreeTermDay
+            dayOfWeek={`${getDayName(dayOfWeek)}`}
+            numberDay={numberDay.toString()}
+            month={`${getMonthName(month)}`}
+            year={year.toString()}
+            idDr={props.idDr}
+          />
         </div>
       );
 

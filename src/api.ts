@@ -14,7 +14,7 @@ export const sendData = (data: any, baseUrlArgument: string, path: string) => {
   });
 };
 
-export const sendAndReceiveData = (data: any, baseUrlArgument: string, path: string) => {
+export const sendAndReceiveData = (data: any, baseUrlArgument: string | (() => string), path: string) => {
   return fetch(`${baseUrlArgument}/${path}`, {
     method: 'POST',
     headers: {

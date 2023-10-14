@@ -1,7 +1,7 @@
-import React from "react";
-import { VisitsDoctor } from "../../molecules/VisitsDoctor/VisitsDoctor";
-import "./AccountDoctor.css";
-import { Week } from "../../organisms/Week/Week";
+import React from 'react';
+import { VisitsDoctor } from '../../molecules/VisitsDoctor/VisitsDoctor';
+import './AccountDoctor.css';
+import { Week } from '../../organisms/Week/Week';
 
 interface Props {
   idDr: string;
@@ -18,12 +18,7 @@ export const AccountDoctor = (props: Props) => {
         <VisitsDoctor idDr={props.idDr} />
       </header>
 
-      <Week
-        idDr={props.idDr}
-        loginDr={props.loginDr}
-        nameDr={props.nameDr}
-        lastNameDr={props.lastNameDr}
-      />
+      <Week idDr={props.idDr} loginDr={props.loginDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} />
     </div>
   );
 };
