@@ -2,6 +2,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 export const baseUrlDoctor: string = `${baseUrl}/doctor`;
 export const baseUrlPatient: string = `${baseUrl}/patient`;
 export const baseUrlTerm = `${baseUrl}/term`;
+export const baseUrlSpecialization = `${baseUrl}/specialization`;
 
 export const sendData = (data: any, baseUrlArgument: string, path: string) => {
   fetch(`${baseUrlArgument}/${path}`, {
@@ -13,7 +14,7 @@ export const sendData = (data: any, baseUrlArgument: string, path: string) => {
   });
 };
 
-export const sendAndReceiveData = (data: any, baseUrlArgument: string, path: string) => {
+export const sendAndReceiveData = (data: any, baseUrlArgument: string | (() => string), path: string) => {
   return fetch(`${baseUrlArgument}/${path}`, {
     method: 'POST',
     headers: {
@@ -27,6 +28,18 @@ export const sendAndReceiveData = (data: any, baseUrlArgument: string, path: str
 
 export const downloadData = (http: string) => {
   return fetch(http)
+    .then((r) => r.json())
+    .then((dt) => dt);
+};
+
+export const sendToken = (token: string | null, baseUrlArgument: string, path: string) => {
+  return fetch(`${baseUrlArgument}/${path}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ token }),
+  })
     .then((r) => r.json())
     .then((dt) => dt);
 };

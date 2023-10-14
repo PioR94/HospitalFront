@@ -1,11 +1,12 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlPatient, downloadData } from '../../../api';
-
-interface Props {
-  idPt: string;
-}
+import { baseUrlDoctor, baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../../api';
+import { getToken } from '../../../utils/variables';
+import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
+import { Dropdown } from 'primereact/dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCity, setSpecialization } from '../../../redux/search-slice';
 
 interface DataDr {
   idDr: string;
@@ -14,40 +15,105 @@ interface DataDr {
   specialization: string;
   address: string;
 }
+const libs = ['places'];
 
-export const ListDoctor = (props: Props) => {
+export const ListDoctor = () => {
   const [list, setList] = useState([]);
-  const [on, setOn] = useState(false);
+  const [idPt, setIdPt] = useState('');
+  const inputRef = useRef<any>(null);
+  const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
+  const [inputText, setInputText] = useState('');
+  const [inputActive, setInputActive] = useState(false);
+  const [specializations, setSpecializations] = useState([]);
+  const dispatch = useDispatch();
+  const cityReduxValue = useSelector((state: any) => state.search.city);
+  const specializationReduxValue = useSelector((state: any) => state.search.specialization);
+  const citySessionValue = sessionStorage.getItem('city');
+  const specializationSessionValue = sessionStorage.getItem('specialization');
 
-  const listAll = async (e: SyntheticEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (!cityReduxValue && !specializationReduxValue) {
+      getDoctors(citySessionValue, specializationSessionValue);
+    }
+  }, []);
 
-    downloadData(baseUrlPatient).then((r) => {
+  useEffect(() => {
+    sendToken(getToken, baseUrlPatient, 'get-id').then((r) => setIdPt(r.idPt));
+  }, [idPt]);
+
+  const getDoctors = async (city: string | null, specialization: string | null) => {
+    const dataSearch = {
+      city,
+      specialization,
+    };
+    sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
       const dataDr = r.map((one: DataDr) => (
-        <li className="listAllLi">
+        <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
-            key={one.idDr}
             idDr={one.idDr}
             name={one.nameDr}
             lastName={one.lastNameDr}
             specialization={one.specialization}
-            idPt={props.idPt}
+            idPt={idPt}
             address={one.address}
           />
         </li>
       ));
       setList(dataDr);
     });
-
-    return on ? setOn(false) : setOn(true);
   };
 
+  useEffect(() => {
+    sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
+      setSuggestedCities(r);
+      console.log(suggestedCities);
+    });
+  }, [inputText, inputActive]);
+
+  useEffect(() => {
+    downloadData(baseUrlSpecialization).then((r) => {
+      setSpecializations(r);
+    });
+  }, []);
+
+  const sendForm = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    if (cityReduxValue || specializationReduxValue) {
+      getDoctors(cityReduxValue, specializationReduxValue);
+      sessionStorage.setItem('city', cityReduxValue);
+      sessionStorage.setItem('specialization', specializationReduxValue);
+    }
+  };
+  useEffect(() => {
+    console.log(cityReduxValue, specializationReduxValue);
+  });
+
   return (
-    <>
-      <button onClick={listAll} className="listAllButton">
-        Lista lekarzy
-      </button>
-      {on && <ul className="listAllUl">{list}</ul>}
-    </>
+    <div className="list-doctor-wrap">
+      <header className="list-doctor-header">
+        <form onSubmit={sendForm} className="container-search">
+          <AutoComplete
+            value={cityReduxValue}
+            suggestions={suggestedCities}
+            completeMethod={(e: AutoCompleteCompleteEvent) => {
+              setInputText(e.query);
+            }}
+            onChange={(e: AutoCompleteChangeEvent) => dispatch(setCity(e.target.value))}
+            minLength={3}
+            placeholder="Wyszukaj miasto"
+            style={{ alignSelf: 'stretch' }}
+          />
+          <Dropdown
+            value={specializationReduxValue}
+            options={specializations}
+            onChange={(e) => dispatch(setSpecialization(e.target.value))}
+            placeholder="Wybierz specjalizację"
+            style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
+          />
+          <button>aa</button>
+        </form>
+      </header>
+      <ul className="list-doctor-ul">{list}</ul>
+    </div>
   );
 };

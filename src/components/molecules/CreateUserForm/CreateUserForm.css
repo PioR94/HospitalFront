@@ -1,0 +1,7 @@
+.messages {
+  width: 300px;
+  position: fixed;
+  font-size: 1px;
+  top: 0;
+  right: 10px;
+}

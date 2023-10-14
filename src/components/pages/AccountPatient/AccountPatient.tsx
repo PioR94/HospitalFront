@@ -1,20 +1,14 @@
-import React from "react";
-import { ListDoctor } from "../../organisms/ListDoctor/ListDoctor";
-import { VisitsPatient } from "../../molecules/VisitPatient/VisitPatient";
-import "./AccountPatient.css";
+import React from 'react';
+import './AccountPatient.css';
+import { Link } from 'react-router-dom';
 
-interface Props {
-  idPt: string;
-  loginPt: string;
-}
+export const AccountPatient = () => {
+  const token = localStorage.getItem('token');
 
-export const AccountPatient = (props: Props) => {
   return (
-    <div className="bg">
+    <div className="bg-patient-account">
       <header className="headerAccountPatient">
-        <h2 className="h2AccountPatient">{props.loginPt}</h2>
-        <ListDoctor idPt={props.idPt} />
-        <VisitsPatient idPt={props.idPt} />
+        <h2 className="h2AccountPatient">Login</h2>
       </header>
     </div>
   );
