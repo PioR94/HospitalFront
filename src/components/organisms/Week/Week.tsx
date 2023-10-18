@@ -17,7 +17,7 @@ export const Week = (props: Props) => {
 
   const renderDays = (dayOfWeek: number, month: number, numberDay: number, year: number) => {
     const days = [];
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 7; i++) {
       days[i] = (
         <Day
           dayOfWeek={`${getDayName(dayOfWeek)}`}
@@ -42,17 +42,9 @@ export const Week = (props: Props) => {
     return days;
   };
 
-  const moveRight = (): void => {
-    if (positionX > -1995) {
-      setPositionX(positionX - 665);
-    }
-  };
+  const moveRight = (): void => {};
 
-  const moveLeft = (): void => {
-    if (positionX < 0) {
-      setPositionX(positionX + 665);
-    }
-  };
+  const moveLeft = (): void => {};
 
   return (
     <>
@@ -65,15 +57,6 @@ export const Week = (props: Props) => {
         >
           {renderDays(initialDayOfWeek, initialMonth, initialNumberDay, initialYear)}
         </div>
-      </div>
-      <div className={changeClass(positionX === -1995, '_moveRightNone', '_moveRight')} onClick={moveRight}>
-        {' '}
-        ⇨
-      </div>
-
-      <div className={changeClass(positionX === 0, '_moveLeftNone', '_moveLeft')} onClick={moveLeft}>
-        {' '}
-        ⇦
       </div>
     </>
   );

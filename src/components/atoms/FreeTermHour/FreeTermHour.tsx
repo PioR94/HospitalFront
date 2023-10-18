@@ -5,7 +5,7 @@ import { Confirm } from '../../molecules/Confirm/Confirm';
 import { baseUrlTerm, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
 import { useSelector } from 'react-redux';
-import { selectActiveLogin, selectUserId } from '../../../redux/selectors';
+import { selectUserId } from '../../../redux/selectors';
 
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);
