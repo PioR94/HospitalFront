@@ -13,7 +13,7 @@ interface DataDr {
   nameDr: string;
   lastNameDr: string;
   specialization: string;
-  address: string;
+  street: string;
 }
 const libs = ['places'];
 
@@ -47,6 +47,7 @@ export const ListDoctor = () => {
       specialization,
     };
     sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
+      console.log(r);
       const dataDr = r.map((one: DataDr) => (
         <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
@@ -55,7 +56,7 @@ export const ListDoctor = () => {
             lastName={one.lastNameDr}
             specialization={one.specialization}
             idPt={idPt}
-            address={one.address}
+            street={one.street}
           />
         </li>
       ));
@@ -66,7 +67,6 @@ export const ListDoctor = () => {
   useEffect(() => {
     sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
       setSuggestedCities(r);
-      console.log(suggestedCities);
     });
   }, [inputText, inputActive]);
 
@@ -78,15 +78,11 @@ export const ListDoctor = () => {
 
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (cityReduxValue || specializationReduxValue) {
-      getDoctors(cityReduxValue, specializationReduxValue);
-      sessionStorage.setItem('city', cityReduxValue);
-      sessionStorage.setItem('specialization', specializationReduxValue);
-    }
+
+    getDoctors(cityReduxValue, specializationReduxValue);
+    sessionStorage.setItem('city', cityReduxValue);
+    sessionStorage.setItem('specialization', specializationReduxValue);
   };
-  useEffect(() => {
-    console.log(cityReduxValue, specializationReduxValue);
-  });
 
   return (
     <div className="list-doctor-wrap">

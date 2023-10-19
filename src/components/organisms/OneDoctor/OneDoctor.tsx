@@ -13,7 +13,7 @@ interface Props {
   name: string;
   lastName: string;
   specialization: string;
-  address: string;
+  street: string;
 }
 
 export const OneDoctor = (props: Props) => {
@@ -47,7 +47,7 @@ export const OneDoctor = (props: Props) => {
 
           <div className="address">
             <MdLocationOn size={20} />
-            <p className="p-address">{props.address}</p>
+            <p className="p-address">{props.street}</p>
           </div>
         </section>
 
