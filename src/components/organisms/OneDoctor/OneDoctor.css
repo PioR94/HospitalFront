@@ -1,5 +1,5 @@
 .one-doctor-wrap {
-  display: inline-flex;
+  display: flex;
   margin-top: 20px;
   max-width: 904px;
   flex-wrap: wrap;
@@ -16,12 +16,11 @@
 }
 
 .one-doctor-section-calendar {
-  position: relative;
   background-color: white;
   width: 450px;
   margin: 1px;
 }
-.pDr {
+.name-specialization {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -30,15 +29,6 @@
   justify-content: space-between;
   font-size: 17px;
   line-height: 20px;
-}
-
-.image {
-  position: relative;
-  height: 80px;
-  width: 80px;
-  border: 1px solid black;
-  left: 20px;
-  top: 10px;
 }
 
 .wrap-free-term-week {
@@ -83,7 +73,7 @@
 .p-address {
 }
 
-.avatar-and-name {
+.avatar-name-star {
   display: flex;
   margin: 20px 0 0 0;
 }

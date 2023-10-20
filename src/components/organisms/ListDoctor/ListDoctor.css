@@ -27,7 +27,6 @@
 .container-search {
   display: flex;
   align-items: center;
-
   height: 35px;
   width: 440px;
   justify-content: space-between;

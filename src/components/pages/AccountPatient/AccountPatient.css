@@ -1,12 +1,10 @@
 .bg {
   display: block;
-  position: relative;
   height: 100%;
   width: 100%;
 }
 
 .headerAccountPatient {
-  position: relative;
   width: 100%;
   background-color: green;
   height: 10vh;
