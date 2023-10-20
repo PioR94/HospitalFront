@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './MainComponent.css';
-import { Btn } from '../../atoms/Btn/Btn';
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { baseUrlDoctor, baseUrlPatient } from '../../../api';
+import { Dropdown } from 'primereact/dropdown';
 import { Option } from '../../../types/options/option';
 
 export const MainComponent = () => {
@@ -48,20 +45,23 @@ export const MainComponent = () => {
 
   return (
     <>
-      <div className="main-bg">
-        <div className="logo" />
+      <div className="main-container">
         <header className="main-header">
-          <Dropdown onChange={handleOptionChange1} options={options1} optionLabel="name" placeholder="Rejestracja" className="check-register" />
-          <Dropdown onChange={handleOptionChange2} options={options2} optionLabel="name" placeholder="Zaloguj" className="check-logout" />
+          <div className="logo" />
+          <div>
+            <Dropdown onChange={handleOptionChange1} options={options1} optionLabel="name" placeholder="Rejestracja" className="check-register" />
+            <Dropdown onChange={handleOptionChange2} options={options2} optionLabel="name" placeholder="Zaloguj" className="check-logout" />
+          </div>
         </header>
-
-        <div className="slogan">
-          <h2 className="slogan-h2 slogan-h2-up ">Opieka Zdrowotna Online </h2>
-          <h2 className="slogan-h2 slogan-h2-down">Proste Umawianie </h2>
-          <h2 className="slogan-h2 slogan-h2-third">Profesjonalizm</h2>
-          <h3 className="slogan-h3">Znajdź najlepszego lekarza w Twojej okolicy i umów się na wizytę bez zbędnych kolejek i stresu.</h3>
+        <div className="slogan-png-container">
+          <div className="slogan">
+            <h2 className="slogan-h2 slogan-h2-up ">Opieka Zdrowotna Online </h2>
+            <h2 className="slogan-h2 slogan-h2-down">Proste Umawianie </h2>
+            <h2 className="slogan-h2 slogan-h2-third">Profesjonalizm</h2>
+            <h3 className="slogan-h3">Znajdź najlepszego lekarza w Twojej okolicy i umów się na wizytę bez zbędnych kolejek i stresu.</h3>
+          </div>
+          <div className="png" />
         </div>
-        <div className="png" />
       </div>
     </>
   );

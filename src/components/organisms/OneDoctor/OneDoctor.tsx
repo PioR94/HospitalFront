@@ -27,9 +27,9 @@ export const OneDoctor = (props: Props) => {
     <>
       <div className="one-doctor-wrap">
         <section className="one-doctor-section-data">
-          <div className="avatar-and-name">
+          <div className="avatar-name-star">
             <Avatar icon="pi pi-user" size="xlarge" />
-            <div className="pDr">
+            <div className="name-specialization">
               <span className="span-name">
                 lek. {props.name} {props.lastName}
               </span>
