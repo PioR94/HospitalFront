@@ -42,21 +42,10 @@ export const Week = (props: Props) => {
     return days;
   };
 
-  const moveRight = (): void => {};
-
-  const moveLeft = (): void => {};
-
   return (
     <>
       <div className="container-week">
-        <div
-          className="_divWeek"
-          style={{
-            translate: positionX,
-          }}
-        >
-          {renderDays(initialDayOfWeek, initialMonth, initialNumberDay, initialYear)}
-        </div>
+        <div className="_divWeek">{renderDays(initialDayOfWeek, initialMonth, initialNumberDay, initialYear)}</div>
       </div>
     </>
   );

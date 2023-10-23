@@ -21,7 +21,7 @@ export const MainComponent = () => {
   const options2 = [
     {
       name: 'doktor',
-      link2: `http://localhost:3000/doctor`,
+      link2: `http://localhost:3000/doctor/log`,
     },
     {
       name: 'pacjent',
