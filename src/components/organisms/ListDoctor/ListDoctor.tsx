@@ -7,6 +7,7 @@ import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCity, setSpecialization } from '../../../redux/search-slice';
+import { Button } from 'primereact/button';
 
 interface DataDr {
   idDr: string;
@@ -24,7 +25,7 @@ export const ListDoctor = () => {
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');
   const [inputActive, setInputActive] = useState(false);
-  const [specializations, setSpecializations] = useState([]);
+  const [specializations, setSpecializations] = useState<string[]>([]);
   const dispatch = useDispatch();
   const cityReduxValue = useSelector((state: any) => state.search.city);
   const specializationReduxValue = useSelector((state: any) => state.search.specialization);
@@ -72,7 +73,8 @@ export const ListDoctor = () => {
 
   useEffect(() => {
     downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(r);
+      console.log(r);
+      setSpecializations(['', ...r]);
     });
   }, []);
 
@@ -106,7 +108,7 @@ export const ListDoctor = () => {
             placeholder="Wybierz specjalizację"
             style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
           />
-          <button>aa</button>
+          <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
         </form>
       </header>
       <ul className="list-doctor-ul">{list}</ul>
