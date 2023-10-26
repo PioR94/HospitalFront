@@ -11,7 +11,7 @@ import 'primeicons/primeicons.css';
 import { ListDoctor } from './components/organisms/ListDoctor/ListDoctor';
 import RequireLogin from './utils/RequireLogin';
 import { AccountPatient } from './components/pages/AccountPatient/AccountPatient';
-import { LoginUser } from './components/molecules/LoginDoctor/LoginUser';
+import { LoginUser } from './components/molecules/LoginUser/LoginUser';
 import { AccountDoctor } from './components/pages/AccountDoctor/AccountDoctor';
 
 export default function App() {
