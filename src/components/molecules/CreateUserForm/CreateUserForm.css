@@ -13,17 +13,21 @@
   justify-content: space-around;
   background-color: white;
   width: 80%;
-  height: 90vh;
-  min-height: 500px;
+  min-height: 90vh;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03), 0 0 2px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.12);
   padding-bottom: 20px;
+  margin: 20px 0;
 }
 
 .container-input {
   display: flex;
   flex-direction: column;
-  font-weight: 500;
+  font-size: 13px;
+  width: 90%;
+}
+.container-input label {
+  margin-bottom: 3px;
 }
 
 .container-div {
@@ -32,9 +36,6 @@
   width: 90%;
 }
 
-.container-input {
-  width: 90%;
-}
 .p-inputtext {
   width: 100%;
 }
@@ -48,12 +49,4 @@
 #register-h2 {
   color: #6366f1;
   font-size: 30px;
-}
-
-.messages {
-  width: 300px;
-  position: fixed;
-  font-size: 1px;
-  top: 0;
-  right: 10px;
 }

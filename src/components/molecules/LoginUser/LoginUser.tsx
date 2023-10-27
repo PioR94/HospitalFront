@@ -37,7 +37,6 @@ export const LoginUser = (props: Role) => {
 
   const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
     event?.preventDefault();
-    console.log(data);
     sendAndReceiveData(data, url, 'log').then((data) => {
       setToken(data.token);
     });
