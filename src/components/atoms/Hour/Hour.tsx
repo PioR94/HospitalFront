@@ -23,12 +23,14 @@ export const Hour = (props: Term) => {
   const termId: string = props.id;
 
   useEffect(() => {
-    sendAndReceiveData(termId, baseUrlTerm, 'term-id').then((r) => setActive(r));
-  }, []);
+    sendAndReceiveData(termId, baseUrlTerm, 'term-id').then((r) => {
+      setActive(r);
+    });
+  }, [props.loginDr]);
 
   const addTerm = () => {
     sendData(term, baseUrlTerm, 'add');
-    active ? setActive(false) : setActive(true);
+    setActive((perv) => !perv);
   };
 
   return (

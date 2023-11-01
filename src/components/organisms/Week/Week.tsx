@@ -13,11 +13,10 @@ interface Props {
 }
 
 export const Week = (props: Props) => {
-  const [positionX, setPositionX] = useState(0);
-
   const renderDays = (dayOfWeek: number, month: number, numberDay: number, year: number) => {
     const days = [];
-    for (let i = 0; i < 28; i++) {
+
+    for (let i = 0; i < 7; i++) {
       days[i] = (
         <Day
           dayOfWeek={`${getDayName(dayOfWeek)}`}
@@ -28,6 +27,7 @@ export const Week = (props: Props) => {
           loginDr={props.loginDr}
           nameDr={props.nameDr}
           lastNameDr={props.lastNameDr}
+          key={numberDay + month}
         />
       );
 
@@ -42,38 +42,10 @@ export const Week = (props: Props) => {
     return days;
   };
 
-  const moveRight = (): void => {
-    if (positionX > -1995) {
-      setPositionX(positionX - 665);
-    }
-  };
-
-  const moveLeft = (): void => {
-    if (positionX < 0) {
-      setPositionX(positionX + 665);
-    }
-  };
-
   return (
     <>
-      <div className="a">
-        <div
-          className="_divWeek"
-          style={{
-            translate: positionX,
-          }}
-        >
-          {renderDays(initialDayOfWeek, initialMonth, initialNumberDay, initialYear)}
-        </div>
-      </div>
-      <div className={changeClass(positionX === -1995, '_moveRightNone', '_moveRight')} onClick={moveRight}>
-        {' '}
-        ⇨
-      </div>
-
-      <div className={changeClass(positionX === 0, '_moveLeftNone', '_moveLeft')} onClick={moveLeft}>
-        {' '}
-        ⇦
+      <div className="container-week">
+        <div className="_divWeek">{renderDays(initialDayOfWeek, initialMonth, initialNumberDay, initialYear)}</div>
       </div>
     </>
   );

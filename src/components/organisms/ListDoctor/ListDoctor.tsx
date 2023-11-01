@@ -7,13 +7,14 @@ import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCity, setSpecialization } from '../../../redux/search-slice';
+import { Button } from 'primereact/button';
 
 interface DataDr {
   idDr: string;
   nameDr: string;
   lastNameDr: string;
   specialization: string;
-  address: string;
+  street: string;
 }
 const libs = ['places'];
 
@@ -24,7 +25,7 @@ export const ListDoctor = () => {
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');
   const [inputActive, setInputActive] = useState(false);
-  const [specializations, setSpecializations] = useState([]);
+  const [specializations, setSpecializations] = useState<string[]>([]);
   const dispatch = useDispatch();
   const cityReduxValue = useSelector((state: any) => state.search.city);
   const specializationReduxValue = useSelector((state: any) => state.search.specialization);
@@ -47,6 +48,7 @@ export const ListDoctor = () => {
       specialization,
     };
     sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
+      console.log(r);
       const dataDr = r.map((one: DataDr) => (
         <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
@@ -55,7 +57,7 @@ export const ListDoctor = () => {
             lastName={one.lastNameDr}
             specialization={one.specialization}
             idPt={idPt}
-            address={one.address}
+            street={one.street}
           />
         </li>
       ));
@@ -66,27 +68,23 @@ export const ListDoctor = () => {
   useEffect(() => {
     sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
       setSuggestedCities(r);
-      console.log(suggestedCities);
     });
   }, [inputText, inputActive]);
 
   useEffect(() => {
     downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(r);
+      console.log(r);
+      setSpecializations(['', ...r]);
     });
   }, []);
 
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (cityReduxValue || specializationReduxValue) {
-      getDoctors(cityReduxValue, specializationReduxValue);
-      sessionStorage.setItem('city', cityReduxValue);
-      sessionStorage.setItem('specialization', specializationReduxValue);
-    }
+
+    getDoctors(cityReduxValue, specializationReduxValue);
+    sessionStorage.setItem('city', cityReduxValue);
+    sessionStorage.setItem('specialization', specializationReduxValue);
   };
-  useEffect(() => {
-    console.log(cityReduxValue, specializationReduxValue);
-  });
 
   return (
     <div className="list-doctor-wrap">
@@ -110,7 +108,7 @@ export const ListDoctor = () => {
             placeholder="Wybierz specjalizację"
             style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
           />
-          <button>aa</button>
+          <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
         </form>
       </header>
       <ul className="list-doctor-ul">{list}</ul>

@@ -13,7 +13,7 @@ interface Props {
   name: string;
   lastName: string;
   specialization: string;
-  address: string;
+  street: string;
 }
 
 export const OneDoctor = (props: Props) => {
@@ -27,9 +27,9 @@ export const OneDoctor = (props: Props) => {
     <>
       <div className="one-doctor-wrap">
         <section className="one-doctor-section-data">
-          <div className="avatar-and-name">
+          <div className="avatar-name-star">
             <Avatar icon="pi pi-user" size="xlarge" />
-            <div className="pDr">
+            <div className="name-specialization">
               <span className="span-name">
                 lek. {props.name} {props.lastName}
               </span>
@@ -47,7 +47,7 @@ export const OneDoctor = (props: Props) => {
 
           <div className="address">
             <MdLocationOn size={20} />
-            <p className="p-address">{props.address}</p>
+            <p className="p-address">{props.street}</p>
           </div>
         </section>
 
