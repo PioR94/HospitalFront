@@ -1,5 +1,5 @@
 import React from 'react';
-import './Confirm.css';
+import './Modal.css';
 import { Btn } from '../../atoms/Btn/Btn';
 import ReactDOM from 'react-dom';
 import { Button } from 'primereact/button';
@@ -14,7 +14,7 @@ interface Props {
   year: string;
 }
 
-export const Confirm = (props: Props) => {
+export const Modal = (props: Props) => {
   return ReactDOM.createPortal(
     <div className="confirm-bg">
       <div className="confirm">
