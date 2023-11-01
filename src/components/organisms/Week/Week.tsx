@@ -13,10 +13,9 @@ interface Props {
 }
 
 export const Week = (props: Props) => {
-  const [positionX, setPositionX] = useState(0);
-
   const renderDays = (dayOfWeek: number, month: number, numberDay: number, year: number) => {
     const days = [];
+
     for (let i = 0; i < 7; i++) {
       days[i] = (
         <Day
@@ -28,6 +27,7 @@ export const Week = (props: Props) => {
           loginDr={props.loginDr}
           nameDr={props.nameDr}
           lastNameDr={props.lastNameDr}
+          key={numberDay + month}
         />
       );
 

@@ -26,7 +26,7 @@ export const VisitsPatient = (props: Props) => {
       setList(dataVisits);
     });
 
-    return on ? setOn(false) : setOn(true);
+    return setOn((perv: boolean) => !perv);
   };
 
   return (

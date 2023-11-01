@@ -13,14 +13,15 @@ export const AccountDoctor = () => {
   });
 
   useEffect(() => {
-    sendToken(token, baseUrlDoctor, 'get-doctor').then((r) =>
+    sendToken(token, baseUrlDoctor, 'get-doctor').then((r) => {
       setDataDr({
         idDr: r.id,
         loginDr: r.login,
         nameDr: r.name,
         lastNameDr: r.lastName,
-      }),
-    );
+      });
+      console.log(r);
+    });
   }, []);
 
   return (

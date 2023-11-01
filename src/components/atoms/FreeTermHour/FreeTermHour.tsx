@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FreeTerm } from 'types';
 import './FreeTermHour.css';
-import { Confirm } from '../../molecules/Confirm/Confirm';
+import { Modal } from '../../molecules/Modal/Modal';
 import { baseUrlTerm, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
 import { useSelector } from 'react-redux';
@@ -26,30 +26,22 @@ export const FreeTermHour = (props: FreeTerm) => {
     setReservation(1);
   };
 
-  const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
-  const displayConfirm = () =>
-    display && reservation === 0 ? (
-      <Confirm
-        message="Czy chcesz zarezerwować ten termin?"
-        clickNo={offDisplay}
-        clickYes={bookTerm}
-        hour={props.hour}
-        numberDay={props.numberDay}
-        month={props.month}
-        year={props.year}
-      />
-    ) : (
-      false
-    );
-
-  const offDisplay = () => setDisplay(false);
-
   return (
     <>
-      <div onClick={displayWindow} className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}>
+      <div onClick={() => setDisplay((prev) => !prev)} className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}>
         {props.hour}
       </div>
-      {displayConfirm()}
+      {display && reservation === 0 ? (
+        <Modal
+          message="Czy chcesz zarezerwować ten termin?"
+          clickNo={() => setDisplay(false)}
+          clickYes={bookTerm}
+          hour={props.hour}
+          numberDay={props.numberDay}
+          month={props.month}
+          year={props.year}
+        />
+      ) : null}
     </>
   );
 };

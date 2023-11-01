@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FreeTermDay } from '../../molecules/FreeTermDay/FreeTermDay';
 import './FreeTermWeek.css';
 import { changeClass, getDayName, getMonthName } from '../../../utils/functions/function';
@@ -8,22 +8,15 @@ interface Props {
   idDr: string;
 }
 
-export const FreeTermWeek = (props: Props) => {
+export const FreeTermWeek = ({ idDr }: Props) => {
   const [counter, setCounter] = useState(0);
   const [initialDate, setInitialDate] = useState(new Date());
-  const [daysToRender, setDaysToRender] = useState<JSX.Element[]>([]);
-
-  let refElements: any[] = [];
-
-  useEffect(() => {
-    renderDays();
-  }, [initialDate]);
 
   useEffect(() => {
     console.log(counter);
   }, [counter]);
 
-  const renderDays = () => {
+  const renderDays = useMemo(() => {
     const days = [];
 
     let nextDate = initialDate;
@@ -40,15 +33,15 @@ export const FreeTermWeek = (props: Props) => {
             numberDay={numberDay.toString()}
             month={`${getMonthName(month)}`}
             year={year.toString()}
-            idDr={props.idDr}
+            idDr={idDr}
           />
         </div>
       );
 
       nextDate = addDays(nextDate, 1);
     }
-    setDaysToRender(days);
-  };
+    return days;
+  }, [initialDate]);
 
   const moveRight = (): void => {
     if (counter < 50) {
@@ -70,7 +63,7 @@ export const FreeTermWeek = (props: Props) => {
         <div className={changeClass(counter === 0, 'move-left-none', 'move-left')} onClick={moveLeft}>
           <i className="pi pi-angle-left" />
         </div>
-        {daysToRender}
+        {renderDays}
 
         <div className={changeClass(counter === 50, 'move-right-none', 'move-right')} onClick={moveRight}>
           <i className="pi pi-angle-right" />

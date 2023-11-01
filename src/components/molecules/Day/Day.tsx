@@ -1,6 +1,6 @@
-import React from "react";
-import { Hour } from "../../atoms/Hour/Hour";
-import "./Day.css";
+import React, { useMemo } from 'react';
+import { Hour } from '../../atoms/Hour/Hour';
+import './Day.css';
 
 interface Props {
   dayOfWeek: string;
@@ -14,13 +14,13 @@ interface Props {
 }
 
 export const Day = (props: Props) => {
-  const renderHours = () => {
+  const renderHours = useMemo(() => {
     const hours = [];
     let hour: number = 6;
     let minutes: number = 0;
-    let zero: string = "";
+    let zero: string = '';
     for (let i = 0; i < 60; i++) {
-      if (minutes === 0) zero = "0";
+      if (minutes === 0) zero = '0';
 
       hours[i] = (
         <Hour
@@ -34,10 +34,11 @@ export const Day = (props: Props) => {
           loginDr={props.loginDr}
           nameDr={props.nameDr}
           lastNameDr={props.lastNameDr}
+          key={hour + minutes + props.numberDay + props.month}
         />
       );
 
-      zero = "";
+      zero = '';
       minutes += 15;
 
       if (minutes === 60) {
@@ -46,7 +47,7 @@ export const Day = (props: Props) => {
       }
     }
     return hours;
-  };
+  }, []);
 
   return (
     <>
@@ -56,7 +57,7 @@ export const Day = (props: Props) => {
           <div>{props.numberDay}</div>
           <div>{props.month}</div>
         </div>
-        {renderHours()}
+        {renderHours}
       </div>
     </>
   );
