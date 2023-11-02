@@ -7,9 +7,7 @@ export const AccountPatient = () => {
 
   return (
     <div className="bg-patient-account">
-      <header className="headerAccountPatient">
-        <h2 className="h2AccountPatient">Login</h2>
-      </header>
+      <img className="img-doctors" src="doctors3.svg" alt="patient" />
     </div>
   );
 };
