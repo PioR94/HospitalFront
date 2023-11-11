@@ -5,7 +5,7 @@ export const baseUrlTerm = `${baseUrl}/term`;
 export const baseUrlSpecialization = `${baseUrl}/specialization`;
 
 export const sendData = (data: any, baseUrlArgument: string, path: string) => {
-  fetch(`${baseUrlArgument}/${path}`, {
+  return fetch(`${baseUrlArgument}/${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

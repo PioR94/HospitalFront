@@ -6,8 +6,10 @@ import { getToken } from '../../../utils/variables';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCity, setSpecialization } from '../../../redux/search-slice';
+
 import { Button } from 'primereact/button';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { updateCity, updateSpecialization } from '../../../redux/search-slice';
 
 interface DataDr {
   idDr: string;
@@ -24,10 +26,9 @@ export const ListDoctor = () => {
   const inputRef = useRef<any>(null);
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');
-  const [inputActive, setInputActive] = useState(false);
   const [specializations, setSpecializations] = useState<string[]>([]);
-  const dispatch = useDispatch();
-  const cityReduxValue = useSelector((state: any) => state.search.city);
+  const dispatch = useAppDispatch();
+  const cityReduxValue = useAppSelector((state: any) => state.search.city);
   const specializationReduxValue = useSelector((state: any) => state.search.specialization);
   const citySessionValue = sessionStorage.getItem('city');
   const specializationSessionValue = sessionStorage.getItem('specialization');
@@ -35,6 +36,8 @@ export const ListDoctor = () => {
   useEffect(() => {
     if (!cityReduxValue && !specializationReduxValue) {
       getDoctors(citySessionValue, specializationSessionValue);
+    } else {
+      getDoctors(cityReduxValue, specializationReduxValue);
     }
   }, []);
 
@@ -69,16 +72,15 @@ export const ListDoctor = () => {
     sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
       setSuggestedCities(r);
     });
-  }, [inputText, inputActive]);
+  }, [inputText]);
 
   useEffect(() => {
     downloadData(baseUrlSpecialization).then((r) => {
-      console.log(r);
       setSpecializations(['', ...r]);
     });
   }, []);
 
-  const sendForm = async (e: SyntheticEvent) => {
+  const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
 
     getDoctors(cityReduxValue, specializationReduxValue);
@@ -89,14 +91,14 @@ export const ListDoctor = () => {
   return (
     <div className="list-doctor-wrap">
       <header className="list-doctor-header">
-        <form onSubmit={sendForm} className="container-search">
+        <form onSubmit={onSubmit} className="container-search">
           <AutoComplete
             value={cityReduxValue}
             suggestions={suggestedCities}
             completeMethod={(e: AutoCompleteCompleteEvent) => {
               setInputText(e.query);
             }}
-            onChange={(e: AutoCompleteChangeEvent) => dispatch(setCity(e.target.value))}
+            onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
             minLength={3}
             placeholder="Wyszukaj miasto"
             style={{ alignSelf: 'stretch' }}
@@ -104,7 +106,7 @@ export const ListDoctor = () => {
           <Dropdown
             value={specializationReduxValue}
             options={specializations}
-            onChange={(e) => dispatch(setSpecialization(e.target.value))}
+            onChange={(e) => dispatch(updateSpecialization(e.target.value))}
             placeholder="Wybierz specjalizację"
             style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
           />

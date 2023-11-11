@@ -37,7 +37,7 @@ export const CreateUserForm = (props: Role) => {
 
   const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
     event?.preventDefault();
-    console.log(data);
+
     sendAndReceiveData(data, url, 'add').then((data) => {});
   };
 
