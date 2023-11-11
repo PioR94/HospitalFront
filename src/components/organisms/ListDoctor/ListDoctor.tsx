@@ -6,7 +6,7 @@ import { getToken } from '../../../utils/variables';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCity, setSpecialization } from '../../../redux/search-slice';
+import { updateCity, updateSpecialization } from '../../../redux/search-slice';
 import { Button } from 'primereact/button';
 
 interface DataDr {
@@ -35,6 +35,8 @@ export const ListDoctor = () => {
   useEffect(() => {
     if (!cityReduxValue && !specializationReduxValue) {
       getDoctors(citySessionValue, specializationSessionValue);
+    } else {
+      getDoctors(cityReduxValue, specializationReduxValue);
     }
   }, []);
 
@@ -96,7 +98,7 @@ export const ListDoctor = () => {
             completeMethod={(e: AutoCompleteCompleteEvent) => {
               setInputText(e.query);
             }}
-            onChange={(e: AutoCompleteChangeEvent) => dispatch(setCity(e.target.value))}
+            onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
             minLength={3}
             placeholder="Wyszukaj miasto"
             style={{ alignSelf: 'stretch' }}
@@ -104,7 +106,7 @@ export const ListDoctor = () => {
           <Dropdown
             value={specializationReduxValue}
             options={specializations}
-            onChange={(e) => dispatch(setSpecialization(e.target.value))}
+            onChange={(e) => dispatch(updateSpecialization(e.target.value))}
             placeholder="Wybierz specjalizację"
             style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
           />

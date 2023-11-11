@@ -11,14 +11,14 @@ const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setCity: (state, action: PayloadAction<string>) => {
+    updateCity: (state, action: PayloadAction<string>) => {
       state.city = action.payload;
     },
-    setSpecialization: (state, action: PayloadAction<string>) => {
+    updateSpecialization: (state, action: PayloadAction<string>) => {
       state.specialization = action.payload;
     },
   },
 });
 
-export const { setCity, setSpecialization } = searchSlice.actions;
+export const { updateCity, updateSpecialization } = searchSlice.actions;
 export default searchSlice.reducer;
