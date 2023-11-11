@@ -5,15 +5,15 @@ import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { updateCity, updateSpecialization } from '../../../redux/search-slice';
 import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../../api';
+import { updateCity, updateSpecialization } from '../../../redux/search-slice';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
 export const AccountPatient = () => {
   const token = localStorage.getItem('token');
-  const dispatch = useDispatch();
-  const cityReduxValue = useSelector((state: any) => state.search.city);
-  const specializationReduxValue = useSelector((state: any) => state.search.specialization);
+  const dispatch = useAppDispatch();
+  const cityReduxValue = useAppSelector((state: any) => state.search.city);
+  const specializationReduxValue = useAppSelector((state: any) => state.search.specialization);
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
   const [specializations, setSpecializations] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');
