@@ -8,5 +8,29 @@
 }
 
 .img-doctors {
-  width: 800px;
+  width: 700px;
+}
+
+.form-search {
+  display: flex;
+  box-sizing: content-box;
+
+  width: 720px;
+  height: 60px;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.div-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  left: 6%;
+  bottom: 17%;
+  height: 200px;
+  font-family: Work Sans;
+  font-size: 25px;
+  color: #3b82f6;
 }
