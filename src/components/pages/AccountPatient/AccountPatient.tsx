@@ -38,10 +38,17 @@ export const AccountPatient = () => {
   };
 
   return (
-    <div className="bg-patient-account">
+    <div className="container-patient-account">
+      <header className="header-patient-account">
+        <img src="logo-white.svg" alt="logo" className="logo-white" />
+
+        <div className="div-menu">
+          <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 20 }} />
+        </div>
+      </header>
       <div className="div-search">
-        <h2>Znajdź lekarza i umów wizytę</h2>
-        <h3>Szukaj wśród lekarzy</h3>
+        <h2 className="h2-patient-account">Znajdź lekarza i umów wizytę</h2>
+        <h3 className="h3-patient-account">Szukaj wśród lekarzy</h3>
         <form onSubmit={onSubmit} className="form-search">
           <AutoComplete
             value={cityReduxValue}
@@ -52,7 +59,7 @@ export const AccountPatient = () => {
             onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
             minLength={3}
             placeholder="Wyszukaj miasto"
-            style={{ alignSelf: 'stretch', flexGrow: 1, marginRight: 10 }}
+            style={{ alignSelf: 'stretch', flexGrow: 1, marginRight: 10, marginBottom: 10 }}
           />
           <Dropdown
             value={specializationReduxValue}
@@ -66,6 +73,7 @@ export const AccountPatient = () => {
               alignSelf: 'stretch',
               boxSizing: 'content-box',
               marginRight: 10,
+              marginBottom: 10,
             }}
           />
           <Button label="Szukaj" severity="info" raised />
