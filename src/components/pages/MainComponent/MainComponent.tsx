@@ -47,7 +47,8 @@ export const MainComponent = () => {
     <>
       <div className="main-container">
         <header className="main-header">
-          <div className="logo" />
+        <img src="logo-blue.svg" alt="logo" className="new-logo" />
+
           <div>
             <Dropdown onChange={handleOptionChange1} options={options1} optionLabel="name" placeholder="Rejestracja" className="check-register" />
             <Dropdown onChange={handleOptionChange2} options={options2} optionLabel="name" placeholder="Zaloguj" className="check-logout" />

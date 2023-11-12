@@ -55,13 +55,9 @@ b .slogan-h2-down {
   font-family: 'Yu Gothic Light';
 }
 
-.logo {
-  width: 80px;
-  height: 80px;
-  background-image: url('/public/logo-19.svg');
-  background-repeat: no-repeat;
+.new-logo {
+  width: 200px;
 }
-
 .png {
   background-image: url('/public/doctors12.jpg');
   width: 450px;
