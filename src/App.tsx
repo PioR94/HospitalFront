@@ -13,6 +13,7 @@ import RequireLogin from './utils/RequireLogin';
 import { AccountPatient } from './components/pages/AccountPatient/AccountPatient';
 import { LoginUser } from './components/molecules/LoginUser/LoginUser';
 import { AccountDoctor } from './components/pages/AccountDoctor/AccountDoctor';
+import { UserPanel } from './components/pages/UserPanel/UserPanel';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/" element={<MainComponent />} />
           <Route path="patient/ad" element={<CreateUserForm role={'patient'} />} />
           <Route path="patient/log" element={<LoginUser role={'patient'} />} />
+          <Route path="patient/panel" element={<UserPanel />} />
           <Route path="doctor/ad" element={<CreateUserForm role={'doctor'} />} />
           <Route path="doctor/log" element={<LoginUser role={'doctor'} />} />
           <Route

@@ -51,6 +51,7 @@
 .logo-white {
   width: 170px;
   margin: 10px 0 0 60px;
+  z-index: 1;
 }
 
 @media (max-width: 1150px) {
