@@ -2,19 +2,22 @@ import React from 'react';
 import 'primeicons/primeicons.css';
 import './UserPanel.css';
 import { Avatar } from 'primereact/avatar';
+import { useNavigate } from 'react-router-dom';
 
 export const UserPanel = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="bg-panel">
         <div className="wrap-panel">
           <div className="sidebar">
             <div className="sidebar-icon-div" style={{ fontSize: 20 }}>
-              <i className="pi pi-home icon"></i>
+              <i className="pi pi-home icon" onClick={() => navigate('../patient')}></i>
               <span className="span-icon">Główna</span>
             </div>
             <div className="sidebar-icon-div">
-              <i className="pi pi-search icon"></i>
+              <i className="pi pi-search icon" onClick={() => navigate('../find-doctor')}></i>
               <span className="span-icon">Szukaj</span>
             </div>
             <div className=" sidebar-icon-div">
@@ -24,6 +27,10 @@ export const UserPanel = () => {
             <div className="sidebar-icon-div">
               <i className="pi pi-clock icon"></i>
               <span className="span-icon">Terminarz</span>
+            </div>
+            <div className="sidebar-icon-div">
+              <i className="pi pi-user icon"></i>
+              <span className="span-icon">Profil</span>
             </div>
             <div className="sidebar-icon-div">
               <i className="pi pi-cog icon"></i>
