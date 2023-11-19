@@ -28,7 +28,7 @@ export const AccountDoctor = () => {
     <div className="bgAccountDoctor">
       <header className="headerAccountDoctor"></header>
 
-      <Week idDr={dataDr.idDr} loginDr={dataDr.loginDr} nameDr={dataDr.nameDr} lastNameDr={dataDr.lastNameDr} />
+      <Week idDr={dataDr.idDr} />
     </div>
   );
 };

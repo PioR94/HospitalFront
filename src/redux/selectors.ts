@@ -7,3 +7,5 @@ export const selectUserId = (state: any) => state.user.id;
 export const selectCity = (state: any) => state.search.city;
 
 export const selectSpecialization = (state: any) => state.search.specialization;
+
+export const selectHours = (state: any) => state.schedule.hours;

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FreeTerm } from 'types';
+
 import { FreeTermHour } from '../../atoms/FreeTermHour/FreeTermHour';
 import './FreeTermDay.css';
 import { baseUrlTerm, sendAndReceiveData } from '../../../api';
+import { FreeTerm } from '../../../types/terms';
 
 interface Props {
   dayOfWeek: string;
