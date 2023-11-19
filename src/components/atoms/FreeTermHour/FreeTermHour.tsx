@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FreeTerm } from 'types';
 import './FreeTermHour.css';
 import { Modal } from '../../molecules/Modal/Modal';
 import { baseUrlTerm, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
 import { useSelector } from 'react-redux';
 import { selectUserId } from '../../../redux/selectors';
+import { FreeTerm } from '../../../types/terms';
 
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);

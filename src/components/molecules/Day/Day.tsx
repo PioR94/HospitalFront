@@ -1,51 +1,31 @@
 import React, { useMemo } from 'react';
 import { Hour } from '../../atoms/Hour/Hour';
 import './Day.css';
+import { addMinutes, format } from 'date-fns';
 
 interface Props {
-  dayOfWeek: string;
-  numberDay: string;
-  month: string;
-  year: string;
+  day: string;
   idDr: string;
-  loginDr: string;
-  nameDr: string;
-  lastNameDr: string;
 }
 
 export const Day = (props: Props) => {
   const renderHours = useMemo(() => {
+    const startHour = 6;
+    const endHour = 21;
+    const intervalMinutes = 15;
     const hours = [];
-    let hour: number = 6;
-    let minutes: number = 0;
-    let zero: string = '';
-    for (let i = 0; i < 60; i++) {
-      if (minutes === 0) zero = '0';
 
-      hours[i] = (
-        <Hour
-          id={`${hour}${minutes}${props.numberDay}${props.month}${props.year}${props.loginDr}`}
-          hour={`${hour}:${minutes}${zero}`}
-          dayOfWeek={props.dayOfWeek}
-          numberDay={props.numberDay}
-          month={props.month}
-          year={props.year}
-          idDr={props.idDr}
-          loginDr={props.loginDr}
-          nameDr={props.nameDr}
-          lastNameDr={props.lastNameDr}
-          key={hour + minutes + props.numberDay + props.month}
-        />
+    let currentTime = new Date();
+    currentTime.setHours(startHour, 0, 0, 0);
+
+    while (currentTime.getHours() < endHour) {
+      const formattedTime = format(currentTime, 'HH:mm');
+      hours.push(
+        <Hour key={formattedTime} hour={formattedTime} day={props.day} idDr={props.idDr} />,
       );
-
-      zero = '';
-      minutes += 15;
-
-      if (minutes === 60) {
-        hour++;
-        minutes = 0;
-      }
+      currentTime = addMinutes(currentTime, intervalMinutes);
     }
+
     return hours;
   }, []);
 
@@ -53,9 +33,7 @@ export const Day = (props: Props) => {
     <>
       <div className="_divDay">
         <div className="_div-date">
-          <div>{props.dayOfWeek}</div>
-          <div>{props.numberDay}</div>
-          <div>{props.month}</div>
+          <div>{props.day}</div>
         </div>
         {renderHours}
       </div>

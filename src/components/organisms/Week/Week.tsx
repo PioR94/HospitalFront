@@ -1,43 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
 import { changeClass, getDayName, getMonthName } from '../../../utils/functions/function';
-import { initialDayOfWeek, initialMonth, initialNumberDay, initialYear } from '../../../utils/get-date';
+import {
+  initialDayOfWeek,
+  initialMonth,
+  initialNumberDay,
+  initialYear,
+} from '../../../utils/get-date';
 import { renderDaysLogic } from '../../../utils/functions/render-days-logic';
+import { useAppSelector } from '../../../hooks/redux';
 
 interface Props {
   idDr: string;
-  loginDr: string;
-  nameDr: string;
-  lastNameDr: string;
 }
 
 export const Week = (props: Props) => {
-  const renderDays = (dayOfWeek: number, month: number, numberDay: number, year: number) => {
+  const hou = useAppSelector((state: any) => state.schedule.hours);
+
+  useEffect(() => {
+    console.log(hou);
+  }, [hou]);
+
+  const renderDays = (day: number) => {
     const days = [];
 
     for (let i = 0; i < 7; i++) {
-      days[i] = (
-        <Day
-          dayOfWeek={`${getDayName(dayOfWeek)}`}
-          month={`${getMonthName(month)}`}
-          numberDay={numberDay.toString()}
-          year={year.toString()}
-          idDr={props.idDr}
-          loginDr={props.loginDr}
-          nameDr={props.nameDr}
-          lastNameDr={props.lastNameDr}
-          key={numberDay + month}
-        />
-      );
-
-      dayOfWeek++;
-      numberDay++;
-
-      const dateDay = renderDaysLogic(dayOfWeek, month, numberDay, year);
-      dayOfWeek = dateDay._dayOfWeek;
-      numberDay = dateDay._numberDay;
-      month = dateDay._month;
+      days[i] = <Day day={`${getDayName(i)}`} idDr={props.idDr} />;
     }
     return days;
   };
@@ -45,7 +34,7 @@ export const Week = (props: Props) => {
   return (
     <>
       <div className="container-week">
-        <div className="_divWeek">{renderDays(initialDayOfWeek, initialMonth, initialNumberDay, initialYear)}</div>
+        <div className="_divWeek">{renderDays(0)}</div>
       </div>
     </>
   );

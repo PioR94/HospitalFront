@@ -1,35 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import './Hour.css';
 import { baseUrlTerm, sendAndReceiveData, sendData } from '../../../api';
-import { Term } from 'types';
 import { changeClass } from '../../../utils/functions/function';
+import { HourProps } from '../../../types/terms';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { toggleHour } from '../../../redux/schedule-slice';
 
-export const Hour = (props: Term) => {
+export const Hour = (props: HourProps) => {
   const [active, setActive] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const term: Term = {
-    id: props.id,
-    hour: props.hour,
-    dayOfWeek: props.dayOfWeek,
-    numberDay: props.numberDay,
-    month: props.month,
-    year: props.year,
+  const term: HourProps = {
+    day: props.day,
     idDr: props.idDr,
-    loginDr: props.loginDr,
-    nameDr: props.nameDr,
-    lastNameDr: props.lastNameDr,
+    hour: props.hour,
   };
 
-  const termId: string = props.id;
-
-  useEffect(() => {
-    sendAndReceiveData(termId, baseUrlTerm, 'term-id').then((r) => {
-      setActive(r);
-    });
-  }, [props.loginDr]);
-
   const addTerm = () => {
-    sendData(term, baseUrlTerm, 'add');
+    dispatch(toggleHour(term));
     setActive((perv) => !perv);
   };
 
