@@ -22,7 +22,8 @@ export interface FreeTerm {
   reservation?: number;
 }
 
-export interface HourProps {
+export interface Schedule {
+  id?: string;
   idDr: string;
   day: string;
   hour: string;

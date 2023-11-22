@@ -20,10 +20,11 @@ export const AccountDoctor = () => {
         nameDr: r.name,
         lastNameDr: r.lastName,
       });
-      console.log(r);
     });
   }, []);
+  
 
+  
   return (
     <div className="bgAccountDoctor">
       <header className="headerAccountDoctor"></header>

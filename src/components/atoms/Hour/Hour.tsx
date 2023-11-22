@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './Hour.css';
 import { baseUrlTerm, sendAndReceiveData, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
-import { HourProps } from '../../../types/terms';
+
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { toggleHour } from '../../../redux/schedule-slice';
+import { isEqual } from 'lodash';
+import { Schedule } from '../../../types/terms/term';
 
-export const Hour = (props: HourProps) => {
+export const Hour = (props: Schedule) => {
   const [active, setActive] = useState(false);
   const dispatch = useAppDispatch();
+  const reduxHours = useAppSelector((state: any) => state.schedule.hours);
 
-  const term: HourProps = {
+  const term: Schedule = {
     day: props.day,
     idDr: props.idDr,
     hour: props.hour,
@@ -18,7 +21,6 @@ export const Hour = (props: HourProps) => {
 
   const addTerm = () => {
     dispatch(toggleHour(term));
-    setActive((perv) => !perv);
   };
 
   return (

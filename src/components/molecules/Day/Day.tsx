@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Hour } from '../../atoms/Hour/Hour';
 import './Day.css';
 import { addMinutes, format } from 'date-fns';
@@ -20,6 +20,7 @@ export const Day = (props: Props) => {
 
     while (currentTime.getHours() < endHour) {
       const formattedTime = format(currentTime, 'HH:mm');
+
       hours.push(
         <Hour key={formattedTime} hour={formattedTime} day={props.day} idDr={props.idDr} />,
       );
@@ -27,7 +28,7 @@ export const Day = (props: Props) => {
     }
 
     return hours;
-  }, []);
+  }, [props.idDr]);
 
   return (
     <>
