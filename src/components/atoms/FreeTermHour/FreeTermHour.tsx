@@ -5,7 +5,7 @@ import { baseUrlTerm, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
 import { useSelector } from 'react-redux';
 import { selectUserId } from '../../../redux/selectors';
-import { FreeTerm } from '../../../types/terms';
+import { FreeTerm } from '../../../types/terms/term';
 
 export const FreeTermHour = (props: FreeTerm) => {
   const [display, setDisplay] = useState(false);
@@ -28,7 +28,10 @@ export const FreeTermHour = (props: FreeTerm) => {
 
   return (
     <>
-      <div onClick={() => setDisplay((prev) => !prev)} className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}>
+      <div
+        onClick={() => setDisplay((prev) => !prev)}
+        className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}
+      >
         {props.hour}
       </div>
       {display && reservation === 0 ? (

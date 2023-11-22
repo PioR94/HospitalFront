@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
-import { changeClass, getDayName, getMonthName } from '../../../utils/functions/function';
-import {
-  initialDayOfWeek,
-  initialMonth,
-  initialNumberDay,
-  initialYear,
-} from '../../../utils/get-date';
-import { renderDaysLogic } from '../../../utils/functions/render-days-logic';
-import { useAppSelector } from '../../../hooks/redux';
+import { getDayName, getMonthName } from '../../../utils/functions/function';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { Button } from 'primereact/button';
+import { baseUrlSchedule, sendAndReceiveData, updateData } from '../../../api';
+
+import { Schedule } from '../../../types/terms/term';
+import { addReduxHours } from '../../../redux/schedule-slice';
 
 interface Props {
   idDr: string;
 }
 
 export const Week = (props: Props) => {
-  const hou = useAppSelector((state: any) => state.schedule.hours);
+  const dispatch = useAppDispatch();
+  const reduxHours = useAppSelector((state: any) => state.schedule.hours);
 
   useEffect(() => {
-    console.log(hou);
-  }, [hou]);
+    props.idDr &&
+      sendAndReceiveData(props.idDr, baseUrlSchedule, 'hours').then((r) =>
+        dispatch(addReduxHours(r)),
+      );
+
+      console.log(reduxHours);
+  }, [props.idDr]);
+
+  const data = {
+    idDr: props.idDr,
+    newSchedule: reduxHours,
+  };
 
   const renderDays = (day: number) => {
     const days = [];
@@ -31,9 +40,14 @@ export const Week = (props: Props) => {
     return days;
   };
 
+  const save = () => {
+    updateData(data, baseUrlSchedule, 'update');
+  };
+
   return (
     <>
       <div className="container-week">
+        <Button label="Zapisz" severity="success" onClick={save} />
         <div className="_divWeek">{renderDays(0)}</div>
       </div>
     </>
