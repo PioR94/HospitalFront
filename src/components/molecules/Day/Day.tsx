@@ -2,15 +2,21 @@ import React, { useEffect, useMemo } from 'react';
 import { Hour } from '../../atoms/Hour/Hour';
 import './Day.css';
 import { addMinutes, format } from 'date-fns';
-import { Schedule } from '../../../types/terms/term';
+import { ScheduleHour } from '../../../types/terms/term';
 
 interface Props {
   day: string;
   idDr: string;
-  hours: Schedule[];
+  hours: ScheduleHour[];
 }
 
 export const Day = (props: Props) => {
+  const getClass = (hour: string) => {
+    const foundHour = props.hours.find((hourObj: ScheduleHour) => hourObj.hour === hour);
+    console.log(foundHour);
+    return foundHour ? '_hour-div-active' : '_hour-div';
+  };
+
   const renderHours = useMemo(() => {
     const startHour = 6;
     const endHour = 21;
@@ -24,13 +30,19 @@ export const Day = (props: Props) => {
       const formattedTime = format(currentTime, 'HH:mm');
 
       hours.push(
-        <Hour key={formattedTime} hour={formattedTime} day={props.day} idDr={props.idDr} />,
+        <Hour
+          key={formattedTime}
+          hour={formattedTime}
+          day={props.day}
+          idDr={props.idDr}
+          className={getClass(formattedTime)}
+        />,
       );
       currentTime = addMinutes(currentTime, intervalMinutes);
     }
 
     return hours;
-  }, [props.idDr]);
+  }, [props.idDr, props.hours]);
 
   return (
     <>

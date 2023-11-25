@@ -6,14 +6,14 @@ import { changeClass } from '../../../utils/functions/function';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { toggleHour } from '../../../redux/schedule-slice';
 import { isEqual } from 'lodash';
-import { Schedule } from '../../../types/terms/term';
+import { ScheduleHour } from '../../../types/terms/term';
 
-export const Hour = (props: Schedule) => {
+export const Hour = (props: ScheduleHour) => {
   const [active, setActive] = useState(false);
   const dispatch = useAppDispatch();
   const reduxHours = useAppSelector((state: any) => state.schedule.hours);
 
-  const term: Schedule = {
+  const term: ScheduleHour = {
     day: props.day,
     idDr: props.idDr,
     hour: props.hour,
@@ -23,9 +23,13 @@ export const Hour = (props: Schedule) => {
     dispatch(toggleHour(term));
   };
 
+  useEffect(() => {
+    console.log(props.className);
+  }, []);
+
   return (
     <>
-      <div onClick={addTerm} className={changeClass(active, '_hour-div-active', '_hour-div')}>
+      <div onClick={addTerm} className={props.className}>
         {props.hour}
       </div>
     </>
