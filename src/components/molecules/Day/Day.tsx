@@ -2,10 +2,12 @@ import React, { useEffect, useMemo } from 'react';
 import { Hour } from '../../atoms/Hour/Hour';
 import './Day.css';
 import { addMinutes, format } from 'date-fns';
+import { Schedule } from '../../../types/terms/term';
 
 interface Props {
   day: string;
   idDr: string;
+  hours: Schedule[];
 }
 
 export const Day = (props: Props) => {

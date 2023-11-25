@@ -34,9 +34,7 @@ export const sendAndReceiveData = (
         ? { data }
         : { ...data },
     ),
-  })
-    .then((r) => r.json())
-    .then((dt) => dt);
+  }).then((r) => r.json());
 };
 
 export const updateData = (data: any, baseUrlArgument: string | (() => string), path: string) => {
@@ -50,15 +48,11 @@ export const updateData = (data: any, baseUrlArgument: string | (() => string), 
         ? { data }
         : { ...data },
     ),
-  })
-    .then((r) => r.json())
-    .then((dt) => dt);
+  }).then((r) => r.json());
 };
 
 export const downloadData = (http: string) => {
-  return fetch(http)
-    .then((r) => r.json())
-    .then((dt) => dt);
+  return fetch(http).then((r) => r.json());
 };
 
 export const sendToken = (token: string | null, baseUrlArgument: string, path: string) => {
@@ -68,7 +62,5 @@ export const sendToken = (token: string | null, baseUrlArgument: string, path: s
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ token }),
-  })
-    .then((r) => r.json())
-    .then((dt) => dt);
+  }).then((r) => r.json());
 };
