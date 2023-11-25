@@ -22,3 +22,13 @@ export enum Day {
   Piątek,
   Sobota,
 }
+
+export enum DaysOfWeek {
+  Sunday,
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+}

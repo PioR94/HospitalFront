@@ -28,3 +28,13 @@ export interface Schedule {
   day: string;
   hour: string;
 }
+
+export interface AvailableHours {
+  Sunday: Schedule[];
+  Monday: Schedule[];
+  Tuesday: Schedule[];
+  Wednesday: Schedule[];
+  Thursday: Schedule[];
+  Friday: Schedule[];
+  Saturday: Schedule[];
+}
