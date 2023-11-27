@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ScheduleState } from '../types/redux/schedule-state';
-import { Schedule } from '../types/terms/term';
+import { ScheduleHour } from '../types/terms/term';
 
 const initialState: ScheduleState = {
   hours: [],
@@ -10,7 +10,7 @@ const scheduleSlice = createSlice({
   name: 'schedule',
   initialState,
   reducers: {
-    toggleHour: (state, action: PayloadAction<Schedule>) => {
+    toggleHour: (state, action: PayloadAction<ScheduleHour>) => {
       const existingHourIndex = state.hours.findIndex(
         (hour) => hour.day === action.payload.day && hour.hour === action.payload.hour,
       );
@@ -21,7 +21,7 @@ const scheduleSlice = createSlice({
         state.hours.push(action.payload);
       }
     },
-    addReduxHours: (state, action: PayloadAction<Schedule[]>) => {
+    addReduxHours: (state, action: PayloadAction<ScheduleHour[]>) => {
       state.hours.push(...action.payload);
     },
   },

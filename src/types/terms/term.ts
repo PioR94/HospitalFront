@@ -22,19 +22,20 @@ export interface FreeTerm {
   reservation?: number;
 }
 
-export interface Schedule {
+export interface ScheduleHour {
   id?: string;
   idDr: string;
   day: string;
   hour: string;
+  className?: string;
 }
 
 export interface AvailableHours {
-  Sunday: Schedule[];
-  Monday: Schedule[];
-  Tuesday: Schedule[];
-  Wednesday: Schedule[];
-  Thursday: Schedule[];
-  Friday: Schedule[];
-  Saturday: Schedule[];
+  Sunday: ScheduleHour[];
+  Monday: ScheduleHour[];
+  Tuesday: ScheduleHour[];
+  Wednesday: ScheduleHour[];
+  Thursday: ScheduleHour[];
+  Friday: ScheduleHour[];
+  Saturday: ScheduleHour[];
 }

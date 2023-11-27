@@ -1,5 +1,5 @@
-import { Schedule } from '../terms/term';
+import { ScheduleHour } from '../terms/term';
 
 export interface ScheduleState {
-  hours: Schedule[];
+  hours: ScheduleHour[];
 }

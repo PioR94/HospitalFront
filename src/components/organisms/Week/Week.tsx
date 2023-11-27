@@ -5,7 +5,7 @@ import { getDayName, getMonthName } from '../../../utils/functions/function';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Button } from 'primereact/button';
 import { baseUrlSchedule, sendAndReceiveData, updateData } from '../../../api';
-import { AvailableHours, Schedule } from '../../../types/terms/term';
+import { AvailableHours, ScheduleHour } from '../../../types/terms/term';
 import { addReduxHours } from '../../../redux/schedule-slice';
 import { DaysOfWeek } from '../../../utils/enum';
 
@@ -54,13 +54,13 @@ export const Week = (props: Props) => {
   useEffect(() => {
     if (reduxHours) {
       setAvailableHours({
-        Sunday: reduxHours.filter((hour: Schedule) => hour.day === 'Niedziela'),
-        Monday: reduxHours.filter((hour: Schedule) => hour.day === 'Poniedziałek'),
-        Tuesday: reduxHours.filter((hour: Schedule) => hour.day === 'Wtorek'),
-        Wednesday: reduxHours.filter((hour: Schedule) => hour.day === 'Środa'),
-        Thursday: reduxHours.filter((hour: Schedule) => hour.day === 'Czwartek'),
-        Friday: reduxHours.filter((hour: Schedule) => hour.day === 'Piątek'),
-        Saturday: reduxHours.filter((hour: Schedule) => hour.day === 'Sobota'),
+        Sunday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Niedziela'),
+        Monday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Poniedziałek'),
+        Tuesday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Wtorek'),
+        Wednesday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Środa'),
+        Thursday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Czwartek'),
+        Friday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Piątek'),
+        Saturday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Sobota'),
       });
     }
   }, [reduxHours]);
