@@ -1,9 +1,20 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlDoctor, baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../../api';
+import {
+  baseUrlDoctor,
+  baseUrlPatient,
+  baseUrlSpecialization,
+  downloadData,
+  sendAndReceiveData,
+  sendToken,
+} from '../../../api';
 import { getToken } from '../../../utils/variables';
-import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
+import {
+  AutoComplete,
+  AutoCompleteChangeEvent,
+  AutoCompleteCompleteEvent,
+} from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCity, updateSpecialization } from '../../../redux/search-slice';
@@ -50,7 +61,6 @@ export const ListDoctor = () => {
       specialization,
     };
     sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
-      console.log(r);
       const dataDr = r.map((one: DataDr) => (
         <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
@@ -75,7 +85,6 @@ export const ListDoctor = () => {
 
   useEffect(() => {
     downloadData(baseUrlSpecialization).then((r) => {
-      console.log(r);
       setSpecializations(['', ...r]);
     });
   }, []);
@@ -108,9 +117,21 @@ export const ListDoctor = () => {
             options={specializations}
             onChange={(e) => dispatch(updateSpecialization(e.target.value))}
             placeholder="Wybierz specjalizację"
-            style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', boxSizing: 'content-box', width: 220 }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              alignSelf: 'stretch',
+              boxSizing: 'content-box',
+              width: 220,
+            }}
           />
-          <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
+          <Button
+            icon="pi pi-search"
+            rounded
+            outlined
+            aria-label="Search"
+            className={'button-search'}
+          />
         </form>
       </header>
       <ul className="list-doctor-ul">{list}</ul>

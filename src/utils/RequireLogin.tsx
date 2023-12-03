@@ -12,7 +12,6 @@ const RequireLogin: React.FC<RequireLoginProps> = ({ children }) => {
     if (!getToken) {
       navigate('/patient/log');
     }
-    console.log('aa' + getToken);
   }, []);
 
   return <>{children}</>;

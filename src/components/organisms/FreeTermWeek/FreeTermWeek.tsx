@@ -12,10 +12,6 @@ export const FreeTermWeek = ({ idDr }: Props) => {
   const [counter, setCounter] = useState(0);
   const [initialDate, setInitialDate] = useState(new Date());
 
-  useEffect(() => {
-    console.log(counter);
-  }, [counter]);
-
   const renderDays = useMemo(() => {
     const days = [];
 
@@ -60,12 +56,18 @@ export const FreeTermWeek = ({ idDr }: Props) => {
   return (
     <>
       <div className="free-term-week">
-        <div className={changeClass(counter === 0, 'move-left-none', 'move-left')} onClick={moveLeft}>
+        <div
+          className={changeClass(counter === 0, 'move-left-none', 'move-left')}
+          onClick={moveLeft}
+        >
           <i className="pi pi-angle-left" />
         </div>
         {renderDays}
 
-        <div className={changeClass(counter === 50, 'move-right-none', 'move-right')} onClick={moveRight}>
+        <div
+          className={changeClass(counter === 50, 'move-right-none', 'move-right')}
+          onClick={moveRight}
+        >
           <i className="pi pi-angle-right" />
         </div>
       </div>

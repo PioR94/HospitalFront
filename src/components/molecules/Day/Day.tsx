@@ -31,11 +31,11 @@ export const Day = (props: Props) => {
 
       hours.push(
         <Hour
-          key={formattedTime}
           hour={formattedTime}
           day={props.day}
           idDr={props.idDr}
           className={getClass(formattedTime)}
+          key={formattedTime}
         />,
       );
       currentTime = addMinutes(currentTime, intervalMinutes);

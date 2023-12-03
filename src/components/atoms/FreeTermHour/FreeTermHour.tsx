@@ -5,44 +5,56 @@ import { baseUrlTerm, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
 import { useSelector } from 'react-redux';
 import { selectUserId } from '../../../redux/selectors';
-import { FreeTerm } from '../../../types/terms/term';
+import { Term } from '../../../types/terms/term';
 
-export const FreeTermHour = (props: FreeTerm) => {
+export const FreeTermHour = ({
+  id,
+  dayOfWeek,
+  hour,
+  numberDay,
+  month,
+  year,
+  idDr,
+  className,
+}: Term) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
-  const [reservation, setReservation] = useState(props.reservation);
+  const [classNameState, setClassNameState] = useState(className);
   const userActiveId = useSelector(selectUserId);
 
-  const termId: string = props.id;
   const dataId = {
-    termId,
-    userActiveId,
+    id,
+    hour,
+    dayOfWeek,
+    numberDay,
+    month,
+    year,
+    idDr,
+    idPt: 'ss',
   };
 
   const bookTerm = async () => {
-    sendData(dataId, baseUrlTerm, 'book-term');
+    console.log(dataId);
+    sendData(dataId, baseUrlTerm, 'add');
     setDisplay(false);
     setFree(true);
-    setReservation(1);
+    setClassNameState('book-term-hour');
   };
 
   return (
     <>
-      <div
-        onClick={() => setDisplay((prev) => !prev)}
-        className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}
-      >
-        {props.hour}
+      <div onClick={() => setDisplay((prev) => !prev)} className={classNameState}>
+        {hour}
       </div>
-      {display && reservation === 0 ? (
+      {display && classNameState === 'free-term-hour' ? (
         <Modal
           message="Czy chcesz zarezerwować ten termin?"
           clickNo={() => setDisplay(false)}
           clickYes={bookTerm}
-          hour={props.hour}
-          numberDay={props.numberDay}
-          month={props.month}
-          year={props.year}
+          hour={hour}
+          numberDay={numberDay}
+          month={month}
+          year={year}
         />
       ) : null}
     </>
