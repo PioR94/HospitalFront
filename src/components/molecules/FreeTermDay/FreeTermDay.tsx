@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { FreeTermHour } from '../../atoms/FreeTermHour/FreeTermHour';
 import './FreeTermDay.css';
-import { baseUrlTerm, sendAndReceiveData } from '../../../api';
-import { FreeTerm } from '../../../types/terms/term';
-
+import { baseUrlSchedule, baseUrlTerm, sendAndReceiveData } from '../../../api';
+import { ScheduleHour } from '../../../types/terms/term';
+import { mergeArrays } from '../../../utils/functions/merge-arrays';
 
 interface Props {
   dayOfWeek: string;
@@ -15,23 +14,66 @@ interface Props {
 }
 
 export const FreeTermDay = (props: Props) => {
-  const [freeTerms, setFreeTerms] = useState([]);
+  const [terms, setTerms] = useState<React.ReactNode[]>([]);
 
   const dayData = {
-    numberDay: props.numberDay,
-    month: props.month,
-    year: props.year,
+    dayOfWeek: props.dayOfWeek,
     idDr: props.idDr,
   };
 
+  const termData = {
+    idDr: props.idDr,
+    numberDay: props.numberDay,
+    month: props.month,
+    year: props.year,
+  };
+
   useEffect(() => {
-    sendAndReceiveData(dayData, baseUrlTerm, 'free-terms').then((data) => {
-      const r = data.map((term: FreeTerm) => (
-        <FreeTermHour id={term.id} hour={term.hour} numberDay={term.numberDay} month={term.month} year={term.year} reservation={term.reservation} key={term.id} />
+    const fetchData = async () => {
+      const fetchFreeTerms = sendAndReceiveData(dayData, baseUrlSchedule, 'free-terms');
+      const fetchReservationTerms = sendAndReceiveData(termData, baseUrlTerm, 'terms');
+
+      const [freeTermsData, reservationTermsData] = await Promise.all([
+        fetchFreeTerms,
+        fetchReservationTerms,
+      ]);
+
+      const modifiedFreeTerms = freeTermsData.map((item: ScheduleHour) => ({
+        ...item,
+        id: item.hour + props.numberDay + props.month + props.year + props.idDr,
+        className: 'free-term-hour',
+      }));
+
+      const modifiedReservationTerms = reservationTermsData.map((item: ScheduleHour) => ({
+        ...item,
+        className: 'book-term-hour',
+      }));
+
+      const mergeArray = mergeArrays(modifiedFreeTerms, modifiedReservationTerms);
+
+      const sortedArray = mergeArray.sort((a: ScheduleHour, b: ScheduleHour) =>
+        a.hour > b.hour ? 1 : -1,
+      );
+
+      const r = sortedArray.map((term: ScheduleHour) => (
+        <FreeTermHour
+          id={term.id || ''}
+          idDr={props.idDr}
+          hour={term.hour}
+          dayOfWeek={props.dayOfWeek}
+          numberDay={props.numberDay}
+          month={props.month}
+          year={props.year}
+          className={term.className}
+          key={term.id}
+        />
       ));
-      setFreeTerms(r);
-    });
-  }, []);
+
+      setTerms(r);
+    };
+
+    fetchData();
+  }, [props.idDr]);
 
   return (
     <>
@@ -42,7 +84,7 @@ export const FreeTermDay = (props: Props) => {
             {props.numberDay} {props.month}
           </div>
         </div>
-        {freeTerms}
+        {terms}
       </div>
     </>
   );
