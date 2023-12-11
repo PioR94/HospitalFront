@@ -23,7 +23,10 @@ export default function App() {
           <Route path="/" element={<MainComponent />} />
           <Route path="patient/ad" element={<CreateUserForm role={'patient'} />} />
           <Route path="patient/log" element={<LoginUser role={'patient'} />} />
-          <Route path="patient/panel" element={<UserPanel />} />
+          {/* <Route path="patient/panel" element={<UserPanel />} /> */}
+          {/* <Route path="doctor/panel" element={<UserPanel />} /> */}
+
+
           <Route path="doctor/ad" element={<CreateUserForm role={'doctor'} />} />
           <Route path="doctor/log" element={<LoginUser role={'doctor'} />} />
           <Route

@@ -3,8 +3,13 @@ import 'primeicons/primeicons.css';
 import './UserPanel.css';
 import { Avatar } from 'primereact/avatar';
 import { useNavigate } from 'react-router-dom';
+import { Week } from '../../organisms/Week/Week';
 
-export const UserPanel = () => {
+interface Props {
+  id: string;
+}
+
+export const UserPanel = (props: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -41,9 +46,15 @@ export const UserPanel = () => {
             <div className="navbar">
               <i className="pi pi-inbox icon icon-navbar"></i>
               <i className="pi pi-bell icon icon-navbar"></i>
-              <Avatar icon="pi pi-user avatar" style={{ backgroundColor: '#9c27b0', color: '#ffffff', marginRight: 50 }} shape="circle" />
+              <Avatar
+                icon="pi pi-user avatar"
+                style={{ backgroundColor: '#9c27b0', color: '#ffffff', marginRight: 50 }}
+                shape="circle"
+              />
             </div>
-            <div className="surface"></div>
+            <div className="surface">
+              <Week idDr={props.id} />
+            </div>
           </div>
         </div>
       </div>
