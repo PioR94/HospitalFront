@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'primeicons/primeicons.css';
 import './UserPanel.css';
 import { Avatar } from 'primereact/avatar';
@@ -11,6 +11,7 @@ interface Props {
 
 export const UserPanel = (props: Props) => {
   const navigate = useNavigate();
+  const [activeComponent, setActiveComponent] = useState<string>('');
 
   return (
     <>
@@ -29,7 +30,7 @@ export const UserPanel = (props: Props) => {
               <i className="pi pi-calendar icon"></i>
               <span className="span-icon">Wizyty</span>
             </div>
-            <div className="sidebar-icon-div">
+            <div className="sidebar-icon-div" onClick={() => setActiveComponent('week')}>
               <i className="pi pi-clock icon"></i>
               <span className="span-icon">Terminarz</span>
             </div>
@@ -52,9 +53,7 @@ export const UserPanel = (props: Props) => {
                 shape="circle"
               />
             </div>
-            <div className="surface">
-              <Week idDr={props.id} />
-            </div>
+            <div className="surface">{activeComponent === 'week' && <Week idDr={props.id} />}</div>
           </div>
         </div>
       </div>
