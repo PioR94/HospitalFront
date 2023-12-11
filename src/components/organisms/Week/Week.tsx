@@ -70,8 +70,10 @@ export const Week = (props: Props) => {
       <div className="container-week">
         <Button
           label="Zapisz"
-          severity="success"
+          icon="pi pi-check"
+          iconPos="right"
           onClick={() => updateData(data, baseUrlSchedule, 'update')}
+          className="button-week"
         />
         <div className="_divWeek">{renderDays()}</div>
       </div>
