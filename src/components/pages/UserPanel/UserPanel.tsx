@@ -4,6 +4,7 @@ import './UserPanel.css';
 import { Avatar } from 'primereact/avatar';
 import { useNavigate } from 'react-router-dom';
 import { Week } from '../../organisms/Week/Week';
+import { Visits } from '../../molecules/Visits/Visits';
 
 interface Props {
   id: string;
@@ -11,7 +12,7 @@ interface Props {
 
 export const UserPanel = (props: Props) => {
   const navigate = useNavigate();
-  const [activeComponent, setActiveComponent] = useState<string>('');
+  const [activeComponent, setActiveComponent] = useState<string>('visits');
 
   return (
     <>
@@ -26,7 +27,7 @@ export const UserPanel = (props: Props) => {
               <i className="pi pi-search icon" onClick={() => navigate('../find-doctor')}></i>
               <span className="span-icon">Szukaj</span>
             </div>
-            <div className=" sidebar-icon-div">
+            <div className=" sidebar-icon-div" onClick={() => setActiveComponent('visits')}>
               <i className="pi pi-calendar icon"></i>
               <span className="span-icon">Wizyty</span>
             </div>
@@ -53,7 +54,10 @@ export const UserPanel = (props: Props) => {
                 shape="circle"
               />
             </div>
-            <div className="surface">{activeComponent === 'week' && <Week idDr={props.id} />}</div>
+            <div className="surface">
+              {activeComponent === 'week' && <Week idDr={props.id} />}
+              {activeComponent === 'visits' && <Visits />}
+            </div>
           </div>
         </div>
       </div>
