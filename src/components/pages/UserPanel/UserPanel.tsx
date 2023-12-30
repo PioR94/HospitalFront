@@ -5,14 +5,17 @@ import { Avatar } from 'primereact/avatar';
 import { useNavigate } from 'react-router-dom';
 import { Week } from '../../organisms/Week/Week';
 import { Visits } from '../../molecules/Visits/Visits';
+import { useAppSelector } from '../../../hooks/redux';
+import { selectId } from '../../../redux/selectors';
 
 interface Props {
-  id: string;
+  role: string;
 }
 
 export const UserPanel = (props: Props) => {
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState<string>('visits');
+  const id = useAppSelector(selectId);
 
   return (
     <>
@@ -48,14 +51,10 @@ export const UserPanel = (props: Props) => {
             <div className="navbar">
               <i className="pi pi-inbox icon icon-navbar"></i>
               <i className="pi pi-bell icon icon-navbar"></i>
-              <Avatar
-                icon="pi pi-user avatar"
-                style={{ backgroundColor: '#9c27b0', color: '#ffffff', marginRight: 50 }}
-                shape="circle"
-              />
+              <Avatar icon="pi pi-user avatar" style={{ backgroundColor: '#9c27b0', color: '#ffffff', marginRight: 50 }} shape="circle" />
             </div>
             <div className="surface">
-              {activeComponent === 'week' && <Week idDr={props.id} />}
+              {activeComponent === 'week' && <Week idDr={id} />}
               {activeComponent === 'visits' && <Visits />}
             </div>
           </div>

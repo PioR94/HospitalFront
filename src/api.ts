@@ -55,12 +55,21 @@ export const downloadData = (http: string) => {
   return fetch(http).then((r) => r.json());
 };
 
-export const sendToken = (token: string | null, baseUrlArgument: string, path: string) => {
+export const sendToken = (
+  token: string | null,
+  baseUrlArgument: string,
+  path: string,
+): Promise<any> => {
   return fetch(`${baseUrlArgument}/${path}`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ token }),
-  }).then((r) => r.json());
+  }).then((response) => {
+    if (!response.ok) {
+      throw response;
+    }
+    return response.json();
+  });
 };

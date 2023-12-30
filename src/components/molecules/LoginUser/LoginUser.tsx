@@ -26,9 +26,11 @@ export const LoginUser = (props: Role) => {
     if (token) {
       sessionStorage.setItem('token', token);
       if (props.role === 'patient') {
+        sessionStorage.setItem('role', 'patient');
         navigate('../patient');
       } else if (props.role === 'doctor') {
-        navigate('../doctor');
+        sessionStorage.setItem('role', 'doctor');
+        navigate('../doctor/panel');
       }
     }
 
@@ -44,9 +46,9 @@ export const LoginUser = (props: Role) => {
 
   const clickRegister = () => {
     if (props.role === 'doctor') {
-      navigate('../doctor/ad');
+      navigate('../doctor/add');
     } else if (props.role === 'patient') {
-      navigate('../patient/ad');
+      navigate('../patient/add');
     }
   };
 
