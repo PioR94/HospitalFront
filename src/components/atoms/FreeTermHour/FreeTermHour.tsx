@@ -4,23 +4,12 @@ import { Modal } from '../../molecules/Modal/Modal';
 import { baseUrlTerm, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
 import { useSelector } from 'react-redux';
-import { selectUserId } from '../../../redux/selectors';
 import { Term } from '../../../types/terms/term';
 
-export const FreeTermHour = ({
-  id,
-  dayOfWeek,
-  hour,
-  numberDay,
-  month,
-  year,
-  idDr,
-  className,
-}: Term) => {
+export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, className }: Term) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
   const [classNameState, setClassNameState] = useState(className);
-  const userActiveId = useSelector(selectUserId);
 
   const dataId = {
     id,

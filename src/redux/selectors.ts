@@ -1,11 +1,25 @@
 // import { UserState } from '../types/redux/user-state';
 
-export const selectActiveLogin = (state: any) => state.user.activeLogin;
+import { RootState } from './store';
 
-export const selectUserId = (state: any) => state.user.id;
+export const selectActiveLogin = (state: RootState) => state.user.login;
 
-export const selectCity = (state: any) => state.search.city;
+export const selectId = (state: RootState) => state.user.id;
 
-export const selectSpecialization = (state: any) => state.search.specialization;
+export const selectCity = (state: RootState) => state.search.city;
 
-export const selectHours = (state: any) => state.schedule.hours;
+export const selectSpecialization = (state: RootState) => state.search.specialization;
+
+export const selectHours = (state: RootState) => state.schedule.hours;
+
+export const selectLogin = (state: RootState) => state.user.login;
+
+export const selectName = (state: RootState) => state.user.name;
+
+export const selectLastName = (state: RootState) => state.user.lastName;
+
+export const selectMail = (state: RootState) => state.user.mail;
+
+export const selectStreet = (state: RootState) => state.user.street;
+
+export const selectCode = (state: RootState) => state.user.code;

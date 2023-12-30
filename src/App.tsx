@@ -14,20 +14,20 @@ import { AccountPatient } from './components/pages/AccountPatient/AccountPatient
 import { LoginUser } from './components/molecules/LoginUser/LoginUser';
 import { AccountDoctor } from './components/pages/AccountDoctor/AccountDoctor';
 import { UserPanel } from './components/pages/UserPanel/UserPanel';
+import { GetUserData } from './redux/GetUserData';
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
+        <GetUserData />
         <Routes>
           <Route path="/" element={<MainComponent />} />
-          <Route path="patient/ad" element={<CreateUserForm role={'patient'} />} />
+          <Route path="patient/add" element={<CreateUserForm role={'patient'} />} />
           <Route path="patient/log" element={<LoginUser role={'patient'} />} />
-          {/* <Route path="patient/panel" element={<UserPanel />} /> */}
-          {/* <Route path="doctor/panel" element={<UserPanel />} /> */}
-
-
-          <Route path="doctor/ad" element={<CreateUserForm role={'doctor'} />} />
+          <Route path="patient/panel" element={<UserPanel role={'patient'} />} />
+          <Route path="doctor/panel" element={<UserPanel role={'docotr'} />} />
+          <Route path="doctor/add" element={<CreateUserForm role={'doctor'} />} />
           <Route path="doctor/log" element={<LoginUser role={'doctor'} />} />
           <Route
             path="find-doctor"
