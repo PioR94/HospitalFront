@@ -6,9 +6,11 @@ import { addDays } from 'date-fns';
 
 interface Props {
   idDr: string;
+  nameDr: string;
+  lastNameDr: string;
 }
 
-export const FreeTermWeek = ({ idDr }: Props) => {
+export const FreeTermWeek = ({ idDr, nameDr, lastNameDr }: Props) => {
   const [counter, setCounter] = useState(0);
   const [initialDate, setInitialDate] = useState(new Date());
 
@@ -30,6 +32,8 @@ export const FreeTermWeek = ({ idDr }: Props) => {
             month={`${getMonthName(month)}`}
             year={year.toString()}
             idDr={idDr}
+            nameDr={nameDr}
+            lastNameDr={lastNameDr}
           />
         </div>
       );

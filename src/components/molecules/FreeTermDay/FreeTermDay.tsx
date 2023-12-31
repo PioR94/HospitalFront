@@ -4,6 +4,7 @@ import './FreeTermDay.css';
 import { baseUrlSchedule, baseUrlTerm, sendAndReceiveData } from '../../../api';
 import { ScheduleHour } from '../../../types/terms/term';
 import { mergeArrays } from '../../../utils/functions/merge-arrays';
+import { StringNullableChain } from 'lodash';
 
 interface Props {
   dayOfWeek: string;
@@ -11,6 +12,8 @@ interface Props {
   month: string;
   year: string;
   idDr: string;
+  nameDr: string;
+  lastNameDr: string;
 }
 
 export const FreeTermDay = (props: Props) => {
@@ -33,10 +36,7 @@ export const FreeTermDay = (props: Props) => {
       const fetchFreeTerms = sendAndReceiveData(dayData, baseUrlSchedule, 'free-terms');
       const fetchReservationTerms = sendAndReceiveData(termData, baseUrlTerm, 'terms');
 
-      const [freeTermsData, reservationTermsData] = await Promise.all([
-        fetchFreeTerms,
-        fetchReservationTerms,
-      ]);
+      const [freeTermsData, reservationTermsData] = await Promise.all([fetchFreeTerms, fetchReservationTerms]);
 
       const modifiedFreeTerms = freeTermsData.map((item: ScheduleHour) => ({
         ...item,
@@ -51,9 +51,7 @@ export const FreeTermDay = (props: Props) => {
 
       const mergeArray = mergeArrays(modifiedFreeTerms, modifiedReservationTerms);
 
-      const sortedArray = mergeArray.sort((a: ScheduleHour, b: ScheduleHour) =>
-        a.hour > b.hour ? 1 : -1,
-      );
+      const sortedArray = mergeArray.sort((a: ScheduleHour, b: ScheduleHour) => (a.hour > b.hour ? 1 : -1));
 
       const r = sortedArray.map((term: ScheduleHour) => (
         <FreeTermHour
@@ -66,6 +64,8 @@ export const FreeTermDay = (props: Props) => {
           year={props.year}
           className={term.className}
           key={term.id}
+          nameDr={props.nameDr}
+          lastNameDr={props.lastNameDr}
         />
       ));
 

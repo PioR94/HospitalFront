@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const GetUserData: React.FC = () => {
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const token = sessionStorage.getItem('token') || '';
     const role = sessionStorage.getItem('role') || '';
@@ -17,22 +17,22 @@ export const GetUserData: React.FC = () => {
     if (token) {
       sendToken(token, url, 'get-user')
         .then((userData: UserState) => {
-          console.log(userData);
           (Object.keys(userData) as Array<keyof UserState>).forEach((key) => {
             dispatch(setField({ field: key, value: userData[key] }));
           });
         })
         .catch((error: Response) => {
           error.text().then((errorMessage: string) => {
-            console.log(errorMessage);
+            console.error(errorMessage);
           });
           if (error.status === 403 || error.status === 404) {
+            console.error(error.status);
             sessionStorage.removeItem('token');
             window.dispatchEvent(new Event('token-updated'));
           }
         });
     }
-  }, [dispatch]);
+  }, [dispatch, navigate]);
 
   return null;
 };

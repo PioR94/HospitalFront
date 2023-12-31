@@ -22,22 +22,30 @@ export const UserPanel = (props: Props) => {
       <div className="bg-panel">
         <div className="wrap-panel">
           <div className="sidebar">
-            <div className="sidebar-icon-div" style={{ fontSize: 20 }}>
-              <i className="pi pi-home icon" onClick={() => navigate('../patient')}></i>
-              <span className="span-icon">Główna</span>
-            </div>
-            <div className="sidebar-icon-div">
-              <i className="pi pi-search icon" onClick={() => navigate('../find-doctor')}></i>
-              <span className="span-icon">Szukaj</span>
-            </div>
+            {props.role === 'patient' && (
+              <div className="sidebar-icon-div" style={{ fontSize: 20 }}>
+                <i className="pi pi-home icon" onClick={() => navigate('../patient')}></i>
+                <span className="span-icon">Główna</span>
+              </div>
+            )}
+
+            {props.role === 'patient' && (
+              <div className="sidebar-icon-div">
+                <i className="pi pi-search icon" onClick={() => navigate('../find-doctor')}></i>
+                <span className="span-icon">Szukaj</span>
+              </div>
+            )}
             <div className=" sidebar-icon-div" onClick={() => setActiveComponent('visits')}>
               <i className="pi pi-calendar icon"></i>
               <span className="span-icon">Wizyty</span>
             </div>
-            <div className="sidebar-icon-div" onClick={() => setActiveComponent('week')}>
-              <i className="pi pi-clock icon"></i>
-              <span className="span-icon">Terminarz</span>
-            </div>
+            {props.role === 'doctor' && (
+              <div className="sidebar-icon-div" onClick={() => setActiveComponent('week')}>
+                <i className="pi pi-clock icon"></i>
+                <span className="span-icon">Terminarz</span>
+              </div>
+            )}
+
             <div className="sidebar-icon-div">
               <i className="pi pi-user icon"></i>
               <span className="span-icon">Profil</span>

@@ -5,7 +5,6 @@ import { changeClass } from '../../../utils/functions/function';
 
 export const OneVisit = ({
   id,
-  userId,
   name,
   lastName,
   numberDay,

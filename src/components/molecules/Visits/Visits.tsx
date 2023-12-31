@@ -1,60 +1,38 @@
-import React from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { OneVisit } from '../OneVisit/OneVisit';
 import './Visits.css';
+import { useAppSelector } from '../../../hooks/redux';
+import { selectId } from '../../../redux/selectors';
+import { baseUrlTerm, sendAndReceiveData } from '../../../api';
+import { Visit } from '../../../types/visits/visit';
 
 export const Visits = () => {
+  const [visits, setVisits] = useState<ReactElement[]>([]);
+  const role = sessionStorage.getItem('role');
+  const userId = useAppSelector(selectId);
+
+  useEffect(() => {
+    sendAndReceiveData(userId, baseUrlTerm, `${role}-terms`).then((r) => {
+      const arrOneVisits = r.map((item: Visit) => (
+        <OneVisit
+          id={item.id}
+          name={item.name}
+          lastName={item.lastName}
+          numberDay={item.numberDay}
+          month={item.month}
+          year={item.year}
+          hour={item.hour}
+          price={item.price}
+          status={item.status}
+        />
+      ));
+      setVisits(arrOneVisits);
+    });
+  }, []);
+
   return (
     <>
-      <div className="div-list">
-        <OneVisit
-          id="sssss"
-          userId="sssssq"
-          name="John"
-          lastName="Willson"
-          numberDay="10"
-          month="Styczeń"
-          year="2022"
-          hour="6:00"
-          price="250.00"
-          status="paid"
-        />
-        <OneVisit
-          id="sssss"
-          userId="sssssq"
-          name="John"
-          lastName="Willson"
-          numberDay="10"
-          month="Styczeń"
-          year="2022"
-          hour="7:00"
-          price="250.00"
-          status="unpaid"
-        />
-        <OneVisit
-          id="sssss"
-          userId="sssssq"
-          name="John"
-          lastName="Willson"
-          numberDay="10"
-          month="Styczeń"
-          year="2022"
-          hour="8:00"
-          price="250.00"
-          status="paid"
-        />
-        <OneVisit
-          id="sssss"
-          userId="sssssq"
-          name="John"
-          lastName="Willson"
-          numberDay="10"
-          month="Styczeń"
-          year="2022"
-          hour="10:00"
-          price="250.00"
-          status="unpaid"
-        />
-      </div>
+      <div className="div-list">{visits}</div>
     </>
   );
 };

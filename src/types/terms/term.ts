@@ -1,5 +1,6 @@
 import { DaysOfWeek } from './../../utils/enum';
 import { Hour } from './../../components/atoms/Hour/Hour';
+import { StringNullableChain } from 'lodash';
 export interface Term {
   id: string;
   hour: string;
@@ -9,7 +10,13 @@ export interface Term {
   year: string;
   idDr: string;
   idPt?: string;
-  className?: string
+  nameDr: string;
+  lastNameDr: string;
+  namePt?: string;
+  lastNamePt?: string;
+  className?: string;
+  price?: string;
+  status?: string;
 }
 
 export interface ScheduleHour {

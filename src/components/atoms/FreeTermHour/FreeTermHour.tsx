@@ -5,13 +5,17 @@ import { baseUrlTerm, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
 import { useSelector } from 'react-redux';
 import { Term } from '../../../types/terms/term';
+import { useAppSelector } from '../../../hooks/redux';
+import { selectId, selectLastName, selectName } from '../../../redux/selectors';
 
-export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, className }: Term) => {
+export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, nameDr, lastNameDr, className }: Term) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
   const [classNameState, setClassNameState] = useState(className);
-
-  const dataId = {
+  const idPt = useAppSelector(selectId);
+  const namePt = useAppSelector(selectName);
+  const lastNamePt = useAppSelector(selectLastName);
+  const dataTerm: Term = {
     id,
     hour,
     dayOfWeek,
@@ -19,12 +23,16 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
     month,
     year,
     idDr,
-    idPt: 'ss',
+    idPt,
+    nameDr,
+    lastNameDr,
+    namePt,
+    lastNamePt,
   };
 
   const bookTerm = async () => {
-    console.log(dataId);
-    sendData(dataId, baseUrlTerm, 'add');
+    console.log(dataTerm);
+    sendData(dataTerm, baseUrlTerm, 'add');
     setDisplay(false);
     setFree(true);
     setClassNameState('book-term-hour');
