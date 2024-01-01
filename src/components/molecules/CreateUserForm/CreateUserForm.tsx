@@ -88,8 +88,6 @@ export const CreateUserForm = (props: Role) => {
               <InputText
                 id="repeat-password"
                 type="password"
-                // feedback={false}
-                // toggleMask
                 {...register('repeatPassword', {
                   required: true,
                   validate: {

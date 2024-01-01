@@ -7,6 +7,7 @@ import { Week } from '../../organisms/Week/Week';
 import { Visits } from '../../molecules/Visits/Visits';
 import { useAppSelector } from '../../../hooks/redux';
 import { selectId } from '../../../redux/selectors';
+import ProfileSettings from '../../organisms/ProfileSettings/ProfileSettings';
 
 interface Props {
   role: string;
@@ -14,7 +15,7 @@ interface Props {
 
 export const UserPanel = (props: Props) => {
   const navigate = useNavigate();
-  const [activeComponent, setActiveComponent] = useState<string>('visits');
+  const [activeComponent, setActiveComponent] = useState<string>('');
   const id = useAppSelector(selectId);
 
   return (
@@ -46,7 +47,7 @@ export const UserPanel = (props: Props) => {
               </div>
             )}
 
-            <div className="sidebar-icon-div">
+            <div className="sidebar-icon-div" onClick={() => setActiveComponent('profileSettings')}>
               <i className="pi pi-user icon"></i>
               <span className="span-icon">Profil</span>
             </div>
@@ -64,6 +65,7 @@ export const UserPanel = (props: Props) => {
             <div className="surface">
               {activeComponent === 'week' && <Week idDr={id} />}
               {activeComponent === 'visits' && <Visits />}
+              {activeComponent === 'profileSettings' && <ProfileSettings />}
             </div>
           </div>
         </div>

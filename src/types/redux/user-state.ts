@@ -8,4 +8,5 @@ export interface UserState {
   code: string;
   city: string;
   specialization: string;
+  price: string;
 }
