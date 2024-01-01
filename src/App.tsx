@@ -25,14 +25,28 @@ export default function App() {
           <Route path="/" element={<MainComponent />} />
           <Route path="patient/add" element={<CreateUserForm role={'patient'} />} />
           <Route path="patient/log" element={<LoginUser role={'patient'} />} />
-          <Route path="patient/panel" element={<UserPanel role={'patient'} />} />
-          <Route path="doctor/panel" element={<UserPanel role={'docotr'} />} />
+          <Route
+            path="patient/panel"
+            element={
+              <RequireLogin requiredRole="patient">
+                <UserPanel role={'patient'} />
+              </RequireLogin>
+            }
+          />
+          <Route
+            path="doctor/panel"
+            element={
+              <RequireLogin requiredRole="doctor">
+                <UserPanel role={'doctor'} />
+              </RequireLogin>
+            }
+          />
           <Route path="doctor/add" element={<CreateUserForm role={'doctor'} />} />
           <Route path="doctor/log" element={<LoginUser role={'doctor'} />} />
           <Route
             path="find-doctor"
             element={
-              <RequireLogin>
+              <RequireLogin requiredRole="patient">
                 <ListDoctor />
               </RequireLogin>
             }
@@ -40,16 +54,8 @@ export default function App() {
           <Route
             path="patient"
             element={
-              <RequireLogin>
+              <RequireLogin requiredRole="patient">
                 <AccountPatient />
-              </RequireLogin>
-            }
-          />
-          <Route
-            path="doctor"
-            element={
-              <RequireLogin>
-                <AccountDoctor />
               </RequireLogin>
             }
           />

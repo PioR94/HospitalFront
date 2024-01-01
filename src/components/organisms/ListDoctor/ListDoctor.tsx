@@ -65,8 +65,8 @@ export const ListDoctor = () => {
         <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
             idDr={one.idDr}
-            name={one.nameDr}
-            lastName={one.lastNameDr}
+            nameDr={one.nameDr}
+            lastNameDr={one.lastNameDr}
             specialization={one.specialization}
             idPt={idPt}
             street={one.street}

@@ -1,6 +1,5 @@
 export interface Visit {
   id: string;
-  userId: string;
   name: string;
   lastName: string;
   numberDay: string;

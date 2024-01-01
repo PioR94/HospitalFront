@@ -10,8 +10,8 @@ import StarRatings from 'react-star-ratings';
 interface Props {
   idDr: string;
   idPt: string;
-  name: string;
-  lastName: string;
+  nameDr: string;
+  lastNameDr: string;
   specialization: string;
   street: string;
 }
@@ -31,7 +31,7 @@ export const OneDoctor = (props: Props) => {
             <Avatar icon="pi pi-user" size="xlarge" />
             <div className="name-specialization">
               <span className="span-name">
-                lek. {props.name} {props.lastName}
+                lek. {props.nameDr} {props.lastNameDr}
               </span>
               <span>{props.specialization}</span>
 
@@ -53,7 +53,7 @@ export const OneDoctor = (props: Props) => {
 
         <section className="one-doctor-section-calendar">
           <div className={changeClass(wrap, 'wrap-free-term-week-down', 'wrap-free-term-week')}>
-            <FreeTermWeek idDr={props.idDr} />
+            <FreeTermWeek idDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} />
           </div>
           <div className="arrow" onClick={scroll}>
             {wrap ? (
