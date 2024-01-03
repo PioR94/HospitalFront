@@ -6,6 +6,7 @@ import { changeClass } from '../../../utils/functions/function';
 import { Avatar } from 'primereact/avatar';
 import { Rating } from 'primereact/rating';
 import StarRatings from 'react-star-ratings';
+import 'primeicons/primeicons.css';
 
 interface Props {
   idDr: string;
@@ -14,6 +15,8 @@ interface Props {
   lastNameDr: string;
   specialization: string;
   street: string;
+  city: string;
+  price: string;
 }
 
 export const OneDoctor = (props: Props) => {
@@ -44,10 +47,17 @@ export const OneDoctor = (props: Props) => {
               />
             </div>
           </div>
-
-          <div className="address">
-            <MdLocationOn size={20} />
-            <p className="p-address">{props.street}</p>
+          <div className="address-price-div">
+            <div className="address">
+              <i className="pi pi-map-marker i-one"></i>
+              <p className="p-address">
+                {props.street}, {props.city}
+              </p>
+            </div>
+            <div className="price-div">
+              <i className="pi pi-money-bill i-one"></i>
+              <p>{props.price ? `${props.price}zł` : 'Brak ceny'}</p>
+            </div>
           </div>
         </section>
 

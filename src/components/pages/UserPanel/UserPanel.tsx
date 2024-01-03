@@ -15,7 +15,7 @@ interface Props {
 
 export const UserPanel = (props: Props) => {
   const navigate = useNavigate();
-  const [activeComponent, setActiveComponent] = useState<string>('');
+  const [activeComponent, setActiveComponent] = useState<string>('visits');
   const id = useAppSelector(selectId);
 
   return (

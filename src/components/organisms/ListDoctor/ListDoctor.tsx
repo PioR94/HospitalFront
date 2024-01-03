@@ -1,20 +1,9 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import {
-  baseUrlDoctor,
-  baseUrlPatient,
-  baseUrlSpecialization,
-  downloadData,
-  sendAndReceiveData,
-  sendToken,
-} from '../../../api';
+import { baseUrlDoctor, baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../../api';
 import { getToken } from '../../../utils/variables';
-import {
-  AutoComplete,
-  AutoCompleteChangeEvent,
-  AutoCompleteCompleteEvent,
-} from 'primereact/autocomplete';
+import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCity, updateSpecialization } from '../../../redux/search-slice';
@@ -26,6 +15,8 @@ interface DataDr {
   lastNameDr: string;
   specialization: string;
   street: string;
+  city: string;
+  price: string;
 }
 const libs = ['places'];
 
@@ -70,6 +61,8 @@ export const ListDoctor = () => {
             specialization={one.specialization}
             idPt={idPt}
             street={one.street}
+            city={one.city}
+            price={one.price}
           />
         </li>
       ));
@@ -125,13 +118,7 @@ export const ListDoctor = () => {
               width: 220,
             }}
           />
-          <Button
-            icon="pi pi-search"
-            rounded
-            outlined
-            aria-label="Search"
-            className={'button-search'}
-          />
+          <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
         </form>
       </header>
       <ul className="list-doctor-ul">{list}</ul>
