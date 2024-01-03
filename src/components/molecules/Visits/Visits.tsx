@@ -32,6 +32,7 @@ export const Visits = () => {
 
   return (
     <>
+      <h2 className="visits-h2">Wizyty</h2>
       <div className="div-list">{visits}</div>
     </>
   );

@@ -23,3 +23,6 @@ export const selectMail = (state: RootState) => state.user.mail;
 export const selectStreet = (state: RootState) => state.user.street;
 
 export const selectCode = (state: RootState) => state.user.code;
+
+export const selectPrice = (state: RootState) => state.user.price;
+

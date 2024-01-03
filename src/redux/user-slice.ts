@@ -11,6 +11,7 @@ const initialState: UserState = {
   code: '',
   city: '',
   specialization: '',
+  price: '',
 };
 
 const userSlice = createSlice({
