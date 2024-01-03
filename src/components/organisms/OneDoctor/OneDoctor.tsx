@@ -63,7 +63,7 @@ export const OneDoctor = (props: Props) => {
 
         <section className="one-doctor-section-calendar">
           <div className={changeClass(wrap, 'wrap-free-term-week-down', 'wrap-free-term-week')}>
-            <FreeTermWeek idDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} />
+            <FreeTermWeek idDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} price={props.price} />
           </div>
           <div className="arrow" onClick={scroll}>
             {wrap ? (

@@ -8,9 +8,10 @@ interface Props {
   idDr: string;
   nameDr: string;
   lastNameDr: string;
+  price: string;
 }
 
-export const FreeTermWeek = ({ idDr, nameDr, lastNameDr }: Props) => {
+export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: Props) => {
   const [counter, setCounter] = useState(0);
   const [initialDate, setInitialDate] = useState(new Date());
 
@@ -34,6 +35,7 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr }: Props) => {
             idDr={idDr}
             nameDr={nameDr}
             lastNameDr={lastNameDr}
+            price={price}
           />
         </div>
       );
@@ -60,18 +62,12 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr }: Props) => {
   return (
     <>
       <div className="free-term-week">
-        <div
-          className={changeClass(counter === 0, 'move-left-none', 'move-left')}
-          onClick={moveLeft}
-        >
+        <div className={changeClass(counter === 0, 'move-left-none', 'move-left')} onClick={moveLeft}>
           <i className="pi pi-angle-left" />
         </div>
         {renderDays}
 
-        <div
-          className={changeClass(counter === 50, 'move-right-none', 'move-right')}
-          onClick={moveRight}
-        >
+        <div className={changeClass(counter === 50, 'move-right-none', 'move-right')} onClick={moveRight}>
           <i className="pi pi-angle-right" />
         </div>
       </div>
