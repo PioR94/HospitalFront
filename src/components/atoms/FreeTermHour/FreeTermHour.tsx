@@ -8,7 +8,7 @@ import { Term } from '../../../types/terms/term';
 import { useAppSelector } from '../../../hooks/redux';
 import { selectId, selectLastName, selectName } from '../../../redux/selectors';
 
-export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, nameDr, lastNameDr, className }: Term) => {
+export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, nameDr, lastNameDr, className, price }: Term) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
   const [classNameState, setClassNameState] = useState(className);
@@ -28,6 +28,7 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
     lastNameDr,
     namePt,
     lastNamePt,
+    price,
   };
 
   const bookTerm = async () => {

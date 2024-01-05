@@ -67,6 +67,7 @@
 
 .address {
   display: flex;
+  align-items: center;
   margin: 30px 0 0 0;
 }
 
@@ -81,4 +82,19 @@
   font-size: 22px;
   font-weight: 500;
   font-family: Roboto;
+}
+
+.price-div {
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+}
+
+.address-price-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.i-one {
+  margin-right: 13px;
 }

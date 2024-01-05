@@ -14,6 +14,7 @@ interface Props {
   idDr: string;
   nameDr: string;
   lastNameDr: string;
+  price: string;
 }
 
 export const FreeTermDay = (props: Props) => {
@@ -66,6 +67,7 @@ export const FreeTermDay = (props: Props) => {
           key={term.id}
           nameDr={props.nameDr}
           lastNameDr={props.lastNameDr}
+          price={props.price}
         />
       ));
 
