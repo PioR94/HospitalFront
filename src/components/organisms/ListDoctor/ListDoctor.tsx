@@ -72,6 +72,7 @@ export const ListDoctor = () => {
 
   useEffect(() => {
     sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
+      console.log(r);
       setSuggestedCities(r);
     });
   }, [inputText, inputActive]);
