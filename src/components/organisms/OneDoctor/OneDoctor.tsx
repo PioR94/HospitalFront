@@ -7,6 +7,7 @@ import { Avatar } from 'primereact/avatar';
 import { Rating } from 'primereact/rating';
 import StarRatings from 'react-star-ratings';
 import 'primeicons/primeicons.css';
+import { Button } from 'primereact/button';
 
 interface Props {
   idDr: string;
@@ -21,6 +22,7 @@ interface Props {
 
 export const OneDoctor = (props: Props) => {
   const [wrap, setWrap] = useState(false);
+  const [calendarVisible, setCalendarVisible] = useState(false);
 
   const scroll = (): void => {
     wrap ? setWrap(false) : setWrap(true);
@@ -29,7 +31,7 @@ export const OneDoctor = (props: Props) => {
   return (
     <>
       <div className="one-doctor-wrap">
-        <section className="one-doctor-section-data">
+        <section className={`one-doctor-section-data ${calendarVisible && 'visible'}`}>
           <div className="avatar-name-star">
             <Avatar icon="pi pi-user" size="xlarge" />
             <div className="name-specialization">
@@ -56,12 +58,17 @@ export const OneDoctor = (props: Props) => {
             </div>
             <div className="price-div">
               <i className="pi pi-money-bill i-one"></i>
+              <p className="p-service">Konsultacja:</p>
               <p>{props.price ? `${props.price}zł` : 'Brak ceny'}</p>
             </div>
+            <button onClick={() => setCalendarVisible(true)} className={'button-visible'}>
+              Terminy
+            </button>
           </div>
         </section>
 
-        <section className="one-doctor-section-calendar">
+        <section className={`one-doctor-section-calendar ${!calendarVisible && 'visible'}`}>
+          <i className="pi pi-times x-visible" onClick={() => setCalendarVisible(false)}></i>
           <div className={changeClass(wrap, 'wrap-free-term-week-down', 'wrap-free-term-week')}>
             <FreeTermWeek idDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} price={props.price} />
           </div>
