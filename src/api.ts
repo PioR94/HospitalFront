@@ -6,6 +6,7 @@ export const baseUrlSpecialization = `${baseUrl}/specialization`;
 export const baseUrlSchedule = `${baseUrl}/schedule`;
 export const baseUrlPayment = `${baseUrl}/payment`;
 
+
 export const sendData = (data: any, baseUrlArgument: string, path: string) => {
   fetch(`${baseUrlArgument}/${path}`, {
     method: 'POST',

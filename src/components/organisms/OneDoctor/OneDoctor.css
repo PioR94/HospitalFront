@@ -1,9 +1,11 @@
 .one-doctor-wrap {
   display: flex;
   margin-top: 20px;
-  max-width: 904px;
-  flex-wrap: wrap;
+  width: 950px;
   justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  align-items: stretch;
 }
 .one-doctor-section-data {
   display: flex;
@@ -11,14 +13,15 @@
   flex-direction: column;
   background-color: white;
   min-height: 300px;
-  width: 450px;
+  width: 50%;
   margin: 1px;
 }
 
 .one-doctor-section-calendar {
   background-color: white;
-  width: 450px;
+  width: 50%;
   margin: 1px;
+  min-height: 300px;
 }
 .name-specialization {
   display: flex;
@@ -86,7 +89,7 @@
 
 .price-div {
   display: flex;
-  margin-top: 40px;
+  margin-top: 20px;
   align-items: center;
 }
 
@@ -97,4 +100,68 @@
 
 .i-one {
   margin-right: 13px;
+}
+.p-service {
+  margin-right: 10px;
+}
+.button-visible,
+.x-visible {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .one-doctor-wrap {
+    flex-direction: column;
+    width: 700px;
+  }
+  .one-doctor-section-data {
+    width: 100%;
+  }
+  .one-doctor-section-calendar {
+    width: 100%;
+  }
+}
+@media (max-width: 750px) {
+  .one-doctor-wrap {
+    width: 500px;
+    min-height: 300px;
+  }
+  .visible {
+    display: none;
+  }
+  .button-visible {
+    display: block;
+    height: 35px;
+    width: 80px;
+    margin-bottom: 10px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    background-color: #eef4fd;
+    color: #2a88fc;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 20px;
+  }
+
+  .button-visible:hover {
+    cursor: pointer;
+    border-color: cornflowerblue;
+    background-color: #e1ecfc;
+  }
+  .x-visible {
+    display: block;
+    width: 15px;
+    height: 15px;
+
+    font-size: 13px;
+    margin: 8px 0 0 8px;
+    color: darkgray;
+    cursor: pointer;
+  }
+  .wrap-free-term-week,
+  .wrap-free-term-week-down {
+    margin-top: -10px;
+  }
 }

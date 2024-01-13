@@ -16,6 +16,7 @@ import { AccountDoctor } from './components/pages/AccountDoctor/AccountDoctor';
 import { UserPanel } from './components/pages/UserPanel/UserPanel';
 import { GetUserData } from './redux/GetUserData';
 import { SuccessPayment } from './components/molecules/SuccessPayment/SuccessPayment';
+import { Map } from './components/organisms/Map/Map';
 
 export default function App() {
   return (
@@ -61,6 +62,7 @@ export default function App() {
             }
           />
           <Route path="success" element={<SuccessPayment />}></Route>
+          <Route path="map" element={<Map />}></Route>
         </Routes>
       </BrowserRouter>
     </>
