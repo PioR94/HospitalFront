@@ -33,18 +33,18 @@ export const OneDoctor = (props: Props) => {
       <div className="one-doctor-wrap">
         <section className={`one-doctor-section-data ${calendarVisible && 'visible'}`}>
           <div className="avatar-name-star">
-            <Avatar icon="pi pi-user" size="xlarge" />
+            <Avatar icon="pi pi-user" size="xlarge" style={{ transform: 'scale(1.3)' }} />
             <div className="name-specialization">
               <span className="span-name">
                 lek. {props.nameDr} {props.lastNameDr}
               </span>
-              <span>{props.specialization}</span>
+              <span className="span-specialization">{props.specialization}</span>
 
               <StarRatings
                 rating={4.5}
                 starRatedColor="darkcyan" // Kolor gwiazdek
                 numberOfStars={5} // Liczba gwiazdek
-                starDimension="18px" //
+                starDimension="25px" //
                 starSpacing="3px" // Odstęp między gwiazdkami
               />
             </div>
@@ -58,6 +58,7 @@ export const OneDoctor = (props: Props) => {
             </div>
             <div className="price-div">
               <i className="pi pi-money-bill i-one"></i>
+
               <p className="p-service">Konsultacja:</p>
               <p>{props.price ? `${props.price}zł` : 'Brak ceny'}</p>
             </div>

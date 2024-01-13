@@ -37,3 +37,9 @@
   height: 35px !important;
   width: 35px !important;
 }
+.container-list-map {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin-top: 20px;
+}

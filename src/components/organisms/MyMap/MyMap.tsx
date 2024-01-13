@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { FiVideo } from 'react-icons/fi';
-import './Map.css';
-
+import './MyMap.css';
+import 'primeicons/primeicons.css';
 const GOOLE_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string;
 
 const containerStyle = {
@@ -17,17 +17,22 @@ const center = {
 
 const libraries = ['places'];
 
-export const Map = () => {
+interface MyMapProps {
+  children?: ReactNode;
+}
+
+export const MyMap = ({ children }: MyMapProps) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: GOOLE_API_KEY,
   });
 
   return isLoaded ? (
-    <div className="section-map" style={{ width: '1000px', height: '500px' }}>
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
-        <Marker position={{ lat: center.lat, lng: center.lng }} />
-      </GoogleMap>
+    <div className="section-map" style={{ borderRadius: '20%' }}>
+      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} options={{ disableDefaultUI: true }}></GoogleMap>
+      <div className="overlay">
+        <i className="pi pi-arrows-alt arrow-alt"></i>
+      </div>
     </div>
   ) : (
     <></>

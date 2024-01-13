@@ -8,8 +8,9 @@ import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCity, updateSpecialization } from '../../../redux/search-slice';
 import { Button } from 'primereact/button';
+import { MyMap } from '../MyMap/MyMap';
 
-interface DataDr {
+export interface DataDr {
   idDr: string;
   nameDr: string;
   lastNameDr: string;
@@ -122,7 +123,11 @@ export const ListDoctor = () => {
           <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
         </form>
       </header>
-      <ul className="list-doctor-ul">{list}</ul>
+      <div className="container-list-map">
+        <ul className="list-doctor-ul">{list}</ul>
+
+        <MyMap> </MyMap>
+      </div>
     </div>
   );
 };
