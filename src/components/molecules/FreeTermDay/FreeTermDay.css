@@ -1,5 +1,5 @@
 .ftd-div-date {
-  width: 65px;
+  width: 70px;
   margin-bottom: 15px;
   line-height: 15px;
   text-align: center;
@@ -7,12 +7,12 @@
 }
 
 .div-dayOfWeek {
-  font-size: 15px;
+  font-size: 20px;
   margin-bottom: 3px;
 }
 
 .div-number-month {
-  font-size: 12px;
+  font-size: 15px;
   color: darkgray;
 }
 
