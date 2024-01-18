@@ -13,7 +13,6 @@ interface Props {
 export const Day = (props: Props) => {
   const getClass = (hour: string) => {
     const foundHour = props.hours.find((hourObj: ScheduleHour) => hourObj.hour === hour);
-    console.log(foundHour);
     return foundHour ? '_hour-div-active' : '_hour-div';
   };
 

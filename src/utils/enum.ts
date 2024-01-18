@@ -14,13 +14,13 @@ export enum Month {
 }
 
 export enum Day {
-  Niedziela,
-  Poniedziałek,
-  Wtorek,
-  Środa,
-  Czwartek,
-  Piątek,
-  Sobota,
+  Niedz,
+  Pon,
+  Wt,
+  Śr,
+  Czw,
+  Pt,
+  Sob,
 }
 
 export enum DaysOfWeek {
