@@ -6,7 +6,6 @@
 
 .list-doctor-ul {
   display: flex;
-  /*background-color: chartreuse;*/
   flex-direction: column;
   align-items: center;
 }
@@ -40,6 +39,57 @@
 .container-list-map {
   display: flex;
   justify-content: center;
-  align-items: start;
   margin-top: 20px;
+}
+.modal-list-map {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.wrapp-ul-map {
+  display: flex;
+  position: relative;
+  width: 90%;
+  height: 90%;
+  overflow-y: scroll;
+  justify-content: center;
+  background-color: white;
+}
+.modal-ul {
+  min-width: 400px;
+  flex: 1;
+}
+.map-container {
+  position: sticky;
+  top: 0;
+  width: 400px;
+  height: 600px;
+  background-color: rebeccapurple;
+}
+.modal-map-container {
+  flex: 2;
+  position: sticky;
+  top: 0;
+}
+.x-map {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+  font-size: 15px;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
 }

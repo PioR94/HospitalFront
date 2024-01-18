@@ -22,8 +22,10 @@ export interface DataDr {
 const libs = ['places'];
 
 export const ListDoctor = () => {
-  const [list, setList] = useState([]);
-  const [idPt, setIdPt] = useState('');
+  const [dataDoctors, setDataDoctors] = useState([]);
+  const [list, setList] = useState<JSX.Element[]>([]);
+  const [modalList, setModalList] = useState<JSX.Element[]>([]);
+  const [modalActive, setModalActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');
@@ -43,33 +45,43 @@ export const ListDoctor = () => {
     }
   }, []);
 
-  useEffect(() => {
-    sendToken(getToken, baseUrlPatient, 'get-id').then((r) => setIdPt(r.idPt));
-  }, [idPt]);
-
   const getDoctors = async (city: string | null, specialization: string | null) => {
     const dataSearch = {
       city,
       specialization,
     };
     sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
-      const dataDr = r.map((one: DataDr) => (
+      setDataDoctors(r);
+    });
+  };
+
+  useEffect(() => {
+    if (!modalActive) {
+      const firstList = dataDoctors.map((one: DataDr) => (
         <li className="list-doctor-li" key={one.idDr}>
           <OneDoctor
             idDr={one.idDr}
             nameDr={one.nameDr}
             lastNameDr={one.lastNameDr}
             specialization={one.specialization}
-            idPt={idPt}
             street={one.street}
             city={one.city}
             price={one.price}
           />
         </li>
       ));
-      setList(dataDr);
-    });
-  };
+      setList(firstList);
+      console.log(list);
+    }
+    if (modalActive) {
+      const secoundList = dataDoctors.map((one: DataDr) => (
+        <li className="list-doctor-li" key={one.idDr}>
+          <OneDoctor {...one} alwaysInvisible={true} />
+        </li>
+      ));
+      setModalList(secoundList);
+    }
+  }, [modalActive, dataDoctors]);
 
   useEffect(() => {
     sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
@@ -123,11 +135,29 @@ export const ListDoctor = () => {
           <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
         </form>
       </header>
-      <div className="container-list-map">
-        <ul className="list-doctor-ul">{list}</ul>
-
-        <MyMap> </MyMap>
-      </div>
+      {!modalActive && (
+        <div className="container-list-map">
+          <ul className="list-doctor-ul">{list}</ul>
+          <div className="map-container">
+            <MyMap>
+              <div className="overlay" onClick={() => setModalActive(true)}>
+                <i className="pi pi-arrows-alt arrow-alt"></i>
+              </div>
+            </MyMap>
+          </div>
+        </div>
+      )}
+      {modalActive && (
+        <div className="modal-list-map">
+          <div className="wrapp-ul-map">
+            <ul className="modal-ul">{modalList}</ul>
+            <div className="modal-map-container">
+              <i className="pi pi-times x-map" onClick={() => setModalActive(false)}></i>
+              <MyMap> </MyMap>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

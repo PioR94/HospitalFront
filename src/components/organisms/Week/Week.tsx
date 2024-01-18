@@ -54,13 +54,13 @@ export const Week = (props: Props) => {
   useEffect(() => {
     if (reduxHours) {
       setAvailableHours({
-        Sunday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Niedziela'),
-        Monday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Poniedziałek'),
-        Tuesday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Wtorek'),
-        Wednesday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Środa'),
-        Thursday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Czwartek'),
-        Friday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Piątek'),
-        Saturday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Sobota'),
+        Sunday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Niedz'),
+        Monday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Pon'),
+        Tuesday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Wt'),
+        Wednesday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Śr'),
+        Thursday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Czw'),
+        Friday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Pt'),
+        Saturday: reduxHours.filter((hour: ScheduleHour) => hour.day === 'Sob'),
       });
     }
   }, [reduxHours]);

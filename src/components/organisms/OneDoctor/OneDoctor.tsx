@@ -11,13 +11,13 @@ import { Button } from 'primereact/button';
 
 interface Props {
   idDr: string;
-  idPt: string;
   nameDr: string;
   lastNameDr: string;
   specialization: string;
   street: string;
   city: string;
   price: string;
+  alwaysInvisible?: boolean;
 }
 
 export const OneDoctor = (props: Props) => {
@@ -28,10 +28,17 @@ export const OneDoctor = (props: Props) => {
     wrap ? setWrap(false) : setWrap(true);
   };
 
+  const sectionDataClass = `${props.alwaysInvisible ? 'modal-one-doctor-section-data' : 'one-doctor-section-data'} ${
+    props.alwaysInvisible ? calendarVisible && 'hidden' : calendarVisible && 'invisible'
+  }`;
+  const sectionCalendarClass = `${props.alwaysInvisible ? 'modal-one-doctor-section-calendar' : 'one-doctor-section-calendar'} ${
+    props.alwaysInvisible ? !calendarVisible && 'hidden' : !calendarVisible && 'invisible'
+  }`;
+
   return (
     <>
-      <div className="one-doctor-wrap">
-        <section className={`one-doctor-section-data ${calendarVisible && 'visible'}`}>
+      <div className={props.alwaysInvisible ? 'modal-one-doctor-wrap' : 'one-doctor-wrap'}>
+        <section className={sectionDataClass}>
           <div className="avatar-name-star">
             <Avatar icon="pi pi-user" size="xlarge" style={{ transform: 'scale(1.3)' }} />
             <div className="name-specialization">
@@ -40,13 +47,7 @@ export const OneDoctor = (props: Props) => {
               </span>
               <span className="span-specialization">{props.specialization}</span>
 
-              <StarRatings
-                rating={4.5}
-                starRatedColor="darkcyan" // Kolor gwiazdek
-                numberOfStars={5} // Liczba gwiazdek
-                starDimension="25px" //
-                starSpacing="3px" // Odstęp między gwiazdkami
-              />
+              <StarRatings rating={4.5} starRatedColor="darkcyan" numberOfStars={5} starDimension="25px" starSpacing="3px" />
             </div>
           </div>
           <div className="address-price-div">
@@ -62,14 +63,14 @@ export const OneDoctor = (props: Props) => {
               <p className="p-service">Konsultacja:</p>
               <p>{props.price ? `${props.price}zł` : 'Brak ceny'}</p>
             </div>
-            <button onClick={() => setCalendarVisible(true)} className={'button-visible'}>
+            <button onClick={() => setCalendarVisible(true)} className={`button-visible ${props.alwaysInvisible && 'visible'}`}>
               Terminy
             </button>
           </div>
         </section>
 
-        <section className={`one-doctor-section-calendar ${!calendarVisible && 'visible'}`}>
-          <i className="pi pi-times x-visible" onClick={() => setCalendarVisible(false)}></i>
+        <section className={sectionCalendarClass}>
+          <i className={`pi pi-times x-visible ${props.alwaysInvisible && 'visible'} `} onClick={() => setCalendarVisible(false)}></i>
           <div className={changeClass(wrap, 'wrap-free-term-week-down', 'wrap-free-term-week')}>
             <FreeTermWeek idDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} price={props.price} />
           </div>

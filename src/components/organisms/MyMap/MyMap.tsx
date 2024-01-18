@@ -28,11 +28,9 @@ export const MyMap = ({ children }: MyMapProps) => {
   });
 
   return isLoaded ? (
-    <div className="section-map" style={{ borderRadius: '20%' }}>
+    <div className="section-map">
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} options={{ disableDefaultUI: true }}></GoogleMap>
-      <div className="overlay">
-        <i className="pi pi-arrows-alt arrow-alt"></i>
-      </div>
+      {children}
     </div>
   ) : (
     <></>
