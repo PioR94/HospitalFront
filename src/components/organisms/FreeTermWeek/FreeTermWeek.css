@@ -1,90 +1,45 @@
 .free-term-week {
-    display: flex;
-    min-height: 250px;
-    WIDTH: 0;
-
-
+  display: flex;
+  min-height: 250px;
+  justify-content: space-around;
 }
 
-.container-free-term-week {
-    position: relative;
-    left: 10px;
-    width: 350px;
-
-}
-
-.move-right {
-    position: absolute;
-    left: 807px;
-    top: 10px;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 25px;
-    cursor: pointer;
-    font-size: 22px;
-    background-color: #eef4fd;
-
-}
-
-.move-right:hover {
-    background-color: darkcyan;
-}
-
-.move-right-none {
-    position: absolute;
-    left: 807px;
-    top: 10px;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 25px;
-    cursor: no-drop;
-    font-size: 22px;
-
-}
-
+.move-right,
 .move-left {
-
-    position: absolute;
-    left: 420px;
-    top: 10px;
-    height: 30px;
-    width: 30px;
-    font-size: 22px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 25px;
-    cursor: pointer;
-    background-color: #eef4fd;
-
-    overflow: visible;
+  display: flex;
+  height: 35px;
+  width: 35px;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  background-color: #eef4fd;
+  color: #2a88fc;
 }
 
+.move-right:hover,
 .move-left:hover {
-    background-color: darkcyan;
+  background-color: #e1ecfc;
 }
 
-
+.move-right-none,
 .move-left-none {
-    position: absolute;
-    left: 420px;
-    top: 10px;
-    height: 30px;
-    width: 30px;
-    font-size: 22px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 25px;
-    cursor: no-drop;
-    overflow: visible;
+  display: flex;
+  height: 35px;
+  width: 35px;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border-radius: 50%;
+  cursor: no-drop;
+  overflow: visible;
+  color: lightgray;
 }
-
-.test {
-    display: inline-block;
-    flex-shrink: 0;
-
-
+.loading-animation {
+  opacity: 0.1;
+  pointer-events: none;
+  transition: opacity 3s ease;
 }

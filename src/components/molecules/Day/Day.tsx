@@ -1,62 +1,55 @@
-import React from "react";
-import { Hour } from "../../atoms/Hour/Hour";
-import "./Day.css";
+import React, { useEffect, useMemo } from 'react';
+import { Hour } from '../../atoms/Hour/Hour';
+import './Day.css';
+import { addMinutes, format } from 'date-fns';
+import { ScheduleHour } from '../../../types/terms/term';
 
 interface Props {
-  dayOfWeek: string;
-  numberDay: string;
-  month: string;
-  year: string;
+  day: string;
   idDr: string;
-  loginDr: string;
-  nameDr: string;
-  lastNameDr: string;
+  hours: ScheduleHour[];
 }
 
 export const Day = (props: Props) => {
-  const renderHours = () => {
-    const hours = [];
-    let hour: number = 6;
-    let minutes: number = 0;
-    let zero: string = "";
-    for (let i = 0; i < 60; i++) {
-      if (minutes === 0) zero = "0";
-
-      hours[i] = (
-        <Hour
-          id={`${hour}${minutes}${props.numberDay}${props.month}${props.year}${props.loginDr}`}
-          hour={`${hour}:${minutes}${zero}`}
-          dayOfWeek={props.dayOfWeek}
-          numberDay={props.numberDay}
-          month={props.month}
-          year={props.year}
-          idDr={props.idDr}
-          loginDr={props.loginDr}
-          nameDr={props.nameDr}
-          lastNameDr={props.lastNameDr}
-        />
-      );
-
-      zero = "";
-      minutes += 15;
-
-      if (minutes === 60) {
-        hour++;
-        minutes = 0;
-      }
-    }
-    return hours;
+  const getClass = (hour: string) => {
+    const foundHour = props.hours.find((hourObj: ScheduleHour) => hourObj.hour === hour);
+    return foundHour ? '_hour-div-active' : '_hour-div';
   };
+
+  const renderHours = useMemo(() => {
+    const startHour = 6;
+    const endHour = 21;
+    const intervalMinutes = 15;
+    const hours = [];
+
+    let currentTime = new Date();
+    currentTime.setHours(startHour, 0, 0, 0);
+
+    while (currentTime.getHours() < endHour) {
+      const formattedTime = format(currentTime, 'HH:mm');
+
+      hours.push(
+        <Hour
+          hour={formattedTime}
+          day={props.day}
+          idDr={props.idDr}
+          className={getClass(formattedTime)}
+          key={formattedTime}
+        />,
+      );
+      currentTime = addMinutes(currentTime, intervalMinutes);
+    }
+
+    return hours;
+  }, [props.idDr, props.hours]);
 
   return (
     <>
       <div className="_divDay">
         <div className="_div-date">
-          <div>{props.dayOfWeek}</div>
-          <div>{props.numberDay}</div>
-          <div>{props.month}</div>
+          <div>{props.day}</div>
         </div>
-        {renderHours()}
+        {renderHours}
       </div>
     </>
   );

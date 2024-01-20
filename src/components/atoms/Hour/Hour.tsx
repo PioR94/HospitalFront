@@ -1,39 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import './Hour.css';
 import { baseUrlTerm, sendAndReceiveData, sendData } from '../../../api';
-import { Term } from 'types';
 import { changeClass } from '../../../utils/functions/function';
 
-export const Hour = (props: Term) => {
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { toggleHour } from '../../../redux/schedule-slice';
+import { isEqual } from 'lodash';
+import { ScheduleHour } from '../../../types/terms/term';
+
+export const Hour = (props: ScheduleHour) => {
   const [active, setActive] = useState(false);
+  const dispatch = useAppDispatch();
+  const reduxHours = useAppSelector((state: any) => state.schedule.hours);
 
-  const term: Term = {
-    id: props.id,
-    hour: props.hour,
-    dayOfWeek: props.dayOfWeek,
-    numberDay: props.numberDay,
-    month: props.month,
-    year: props.year,
+  const term: ScheduleHour = {
+    day: props.day,
     idDr: props.idDr,
-    loginDr: props.loginDr,
-    nameDr: props.nameDr,
-    lastNameDr: props.lastNameDr,
+    hour: props.hour,
   };
-
-  const termId: string = props.id;
-
-  useEffect(() => {
-    sendAndReceiveData(termId, baseUrlTerm, 'term-id').then((r) => setActive(r));
-  }, []);
 
   const addTerm = () => {
-    sendData(term, baseUrlTerm, 'add');
-    active ? setActive(false) : setActive(true);
+    dispatch(toggleHour(term));
   };
+
+  useEffect(() => {
+    console.log(props.className);
+  }, []);
 
   return (
     <>
-      <div onClick={addTerm} className={changeClass(active, '_hour-div-active', '_hour-div')}>
+      <div onClick={addTerm} className={props.className}>
         {props.hour}
       </div>
     </>

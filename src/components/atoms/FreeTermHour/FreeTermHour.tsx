@@ -1,48 +1,81 @@
-import React, { useState } from 'react';
-import { FreeTerm } from 'types';
+import React, { useEffect, useState } from 'react';
 import './FreeTermHour.css';
-import { Confirm } from '../../molecules/Confirm/Confirm';
-import { baseUrlTerm, sendData } from '../../../api';
+import { Modal } from '../../molecules/Modal/Modal';
+import { baseUrlPayment, baseUrlTerm, sendAndReceiveData, sendData } from '../../../api';
 import { changeClass } from '../../../utils/functions/function';
+import { useSelector } from 'react-redux';
+import { Term } from '../../../types/terms/term';
+import { useAppSelector } from '../../../hooks/redux';
+import { selectId, selectLastName, selectName } from '../../../redux/selectors';
+import { loadStripe } from '@stripe/stripe-js';
 
-export const FreeTermHour = (props: FreeTerm) => {
+const STRIPE_PUBLIC_KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY as string;
+const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
+
+export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, nameDr, lastNameDr, className, price }: Term) => {
   const [display, setDisplay] = useState(false);
   const [free, setFree] = useState(false);
-  const [reservation, setReservation] = useState(props.reservation);
-
-  const id: string = props.id;
-
-  const bookTerm = async () => {
-    sendData(id, baseUrlTerm, 'book-term');
-    setDisplay(false);
-    setFree(true);
-    setReservation(1);
+  const [classNameState, setClassNameState] = useState(className);
+  const idPt = useAppSelector(selectId);
+  const namePt = useAppSelector(selectName);
+  const lastNamePt = useAppSelector(selectLastName);
+  const dataTerm: Term = {
+    id,
+    hour,
+    dayOfWeek,
+    numberDay,
+    month,
+    year,
+    idDr,
+    idPt,
+    nameDr,
+    lastNameDr,
+    namePt,
+    lastNamePt,
+    price,
   };
 
-  const displayWindow = () => (display ? setDisplay(false) : setDisplay(true));
-  const displayConfirm = () =>
-    display && reservation === 0 ? (
-      <Confirm
-        message="Czy chcesz zarezerwować ten termin?"
-        clickNo={offDisplay}
-        clickYes={bookTerm}
-        hour={props.hour}
-        numberDay={props.numberDay}
-        month={props.month}
-        year={props.year}
-      />
-    ) : (
-      false
-    );
+  useEffect(() => {
+    console.log(STRIPE_PUBLIC_KEY);
+    console.log(stripePromise);
+  }, []);
 
-  const offDisplay = () => setDisplay(false);
+  const bookTerm = async () => {
+    console.log(dataTerm);
+    sendData(dataTerm, baseUrlTerm, 'add');
+    setDisplay(false);
+    setFree(true);
+    setClassNameState('book-term-hour');
+  };
+
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+    if (stripe === null) {
+      console.error('Stripe has not been initialized');
+      return;
+    }
+    sessionStorage.setItem('data-term', JSON.stringify(dataTerm));
+    const session = await sendAndReceiveData(price, baseUrlPayment, 'create-checkout-session');
+
+    await stripe.redirectToCheckout({ sessionId: session.id });
+  };
 
   return (
     <>
-      <div onClick={displayWindow} className={changeClass(reservation === 1, 'book-term-hour', 'free-term-hour')}>
-        {props.hour}
+      <div onClick={() => setDisplay((prev) => !prev)} className={classNameState}>
+        {hour}
       </div>
-      {displayConfirm()}
+      {display && classNameState === 'free-term-hour' ? (
+        <Modal
+          message="Czy chcesz zarezerwować ten termin?"
+          clickNo={() => setDisplay(false)}
+          clickYes={handleCheckout}
+          hour={hour}
+          numberDay={numberDay}
+          month={month}
+          year={year}
+        />
+      ) : null}
     </>
   );
 };

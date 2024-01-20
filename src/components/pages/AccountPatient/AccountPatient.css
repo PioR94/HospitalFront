@@ -1,20 +1,91 @@
-
-.bg {
-    display: block;
-    position: relative;
-    height: 100%;
-    width: 100%;
+.container-patient-account {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: rgb(14, 175, 167);
 }
 
-.headerAccountPatient {
-    position: relative;
-    width: 100%;
-    background-color: #111;
-    height: 10vh;
-    line-height: 10vh;
+.img-doctors {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 700px;
+  height: 420px;
 }
 
+.form-search {
+  display: flex;
+  box-sizing: content-box;
+  width: 720px;
+  height: 60px;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
 
-.h2AccountPatient {
-    font-size: 30px;
+.div-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 0 50px 50px;
+  height: 200px;
+  font-family: Work Sans;
+  font-size: 25px;
+  color: rgb(250, 248, 248);
+  z-index: 1;
+}
+
+.header-patient-account {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.div-menu {
+  margin: 10px 60px 0 0;
+}
+
+.logo-white {
+  width: 170px;
+  margin: 10px 0 0 60px;
+  z-index: 1;
+}
+
+@media (max-width: 1150px) {
+  .container-patient-account {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .div-search {
+    height: auto;
+    margin: 0 0 70px 0;
+  }
+  .form-search {
+    flex-direction: column;
+    height: 200px;
+    width: 500px;
+  }
+  .img-doctors {
+    bottom: calc(50% - 200px);
+    right: calc(50% - 350px);
+    opacity: 0.2;
+  }
+}
+@media (max-width: 700px) {
+  .img-doctors {
+    width: 550px;
+    height: 400px;
+    bottom: calc(50% - 200px);
+    right: calc(50% - 275px);
+  }
+  .div-search {
+    font-size: 20px;
+  }
+  .form-search {
+    height: 180px;
+    width: 400px;
+  }
 }

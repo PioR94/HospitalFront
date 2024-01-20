@@ -1,0 +1,9 @@
+.div-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.visits-h2 {
+  color: #6c757d;
+  margin: 40px;
+}
