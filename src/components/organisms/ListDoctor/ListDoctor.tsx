@@ -18,8 +18,11 @@ export interface DataDr {
   street: string;
   city: string;
   price: string;
+  latitude: number;
+  longitude: number;
 }
 const libs = ['places'];
+
 
 export const ListDoctor = () => {
   const [dataDoctors, setDataDoctors] = useState([]);
@@ -36,6 +39,8 @@ export const ListDoctor = () => {
   const specializationReduxValue = useSelector((state: any) => state.search.specialization);
   const citySessionValue = sessionStorage.getItem('city');
   const specializationSessionValue = sessionStorage.getItem('specialization');
+  const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
+  const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   useEffect(() => {
     if (!cityReduxValue && !specializationReduxValue) {
@@ -57,16 +62,16 @@ export const ListDoctor = () => {
 
   useEffect(() => {
     if (!modalActive) {
-      const firstList = dataDoctors.map((one: DataDr) => (
-        <li className="list-doctor-li" key={one.idDr}>
+      const firstList = dataDoctors.map((doctor: DataDr) => (
+        <li className="list-doctor-li" key={doctor.idDr}>
           <OneDoctor
-            idDr={one.idDr}
-            nameDr={one.nameDr}
-            lastNameDr={one.lastNameDr}
-            specialization={one.specialization}
-            street={one.street}
-            city={one.city}
-            price={one.price}
+            idDr={doctor.idDr}
+            nameDr={doctor.nameDr}
+            lastNameDr={doctor.lastNameDr}
+            specialization={doctor.specialization}
+            street={doctor.street}
+            city={doctor.city}
+            price={doctor.price}
           />
         </li>
       ));
@@ -74,9 +79,15 @@ export const ListDoctor = () => {
       console.log(list);
     }
     if (modalActive) {
-      const secoundList = dataDoctors.map((one: DataDr) => (
-        <li className="list-doctor-li" key={one.idDr}>
-          <OneDoctor {...one} alwaysInvisible={true} />
+      const secoundList = dataDoctors.map((doctor: DataDr, index: number) => (
+        <li
+          className="list-doctor-li"
+          key={doctor.idDr}
+          ref={(el) => (doctorRefs.current[index] = el)} // Przypisanie referencji
+          onMouseEnter={() => setActiveDoctorId(doctor.idDr)}
+          onMouseLeave={() => setActiveDoctorId(null)}
+        >
+          <OneDoctor {...doctor} alwaysInvisible={true} />
         </li>
       ));
       setModalList(secoundList);
@@ -96,6 +107,9 @@ export const ListDoctor = () => {
     });
   }, []);
 
+  useEffect(() => {
+    doctorRefs.current = doctorRefs.current.slice(0, dataDoctors.length);
+  }, [dataDoctors]);
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
@@ -140,7 +154,13 @@ export const ListDoctor = () => {
         <div className={!modalActive ? 'wrapp-ul-map' : 'modal-wrapp-ul-map'}>
           <ul className={!modalActive ? 'doctor-ul' : 'modal-doctor-ul'}>{!modalActive ? list : modalList}</ul>
           <div className={!modalActive ? 'map-container' : 'modal-map-container'}>
-            <MyMap>
+            <MyMap
+              doctors={dataDoctors}
+              activeDoctorId={activeDoctorId}
+              onMarkerEnter={setActiveDoctorId}
+              onMarkerLeave={() => setActiveDoctorId(null)}
+              doctorRefs={doctorRefs}
+            >
               {!modalActive ? (
                 <div className="overlay" onClick={() => setModalActive(true)}>
                   <i className="pi pi-arrows-alt arrow-alt"></i>
