@@ -25,7 +25,7 @@ export const ListDoctor = () => {
   const [dataDoctors, setDataDoctors] = useState([]);
   const [list, setList] = useState<JSX.Element[]>([]);
   const [modalList, setModalList] = useState<JSX.Element[]>([]);
-  const [modalActive, setModalActive] = useState<boolean>(false);
+  const [modalActive, setModalActive] = useState<boolean>(true);
   const inputRef = useRef<any>(null);
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');
@@ -135,29 +135,23 @@ export const ListDoctor = () => {
           <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
         </form>
       </header>
-      {!modalActive && (
-        <div className="container-list-map">
-          <ul className="list-doctor-ul">{list}</ul>
-          <div className="map-container">
+
+      <div className={!modalActive ? 'container-list-map' : 'modal-container-list-map'}>
+        <div className={!modalActive ? 'wrapp-ul-map' : 'modal-wrapp-ul-map'}>
+          <ul className={!modalActive ? 'doctor-ul' : 'modal-doctor-ul'}>{!modalActive ? list : modalList}</ul>
+          <div className={!modalActive ? 'map-container' : 'modal-map-container'}>
             <MyMap>
-              <div className="overlay" onClick={() => setModalActive(true)}>
-                <i className="pi pi-arrows-alt arrow-alt"></i>
-              </div>
+              {!modalActive ? (
+                <div className="overlay" onClick={() => setModalActive(true)}>
+                  <i className="pi pi-arrows-alt arrow-alt"></i>
+                </div>
+              ) : (
+                <i className="pi pi-times x-map" onClick={() => setModalActive(false)}></i>
+              )}
             </MyMap>
           </div>
         </div>
-      )}
-      {modalActive && (
-        <div className="modal-list-map">
-          <div className="wrapp-ul-map">
-            <ul className="modal-ul">{modalList}</ul>
-            <div className="modal-map-container">
-              <i className="pi pi-times x-map" onClick={() => setModalActive(false)}></i>
-              <MyMap> </MyMap>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
