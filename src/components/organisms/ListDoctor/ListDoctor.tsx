@@ -23,12 +23,11 @@ export interface DataDr {
 }
 const libs = ['places'];
 
-
 export const ListDoctor = () => {
   const [dataDoctors, setDataDoctors] = useState([]);
   const [list, setList] = useState<JSX.Element[]>([]);
   const [modalList, setModalList] = useState<JSX.Element[]>([]);
-  const [modalActive, setModalActive] = useState<boolean>(true);
+  const [modalActive, setModalActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');

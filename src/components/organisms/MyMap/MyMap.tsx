@@ -4,6 +4,7 @@ import { FiVideo } from 'react-icons/fi';
 import './MyMap.css';
 import 'primeicons/primeicons.css';
 import { DataDr } from '../ListDoctor/ListDoctor';
+import { activeIcon, defIcon } from '../../../utils/icons-map';
 const GOOLE_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string;
 
 const containerStyle = {
@@ -26,8 +27,7 @@ interface MyMapProps {
   onMarkerLeave: () => void;
   doctorRefs: React.MutableRefObject<(HTMLLIElement | null)[]>;
 }
-const defaultIcon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-const activeIcon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+
 export const MyMap = ({ children, doctors, activeDoctorId, onMarkerEnter, onMarkerLeave, doctorRefs }: MyMapProps) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -42,7 +42,7 @@ export const MyMap = ({ children, doctors, activeDoctorId, onMarkerEnter, onMark
             key={doctor.idDr}
             position={{ lat: doctor.latitude, lng: doctor.longitude }}
             onClick={() => onMarkerEnter(doctor.idDr)}
-            icon={activeDoctorId === doctor.idDr ? activeIcon : defaultIcon}
+            icon={activeDoctorId === doctor.idDr ? activeIcon : defIcon}
             onMouseOver={() => {
               onMarkerEnter(doctor.idDr);
               const doctorIndex = doctors.findIndex((d) => d.idDr === doctor.idDr);
@@ -50,7 +50,7 @@ export const MyMap = ({ children, doctors, activeDoctorId, onMarkerEnter, onMark
               if (doctorRef) {
                 doctorRef.scrollIntoView({
                   behavior: 'smooth',
-                  block: 'nearest',
+                  block: 'center',
                 });
               }
             }}
