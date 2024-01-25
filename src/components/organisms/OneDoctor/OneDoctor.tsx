@@ -37,7 +37,7 @@ export const OneDoctor = (props: Props) => {
 
   return (
     <>
-      <div className={props.alwaysInvisible ? 'modal-one-doctor-wrap' : 'one-doctor-wrap'}>
+      <div className={props.alwaysInvisible ? 'modal-one-doctor-wrapp' : 'one-doctor-wrapp'}>
         <section className={sectionDataClass}>
           <div className="avatar-name-star">
             <Avatar icon="pi pi-user" size="xlarge" style={{ transform: 'scale(1.3)' }} />

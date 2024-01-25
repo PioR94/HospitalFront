@@ -35,10 +35,6 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
     price,
   };
 
-  useEffect(() => {
-    console.log(STRIPE_PUBLIC_KEY);
-    console.log(stripePromise);
-  }, []);
 
   const bookTerm = async () => {
     console.log(dataTerm);
