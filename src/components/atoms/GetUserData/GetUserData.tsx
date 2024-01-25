@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { setField } from './user-slice';
-import { sendAndReceiveData, sendToken } from '../api';
-import { UserState } from '../types/redux/user-state';
-import { useAppDispatch } from '../hooks/redux';
-import { chooseValue } from '../utils/functions/choose-value';
+import { setField } from '../../../redux/user-slice';
+import { sendAndReceiveData, sendToken } from '../../../api';
+import { UserState } from '../../../types/redux/user-state';
+import { useAppDispatch } from '../../../hooks/redux';
+import { chooseValue } from '../../../utils/functions/choose-value';
 import { useNavigate } from 'react-router-dom';
 
 export const GetUserData: React.FC = () => {

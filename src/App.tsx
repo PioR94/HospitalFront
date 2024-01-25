@@ -14,7 +14,7 @@ import { AccountPatient } from './components/pages/AccountPatient/AccountPatient
 import { LoginUser } from './components/molecules/LoginUser/LoginUser';
 import { AccountDoctor } from './components/pages/AccountDoctor/AccountDoctor';
 import { UserPanel } from './components/pages/UserPanel/UserPanel';
-import { GetUserData } from './redux/GetUserData';
+import { GetUserData } from './components/atoms/GetUserData/GetUserData';
 import { SuccessPayment } from './components/molecules/SuccessPayment/SuccessPayment';
 import { MyMap } from './components/organisms/MyMap/MyMap';
 
