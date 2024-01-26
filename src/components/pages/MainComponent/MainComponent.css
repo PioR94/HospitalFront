@@ -17,8 +17,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 20px 5% 0 5%;
-  margin-top: 20px;
+  padding-right: 5%;
 }
 
 .slogan {
@@ -41,6 +40,7 @@
 }
 .dropdowns {
   white-space: nowrap;
+  margin-top: 20px;
 }
 .slogan-h2-up {
   white-space: nowrap;
@@ -61,7 +61,8 @@
 }
 
 .new-logo {
-  width: 200px;
+  width: 230px;
+  margin: 20px 0 0 60px;
 }
 .png {
   background-image: url('/public/doctors12.jpg');
@@ -71,14 +72,16 @@
 }
 
 .check-register {
-  margin-right: 20px;
+  margin-right: 45px;
   border: none !important;
+  transform: scale(1.2);
 }
 
 .check-logout {
   font-weight: bold !important;
   border-color: #345ddd !important;
   border-radius: 20px !important;
+  transform: scale(1.2);
 }
 
 .check-logout > .p-dropdown-trigger {
@@ -94,7 +97,18 @@
   font-size: 18px;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 850px) {
+  .png {
+    transform: scale(0.8);
+  }
+  .slogan-h2 {
+    font-size: 25px;
+  }
+  .slogan-h3 {
+    font-size: 10px;
+  }
+}
+@media (max-width: 700px) {
   .new-logo {
     display: none;
   }
@@ -108,13 +122,15 @@
   .slogan {
     position: absolute;
     z-index: 1;
+    transform: scale(1.1);
   }
   .png {
     position: absolute;
     opacity: 0.1;
+    transform: scale(1.2);
   }
   .slogan-h2 {
-    font-size: 30px !important;
+    font-size: 30px;
     color: rgb(102, 101, 101);
     text-shadow: 1px 3px 1px #fff;
   }
@@ -123,21 +139,30 @@
   }
 }
 
-@media (max-width: 850px) {
-  .png {
-    transform: scale(0.8);
+@media (max-width: 420px) {
+  .slogan {
+    margin-left: 7%;
   }
   .slogan-h2 {
     font-size: 25px;
   }
-  .slogan-h3 {
-    font-size: 10px;
+  .check-register {
+    margin-right: 10px;
+
+    transform: scale(1);
+  }
+
+  .check-logout {
+    transform: scale(1);
+  }
+  .png {
+    transform: scale(0.9);
   }
 }
 
 @media (min-width: 850px) {
   .png {
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
   .slogan-h2 {
     font-size: 30px;
@@ -148,7 +173,7 @@
 }
 @media (min-width: 1150px) {
   .png {
-    transform: scale(0.8);
+    transform: scale(1);
   }
   .slogan-h2 {
     font-size: 35px;
@@ -185,6 +210,19 @@
 @media (min-width: 1550px) {
   .png {
     transform: scale(1.2);
+    margin-top: 20px;
+  }
+  .slogan-h2 {
+    font-size: 55px;
+  }
+  .slogan-h3 {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1950px) {
+  .png {
+    transform: scale(1.5);
     margin-top: 20px;
   }
   .slogan-h2 {
