@@ -43,44 +43,45 @@ export const AccountPatient = () => {
         <img src="logo-white.svg" alt="logo" className="logo-white" />
 
         <div className="div-menu">
-          <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 20 }} onClick={() => navigate('../patient/panel')} />
+          <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 25 }} onClick={() => navigate('../patient/panel')} />
         </div>
       </header>
-      <div className="div-search">
-        <h2 className="h2-patient-account">Znajdź lekarza i umów wizytę</h2>
-        <h3 className="h3-patient-account">Szukaj wśród lekarzy</h3>
-        <form onSubmit={onSubmit} className="form-search">
-          <AutoComplete
-            value={cityReduxValue}
-            suggestions={suggestedCities}
-            completeMethod={(e: AutoCompleteCompleteEvent) => {
-              setInputText(e.query);
-            }}
-            onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
-            minLength={3}
-            placeholder="Wyszukaj miasto"
-            style={{ alignSelf: 'stretch', flexGrow: 1, marginRight: 10, marginBottom: 10 }}
-          />
-          <Dropdown
-            value={specializationReduxValue}
-            options={specializations}
-            onChange={(e) => dispatch(updateSpecialization(e.target.value))}
-            placeholder="Wybierz specjalizację"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              flexGrow: 1,
-              alignSelf: 'stretch',
-              boxSizing: 'content-box',
-              marginRight: 10,
-              marginBottom: 10,
-            }}
-          />
-          <Button label="Szukaj" severity="info" raised />
-        </form>
+      <div className="wrapp-search-img">
+        <div className="div-search">
+          <h2 className="h2-patient-account">Znajdź lekarza i umów wizytę</h2>
+          <h3 className="h3-patient-account">Szukaj wśród lekarzy</h3>
+          <form onSubmit={onSubmit} className="form-search">
+            <AutoComplete
+              value={cityReduxValue}
+              suggestions={suggestedCities}
+              completeMethod={(e: AutoCompleteCompleteEvent) => {
+                setInputText(e.query);
+              }}
+              onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
+              minLength={3}
+              placeholder="Wyszukaj miasto"
+              style={{ alignSelf: 'stretch', flexGrow: 1, marginRight: 10, marginBottom: 10 }}
+            />
+            <Dropdown
+              value={specializationReduxValue}
+              options={specializations}
+              onChange={(e) => dispatch(updateSpecialization(e.target.value))}
+              placeholder="Wybierz specjalizację"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexGrow: 1,
+                alignSelf: 'stretch',
+                boxSizing: 'content-box',
+                marginRight: 10,
+                marginBottom: 10,
+              }}
+            />
+            <Button label="Szukaj" severity="info" raised />
+          </form>
+        </div>
+        <img className="img-doctors" src="doctors3.svg" alt="patient" />
       </div>
-
-      <img className="img-doctors" src="doctors3.svg" alt="patient" />
     </div>
   );
 };
