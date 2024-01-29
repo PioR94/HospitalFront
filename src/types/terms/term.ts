@@ -1,6 +1,3 @@
-import { DaysOfWeek } from './../../utils/enum';
-import { Hour } from './../../components/atoms/Hour/Hour';
-import { StringNullableChain } from 'lodash';
 export interface Term {
   id: string;
   hour: string;

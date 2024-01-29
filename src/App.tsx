@@ -1,22 +1,19 @@
 import React from 'react';
 import './App.css';
-import { CreateUserForm } from './components/molecules/CreateUserForm/CreateUserForm';
+import { CreateUserForm } from './molecules/CreateUserForm/CreateUserForm';
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { MainComponent } from './components/pages/MainComponent/MainComponent';
-
+import { MainComponent } from './pages/MainComponent/MainComponent';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import { ListDoctor } from './components/organisms/ListDoctor/ListDoctor';
+import { ListDoctor } from './organisms/ListDoctor/ListDoctor';
 import RequireLogin from './utils/RequireLogin';
-import { AccountPatient } from './components/pages/AccountPatient/AccountPatient';
-import { LoginUser } from './components/molecules/LoginUser/LoginUser';
-import { AccountDoctor } from './components/pages/AccountDoctor/AccountDoctor';
-import { UserPanel } from './components/pages/UserPanel/UserPanel';
-import { GetUserData } from './components/atoms/GetUserData/GetUserData';
-import { SuccessPayment } from './components/molecules/SuccessPayment/SuccessPayment';
-import { MyMap } from './components/organisms/MyMap/MyMap';
+import { AccountPatient } from './pages/AccountPatient/AccountPatient';
+import { LoginUser } from './molecules/LoginUser/LoginUser';
+import { UserPanel } from './pages/UserPanel/UserPanel';
+import { GetUserData } from './atoms/GetUserData/GetUserData';
+import { SuccessPayment } from './molecules/SuccessPayment/SuccessPayment';
 
 export default function App() {
   return (
@@ -62,7 +59,6 @@ export default function App() {
             }
           />
           <Route path="success" element={<SuccessPayment />}></Route>
-          {/* <Route path="map" element={<Map />}></Route> */}
         </Routes>
       </BrowserRouter>
     </>

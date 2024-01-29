@@ -1,0 +1,28 @@
+.p-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 200px 20px 0;
+  margin: 20px 40px;
+  border-top: 2px solid #efefef;
+}
+.p-fluid {
+}
+
+.profile-input {
+  flex-basis: 60%;
+}
+
+.profile-h2 {
+  color: #6c757d;
+  margin: 40px;
+}
+
+@media (max-width: 790px) {
+  .p-field {
+    flex-direction: column;
+  }
+  .profile-input {
+    width: 40vw !important;
+    margin-top: 10px;
+  }
+}
