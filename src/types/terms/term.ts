@@ -1,6 +1,3 @@
-import { DaysOfWeek } from './../../utils/enum';
-import { Hour } from './../../components/atoms/Hour/Hour';
-import { StringNullableChain } from 'lodash';
 export interface Term {
   id: string;
   hour: string;
@@ -35,4 +32,13 @@ export interface AvailableHours {
   Thursday: ScheduleHour[];
   Friday: ScheduleHour[];
   Saturday: ScheduleHour[];
+}
+
+export interface VisitTable {
+  id: string;
+  name: string;
+  lastName: string;
+  date: string;
+  price: string;
+  status: string;
 }
