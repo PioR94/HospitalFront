@@ -3,7 +3,7 @@ import { Visit } from '../../types/visits/visit';
 import './OneVisit.css';
 import { changeClass } from '../../utils/functions/function';
 
-export const OneVisit = ({ id, name, lastName, numberDay, month, year, hour, price, status }: Visit) => {
+export const OneVisit = ({ name, lastName, numberDay, month, year, hour, price, status }: Visit) => {
   return (
     <>
       <div className={`one-visit ${changeClass(status === 'paid', 'green', 'pink')}`}>

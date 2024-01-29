@@ -9,18 +9,8 @@ import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { Button } from 'primereact/button';
 import { MyMap } from '../MyMap/MyMap';
 import { useNavigate } from 'react-router-dom';
+import { Doctor } from '../../types/users/user';
 
-export interface DataDr {
-  idDr: string;
-  nameDr: string;
-  lastNameDr: string;
-  specialization: string;
-  street: string;
-  city: string;
-  price: string;
-  latitude: number;
-  longitude: number;
-}
 const libs = ['places'];
 
 export const ListDoctor = () => {
@@ -61,7 +51,7 @@ export const ListDoctor = () => {
 
   useEffect(() => {
     if (!modalActive) {
-      const firstList = dataDoctors.map((doctor: DataDr) => (
+      const firstList = dataDoctors.map((doctor: Doctor) => (
         <li className="list-doctor-li" key={doctor.idDr}>
           <OneDoctor
             idDr={doctor.idDr}
@@ -78,7 +68,7 @@ export const ListDoctor = () => {
       console.log(list);
     }
     if (modalActive) {
-      const secoundList = dataDoctors.map((doctor: DataDr, index: number) => (
+      const secoundList = dataDoctors.map((doctor: Doctor, index: number) => (
         <li
           className="list-doctor-li"
           key={doctor.idDr}

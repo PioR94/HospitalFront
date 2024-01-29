@@ -5,19 +5,9 @@ import { changeClass } from '../../utils/functions/function';
 import { Avatar } from 'primereact/avatar';
 import StarRatings from 'react-star-ratings';
 import 'primeicons/primeicons.css';
+import { OneDoctorProps } from '../../types/props/props';
 
-interface Props {
-  idDr: string;
-  nameDr: string;
-  lastNameDr: string;
-  specialization: string;
-  street: string;
-  city: string;
-  price: string;
-  alwaysInvisible?: boolean;
-}
-
-export const OneDoctor = (props: Props) => {
+export const OneDoctor = ({ idDr, nameDr, lastNameDr, specialization, street, city, price, alwaysInvisible }: OneDoctorProps) => {
   const [wrap, setWrap] = useState(false);
   const [calendarVisible, setCalendarVisible] = useState(false);
 
@@ -25,24 +15,24 @@ export const OneDoctor = (props: Props) => {
     wrap ? setWrap(false) : setWrap(true);
   };
 
-  const sectionDataClass = `${props.alwaysInvisible ? 'modal-one-doctor-section-data' : 'one-doctor-section-data'} ${
-    props.alwaysInvisible ? calendarVisible && 'hidden' : calendarVisible && 'invisible'
+  const sectionDataClass = `${alwaysInvisible ? 'modal-one-doctor-section-data' : 'one-doctor-section-data'} ${
+    alwaysInvisible ? calendarVisible && 'hidden' : calendarVisible && 'invisible'
   }`;
-  const sectionCalendarClass = `${props.alwaysInvisible ? 'modal-one-doctor-section-calendar' : 'one-doctor-section-calendar'} ${
-    props.alwaysInvisible ? !calendarVisible && 'hidden' : !calendarVisible && 'invisible'
+  const sectionCalendarClass = `${alwaysInvisible ? 'modal-one-doctor-section-calendar' : 'one-doctor-section-calendar'} ${
+    alwaysInvisible ? !calendarVisible && 'hidden' : !calendarVisible && 'invisible'
   }`;
 
   return (
     <>
-      <div className={props.alwaysInvisible ? 'modal-one-doctor-wrapp' : 'one-doctor-wrapp'}>
+      <div className={alwaysInvisible ? 'modal-one-doctor-wrapp' : 'one-doctor-wrapp'}>
         <section className={sectionDataClass}>
           <div className="avatar-name-star">
             <Avatar icon="pi pi-user" size="xlarge" style={{ transform: 'scale(1.3)' }} />
             <div className="name-specialization">
               <span className="span-name">
-                lek. {props.nameDr} {props.lastNameDr}
+                lek. {nameDr} {lastNameDr}
               </span>
-              <span className="span-specialization">{props.specialization}</span>
+              <span className="span-specialization">{specialization}</span>
 
               <StarRatings rating={4.5} starRatedColor="darkcyan" numberOfStars={5} starDimension="25px" starSpacing="3px" />
             </div>
@@ -51,25 +41,25 @@ export const OneDoctor = (props: Props) => {
             <div className="address">
               <i className="pi pi-map-marker i-one"></i>
               <p className="p-address">
-                {props.street}, {props.city}
+                {street}, {city}
               </p>
             </div>
             <div className="price-div">
               <i className="pi pi-money-bill i-one"></i>
 
               <p className="p-service">Konsultacja:</p>
-              <p>{props.price ? `${props.price}zł` : 'Brak ceny'}</p>
+              <p>{price ? `${price}zł` : 'Brak ceny'}</p>
             </div>
-            <button onClick={() => setCalendarVisible(true)} className={`button-visible ${props.alwaysInvisible && 'visible'}`}>
+            <button onClick={() => setCalendarVisible(true)} className={`button-visible ${alwaysInvisible && 'visible'}`}>
               Terminy
             </button>
           </div>
         </section>
 
         <section className={sectionCalendarClass}>
-          <i className={`pi pi-times x-visible ${props.alwaysInvisible && 'visible'} `} onClick={() => setCalendarVisible(false)}></i>
+          <i className={`pi pi-times x-visible ${alwaysInvisible && 'visible'} `} onClick={() => setCalendarVisible(false)}></i>
           <div className={changeClass(wrap, 'wrap-free-term-week-down', 'wrap-free-term-week')}>
-            <FreeTermWeek idDr={props.idDr} nameDr={props.nameDr} lastNameDr={props.lastNameDr} price={props.price} />
+            <FreeTermWeek idDr={idDr} nameDr={nameDr} lastNameDr={lastNameDr} price={price} />
           </div>
           <div className="arrow" onClick={scroll}>
             {wrap ? (

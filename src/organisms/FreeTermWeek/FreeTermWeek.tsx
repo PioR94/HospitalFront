@@ -3,15 +3,9 @@ import { FreeTermDay } from '../../molecules/FreeTermDay/FreeTermDay';
 import './FreeTermWeek.css';
 import { changeClass, getDayName, getMonthName } from '../../utils/functions/function';
 import { addDays } from 'date-fns';
+import { FreeTermWeekProps } from '../../types/props/props';
 
-interface Props {
-  idDr: string;
-  nameDr: string;
-  lastNameDr: string;
-  price: string;
-}
-
-export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: Props) => {
+export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekProps) => {
   const [counter, setCounter] = useState(0);
   const [initialDate, setInitialDate] = useState(new Date());
 

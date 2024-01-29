@@ -10,7 +10,6 @@ import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 export const AccountPatient = () => {
-  const token = localStorage.getItem('token');
   const dispatch = useAppDispatch();
   const cityReduxValue = useAppSelector((state: any) => state.search.city);
   const specializationReduxValue = useAppSelector((state: any) => state.search.specialization);

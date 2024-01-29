@@ -10,10 +10,10 @@ import { Button } from 'primereact/button';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { InputsAddForm, InputsLog } from '../../types/hook-form/inputs';
 
-export const CreateUserForm = (props: Role) => {
+export const CreateUserForm = ({role}: Role) => {
   const [specializations, setSpecializations] = useState([]);
   const [comparePassword, setComparePassword] = useState<boolean>(true);
-  const url = chooseValue(props.role) || '';
+  const url = chooseValue(role) || '';
   const {
     register,
     handleSubmit,
@@ -148,7 +148,7 @@ export const CreateUserForm = (props: Role) => {
             {errors.street && <p style={{ color: 'red', fontSize: 12 }}>Pole jest wymagane</p>}
           </div>
 
-          {props.role === 'doctor' ? (
+          {role === 'doctor' ? (
             <div className="container-input">
               <label htmlFor="specialization" style={errors.specialization && { color: 'red' }}>
                 Specializacja

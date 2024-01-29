@@ -3,16 +3,11 @@ import { Hour } from '../../atoms/Hour/Hour';
 import './Day.css';
 import { addMinutes, format } from 'date-fns';
 import { ScheduleHour } from '../../types/terms/term';
+import { DayProps } from '../../types/props/props';
 
-interface Props {
-  day: string;
-  idDr: string;
-  hours: ScheduleHour[];
-}
-
-export const Day = (props: Props) => {
+export const Day = ({ day, idDr, hours }: DayProps) => {
   const getClass = (hour: string) => {
-    const foundHour = props.hours.find((hourObj: ScheduleHour) => hourObj.hour === hour);
+    const foundHour = hours.find((hourObj: ScheduleHour) => hourObj.hour === hour);
     return foundHour ? '_hour-div-active' : '_hour-div';
   };
 
@@ -28,26 +23,18 @@ export const Day = (props: Props) => {
     while (currentTime.getHours() < endHour) {
       const formattedTime = format(currentTime, 'HH:mm');
 
-      hours.push(
-        <Hour
-          hour={formattedTime}
-          day={props.day}
-          idDr={props.idDr}
-          className={getClass(formattedTime)}
-          key={formattedTime}
-        />,
-      );
+      hours.push(<Hour hour={formattedTime} day={day} idDr={idDr} className={getClass(formattedTime)} key={formattedTime} />);
       currentTime = addMinutes(currentTime, intervalMinutes);
     }
 
     return hours;
-  }, [props.idDr, props.hours]);
+  }, [idDr, hours]);
 
   return (
     <>
       <div className="_divDay">
         <div className="_div-date">
-          <div>{props.day}</div>
+          <div>{day}</div>
         </div>
         {renderHours}
       </div>

@@ -10,8 +10,8 @@ import { chooseValue } from '../../utils/functions/choose-value';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { InputsLog } from '../../types/hook-form/inputs';
 
-export const LoginUser = (props: Role) => {
-  const url = chooseValue(props.role) || '';
+export const LoginUser = ({role}: Role) => {
+  const url = chooseValue(role) || '';
   const {
     register,
     handleSubmit,
@@ -25,10 +25,10 @@ export const LoginUser = (props: Role) => {
   useEffect(() => {
     if (token) {
       sessionStorage.setItem('token', token);
-      if (props.role === 'patient') {
+      if (role === 'patient') {
         sessionStorage.setItem('role', 'patient');
         navigate('../patient');
-      } else if (props.role === 'doctor') {
+      } else if (role === 'doctor') {
         sessionStorage.setItem('role', 'doctor');
         navigate('../doctor/panel');
       }
@@ -45,9 +45,9 @@ export const LoginUser = (props: Role) => {
   };
 
   const clickRegister = () => {
-    if (props.role === 'doctor') {
+    if (role === 'doctor') {
       navigate('../doctor/add');
-    } else if (props.role === 'patient') {
+    } else if (role === 'patient') {
       navigate('../patient/add');
     }
   };

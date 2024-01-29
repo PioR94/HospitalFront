@@ -3,8 +3,8 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { FiVideo } from 'react-icons/fi';
 import './MyMap.css';
 import 'primeicons/primeicons.css';
-import { DataDr } from '../ListDoctor/ListDoctor';
 import { activeIcon, defIcon } from '../../utils/icons-map';
+import { MyMapProps } from '../../types/props/props';
 const GOOLE_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string;
 
 const containerStyle = {
@@ -18,15 +18,6 @@ const center = {
 };
 
 const libraries = ['places'];
-
-interface MyMapProps {
-  children?: ReactNode;
-  doctors: DataDr[];
-  activeDoctorId: string | null;
-  onMarkerEnter: (id: string) => void;
-  onMarkerLeave: () => void;
-  doctorRefs: React.MutableRefObject<(HTMLLIElement | null)[]>;
-}
 
 export const MyMap = ({ children, doctors, activeDoctorId, onMarkerEnter, onMarkerLeave, doctorRefs }: MyMapProps) => {
   const { isLoaded } = useJsApiLoader({

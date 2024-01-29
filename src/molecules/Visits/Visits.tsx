@@ -1,5 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { OneVisit } from '../OneVisit/OneVisit';
+import React, { useEffect, useState } from 'react';
 import './Visits.css';
 import { useAppSelector } from '../../hooks/redux';
 import { selectId } from '../../redux/selectors';
@@ -8,15 +7,7 @@ import { Visit } from '../../types/visits/visit';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Month } from '../../utils/enum';
-
-interface VisitTable {
-  id: string;
-  name: string;
-  lastName: string;
-  date: string;
-  price: string;
-  status: string;
-}
+import { VisitTable } from '../../types/terms/term';
 
 export const Visits = () => {
   const [visits, setVisits] = useState<VisitTable[]>([]);

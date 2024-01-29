@@ -33,3 +33,12 @@ export interface AvailableHours {
   Friday: ScheduleHour[];
   Saturday: ScheduleHour[];
 }
+
+export interface VisitTable {
+  id: string;
+  name: string;
+  lastName: string;
+  date: string;
+  price: string;
+  status: string;
+}

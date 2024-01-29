@@ -8,12 +8,9 @@ import { baseUrlSchedule, sendAndReceiveData, updateData } from '../../api';
 import { AvailableHours, ScheduleHour } from '../../types/terms/term';
 import { addReduxHours } from '../../redux/schedule-slice';
 import { DaysOfWeek } from '../../utils/enum';
+import { WeekProps } from '../../types/props/props';
 
-interface Props {
-  idDr: string;
-}
-
-export const Week = (props: Props) => {
+export const Week = ({ idDr }: WeekProps) => {
   const dispatch = useAppDispatch();
   const reduxHours = useAppSelector((state: any) => state.schedule.hours);
   const [availableHours, setAvailableHours] = useState<AvailableHours>({
@@ -27,7 +24,7 @@ export const Week = (props: Props) => {
   });
 
   const data = {
-    idDr: props.idDr,
+    idDr,
     newSchedule: reduxHours,
   };
 
@@ -39,17 +36,17 @@ export const Week = (props: Props) => {
   const renderDays = () => {
     const days = [];
     for (let i = 0; i < 7; i++) {
-      days[i] = <Day day={`${getDayName(i)}`} idDr={props.idDr} hours={getAvailableHoursDay(i)} />;
+      days[i] = <Day day={`${getDayName(i)}`} idDr={idDr} hours={getAvailableHoursDay(i)} />;
     }
     return days;
   };
 
   useEffect(() => {
-    props.idDr &&
-      sendAndReceiveData(props.idDr, baseUrlSchedule, 'hours').then((r) => {
+    idDr &&
+      sendAndReceiveData(idDr, baseUrlSchedule, 'hours').then((r) => {
         dispatch(addReduxHours(r));
       });
-  }, [props.idDr]);
+  }, [idDr]);
 
   useEffect(() => {
     if (reduxHours) {

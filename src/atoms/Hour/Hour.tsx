@@ -4,13 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleHour } from '../../redux/schedule-slice';
 import { ScheduleHour } from '../../types/terms/term';
 
-export const Hour = (props: ScheduleHour) => {
+export const Hour = ({ day, idDr, hour, className }: ScheduleHour) => {
   const dispatch = useAppDispatch();
 
   const term: ScheduleHour = {
-    day: props.day,
-    idDr: props.idDr,
-    hour: props.hour,
+    day,
+    idDr,
+    hour,
   };
 
   const addTerm = () => {
@@ -19,8 +19,8 @@ export const Hour = (props: ScheduleHour) => {
 
   return (
     <>
-      <div onClick={addTerm} className={props.className}>
-        {props.hour}
+      <div onClick={addTerm} className={className}>
+        {hour}
       </div>
     </>
   );

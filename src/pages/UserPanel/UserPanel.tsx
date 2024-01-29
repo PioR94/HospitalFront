@@ -8,12 +8,9 @@ import { Visits } from '../../molecules/Visits/Visits';
 import { useAppSelector } from '../../hooks/redux';
 import { selectId } from '../../redux/selectors';
 import ProfileSettings from '../../organisms/ProfileSettings/ProfileSettings';
+import { Role } from '../../types/role/role';
 
-interface Props {
-  role: string;
-}
-
-export const UserPanel = (props: Props) => {
+export const UserPanel = ({ role }: Role) => {
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState<string>('visits');
   const id = useAppSelector(selectId);
@@ -23,14 +20,14 @@ export const UserPanel = (props: Props) => {
       <div className="bg-panel">
         <div className="wrap-panel">
           <div className="sidebar">
-            {props.role === 'patient' && (
+            {role === 'patient' && (
               <div className="sidebar-icon-div" style={{ fontSize: 20 }}>
                 <i className="pi pi-home icon" onClick={() => navigate('../patient')}></i>
                 <span className="span-icon">Główna</span>
               </div>
             )}
 
-            {props.role === 'patient' && (
+            {role === 'patient' && (
               <div className="sidebar-icon-div">
                 <i className="pi pi-search icon" onClick={() => navigate('../find-doctor')}></i>
                 <span className="span-icon">Szukaj</span>
@@ -40,7 +37,7 @@ export const UserPanel = (props: Props) => {
               <i className="pi pi-calendar icon"></i>
               <span className="span-icon">Wizyty</span>
             </div>
-            {props.role === 'doctor' && (
+            {role === 'doctor' && (
               <div className="sidebar-icon-div" onClick={() => setActiveComponent('week')}>
                 <i className="pi pi-clock icon"></i>
                 <span className="span-icon">Terminarz</span>

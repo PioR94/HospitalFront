@@ -9,16 +9,7 @@ import { baseUrlSpecialization, downloadData, updateData } from '../../api';
 import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { chooseValue } from '../../utils/functions/choose-value';
-
-interface FormInput {
-  name: string;
-  lastName: string;
-  street: string;
-  code: string;
-  city: string;
-  specialization?: string;
-  price?: string;
-}
+import { FormProfileSettings } from '../../types/forms/forms';
 
 const ProfileSettings: React.FC = () => {
   const role = sessionStorage.getItem('role');
@@ -39,7 +30,7 @@ const ProfileSettings: React.FC = () => {
     control,
     setValue,
     formState: { errors },
-  } = useForm<FormInput>({
+  } = useForm<FormProfileSettings>({
     defaultValues: {
       name,
       lastName,
@@ -57,7 +48,7 @@ const ProfileSettings: React.FC = () => {
     });
   }, []);
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
+  const onSubmit: SubmitHandler<FormProfileSettings> = (data) => {
     const dataProfile = {
       id,
       ...data,

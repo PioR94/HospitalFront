@@ -4,31 +4,21 @@ import './FreeTermDay.css';
 import { baseUrlSchedule, baseUrlTerm, sendAndReceiveData } from '../../api';
 import { ScheduleHour } from '../../types/terms/term';
 import { mergeArrays } from '../../utils/functions/merge-arrays';
+import { FreeTermDayProps } from '../../types/props/props';
 
-interface Props {
-  dayOfWeek: string;
-  numberDay: string;
-  month: string;
-  year: string;
-  idDr: string;
-  nameDr: string;
-  lastNameDr: string;
-  price: string;
-}
-
-export const FreeTermDay = (props: Props) => {
+export const FreeTermDay = ({ dayOfWeek, numberDay, month, year, idDr, nameDr, lastNameDr, price }: FreeTermDayProps) => {
   const [terms, setTerms] = useState<React.ReactNode[]>([]);
 
   const dayData = {
-    dayOfWeek: props.dayOfWeek,
-    idDr: props.idDr,
+    dayOfWeek,
+    idDr,
   };
 
   const termData = {
-    idDr: props.idDr,
-    numberDay: props.numberDay,
-    month: props.month,
-    year: props.year,
+    idDr,
+    numberDay,
+    month,
+    year,
   };
 
   useEffect(() => {
@@ -40,7 +30,7 @@ export const FreeTermDay = (props: Props) => {
 
       const modifiedFreeTerms = freeTermsData.map((item: ScheduleHour) => ({
         ...item,
-        id: item.hour + props.numberDay + props.month + props.year + props.idDr,
+        id: item.hour + numberDay + month + year + idDr,
         className: 'free-term-hour',
       }));
 
@@ -56,17 +46,17 @@ export const FreeTermDay = (props: Props) => {
       const r = sortedArray.map((term: ScheduleHour) => (
         <FreeTermHour
           id={term.id || ''}
-          idDr={props.idDr}
+          idDr={idDr}
           hour={term.hour}
-          dayOfWeek={props.dayOfWeek}
-          numberDay={props.numberDay}
-          month={props.month}
-          year={props.year}
+          dayOfWeek={dayOfWeek}
+          numberDay={numberDay}
+          month={month}
+          year={year}
           className={term.className}
           key={term.id}
-          nameDr={props.nameDr}
-          lastNameDr={props.lastNameDr}
-          price={props.price}
+          nameDr={nameDr}
+          lastNameDr={lastNameDr}
+          price={price}
         />
       ));
 
@@ -74,15 +64,15 @@ export const FreeTermDay = (props: Props) => {
     };
 
     fetchData();
-  }, [props.idDr]);
+  }, [idDr]);
 
   return (
     <>
       <div className="free-term-day">
         <div className="ftd-div-date">
-          <div className="div-dayOfWeek">{props.dayOfWeek}</div>
+          <div className="div-dayOfWeek">{dayOfWeek}</div>
           <div className="div-number-month">
-            {props.numberDay} {props.month}
+            {numberDay} {month}
           </div>
         </div>
         {terms}
