@@ -2,22 +2,28 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserState } from '../types/redux/user-state';
 
 const initialState: UserState = {
-  activeLogin: '',
   id: '',
+  login: '',
+  name: '',
+  lastName: '',
+  mail: '',
+  street: '',
+  code: '',
+  city: '',
+  specialization: '',
+  price: '',
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setLogin: (state, action: PayloadAction<string>) => {
-      state.activeLogin = action.payload;
-    },
-    setId: (state, action: PayloadAction<string>) => {
-      state.id = action.payload;
+    setField: (state, action: PayloadAction<{ field: keyof UserState; value: string }>) => {
+      const { field, value } = action.payload;
+      state[field] = value;
     },
   },
 });
 
-export const { setLogin, setId } = userSlice.actions;
+export const { setField } = userSlice.actions;
 export default userSlice.reducer;

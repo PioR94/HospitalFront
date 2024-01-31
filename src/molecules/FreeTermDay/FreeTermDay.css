@@ -1,0 +1,21 @@
+.ftd-div-date {
+  width: 70px;
+  margin-bottom: 15px;
+  line-height: 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.div-dayOfWeek {
+  font-size: 22px;
+  margin-bottom: 7px;
+}
+
+.div-number-month {
+  font-size: 15px;
+  color: darkgray;
+}
+
+.free-term-day {
+  margin-top: 20px;
+}

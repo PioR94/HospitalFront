@@ -1,20 +1,44 @@
-import React, { useEffect, ReactNode } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface RequireLoginProps {
-  children: ReactNode;
+  children: React.ReactNode;
+  requiredRole?: string;
 }
 
-const RequireLogin: React.FC<RequireLoginProps> = ({ children }) => {
+const RequireLogin: React.FC<RequireLoginProps> = ({ children, requiredRole }) => {
   const navigate = useNavigate();
-  const getToken = sessionStorage.getItem('token');
-  useEffect(() => {
-    if (!getToken) {
-      navigate('/patient/log');
+
+  const checkTokenAndRole = () => {
+    const token = sessionStorage.getItem('token');
+    const role = sessionStorage.getItem('role');
+
+    if (!token) {
+      navigate(`/${role}/log`);
+      return;
     }
-    console.log('aa' + getToken);
-  }, []);
+
+    if (requiredRole && role !== requiredRole) {
+      navigate('/');
+      return;
+    }
+  };
+
+  useEffect(() => {
+    checkTokenAndRole();
+
+    const handleTokenUpdate = () => {
+      checkTokenAndRole();
+    };
+
+    window.addEventListener('token-updated', handleTokenUpdate);
+
+    return () => {
+      window.removeEventListener('token-updated', handleTokenUpdate);
+    };
+  }, [navigate, requiredRole]);
 
   return <>{children}</>;
 };
+
 export default RequireLogin;
