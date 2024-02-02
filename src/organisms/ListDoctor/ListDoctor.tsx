@@ -23,6 +23,7 @@ export const ListDoctor = () => {
   const [inputText, setInputText] = useState('');
   const [inputActive, setInputActive] = useState(false);
   const [specializations, setSpecializations] = useState<string[]>([]);
+  const [invisible, setInvisible] = useState<boolean>(false);
   const dispatch = useDispatch();
   const cityReduxValue = useSelector((state: any) => state.search.city);
   const specializationReduxValue = useSelector((state: any) => state.search.specialization);
@@ -31,6 +32,7 @@ export const ListDoctor = () => {
   const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
   const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!cityReduxValue && !specializationReduxValue) {
       getDoctors(citySessionValue, specializationSessionValue);
@@ -70,9 +72,9 @@ export const ListDoctor = () => {
     if (modalActive) {
       const secoundList = dataDoctors.map((doctor: Doctor, index: number) => (
         <li
-          className="list-doctor-li"
+          className="list-doctor-li modal-data"
           key={doctor.idDr}
-          ref={(el) => (doctorRefs.current[index] = el)} // Przypisanie referencji
+          ref={(el) => (doctorRefs.current[index] = el)}
           onMouseEnter={() => setActiveDoctorId(doctor.idDr)}
           onMouseLeave={() => setActiveDoctorId(null)}
         >
@@ -110,35 +112,44 @@ export const ListDoctor = () => {
   return (
     <div className="list-doctor-wrap">
       <header className="list-doctor-header">
-        <img src="logo-white.svg" alt="logo" className="logo-white" />
+        <img src="logo-white.svg" alt="logo" className="logo-list" />
         <form onSubmit={sendForm} className="container-search">
-          <AutoComplete
-            value={cityReduxValue}
-            suggestions={suggestedCities}
-            completeMethod={(e: AutoCompleteCompleteEvent) => {
-              setInputText(e.query);
-            }}
-            onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
-            minLength={3}
-            placeholder="Wyszukaj miasto"
-            style={{ alignSelf: 'stretch', width: 250 }}
-          />
-          <Dropdown
-            value={specializationReduxValue}
-            options={specializations}
-            onChange={(e) => dispatch(updateSpecialization(e.target.value))}
-            placeholder="Wybierz specjalizację"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              alignSelf: 'stretch',
-              boxSizing: 'content-box',
-              width: 250,
-            }}
-          />
+          <i className="pi pi-sort-alt arrow-visible" onClick={() => setInvisible((perv) => !perv)} />
+          <div className="input-wrapp">
+            <AutoComplete
+              value={cityReduxValue}
+              suggestions={suggestedCities}
+              completeMethod={(e: AutoCompleteCompleteEvent) => {
+                setInputText(e.query);
+              }}
+              onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
+              minLength={3}
+              placeholder="Wyszukaj miasto"
+              style={{ alignSelf: 'stretch', marginRight: '5px', flex: 1 }}
+              className={`${!invisible && 'input-invisible'}`}
+            />
+            <Dropdown
+              value={specializationReduxValue}
+              options={specializations}
+              onChange={(e) => dispatch(updateSpecialization(e.target.value))}
+              placeholder="Specializacja"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                alignSelf: 'stretch',
+                boxSizing: 'content-box',
+                marginRight: '5px',
+                flex: 1,
+              }}
+              className={`${invisible && 'input-invisible'}`}
+            />
+          </div>
+
           <Button icon="pi pi-search" rounded outlined aria-label="Search" className={'button-search'} />
         </form>
-        <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 25 }} onClick={() => navigate('../patient/panel')} />
+        <Button text rounded style={{ color: 'white' }} onClick={() => navigate('../patient/panel')}>
+          <i className="pi pi-user icon-user" />
+        </Button>
       </header>
 
       <div className={!modalActive ? 'container-list-map' : 'modal-container-list-map'}>

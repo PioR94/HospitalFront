@@ -161,6 +161,13 @@
   display: none;
 }
 
+.hover-effect {
+  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.modal-data:hover {
+  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 1450px) {
   .one-doctor-wrapp {
     width: 1200px;
