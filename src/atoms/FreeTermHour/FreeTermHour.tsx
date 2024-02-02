@@ -12,7 +12,6 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, nameDr, lastNameDr, className, price }: Term) => {
   const [display, setDisplay] = useState(false);
-  const [free, setFree] = useState(false);
   const [classNameState, setClassNameState] = useState(className);
   const idPt = useAppSelector(selectId);
   const namePt = useAppSelector(selectName);
@@ -31,14 +30,6 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
     namePt,
     lastNamePt,
     price,
-  };
-
-  const bookTerm = async () => {
-    console.log(dataTerm);
-    sendData(dataTerm, baseUrlTerm, 'add');
-    setDisplay(false);
-    setFree(true);
-    setClassNameState('book-term-hour');
   };
 
   const handleCheckout = async () => {
