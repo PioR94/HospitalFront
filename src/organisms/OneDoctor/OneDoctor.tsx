@@ -27,7 +27,7 @@ export const OneDoctor = ({ idDr, nameDr, lastNameDr, specialization, street, ci
       <div className={alwaysInvisible ? 'modal-one-doctor-wrapp' : 'one-doctor-wrapp'}>
         <section className={sectionDataClass}>
           <div className="avatar-name-star">
-            <Avatar icon="pi pi-user" size="xlarge" style={{ transform: 'scale(1.3)' }} />
+            <Avatar icon="pi pi-user" size="xlarge" style={{ transform: 'scale(1.3)', minWidth: 65 }} />
             <div className="name-specialization">
               <span className="span-name">
                 lek. {nameDr} {lastNameDr}

@@ -10,6 +10,7 @@ import { Button } from 'primereact/button';
 import { MyMap } from '../MyMap/MyMap';
 import { useNavigate } from 'react-router-dom';
 import { Doctor } from '../../types/users/user';
+import { Card } from 'primereact/card';
 
 const libs = ['places'];
 
@@ -67,7 +68,7 @@ export const ListDoctor = () => {
         </li>
       ));
       setList(firstList);
-      console.log(list);
+      console.log(dataDoctors);
     }
     if (modalActive) {
       const secoundList = dataDoctors.map((doctor: Doctor, index: number) => (
@@ -125,7 +126,7 @@ export const ListDoctor = () => {
               onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
               minLength={3}
               placeholder="Wyszukaj miasto"
-              style={{ alignSelf: 'stretch', marginRight: '5px', flex: 1 }}
+              style={{ alignSelf: 'stretch', marginRight: '5px', width: '100%' }}
               className={`${!invisible && 'input-invisible'}`}
             />
             <Dropdown
@@ -139,7 +140,7 @@ export const ListDoctor = () => {
                 alignSelf: 'stretch',
                 boxSizing: 'content-box',
                 marginRight: '5px',
-                flex: 1,
+                width: '100%',
               }}
               className={`${invisible && 'input-invisible'}`}
             />
@@ -151,27 +152,36 @@ export const ListDoctor = () => {
           <i className="pi pi-user icon-user" />
         </Button>
       </header>
+      {dataDoctors.length === 0 && (
+        <div className="message">
+          <Card title={<span style={{ fontSize: '40px' }}>Ooops!</span>} style={{}}>
+            <p style={{ fontSize: '24px' }}>Nie znaleziono wyników dla podanych kryteriów.</p>
+          </Card>
+        </div>
+      )}
 
       <div className={!modalActive ? 'container-list-map' : 'modal-container-list-map'}>
         <div className={!modalActive ? 'wrapp-ul-map' : 'modal-wrapp-ul-map'}>
           <ul className={!modalActive ? 'doctor-ul' : 'modal-doctor-ul'}>{!modalActive ? list : modalList}</ul>
-          <div className={!modalActive ? 'map-container' : 'modal-map-container'}>
-            <MyMap
-              doctors={dataDoctors}
-              activeDoctorId={activeDoctorId}
-              onMarkerEnter={setActiveDoctorId}
-              onMarkerLeave={() => setActiveDoctorId(null)}
-              doctorRefs={doctorRefs}
-            >
-              {!modalActive ? (
-                <div className="overlay" onClick={() => setModalActive(true)}>
-                  <i className="pi pi-arrows-alt arrow-alt"></i>
-                </div>
-              ) : (
-                <i className="pi pi-times x-map" onClick={() => setModalActive(false)}></i>
-              )}
-            </MyMap>
-          </div>
+          {dataDoctors.length > 0 && (
+            <div className={!modalActive ? 'map-container' : 'modal-map-container'}>
+              <MyMap
+                doctors={dataDoctors}
+                activeDoctorId={activeDoctorId}
+                onMarkerEnter={setActiveDoctorId}
+                onMarkerLeave={() => setActiveDoctorId(null)}
+                doctorRefs={doctorRefs}
+              >
+                {!modalActive ? (
+                  <div className="overlay" onClick={() => setModalActive(true)}>
+                    <i className="pi pi-arrows-alt arrow-alt"></i>
+                  </div>
+                ) : (
+                  <i className="pi pi-times x-map" onClick={() => setModalActive(false)}></i>
+                )}
+              </MyMap>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -221,3 +221,11 @@
     margin-top: -10px;
   }
 }
+@media (max-width: 400px) {
+  .avatar-name-star {
+    flex-direction: column;
+  }
+  .name-specialization {
+    margin: 20px 0px 0 0px;
+  }
+}
