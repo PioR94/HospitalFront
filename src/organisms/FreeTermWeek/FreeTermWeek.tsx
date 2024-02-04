@@ -14,7 +14,7 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekPr
 
     let nextDate = initialDate;
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       let dayOfWeek = nextDate.getDay();
       let numberDay = nextDate.getUTCDate();
       let month = nextDate.getMonth();
@@ -41,14 +41,14 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekPr
 
   const moveRight = (): void => {
     if (counter < 50) {
-      setInitialDate(addDays(initialDate, 4));
+      setInitialDate(addDays(initialDate, 3));
       setCounter(counter + 1);
     }
   };
 
   const moveLeft = (): void => {
     if (counter > 0) {
-      setInitialDate(addDays(initialDate, -4));
+      setInitialDate(addDays(initialDate, -3));
       setCounter(counter - 1);
     }
   };
