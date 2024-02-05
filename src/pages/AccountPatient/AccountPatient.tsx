@@ -40,7 +40,6 @@ export const AccountPatient = () => {
     <div className="container-patient-account">
       <header className="header-patient-account">
         <img src="logo-white.svg" alt="logo" className="logo-white" />
-
         <div className="div-menu">
           <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 25 }} onClick={() => navigate('../patient/panel')} />
         </div>

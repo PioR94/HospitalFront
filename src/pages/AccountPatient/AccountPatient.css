@@ -26,7 +26,6 @@
   width: 720px;
   height: 60px;
   justify-content: space-between;
-
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
@@ -67,7 +66,7 @@
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1300px) {
   .wrapp-search-img {
     position: relative;
     align-items: center;
@@ -125,13 +124,13 @@
   }
 }
 
-@media (min-width: 1450px) {
+@media (min-width: 1570px) {
   .img-doctors {
     width: 800px;
     height: 500px;
   }
 }
-@media (min-width: 1800px) {
+@media (min-width: 2060px) {
   .div-search {
     transform: scale(1.2);
   }

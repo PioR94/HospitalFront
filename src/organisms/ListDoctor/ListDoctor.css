@@ -37,8 +37,7 @@
 }
 .input-wrapp {
   display: flex;
-  background-color: blue;
-  width: 70%;
+  width: calc(100% - 50px);
 }
 .button-search {
   background-color: white !important;
@@ -114,8 +113,8 @@
 .arrow-visible {
   display: none;
   color: white;
-  margin-right: 5px;
   font-size: 20px;
+  width: 20px;
 }
 .logo-list {
   width: 200px;
@@ -131,6 +130,11 @@
 
 .dropdown-placeholder-shrink {
   width: 100%; /* Zapewnia, że input zajmuje całą szerokość */
+}
+
+.input-find-doctor {
+  width: 50%;
+  margin-right: 5px;
 }
 
 @media (max-width: 1450px) {
@@ -149,15 +153,20 @@
 @media (max-width: 620px) {
   .arrow-visible {
     display: block;
-    margin-right: 8px;
+    margin-right: 5px;
   }
   .input-invisible {
     display: none !important;
   }
+  .input-find-doctor {
+    width: 100%;
+  }
   .container-search {
-    width: 60%;
+    width: 80%;
     min-width: 250px;
     margin-left: 10px;
-    background-color: aquamarine;
+  }
+  .input-wrapp {
+    width: calc(100% - 80px);
   }
 }
