@@ -126,8 +126,8 @@ export const ListDoctor = () => {
               onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
               minLength={3}
               placeholder="Wyszukaj miasto"
-              style={{ alignSelf: 'stretch', marginRight: '5px', width: '100%' }}
-              className={`${!invisible && 'input-invisible'}`}
+              style={{ alignSelf: 'stretch', marginRight: '5px' }}
+              className={`input-find-doctor ${!invisible && 'input-invisible'}`}
             />
             <Dropdown
               value={specializationReduxValue}
@@ -139,10 +139,9 @@ export const ListDoctor = () => {
                 alignItems: 'center',
                 alignSelf: 'stretch',
                 boxSizing: 'content-box',
-                marginRight: '5px',
-                width: '100%',
+                
               }}
-              className={`${invisible && 'input-invisible'}`}
+              className={`input-find-doctor ${invisible && 'input-invisible'}`}
             />
           </div>
 
