@@ -9,10 +9,15 @@ import { useAppSelector } from '../../hooks/redux';
 import { selectId } from '../../redux/selectors';
 import ProfileSettings from '../../organisms/ProfileSettings/ProfileSettings';
 import { Role } from '../../types/role/role';
+import { useGetUserData } from '../../hooks/useGetUserData';
 
 export const UserPanel = ({ role }: Role) => {
   const navigate = useNavigate();
-  const [activeComponent, setActiveComponent] = useState<string>('visits');
+
+  useGetUserData();
+
+  const [activeComponent, setActiveComponent] = useState<string>('');
+
   const id = useAppSelector(selectId);
 
   return (
@@ -47,10 +52,6 @@ export const UserPanel = ({ role }: Role) => {
             <div className="sidebar-icon-div" onClick={() => setActiveComponent('profileSettings')}>
               <i className="pi pi-user icon"></i>
               <span className="span-icon">Profil</span>
-            </div>
-            <div className="sidebar-icon-div">
-              <i className="pi pi-cog icon"></i>
-              <span className="span-icon">Ustawienia</span>
             </div>
           </div>
           <div className="container-navbar-surface">

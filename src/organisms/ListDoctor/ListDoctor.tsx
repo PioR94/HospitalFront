@@ -11,28 +11,48 @@ import { MyMap } from '../MyMap/MyMap';
 import { useNavigate } from 'react-router-dom';
 import { Doctor } from '../../types/users/user';
 import { Card } from 'primereact/card';
+import { useGetUserData } from '../../hooks/useGetUserData';
 
 const libs = ['places'];
 
 export const ListDoctor = () => {
   const [dataDoctors, setDataDoctors] = useState([]);
+
   const [list, setList] = useState<JSX.Element[]>([]);
+
   const [modalList, setModalList] = useState<JSX.Element[]>([]);
+
   const [modalActive, setModalActive] = useState<boolean>(false);
+
   const inputRef = useRef<any>(null);
+
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
+
   const [inputText, setInputText] = useState('');
+
   const [inputActive, setInputActive] = useState(false);
+
   const [specializations, setSpecializations] = useState<string[]>([]);
+
   const [invisible, setInvisible] = useState<boolean>(false);
+
   const dispatch = useDispatch();
+
   const cityReduxValue = useSelector((state: any) => state.search.city);
+
   const specializationReduxValue = useSelector((state: any) => state.search.specialization);
+
   const citySessionValue = sessionStorage.getItem('city');
+
   const specializationSessionValue = sessionStorage.getItem('specialization');
+
   const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
+
   const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);
+
   const navigate = useNavigate();
+
+  useGetUserData();
 
   useEffect(() => {
     if (!cityReduxValue && !specializationReduxValue) {
@@ -67,7 +87,9 @@ export const ListDoctor = () => {
           />
         </li>
       ));
+
       setList(firstList);
+
       console.log(dataDoctors);
     }
     if (modalActive) {
@@ -139,7 +161,6 @@ export const ListDoctor = () => {
                 alignItems: 'center',
                 alignSelf: 'stretch',
                 boxSizing: 'content-box',
-                
               }}
               className={`input-find-doctor ${invisible && 'input-invisible'}`}
             />
