@@ -11,7 +11,6 @@ import RequireLogin from './utils/RequireLogin';
 import { AccountPatient } from './pages/AccountPatient/AccountPatient';
 import { LoginUser } from './molecules/LoginUser/LoginUser';
 import { UserPanel } from './pages/UserPanel/UserPanel';
-import { GetUserData } from './atoms/GetUserData/GetUserData';
 import { SuccessPayment } from './molecules/SuccessPayment/SuccessPayment';
 
 export default function App() {
@@ -23,7 +22,6 @@ export default function App() {
       path: 'patient/panel',
       element: (
         <RequireLogin requiredRole="patient">
-          <GetUserData />
           <UserPanel role={'patient'} />
         </RequireLogin>
       ),
@@ -32,7 +30,6 @@ export default function App() {
       path: 'doctor/panel',
       element: (
         <RequireLogin requiredRole="doctor">
-          <GetUserData />
           <UserPanel role={'doctor'} />
         </RequireLogin>
       ),
@@ -43,7 +40,6 @@ export default function App() {
       path: 'find-doctor',
       element: (
         <RequireLogin requiredRole="patient">
-          <GetUserData />
           <ListDoctor />
         </RequireLogin>
       ),
@@ -52,7 +48,6 @@ export default function App() {
       path: 'patient',
       element: (
         <RequireLogin requiredRole="patient">
-          <GetUserData />
           <AccountPatient />
         </RequireLogin>
       ),

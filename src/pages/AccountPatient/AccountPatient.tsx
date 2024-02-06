@@ -8,15 +8,24 @@ import { Button } from 'primereact/button';
 import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useGetUserData } from '../../hooks/useGetUserData';
 
 export const AccountPatient = () => {
   const dispatch = useAppDispatch();
+
   const cityReduxValue = useAppSelector((state: any) => state.search.city);
+
   const specializationReduxValue = useAppSelector((state: any) => state.search.specialization);
+
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
+
   const [specializations, setSpecializations] = useState<string[]>([]);
+
   const [inputText, setInputText] = useState('');
+
   const navigate = useNavigate();
+
+  useGetUserData();
 
   useEffect(() => {
     sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
