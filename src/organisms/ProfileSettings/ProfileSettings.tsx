@@ -7,20 +7,14 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputMask } from 'primereact/inputmask';
 import { baseUrlSpecialization, downloadData, updateData } from '../../api';
 import { RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
+import {} from 'react-redux';
 import { chooseValue } from '../../utils/functions/choose-value';
 import { FormProfileSettings } from '../../types/forms/forms';
+import { useAppSelector } from '../../hooks/redux';
 
 const ProfileSettings: React.FC = () => {
   const role = sessionStorage.getItem('role');
-  const id = useSelector((state: RootState) => state.user.id);
-  const name = useSelector((state: RootState) => state.user.name);
-  const lastName = useSelector((state: RootState) => state.user.lastName);
-  const street = useSelector((state: RootState) => state.user.street);
-  const code = useSelector((state: RootState) => state.user.code);
-  const city = useSelector((state: RootState) => state.user.city);
-  const specialization = useSelector((state: RootState) => state.user.specialization);
-  const price = useSelector((state: RootState) => state.user.price);
+  const { idUser, name, lastName, street, code, city, specialization, price } = useAppSelector((state) => state.user);
   const url = chooseValue(role) || '';
   const [specializations, setSpecializations] = useState([]);
 
@@ -28,7 +22,6 @@ const ProfileSettings: React.FC = () => {
     register,
     handleSubmit,
     control,
-    setValue,
     formState: { errors },
   } = useForm<FormProfileSettings>({
     defaultValues: {
@@ -50,7 +43,7 @@ const ProfileSettings: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormProfileSettings> = (data) => {
     const dataProfile = {
-      id,
+      id: idUser,
       ...data,
     };
     console.log(dataProfile);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
 import { getDayName } from '../../utils/functions/function';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { Dispatch, uselector } from '../../hooks/redux';
 import { Button } from 'primereact/button';
 import { baseUrlSchedule, sendAndReceiveData, updateData } from '../../api';
 import { AvailableHours, ScheduleHour } from '../../types/terms/term';
@@ -11,8 +11,8 @@ import { DaysOfWeek } from '../../utils/enum';
 import { WeekProps } from '../../types/props/props';
 
 export const Week = ({ idDr }: WeekProps) => {
-  const dispatch = useAppDispatch();
-  const reduxHours = useAppSelector((state: any) => state.schedule.hours);
+  const dispatch = Dispatch();
+  const reduxHours = uselector((state: any) => state.schedule.hours);
   const [availableHours, setAvailableHours] = useState<AvailableHours>({
     Sunday: [],
     Monday: [],

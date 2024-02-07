@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserState } from '../types/redux/user-state';
 
 const initialState: UserState = {
-  id: '',
+  idUser: '',
   login: '',
   name: '',
   lastName: '',

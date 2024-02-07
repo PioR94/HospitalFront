@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { setField } from '../redux/user-slice';
 import { sendToken } from '../api';
 import { UserState } from '../types/redux/user-state';
-import { useAppDispatch } from './redux';
+import { Dispatch } from './redux';
 import { chooseValue } from '../utils/functions/choose-value';
 import { useNavigate } from 'react-router-dom';
 
 export const useGetUserData = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = Dispatch();
 
   const navigate = useNavigate();
 

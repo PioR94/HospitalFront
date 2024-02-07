@@ -4,7 +4,7 @@ import './ListDoctor.css';
 import { baseUrlDoctor, baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../api';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { Button } from 'primereact/button';
 import { MyMap } from '../MyMap/MyMap';
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { Doctor } from '../../types/users/user';
 import { Card } from 'primereact/card';
 import { useGetUserData } from '../../hooks/useGetUserData';
+import { useAppSelector } from '../../hooks/redux';
 
 const libs = ['places'];
 
@@ -38,9 +39,7 @@ export const ListDoctor = () => {
 
   const dispatch = useDispatch();
 
-  const cityReduxValue = useSelector((state: any) => state.search.city);
-
-  const specializationReduxValue = useSelector((state: any) => state.search.specialization);
+  const { city, specialization } = useAppSelector((state) => state.search);
 
   const citySessionValue = sessionStorage.getItem('city');
 
@@ -55,10 +54,10 @@ export const ListDoctor = () => {
   useGetUserData();
 
   useEffect(() => {
-    if (!cityReduxValue && !specializationReduxValue) {
+    if (!city && !specialization) {
       getDoctors(citySessionValue, specializationSessionValue);
     } else {
-      getDoctors(cityReduxValue, specializationReduxValue);
+      getDoctors(city, specialization);
     }
   }, []);
 
@@ -127,9 +126,9 @@ export const ListDoctor = () => {
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    getDoctors(cityReduxValue, specializationReduxValue);
-    sessionStorage.setItem('city', cityReduxValue);
-    sessionStorage.setItem('specialization', specializationReduxValue);
+    getDoctors(city, specialization);
+    sessionStorage.setItem('city', city);
+    sessionStorage.setItem('specialization', specialization);
   };
 
   return (
@@ -140,7 +139,7 @@ export const ListDoctor = () => {
           <i className="pi pi-sort-alt arrow-visible" onClick={() => setInvisible((perv) => !perv)} />
           <div className="input-wrapp">
             <AutoComplete
-              value={cityReduxValue}
+              value={city}
               suggestions={suggestedCities}
               completeMethod={(e: AutoCompleteCompleteEvent) => {
                 setInputText(e.query);
@@ -152,7 +151,7 @@ export const ListDoctor = () => {
               className={`input-find-doctor ${!invisible && 'input-invisible'}`}
             />
             <Dropdown
-              value={specializationReduxValue}
+              value={specialization}
               options={specializations}
               onChange={(e) => dispatch(updateSpecialization(e.target.value))}
               placeholder="Specializacja"

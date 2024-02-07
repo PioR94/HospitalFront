@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { Week } from '../../organisms/Week/Week';
 import { Visits } from '../../molecules/Visits/Visits';
 import { useAppSelector } from '../../hooks/redux';
-import { selectId } from '../../redux/selectors';
 import ProfileSettings from '../../organisms/ProfileSettings/ProfileSettings';
 import { Role } from '../../types/role/role';
 import { useGetUserData } from '../../hooks/useGetUserData';
@@ -18,7 +17,7 @@ export const UserPanel = ({ role }: Role) => {
 
   const [activeComponent, setActiveComponent] = useState<string>('');
 
-  const id = useAppSelector(selectId);
+  const { idUser } = useAppSelector((state) => state.user);
 
   return (
     <>
@@ -61,7 +60,7 @@ export const UserPanel = ({ role }: Role) => {
               <Avatar icon="pi pi-user avatar" style={{ backgroundColor: '#9c27b0', color: '#ffffff', marginRight: 50 }} shape="circle" />
             </div>
             <div className="surface">
-              {activeComponent === 'week' && <Week idDr={id} />}
+              {activeComponent === 'week' && <Week idDr={idUser} />}
               {activeComponent === 'visits' && <Visits />}
               {activeComponent === 'profileSettings' && <ProfileSettings />}
             </div>
