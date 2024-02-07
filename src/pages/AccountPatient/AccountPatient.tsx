@@ -1,10 +1,9 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import './AccountPatient.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-
 import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -13,9 +12,7 @@ import { useGetUserData } from '../../hooks/useGetUserData';
 export const AccountPatient = () => {
   const dispatch = useAppDispatch();
 
-  const cityReduxValue = useAppSelector((state: any) => state.search.city);
-
-  const specializationReduxValue = useAppSelector((state: any) => state.search.specialization);
+  const { city, specialization } = useAppSelector((state) => state.search);
 
   const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
 
@@ -32,6 +29,7 @@ export const AccountPatient = () => {
       setSuggestedCities(r);
     });
   }, [inputText]);
+
   useEffect(() => {
     downloadData(baseUrlSpecialization).then((r) => {
       setSpecializations(['', ...r]);
@@ -40,8 +38,11 @@ export const AccountPatient = () => {
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    sessionStorage.setItem('city', cityReduxValue);
-    sessionStorage.setItem('specialization', specializationReduxValue);
+
+    sessionStorage.setItem('city', city);
+
+    sessionStorage.setItem('specialization', specialization);
+
     navigate('../find-doctor');
   };
 
@@ -59,7 +60,7 @@ export const AccountPatient = () => {
           <h3 className="h3-patient-account">Szukaj wśród lekarzy</h3>
           <form onSubmit={onSubmit} className="form-search">
             <AutoComplete
-              value={cityReduxValue}
+              value={city}
               suggestions={suggestedCities}
               completeMethod={(e: AutoCompleteCompleteEvent) => {
                 setInputText(e.query);
@@ -70,7 +71,7 @@ export const AccountPatient = () => {
               style={{ alignSelf: 'stretch', flexGrow: 1, marginRight: 10, marginBottom: 10 }}
             />
             <Dropdown
-              value={specializationReduxValue}
+              value={specialization}
               options={specializations}
               onChange={(e) => dispatch(updateSpecialization(e.target.value))}
               placeholder="Wybierz specjalizację"

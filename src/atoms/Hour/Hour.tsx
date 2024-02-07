@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Hour.css';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch} from '../../hooks/redux';
 import { toggleHour } from '../../redux/schedule-slice';
 import { ScheduleHour } from '../../types/terms/term';
 
