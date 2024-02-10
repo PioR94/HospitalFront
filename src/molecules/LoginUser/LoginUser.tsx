@@ -56,11 +56,11 @@ export const LoginUser = ({role}: Role) => {
     <div className="login-user-container">
       <div className="form-container">
         <form onSubmit={handleSubmit(onSubmit)} className="form-login">
-          <div className="wrap-input-label">
+          <div className="wrapp-input-label">
             <label htmlFor="login-user">Login</label>
             <InputText type="text" id="login-user" {...register('login')} />{' '}
           </div>
-          <div className="wrap-input-label">
+          <div className="wrapp-input-label">
             <label htmlFor="password-user">Hasło</label>
             <InputText type="password" id="password-user" {...register('password')} />
           </div>

@@ -8,7 +8,7 @@ import { DayProps } from '../../types/props/props';
 export const Day = ({ day, idDr, hours }: DayProps) => {
   const getClass = (hour: string) => {
     const foundHour = hours.find((hourObj: ScheduleHour) => hourObj.hour === hour);
-    return foundHour ? '_hour-div-active' : '_hour-div';
+    return foundHour ? 'hour-div-active' : 'hour-div';
   };
 
   const renderHours = useMemo(() => {
@@ -31,13 +31,11 @@ export const Day = ({ day, idDr, hours }: DayProps) => {
   }, [idDr, hours]);
 
   return (
-    <>
-      <div className="_divDay">
-        <div className="_div-date">
-          <div>{day}</div>
-        </div>
-        {renderHours}
+    <div className="div-day">
+      <div className="div-date">
+        <div>{day}</div>
       </div>
-    </>
+      {renderHours}
+    </div>
   );
 };

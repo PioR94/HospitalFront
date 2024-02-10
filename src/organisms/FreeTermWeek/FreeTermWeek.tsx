@@ -7,6 +7,7 @@ import { FreeTermWeekProps } from '../../types/props/props';
 
 export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekProps) => {
   const [counter, setCounter] = useState(0);
+  
   const [initialDate, setInitialDate] = useState(new Date());
 
   const renderDays = useMemo(() => {

@@ -7,11 +7,15 @@ import { baseUrlTerm, sendData } from '../../api';
 
 export const SuccessPayment = () => {
   const navigate = useNavigate();
+
   const dataTerm = sessionStorage.getItem('data-term');
+
   useEffect(() => {
     if (dataTerm) {
       const data = JSON.parse(dataTerm);
+
       sendData(data, baseUrlTerm, 'add');
+
       sessionStorage.removeItem('dataTerm');
     }
   }, []);

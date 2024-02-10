@@ -1,4 +1,4 @@
-._hour-div {
+.hour-div {
   display: block;
   height: 40px;
   width: 90px;
@@ -9,7 +9,7 @@
   cursor: pointer;
 }
 
-._hour-div-active {
+.hour-div-active {
   display: block;
   height: 40px;
   max-width: 90px;

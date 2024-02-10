@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
 }
+
 .overlay {
   display: flex;
   position: absolute;
@@ -20,6 +21,7 @@
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.7);
 }
+
 .arrow-alt {
   font-size: 0px;
   color: #008b8b;
