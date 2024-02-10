@@ -38,6 +38,7 @@
   overflow: visible;
   color: lightgray;
 }
+
 .loading-animation {
   opacity: 0.1;
   pointer-events: none;

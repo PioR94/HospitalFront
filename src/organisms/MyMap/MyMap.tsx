@@ -26,41 +26,41 @@ export const MyMap = ({ children, doctors, activeDoctorId, onMarkerEnter, onMark
     googleMapsApiKey: GOOLE_API_KEY,
   });
 
-  return isLoaded ? (
-    <div className="section-map">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} options={{ disableDefaultUI: true }}>
-        {doctors.map((doctor) => (
-          <Marker
-            key={doctor.idDr}
-            position={{ lat: doctor.latitude, lng: doctor.longitude }}
-            onClick={() => onMarkerEnter(doctor.idDr)}
-            icon={activeDoctorId === doctor.idDr ? activeIcon : defIcon}
-            onMouseOver={() => {
-              onMarkerEnter(doctor.idDr);
-              const doctorIndex = doctors.findIndex((d) => d.idDr === doctor.idDr);
-              const doctorRef = doctorRefs.current[doctorIndex];
-              if (doctorRef) {
-                doctorRef.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'center',
-                });
-                doctorRef.classList.add('hover-effect');
-              }
-            }}
-            onMouseOut={() => {
-              onMarkerLeave();
-              const doctorIndex = doctors.findIndex((d) => d.idDr === doctor.idDr);
-              const doctorRef = doctorRefs.current[doctorIndex];
-              if (doctorRef) {
-                doctorRef.classList.remove('hover-effect');
-              }
-            }}
-          />
-        ))}
-      </GoogleMap>
-      {children}
-    </div>
-  ) : (
-    <></>
-  );
+  if (isLoaded)
+    return (
+      <div className="section-map">
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} options={{ disableDefaultUI: true }}>
+          {doctors.map((doctor) => (
+            <Marker
+              key={doctor.idDr}
+              position={{ lat: doctor.latitude, lng: doctor.longitude }}
+              onClick={() => onMarkerEnter(doctor.idDr)}
+              icon={activeDoctorId === doctor.idDr ? activeIcon : defIcon}
+              onMouseOver={() => {
+                onMarkerEnter(doctor.idDr);
+                const doctorIndex = doctors.findIndex((d) => d.idDr === doctor.idDr);
+                const doctorRef = doctorRefs.current[doctorIndex];
+                if (doctorRef) {
+                  doctorRef.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                  });
+                  doctorRef.classList.add('hover-effect');
+                }
+              }}
+              onMouseOut={() => {
+                onMarkerLeave();
+                const doctorIndex = doctors.findIndex((d) => d.idDr === doctor.idDr);
+                const doctorRef = doctorRefs.current[doctorIndex];
+                if (doctorRef) {
+                  doctorRef.classList.remove('hover-effect');
+                }
+              }}
+            />
+          ))}
+        </GoogleMap>
+        {children}
+      </div>
+    );
+  return null;
 };

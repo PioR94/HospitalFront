@@ -39,6 +39,7 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
       return;
     }
     sessionStorage.setItem('data-term', JSON.stringify(dataTerm));
+
     const session = await sendAndReceiveData(price, baseUrlPayment, 'create-checkout-session');
 
     await stripe.redirectToCheckout({ sessionId: session.id });

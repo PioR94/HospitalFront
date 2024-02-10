@@ -70,7 +70,7 @@ export const FreeTermDay = ({ dayOfWeek, numberDay, month, year, idDr, nameDr, l
     <>
       <div className="free-term-day">
         <div className="ftd-div-date">
-          <div className="div-dayOfWeek">{dayOfWeek}</div>
+          <div className="div-day-of-week">{dayOfWeek}</div>
           <div className="div-number-month">
             {numberDay} {month}
           </div>
