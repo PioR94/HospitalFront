@@ -6,8 +6,8 @@ import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { useGetUserData } from '../../hooks/useGetUserData';
+import { useAppDispatch, useAppSelector } from '../../hooks/common/redux';
+import { useGetUserData } from '../../hooks/common/useGetUserData';
 
 export const AccountPatient = () => {
   const dispatch = useAppDispatch();

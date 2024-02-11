@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlDoctor, baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../api';
+import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch } from 'react-redux';
@@ -11,14 +11,13 @@ import { MyMap } from '../MyMap/MyMap';
 import { useNavigate } from 'react-router-dom';
 import { Doctor } from '../../types/users/user';
 import { Card } from 'primereact/card';
-import { useGetUserData } from '../../hooks/useGetUserData';
-import { useAppSelector } from '../../hooks/redux';
+import { useGetUserData } from '../../hooks/common/useGetUserData';
+import { useAppSelector } from '../../hooks/common/redux';
+import { useDoctorsData } from '../../hooks/components/ListDoctor/useDoctorsData';
 
 const libs = ['places'];
 
 export const ListDoctor = () => {
-  const [dataDoctors, setDataDoctors] = useState([]);
-
   const [list, setList] = useState<JSX.Element[]>([]);
 
   const [modalList, setModalList] = useState<JSX.Element[]>([]);
@@ -41,10 +40,6 @@ export const ListDoctor = () => {
 
   const { city, specialization } = useAppSelector((state) => state.search);
 
-  const citySessionValue = sessionStorage.getItem('city');
-
-  const specializationSessionValue = sessionStorage.getItem('specialization');
-
   const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
 
   const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);
@@ -53,23 +48,7 @@ export const ListDoctor = () => {
 
   useGetUserData();
 
-  useEffect(() => {
-    if (!city && !specialization) {
-      getDoctors(citySessionValue, specializationSessionValue);
-    } else {
-      getDoctors(city, specialization);
-    }
-  }, []);
-
-  const getDoctors = async (city: string | null, specialization: string | null) => {
-    const dataSearch = {
-      city,
-      specialization,
-    };
-    sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
-      setDataDoctors(r);
-    });
-  };
+  const { dataDoctors, fetchDoctors } = useDoctorsData();
 
   useEffect(() => {
     if (!modalActive) {
@@ -123,12 +102,11 @@ export const ListDoctor = () => {
   useEffect(() => {
     doctorRefs.current = doctorRefs.current.slice(0, dataDoctors.length);
   }, [dataDoctors]);
+
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    getDoctors(city, specialization);
-    sessionStorage.setItem('city', city);
-    sessionStorage.setItem('specialization', specialization);
+    fetchDoctors(city, specialization);
   };
 
   return (

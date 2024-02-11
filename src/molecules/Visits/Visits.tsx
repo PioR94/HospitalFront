@@ -6,7 +6,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Month } from '../../utils/enum';
 import { VisitTable } from '../../types/terms/term';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks/common/redux';
 
 export const Visits = () => {
   const [visits, setVisits] = useState<VisitTable[]>([]);

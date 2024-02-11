@@ -10,7 +10,7 @@ import { RootState } from '../../redux/store';
 import {} from 'react-redux';
 import { chooseValue } from '../../utils/functions/choose-value';
 import { FormProfileSettings } from '../../types/forms/forms';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks/common/redux';
 
 const ProfileSettings: React.FC = () => {
   const role = sessionStorage.getItem('role');
