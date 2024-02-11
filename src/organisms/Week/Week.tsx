@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
 import { getDayName } from '../../utils/functions/function';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/common/redux';
 import { Button } from 'primereact/button';
 import { baseUrlSchedule, sendAndReceiveData, updateData } from '../../api';
 import { AvailableHours, ScheduleHour } from '../../types/terms/term';
