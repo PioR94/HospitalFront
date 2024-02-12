@@ -14,6 +14,7 @@ import { Card } from 'primereact/card';
 import { useGetUserData } from '../../hooks/common/useGetUserData';
 import { useAppSelector } from '../../hooks/common/redux';
 import { useDoctorsData } from '../../hooks/components/ListDoctor/useDoctorsData';
+import { useCitySuggestions } from '../../hooks/components/ListDoctor/useCitySuggestions';
 
 const libs = ['places'];
 
@@ -26,11 +27,7 @@ export const ListDoctor = () => {
 
   const inputRef = useRef<any>(null);
 
-  const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
-
   const [inputText, setInputText] = useState('');
-
-  const [inputActive, setInputActive] = useState(false);
 
   const [specializations, setSpecializations] = useState<string[]>([]);
 
@@ -49,6 +46,8 @@ export const ListDoctor = () => {
   useGetUserData();
 
   const { dataDoctors, fetchDoctors } = useDoctorsData();
+
+  const citySuggestions = useCitySuggestions(inputText);
 
   useEffect(() => {
     if (!modalActive) {
@@ -87,13 +86,6 @@ export const ListDoctor = () => {
   }, [modalActive, dataDoctors]);
 
   useEffect(() => {
-    sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
-      console.log(r);
-      setSuggestedCities(r);
-    });
-  }, [inputText, inputActive]);
-
-  useEffect(() => {
     downloadData(baseUrlSpecialization).then((r) => {
       setSpecializations(['', ...r]);
     });
@@ -118,7 +110,7 @@ export const ListDoctor = () => {
           <div className="input-wrapp">
             <AutoComplete
               value={city}
-              suggestions={suggestedCities}
+              suggestions={citySuggestions}
               completeMethod={(e: AutoCompleteCompleteEvent) => {
                 setInputText(e.query);
               }}
