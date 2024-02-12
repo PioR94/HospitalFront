@@ -15,10 +15,13 @@ import { useAppSelector } from '../../hooks/common/redux';
 import { useDoctorsData } from '../../hooks/components/ListDoctor/useDoctorsData';
 import { useCitySuggestions } from '../../hooks/components/ListDoctor/useCitySuggestions';
 import { useSpecializations } from '../../hooks/common/useSpecializations';
+import { useDoctorRefs } from '../../hooks/components/ListDoctor/useDoctorRefs';
 
 const libs = ['places'];
 
 export const ListDoctor = () => {
+  useGetUserData();
+
   const [list, setList] = useState<JSX.Element[]>([]);
 
   const [modalList, setModalList] = useState<JSX.Element[]>([]);
@@ -35,17 +38,15 @@ export const ListDoctor = () => {
 
   const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
 
-  const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);
-
-  const navigate = useNavigate();
-
-  useGetUserData();
+  const navigate = useNavigate(); 
 
   const { dataDoctors, fetchDoctors } = useDoctorsData();
 
   const citySuggestions = useCitySuggestions(inputText);
 
   const specializations = useSpecializations();
+  
+  const doctorRefs = useDoctorRefs(dataDoctors);
 
   useEffect(() => {
     if (!modalActive) {
@@ -81,10 +82,6 @@ export const ListDoctor = () => {
       setModalList(secoundList);
     }
   }, [modalActive, dataDoctors]);
-
-  useEffect(() => {
-    doctorRefs.current = doctorRefs.current.slice(0, dataDoctors.length);
-  }, [dataDoctors]);
 
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
