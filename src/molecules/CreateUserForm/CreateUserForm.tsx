@@ -27,6 +27,7 @@ export const CreateUserForm = ({ role }: Role) => {
   } = useForm<InputsAddForm>();
 
   const [password, repeatPassword] = watch(['password', 'repeatPassword']);
+  
   useEffect(() => {
     setComparePassword(password === repeatPassword);
   }, [password, repeatPassword]);

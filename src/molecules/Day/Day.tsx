@@ -2,32 +2,28 @@ import React, { useMemo } from 'react';
 import { Hour } from '../../atoms/Hour/Hour';
 import './Day.css';
 import { addMinutes, format } from 'date-fns';
-import { ScheduleHour } from '../../types/terms/term';
 import { DayProps } from '../../types/props/props';
+import { getClassForHour } from '../../utils/functions/get-class-for-hour';
 
 export const Day = ({ day, idDr, hours }: DayProps) => {
-  const getClass = (hour: string) => {
-    const foundHour = hours.find((hourObj: ScheduleHour) => hourObj.hour === hour);
-    return foundHour ? 'hour-div-active' : 'hour-div';
-  };
-
   const renderHours = useMemo(() => {
     const startHour = 6;
     const endHour = 21;
     const intervalMinutes = 15;
-    const hours = [];
+    const hoursToRender = [];
 
     let currentTime = new Date();
+
     currentTime.setHours(startHour, 0, 0, 0);
 
     while (currentTime.getHours() < endHour) {
       const formattedTime = format(currentTime, 'HH:mm');
 
-      hours.push(<Hour hour={formattedTime} day={day} idDr={idDr} className={getClass(formattedTime)} key={formattedTime} />);
+      hoursToRender.push(<Hour hour={formattedTime} day={day} idDr={idDr} className={getClassForHour(formattedTime, hours)} key={formattedTime} />);
       currentTime = addMinutes(currentTime, intervalMinutes);
     }
 
-    return hours;
+    return hoursToRender;
   }, [idDr, hours]);
 
   return (
