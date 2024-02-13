@@ -18,10 +18,8 @@ export const Hour = ({ day, idDr, hour, className }: ScheduleHour) => {
   };
 
   return (
-    <>
-      <div onClick={addTerm} className={className}>
-        {hour}
-      </div>
-    </>
+    <div onClick={addTerm} className={className}>
+      {hour}
+    </div>
   );
 };

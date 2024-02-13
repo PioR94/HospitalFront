@@ -1,7 +1,6 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { useDispatch } from 'react-redux';
@@ -15,21 +14,21 @@ import { useGetUserData } from '../../hooks/common/useGetUserData';
 import { useAppSelector } from '../../hooks/common/redux';
 import { useDoctorsData } from '../../hooks/components/ListDoctor/useDoctorsData';
 import { useCitySuggestions } from '../../hooks/components/ListDoctor/useCitySuggestions';
+import { useSpecializations } from '../../hooks/common/useSpecializations';
+import { useDoctorRefs } from '../../hooks/components/ListDoctor/useDoctorRefs';
 
 const libs = ['places'];
 
 export const ListDoctor = () => {
+  useGetUserData();
+
   const [list, setList] = useState<JSX.Element[]>([]);
 
   const [modalList, setModalList] = useState<JSX.Element[]>([]);
 
   const [modalActive, setModalActive] = useState<boolean>(false);
 
-  const inputRef = useRef<any>(null);
-
   const [inputText, setInputText] = useState('');
-
-  const [specializations, setSpecializations] = useState<string[]>([]);
 
   const [invisible, setInvisible] = useState<boolean>(false);
 
@@ -39,15 +38,15 @@ export const ListDoctor = () => {
 
   const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
 
-  const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);
-
-  const navigate = useNavigate();
-
-  useGetUserData();
+  const navigate = useNavigate(); 
 
   const { dataDoctors, fetchDoctors } = useDoctorsData();
 
   const citySuggestions = useCitySuggestions(inputText);
+
+  const specializations = useSpecializations();
+  
+  const doctorRefs = useDoctorRefs(dataDoctors);
 
   useEffect(() => {
     if (!modalActive) {
@@ -66,9 +65,8 @@ export const ListDoctor = () => {
       ));
 
       setList(firstList);
-
-      console.log(dataDoctors);
     }
+
     if (modalActive) {
       const secoundList = dataDoctors.map((doctor: Doctor, index: number) => (
         <li
@@ -85,19 +83,8 @@ export const ListDoctor = () => {
     }
   }, [modalActive, dataDoctors]);
 
-  useEffect(() => {
-    downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(['', ...r]);
-    });
-  }, []);
-
-  useEffect(() => {
-    doctorRefs.current = doctorRefs.current.slice(0, dataDoctors.length);
-  }, [dataDoctors]);
-
   const sendForm = async (e: SyntheticEvent) => {
     e.preventDefault();
-
     fetchDoctors(city, specialization);
   };
 

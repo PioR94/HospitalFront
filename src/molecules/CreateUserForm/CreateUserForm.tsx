@@ -9,11 +9,15 @@ import { chooseValue } from '../../utils/functions/choose-value';
 import { Button } from 'primereact/button';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { InputsAddForm, InputsLog } from '../../types/hook-form/inputs';
+import { useSpecializations } from '../../hooks/common/useSpecializations';
 
 export const CreateUserForm = ({ role }: Role) => {
-  const [specializations, setSpecializations] = useState([]);
+  const specializations = useSpecializations();
+
   const [comparePassword, setComparePassword] = useState<boolean>(true);
+
   const url = chooseValue(role) || '';
+
   const {
     register,
     handleSubmit,
@@ -23,15 +27,10 @@ export const CreateUserForm = ({ role }: Role) => {
   } = useForm<InputsAddForm>();
 
   const [password, repeatPassword] = watch(['password', 'repeatPassword']);
+  
   useEffect(() => {
     setComparePassword(password === repeatPassword);
   }, [password, repeatPassword]);
-
-  useEffect(() => {
-    downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(r);
-    });
-  }, []);
 
   const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
     event?.preventDefault();
