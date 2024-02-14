@@ -13,3 +13,4 @@ export const useInitializeData = (idDr: string) => {
       });
     }
   }, [idDr, dispatch]);
+};
