@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
 import { getDayName } from '../../utils/functions/function';
@@ -19,23 +19,24 @@ export const Week = ({ idDr }: WeekProps) => {
   const daysList = useMemo(() => {
     const days = [];
     for (let i = 0; i < 7; i++) {
-      days[i] = <Day day={`${getDayName(i)}`} idDr={idDr} hours={getAvailableHoursDay(i)} />;
+      days[i] = <Day day={`${getDayName(i)}`} idDr={idDr} hours={getAvailableHoursDay(i)} key={`${getDayName(i)}`} />;
     }
     return days;
   }, [idDr, getAvailableHoursDay]);
 
+  useEffect(() => {
+    console.log(reduxHours.length);
+  }, [reduxHours]);
   return (
-    <>
-      <div className="container-week">
-        <Button
-          label="Zapisz"
-          icon="pi pi-check"
-          iconPos="right"
-          onClick={() => updateData({ idDr, newSchedule: reduxHours }, baseUrlSchedule, 'update')}
-          className="button-week"
-        />
-        <div className="div-week">{daysList}</div>
-      </div>
-    </>
+    <div className="container-week">
+      <Button
+        label="Zapisz"
+        icon="pi pi-check"
+        iconPos="right"
+        onClick={() => updateData({ idDr, newSchedule: reduxHours }, baseUrlSchedule, 'update')}
+        className="button-week"
+      />
+      <div className="div-week">{daysList}</div>
+    </div>
   );
 };
