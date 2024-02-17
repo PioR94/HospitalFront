@@ -1,7 +1,7 @@
 import React from 'react';
 import { Visit } from '../../types/visits/visit';
 import './OneVisit.css';
-import { changeClass } from '../../utils/functions/function';
+import { changeClass } from '../../utils/functions/change-class';
 
 export const OneVisit = ({ name, lastName, numberDay, month, year, hour, price, status }: Visit) => {
   return (

@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { FreeTermDay } from '../../molecules/FreeTermDay/FreeTermDay';
 import './FreeTermWeek.css';
-import { changeClass, getDayName, getMonthName } from '../../utils/functions/function';
+import { getDayName, getMonthName } from '../../utils/functions/get-day-month-name';
 import { addDays } from 'date-fns';
 import { FreeTermWeekProps } from '../../types/props/props';
+import { changeClass } from '../../utils/functions/change-class';
 
 export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekProps) => {
   const [counter, setCounter] = useState(0);
-  
+
   const [initialDate, setInitialDate] = useState(new Date());
 
   const renderDays = useMemo(() => {

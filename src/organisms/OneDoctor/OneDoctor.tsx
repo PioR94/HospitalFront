@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './OneDoctor.css';
 import { FreeTermWeek } from '../FreeTermWeek/FreeTermWeek';
-import { changeClass } from '../../utils/functions/function';
 import { Avatar } from 'primereact/avatar';
 import StarRatings from 'react-star-ratings';
 import 'primeicons/primeicons.css';
 import { OneDoctorProps } from '../../types/props/props';
+import { changeClass } from '../../utils/functions/change-class';
 
 export const OneDoctor = ({ idDr, nameDr, lastNameDr, specialization, street, city, price, alwaysInvisible }: OneDoctorProps) => {
   const [wrap, setWrap] = useState(false);
