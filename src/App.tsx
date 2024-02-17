@@ -7,7 +7,7 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import { ListDoctor } from './organisms/ListDoctor/ListDoctor';
-import RequireLogin from './utils/RequireLogin';
+import RequireLogin from './atoms/RequireLogin';
 import { AccountPatient } from './pages/AccountPatient/AccountPatient';
 import { LoginUser } from './molecules/LoginUser/LoginUser';
 import { UserPanel } from './pages/UserPanel/UserPanel';

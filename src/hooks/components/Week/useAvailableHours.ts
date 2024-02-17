@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AvailableHours, ScheduleHour } from '../../../types/terms/term';
 import { useAppSelector } from '../../common/redux';
-import { DaysOfWeek } from '../../../utils/enum';
+import { DaysOfWeek } from '../../../utils/constants/month-and-day';
 import { RootState } from '../../../redux/store';
 
 export const useAvailableHours = () => {

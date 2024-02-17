@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
-import { getDayName } from '../../utils/functions/function';
+import { getDayName } from '../../utils/functions/get-day-month-name';
 import { baseUrlSchedule, updateData } from '../../api';
 import { Button } from 'primereact/button';
 import { WeekProps } from '../../types/props/props';
@@ -24,9 +24,7 @@ export const Week = ({ idDr }: WeekProps) => {
     return days;
   }, [idDr, getAvailableHoursDay]);
 
-  useEffect(() => {
-    console.log(reduxHours.length);
-  }, [reduxHours]);
+
   return (
     <div className="container-week">
       <Button
