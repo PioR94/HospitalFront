@@ -14,8 +14,6 @@ import { useSpecializations } from '../../hooks/common/useSpecializations';
 export const CreateUserForm = ({ role }: Role) => {
   const specializations = useSpecializations();
 
-  const [comparePassword, setComparePassword] = useState<boolean>(true);
-
   const url = chooseValue(role) || '';
 
   const {
@@ -27,10 +25,6 @@ export const CreateUserForm = ({ role }: Role) => {
   } = useForm<InputsAddForm>();
 
   const [password, repeatPassword] = watch(['password', 'repeatPassword']);
-  
-  useEffect(() => {
-    setComparePassword(password === repeatPassword);
-  }, [password, repeatPassword]);
 
   const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
     event?.preventDefault();
