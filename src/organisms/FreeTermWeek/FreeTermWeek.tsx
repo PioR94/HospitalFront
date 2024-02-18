@@ -21,6 +21,7 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekPr
       let numberDay = nextDate.getUTCDate();
       let month = nextDate.getMonth();
       let year = nextDate.getFullYear();
+
       days[i] = (
         <div key={`${year}-${month}-${numberDay}`}>
           <FreeTermDay

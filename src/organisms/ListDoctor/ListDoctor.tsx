@@ -38,14 +38,14 @@ export const ListDoctor = () => {
 
   const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const { dataDoctors, fetchDoctors } = useDoctorsData();
 
   const citySuggestions = useCitySuggestions(inputText);
 
   const specializations = useSpecializations();
-  
+
   const doctorRefs = useDoctorRefs(dataDoctors);
 
   useEffect(() => {
