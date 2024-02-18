@@ -1,36 +1,13 @@
-import React, { BaseSyntheticEvent, SyntheticEvent, useEffect, useState } from 'react';
+import React from 'react';
 import './LoginUser.css';
-import { sendAndReceiveData } from '../../api';
 import { Role } from '../../types/role/role';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
-import { chooseValue } from '../../utils/functions/choose-value';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { InputsLog } from '../../types/hook-form/inputs';
-import { useNavigateLogin } from '../../hooks/components/LoginUser/useNavigateLogin';
+import { useLoginUser } from '../../hooks/components/LoginUser/useLoginUser';
 
 export const LoginUser = ({ role }: Role) => {
-  const url = chooseValue(role) || '';
-
-  const [token, setToken] = useState('');
-
-  const { clickRegister } = useNavigateLogin(role, token);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<InputsLog>();
-
-  const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
-    event?.preventDefault();
-
-    sendAndReceiveData(data, url, 'log').then((data) => {
-      setToken(data.token);
-    });
-  };
+  const { clickRegister, onSubmit, register, handleSubmit } = useLoginUser(role);
 
   return (
     <div className="login-user-container">
