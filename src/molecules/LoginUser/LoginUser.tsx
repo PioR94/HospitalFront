@@ -1,7 +1,6 @@
 import React, { BaseSyntheticEvent, SyntheticEvent, useEffect, useState } from 'react';
 import './LoginUser.css';
 import { sendAndReceiveData } from '../../api';
-import { useNavigate } from 'react-router-dom';
 import { Role } from '../../types/role/role';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -9,9 +8,15 @@ import { Divider } from 'primereact/divider';
 import { chooseValue } from '../../utils/functions/choose-value';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { InputsLog } from '../../types/hook-form/inputs';
+import { useNavigateLogin } from '../../hooks/components/LoginUser/useNavigateLogin';
 
-export const LoginUser = ({role}: Role) => {
+export const LoginUser = ({ role }: Role) => {
   const url = chooseValue(role) || '';
+
+  const [token, setToken] = useState('');
+
+  const { clickRegister } = useNavigateLogin(role, token);
+
   const {
     register,
     handleSubmit,
@@ -19,37 +24,12 @@ export const LoginUser = ({role}: Role) => {
     formState: { errors },
   } = useForm<InputsLog>();
 
-  const [token, setToken] = useState('');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (token) {
-      sessionStorage.setItem('token', token);
-      if (role === 'patient') {
-        sessionStorage.setItem('role', 'patient');
-        navigate('../patient');
-      } else if (role === 'doctor') {
-        sessionStorage.setItem('role', 'doctor');
-        navigate('../doctor/panel');
-      }
-    }
-
-    console.log(token);
-  }, [token]);
-
   const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
     event?.preventDefault();
+
     sendAndReceiveData(data, url, 'log').then((data) => {
       setToken(data.token);
     });
-  };
-
-  const clickRegister = () => {
-    if (role === 'doctor') {
-      navigate('../doctor/add');
-    } else if (role === 'patient') {
-      navigate('../patient/add');
-    }
   };
 
   return (
