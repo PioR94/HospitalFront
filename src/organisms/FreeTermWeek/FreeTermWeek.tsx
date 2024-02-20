@@ -5,11 +5,10 @@ import { getDayName, getMonthName } from '../../utils/functions/get-day-month-na
 import { addDays } from 'date-fns';
 import { FreeTermWeekProps } from '../../types/props/props';
 import { changeClass } from '../../utils/functions/change-class';
+import { useMoveArrows } from '../../hooks/components/FreeTermWeek/useMoveArrows';
 
 export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekProps) => {
-  const [counter, setCounter] = useState(0);
-
-  const [initialDate, setInitialDate] = useState(new Date());
+  const { counter, initialDate, moveRight, moveLeft } = useMoveArrows();
 
   const renderDays = useMemo(() => {
     const days = [];
@@ -42,20 +41,6 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekPr
     return days;
   }, [initialDate]);
 
-  const moveRight = (): void => {
-    if (counter < 50) {
-      setInitialDate(addDays(initialDate, 3));
-      setCounter(counter + 1);
-    }
-  };
-
-  const moveLeft = (): void => {
-    if (counter > 0) {
-      setInitialDate(addDays(initialDate, -3));
-      setCounter(counter - 1);
-    }
-  };
-
   return (
     <>
       <div className="free-term-week">
@@ -64,7 +49,7 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekPr
         </div>
         {renderDays}
 
-        <div className={changeClass(counter === 50, 'move-right-none', 'move-right')} onClick={moveRight}>
+        <div className={changeClass(counter === 20, 'move-right-none', 'move-right')} onClick={moveRight}>
           <i className="pi pi-angle-right" />
         </div>
       </div>
