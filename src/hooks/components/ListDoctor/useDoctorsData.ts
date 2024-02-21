@@ -1,10 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SyntheticEvent } from 'react';
 import { baseUrlDoctor, sendAndReceiveData } from '../../../api';
+import { useAppSelector } from '../../common/redux';
 
 export const useDoctorsData = () => {
   const [dataDoctors, setDataDoctors] = useState([]);
 
+  const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
+
+  const { city, specialization } = useAppSelector((state) => state.search);
+
   const defaultCity = sessionStorage.getItem('city') || null;
+
   const defaultSpecialization = sessionStorage.getItem('specialization') || null;
 
   const fetchDoctors = async (city = defaultCity, specialization = defaultSpecialization) => {
@@ -23,9 +29,15 @@ export const useDoctorsData = () => {
       setDataDoctors([]);
     }
   };
+
+  const sendForm = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    fetchDoctors(city, specialization);
+  };
+
   useEffect(() => {
     fetchDoctors();
   }, []);
 
-  return { dataDoctors, fetchDoctors };
+  return { dataDoctors, sendForm, activeDoctorId, setActiveDoctorId };
 };

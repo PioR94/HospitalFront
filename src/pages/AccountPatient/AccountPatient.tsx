@@ -1,50 +1,16 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import React from 'react';
 import './AccountPatient.css';
-import { useNavigate } from 'react-router-dom';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/common/redux';
 import { useGetUserData } from '../../hooks/common/useGetUserData';
+import { useAccountPatient } from '../../hooks/components/AccountPatient/useAccountPatient';
 
 export const AccountPatient = () => {
-  const dispatch = useAppDispatch();
-
-  const { city, specialization } = useAppSelector((state) => state.search);
-
-  const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
-
-  const [specializations, setSpecializations] = useState<string[]>([]);
-
-  const [inputText, setInputText] = useState('');
-
-  const navigate = useNavigate();
-
   useGetUserData();
 
-  useEffect(() => {
-    sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
-      setSuggestedCities(r);
-    });
-  }, [inputText]);
-
-  useEffect(() => {
-    downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(['', ...r]);
-    });
-  }, []);
-
-  const onSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-
-    sessionStorage.setItem('city', city);
-
-    sessionStorage.setItem('specialization', specialization);
-
-    navigate('../find-doctor');
-  };
+  const { onSubmit, city, suggestedCities, setInputText, navigate, dispatch, specialization, specializations } = useAccountPatient();
 
   return (
     <div className="container-patient-account">
