@@ -36,11 +36,9 @@ export const ListDoctor = () => {
 
   const { city, specialization } = useAppSelector((state) => state.search);
 
-  const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
-
   const navigate = useNavigate();
 
-  const { dataDoctors, fetchDoctors } = useDoctorsData();
+  const { dataDoctors, sendForm, activeDoctorId, setActiveDoctorId } = useDoctorsData();
 
   const citySuggestions = useCitySuggestions(inputText);
 
@@ -82,11 +80,6 @@ export const ListDoctor = () => {
       setModalList(secoundList);
     }
   }, [modalActive, dataDoctors]);
-
-  const sendForm = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    fetchDoctors(city, specialization);
-  };
 
   return (
     <div className="list-doctor-wrap">

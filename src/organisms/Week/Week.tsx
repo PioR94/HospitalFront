@@ -14,6 +14,7 @@ export const Week = ({ idDr }: WeekProps) => {
   const reduxHours = useAppSelector((state: RootState) => state.schedule.hours);
 
   const { getAvailableHoursDay } = useAvailableHours();
+
   useInitializeData(idDr);
 
   const daysList = useMemo(() => {
