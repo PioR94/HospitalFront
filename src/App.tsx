@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { CreateUserForm } from './molecules/CreateUserForm/CreateUserForm';
-import { MainComponent } from './pages/MainComponent/MainComponent';
+import { StartPage } from './pages/StartPage/StartPage';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -15,7 +15,7 @@ import { SuccessPayment } from './molecules/SuccessPayment/SuccessPayment';
 
 export default function App() {
   const router = createBrowserRouter([
-    { path: '/', element: <MainComponent /> },
+    { path: '/', element: <StartPage /> },
     { path: 'patient/add', element: <CreateUserForm role={'patient'} /> },
     { path: 'patient/log', element: <LoginUser role={'patient'} /> },
     {
