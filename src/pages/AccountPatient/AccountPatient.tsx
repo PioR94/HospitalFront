@@ -8,43 +8,12 @@ import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/common/redux';
 import { useGetUserData } from '../../hooks/common/useGetUserData';
+import { useAccountPatient } from '../../hooks/components/AccountPatient/useAccountPatient';
 
 export const AccountPatient = () => {
-  const dispatch = useAppDispatch();
-
-  const { city, specialization } = useAppSelector((state) => state.search);
-
-  const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
-
-  const [specializations, setSpecializations] = useState<string[]>([]);
-
-  const [inputText, setInputText] = useState('');
-
-  const navigate = useNavigate();
-
   useGetUserData();
 
-  useEffect(() => {
-    sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
-      setSuggestedCities(r);
-    });
-  }, [inputText]);
-
-  useEffect(() => {
-    downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(['', ...r]);
-    });
-  }, []);
-
-  const onSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-
-    sessionStorage.setItem('city', city);
-
-    sessionStorage.setItem('specialization', specialization);
-
-    navigate('../find-doctor');
-  };
+  const { onSubmit, city, suggestedCities, setInputText, navigate, dispatch, specialization, specializations } = useAccountPatient();
 
   return (
     <div className="container-patient-account">
