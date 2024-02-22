@@ -6,7 +6,6 @@ import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { InputMask } from 'primereact/inputmask';
 import { baseUrlSpecialization, downloadData, updateData } from '../../api';
-import { RootState } from '../../redux/store';
 import {} from 'react-redux';
 import { chooseValue } from '../../utils/functions/choose-value';
 import { FormProfileSettings } from '../../types/forms/forms';

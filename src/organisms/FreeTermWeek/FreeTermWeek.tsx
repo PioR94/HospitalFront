@@ -42,17 +42,15 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekPr
   }, [initialDate]);
 
   return (
-    <>
-      <div className="free-term-week">
-        <div className={changeClass(counter === 0, 'move-left-none', 'move-left')} onClick={moveLeft}>
-          <i className="pi pi-angle-left" />
-        </div>
-        {renderDays}
-
-        <div className={changeClass(counter === 20, 'move-right-none', 'move-right')} onClick={moveRight}>
-          <i className="pi pi-angle-right" />
-        </div>
+    <div className="free-term-week">
+      <div className={changeClass(counter === 0, 'move-left-none', 'move-left')} onClick={moveLeft}>
+        <i className="pi pi-angle-left" />
       </div>
-    </>
+      {renderDays}
+
+      <div className={changeClass(counter === 20, 'move-right-none', 'move-right')} onClick={moveRight}>
+        <i className="pi pi-angle-right" />
+      </div>
+    </div>
   );
 };

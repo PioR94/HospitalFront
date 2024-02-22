@@ -1,6 +1,6 @@
-import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
+import React, { BaseSyntheticEvent} from 'react';
 import './CreateUserForm.css';
-import { baseUrlSpecialization, downloadData, sendAndReceiveData, sendData } from '../../api';
+import { sendData } from '../../api';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { InputMask } from 'primereact/inputmask';

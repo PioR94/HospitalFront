@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
 import { getDayName } from '../../utils/functions/get-day-month-name';
@@ -19,6 +19,7 @@ export const Week = ({ idDr }: WeekProps) => {
 
   const daysList = useMemo(() => {
     const days = [];
+
     for (let i = 0; i < 7; i++) {
       days[i] = <Day day={`${getDayName(i)}`} idDr={idDr} hours={getAvailableHoursDay(i)} key={`${getDayName(i)}`} />;
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './OneDoctor.css';
 import { FreeTermWeek } from '../FreeTermWeek/FreeTermWeek';
 import { Avatar } from 'primereact/avatar';
@@ -6,18 +6,12 @@ import StarRatings from 'react-star-ratings';
 import 'primeicons/primeicons.css';
 import { OneDoctorProps } from '../../types/props/props';
 import { changeClass } from '../../utils/functions/change-class';
+import { useOneDoctor } from '../../hooks/components/StartPage/useOneDoctor';
 
 export const OneDoctor = ({ idDr, nameDr, lastNameDr, specialization, street, city, price, alwaysInvisible }: OneDoctorProps) => {
   const [wrapp, setWrapp] = useState(false);
-  const [calendarVisible, setCalendarVisible] = useState(false);
 
-  const sectionDataClass = `${alwaysInvisible ? 'modal-one-doctor-section-data' : 'one-doctor-section-data'} ${
-    alwaysInvisible ? calendarVisible && 'hidden' : calendarVisible && 'invisible'
-  }`;
-
-  const sectionCalendarClass = `${alwaysInvisible ? 'modal-one-doctor-section-calendar' : 'one-doctor-section-calendar'} ${
-    alwaysInvisible ? !calendarVisible && 'hidden' : !calendarVisible && 'invisible'
-  }`;
+  const { setCalendarVisible, sectionCalendarClass, sectionDataClass } = useOneDoctor(alwaysInvisible);
 
   return (
     <div className={alwaysInvisible ? 'modal-one-doctor-wrapp' : 'one-doctor-wrapp'}>

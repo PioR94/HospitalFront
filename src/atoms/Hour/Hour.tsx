@@ -7,21 +7,9 @@ import { ScheduleHour } from '../../types/terms/term';
 export const Hour = ({ day, idDr, hour, className }: ScheduleHour) => {
   const dispatch = useAppDispatch();
 
-  const term: ScheduleHour = {
-    day,
-    idDr,
-    hour,
-  };
-
-  const addTerm = () => {
-    dispatch(toggleHour(term));
-  };
-
   return (
-    <>
-      <div onClick={addTerm} className={className}>
-        {hour}
-      </div>
-    </>
+    <div onClick={() => dispatch(toggleHour({ day, idDr, hour }))} className={className}>
+      {hour}
+    </div>
   );
 };

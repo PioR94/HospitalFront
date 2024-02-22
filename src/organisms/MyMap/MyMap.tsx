@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import { FiVideo } from 'react-icons/fi';
 import './MyMap.css';
 import 'primeicons/primeicons.css';
 

@@ -48,12 +48,10 @@ export const Visits = () => {
   }, []);
 
   return (
-    <>
-      <DataTable value={visits} tableStyle={{ minWidth: '50rem' }}>
-        <Column field="date" header="Data"></Column>
-        <Column field="lastName" header="Last Name"></Column>
-        <Column field="name" header="Name"></Column>
-      </DataTable>
-    </>
+    <DataTable value={visits} tableStyle={{ minWidth: '50rem' }}>
+      <Column field="date" header="Data"></Column>
+      <Column field="lastName" header="Last Name"></Column>
+      <Column field="name" header="Name"></Column>
+    </DataTable>
   );
 };
