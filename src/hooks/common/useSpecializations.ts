@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { baseUrlSpecialization, downloadData } from '../../api';
+import { useQuery } from 'react-query';
 
 export const useSpecializations = () => {
-  const [specializations, setSpecializations] = useState([]);
+  const specializationsQuery = useQuery('specializations', () => downloadData(baseUrlSpecialization), {
+    select: (data) => ['', ...data],
+  });
 
-  useEffect(() => {
-    downloadData(baseUrlSpecialization).then(setSpecializations);
-  }, []);
-
-  return specializations;
+  return { specializations: specializationsQuery.data };
 };
- 

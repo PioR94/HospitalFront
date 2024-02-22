@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { baseUrlPatient, sendAndReceiveData } from '../../../api';
+import { baseUrlPatient, sendAndReceiveData } from '../../api';
 
-export const useCitySuggestions = (inputText: string) => {
+export const useCitySuggestions = () => {
+  const [inputText, setInputText] = useState('');
+
   const [citySuggestions, setCitySuggestions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -10,5 +12,5 @@ export const useCitySuggestions = (inputText: string) => {
     });
   }, [inputText]);
 
-  return citySuggestions;
+  return { citySuggestions, setInputText };
 };
