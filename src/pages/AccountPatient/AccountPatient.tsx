@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './AccountPatient.css';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
@@ -6,11 +6,21 @@ import { Button } from 'primereact/button';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { useGetUserData } from '../../hooks/common/useGetUserData';
 import { useAccountPatient } from '../../hooks/components/AccountPatient/useAccountPatient';
+import { useSpecializations } from '../../hooks/common/useSpecializations';
+import { useCitySuggestions } from '../../hooks/common/useCitySuggestions';
 
 export const AccountPatient = () => {
   useGetUserData();
 
-  const { onSubmit, city, suggestedCities, setInputText, navigate, dispatch, specialization, specializations } = useAccountPatient();
+  const { onSubmit, city, navigate, dispatch, specialization } = useAccountPatient();
+
+  const { specializations } = useSpecializations();
+
+  const { citySuggestions, setInputText } = useCitySuggestions();
+
+  useEffect(() => {
+    console.log(citySuggestions);
+  }, [citySuggestions]);
 
   return (
     <div className="container-patient-account">
@@ -27,7 +37,7 @@ export const AccountPatient = () => {
           <form onSubmit={onSubmit} className="form-search">
             <AutoComplete
               value={city}
-              suggestions={suggestedCities}
+              suggestions={citySuggestions}
               completeMethod={(e: AutoCompleteCompleteEvent) => {
                 setInputText(e.query);
               }}

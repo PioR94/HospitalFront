@@ -13,7 +13,7 @@ import { Card } from 'primereact/card';
 import { useGetUserData } from '../../hooks/common/useGetUserData';
 import { useAppSelector } from '../../hooks/common/redux';
 import { useDoctorsData } from '../../hooks/components/ListDoctor/useDoctorsData';
-import { useCitySuggestions } from '../../hooks/components/ListDoctor/useCitySuggestions';
+import { useCitySuggestions } from '../../hooks/common/useCitySuggestions';
 import { useSpecializations } from '../../hooks/common/useSpecializations';
 import { useDoctorRefs } from '../../hooks/components/ListDoctor/useDoctorRefs';
 
@@ -28,8 +28,6 @@ export const ListDoctor = () => {
 
   const [modalActive, setModalActive] = useState<boolean>(false);
 
-  const [inputText, setInputText] = useState('');
-
   const [invisible, setInvisible] = useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -40,9 +38,9 @@ export const ListDoctor = () => {
 
   const { dataDoctors, sendForm, activeDoctorId, setActiveDoctorId } = useDoctorsData();
 
-  const citySuggestions = useCitySuggestions(inputText);
+  const { citySuggestions, setInputText } = useCitySuggestions();
 
-  const specializations = useSpecializations();
+  const { specializations } = useSpecializations();
 
   const doctorRefs = useDoctorRefs(dataDoctors);
 

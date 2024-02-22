@@ -12,7 +12,7 @@ import { InputsAddForm, InputsLog } from '../../types/hook-form/inputs';
 import { useSpecializations } from '../../hooks/common/useSpecializations';
 
 export const CreateUserForm = ({ role }: Role) => {
-  const specializations = useSpecializations();
+  const { specializations } = useSpecializations();
 
   const url = chooseValue(role) || '';
 
