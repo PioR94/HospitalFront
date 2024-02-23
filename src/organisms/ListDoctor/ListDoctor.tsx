@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';

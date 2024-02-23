@@ -34,6 +34,7 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
 
   const handleCheckout = async () => {
     const stripe = await stripePromise;
+
     if (stripe === null) {
       console.error('Stripe has not been initialized');
       return;
@@ -46,7 +47,7 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
   };
 
   return (
-    <>
+    <div>
       <div onClick={() => setDisplay((prev) => !prev)} className={classNameState}>
         {hour}
       </div>
@@ -61,6 +62,6 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
           year={year}
         />
       ) : null}
-    </>
+    </div>
   );
 };

@@ -21,5 +21,5 @@ export const useAccountPatient = () => {
     navigate('../find-doctor');
   };
 
-  return { onSubmit, city, specialization, dispatch, navigate };
+  return { onSubmit, city, specialization, dispatch, navigate, };
 };

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { baseUrlSpecialization, downloadData } from '../../api';
 import { useQuery } from 'react-query';
 

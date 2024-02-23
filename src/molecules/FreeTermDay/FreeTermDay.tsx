@@ -32,16 +32,14 @@ export const FreeTermDay = ({ dayOfWeek, numberDay, month, year, idDr, nameDr, l
   }, [data]);
 
   return (
-    <>
-      <div className="free-term-day">
-        <div className="ftd-div-date">
-          <div className="div-day-of-week">{dayOfWeek}</div>
-          <div className="div-number-month">
-            {numberDay} {month}
-          </div>
+    <div className="free-term-day">
+      <div className="ftd-div-date">
+        <div className="div-day-of-week">{dayOfWeek}</div>
+        <div className="div-number-month">
+          {numberDay} {month}
         </div>
-        {terms}
       </div>
-    </>
+      {terms}
+    </div>
   );
 };
