@@ -1,46 +1,31 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './AccountPatient.css';
-import { Link, useNavigate } from 'react-router-dom';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-
-import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useGetUserData } from '../../hooks/common/useGetUserData';
+import { useAccountPatient } from '../../hooks/components/AccountPatient/useAccountPatient';
+import { useSpecializations } from '../../hooks/common/useSpecializations';
+import { useCitySuggestions } from '../../hooks/common/useCitySuggestions';
 
 export const AccountPatient = () => {
-  const dispatch = useAppDispatch();
-  const cityReduxValue = useAppSelector((state: any) => state.search.city);
-  const specializationReduxValue = useAppSelector((state: any) => state.search.specialization);
-  const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
-  const [specializations, setSpecializations] = useState<string[]>([]);
-  const [inputText, setInputText] = useState('');
-  const navigate = useNavigate();
+  useGetUserData();
+
+  const { onSubmit, city, navigate, dispatch, specialization } = useAccountPatient();
+
+  const { specializations } = useSpecializations();
+
+  const { citySuggestions, setInputText } = useCitySuggestions();
 
   useEffect(() => {
-    sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
-      setSuggestedCities(r);
-    });
-  }, [inputText]);
-  useEffect(() => {
-    downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(['', ...r]);
-    });
-  }, []);
-
-  const onSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    sessionStorage.setItem('city', cityReduxValue);
-    sessionStorage.setItem('specialization', specializationReduxValue);
-    navigate('../find-doctor');
-  };
+    console.log(citySuggestions);
+  }, [citySuggestions]);
 
   return (
     <div className="container-patient-account">
       <header className="header-patient-account">
         <img src="logo-white.svg" alt="logo" className="logo-white" />
-
         <div className="div-menu">
           <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 25 }} onClick={() => navigate('../patient/panel')} />
         </div>
@@ -51,8 +36,8 @@ export const AccountPatient = () => {
           <h3 className="h3-patient-account">Szukaj wśród lekarzy</h3>
           <form onSubmit={onSubmit} className="form-search">
             <AutoComplete
-              value={cityReduxValue}
-              suggestions={suggestedCities}
+              value={city}
+              suggestions={citySuggestions}
               completeMethod={(e: AutoCompleteCompleteEvent) => {
                 setInputText(e.query);
               }}
@@ -62,7 +47,7 @@ export const AccountPatient = () => {
               style={{ alignSelf: 'stretch', flexGrow: 1, marginRight: 10, marginBottom: 10 }}
             />
             <Dropdown
-              value={specializationReduxValue}
+              value={specialization}
               options={specializations}
               onChange={(e) => dispatch(updateSpecialization(e.target.value))}
               placeholder="Wybierz specjalizację"

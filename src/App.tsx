@@ -2,28 +2,26 @@ import React from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { CreateUserForm } from './molecules/CreateUserForm/CreateUserForm';
-import { MainComponent } from './pages/MainComponent/MainComponent';
+import { StartPage } from './pages/StartPage/StartPage';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import { ListDoctor } from './organisms/ListDoctor/ListDoctor';
-import RequireLogin from './utils/RequireLogin';
+import RequireLogin from './atoms/RequireLogin';
 import { AccountPatient } from './pages/AccountPatient/AccountPatient';
 import { LoginUser } from './molecules/LoginUser/LoginUser';
 import { UserPanel } from './pages/UserPanel/UserPanel';
-import { GetUserData } from './atoms/GetUserData/GetUserData';
 import { SuccessPayment } from './molecules/SuccessPayment/SuccessPayment';
 
 export default function App() {
   const router = createBrowserRouter([
-    { path: '/', element: <MainComponent /> },
+    { path: '/', element: <StartPage /> },
     { path: 'patient/add', element: <CreateUserForm role={'patient'} /> },
     { path: 'patient/log', element: <LoginUser role={'patient'} /> },
     {
       path: 'patient/panel',
       element: (
         <RequireLogin requiredRole="patient">
-          <GetUserData />
           <UserPanel role={'patient'} />
         </RequireLogin>
       ),
@@ -32,7 +30,6 @@ export default function App() {
       path: 'doctor/panel',
       element: (
         <RequireLogin requiredRole="doctor">
-          <GetUserData />
           <UserPanel role={'doctor'} />
         </RequireLogin>
       ),
@@ -43,7 +40,6 @@ export default function App() {
       path: 'find-doctor',
       element: (
         <RequireLogin requiredRole="patient">
-          <GetUserData />
           <ListDoctor />
         </RequireLogin>
       ),
@@ -52,7 +48,6 @@ export default function App() {
       path: 'patient',
       element: (
         <RequireLogin requiredRole="patient">
-          <GetUserData />
           <AccountPatient />
         </RequireLogin>
       ),

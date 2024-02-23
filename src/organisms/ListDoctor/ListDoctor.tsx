@@ -1,55 +1,48 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { OneDoctor } from '../OneDoctor/OneDoctor';
 import './ListDoctor.css';
-import { baseUrlDoctor, baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData, sendToken } from '../../api';
 import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 import { Dropdown } from 'primereact/dropdown';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
 import { Button } from 'primereact/button';
 import { MyMap } from '../MyMap/MyMap';
 import { useNavigate } from 'react-router-dom';
 import { Doctor } from '../../types/users/user';
+import { Card } from 'primereact/card';
+import { useGetUserData } from '../../hooks/common/useGetUserData';
+import { useAppSelector } from '../../hooks/common/redux';
+import { useDoctorsData } from '../../hooks/components/ListDoctor/useDoctorsData';
+import { useCitySuggestions } from '../../hooks/common/useCitySuggestions';
+import { useSpecializations } from '../../hooks/common/useSpecializations';
+import { useDoctorRefs } from '../../hooks/components/ListDoctor/useDoctorRefs';
 
 const libs = ['places'];
 
 export const ListDoctor = () => {
-  const [dataDoctors, setDataDoctors] = useState([]);
+  useGetUserData();
+
   const [list, setList] = useState<JSX.Element[]>([]);
+
   const [modalList, setModalList] = useState<JSX.Element[]>([]);
+
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const inputRef = useRef<any>(null);
-  const [suggestedCities, setSuggestedCities] = useState<string[]>([]);
-  const [inputText, setInputText] = useState('');
-  const [inputActive, setInputActive] = useState(false);
-  const [specializations, setSpecializations] = useState<string[]>([]);
+
   const [invisible, setInvisible] = useState<boolean>(false);
+
   const dispatch = useDispatch();
-  const cityReduxValue = useSelector((state: any) => state.search.city);
-  const specializationReduxValue = useSelector((state: any) => state.search.specialization);
-  const citySessionValue = sessionStorage.getItem('city');
-  const specializationSessionValue = sessionStorage.getItem('specialization');
-  const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
-  const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  const { city, specialization } = useAppSelector((state) => state.search);
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!cityReduxValue && !specializationReduxValue) {
-      getDoctors(citySessionValue, specializationSessionValue);
-    } else {
-      getDoctors(cityReduxValue, specializationReduxValue);
-    }
-  }, []);
+  const { dataDoctors, sendForm, activeDoctorId, setActiveDoctorId } = useDoctorsData();
 
-  const getDoctors = async (city: string | null, specialization: string | null) => {
-    const dataSearch = {
-      city,
-      specialization,
-    };
-    sendAndReceiveData(dataSearch, baseUrlDoctor, 'find-doctors').then((r) => {
-      setDataDoctors(r);
-    });
-  };
+  const { citySuggestions, setInputText } = useCitySuggestions();
+
+  const { specializations } = useSpecializations();
+
+  const doctorRefs = useDoctorRefs(dataDoctors);
 
   useEffect(() => {
     if (!modalActive) {
@@ -66,9 +59,10 @@ export const ListDoctor = () => {
           />
         </li>
       ));
+
       setList(firstList);
-      console.log(list);
     }
+
     if (modalActive) {
       const secoundList = dataDoctors.map((doctor: Doctor, index: number) => (
         <li
@@ -85,30 +79,6 @@ export const ListDoctor = () => {
     }
   }, [modalActive, dataDoctors]);
 
-  useEffect(() => {
-    sendAndReceiveData(inputText, baseUrlPatient, 'google-api').then((r) => {
-      console.log(r);
-      setSuggestedCities(r);
-    });
-  }, [inputText, inputActive]);
-
-  useEffect(() => {
-    downloadData(baseUrlSpecialization).then((r) => {
-      setSpecializations(['', ...r]);
-    });
-  }, []);
-
-  useEffect(() => {
-    doctorRefs.current = doctorRefs.current.slice(0, dataDoctors.length);
-  }, [dataDoctors]);
-  const sendForm = async (e: SyntheticEvent) => {
-    e.preventDefault();
-
-    getDoctors(cityReduxValue, specializationReduxValue);
-    sessionStorage.setItem('city', cityReduxValue);
-    sessionStorage.setItem('specialization', specializationReduxValue);
-  };
-
   return (
     <div className="list-doctor-wrap">
       <header className="list-doctor-header">
@@ -117,19 +87,19 @@ export const ListDoctor = () => {
           <i className="pi pi-sort-alt arrow-visible" onClick={() => setInvisible((perv) => !perv)} />
           <div className="input-wrapp">
             <AutoComplete
-              value={cityReduxValue}
-              suggestions={suggestedCities}
+              value={city}
+              suggestions={citySuggestions}
               completeMethod={(e: AutoCompleteCompleteEvent) => {
                 setInputText(e.query);
               }}
               onChange={(e: AutoCompleteChangeEvent) => dispatch(updateCity(e.target.value))}
               minLength={3}
               placeholder="Wyszukaj miasto"
-              style={{ alignSelf: 'stretch', marginRight: '5px', flex: 1 }}
-              className={`${!invisible && 'input-invisible'}`}
+              style={{ alignSelf: 'stretch', marginRight: '5px' }}
+              className={`input-find-doctor ${!invisible && 'input-invisible'}`}
             />
             <Dropdown
-              value={specializationReduxValue}
+              value={specialization}
               options={specializations}
               onChange={(e) => dispatch(updateSpecialization(e.target.value))}
               placeholder="Specializacja"
@@ -138,10 +108,8 @@ export const ListDoctor = () => {
                 alignItems: 'center',
                 alignSelf: 'stretch',
                 boxSizing: 'content-box',
-                marginRight: '5px',
-                flex: 1,
               }}
-              className={`${invisible && 'input-invisible'}`}
+              className={`input-find-doctor ${invisible && 'input-invisible'}`}
             />
           </div>
 
@@ -151,27 +119,36 @@ export const ListDoctor = () => {
           <i className="pi pi-user icon-user" />
         </Button>
       </header>
+      {dataDoctors.length === 0 && (
+        <div className="message">
+          <Card title={<span style={{ fontSize: '40px' }}>Ooops!</span>} style={{}}>
+            <p style={{ fontSize: '24px' }}>Nie znaleziono wyników dla podanych kryteriów.</p>
+          </Card>
+        </div>
+      )}
 
       <div className={!modalActive ? 'container-list-map' : 'modal-container-list-map'}>
         <div className={!modalActive ? 'wrapp-ul-map' : 'modal-wrapp-ul-map'}>
           <ul className={!modalActive ? 'doctor-ul' : 'modal-doctor-ul'}>{!modalActive ? list : modalList}</ul>
-          <div className={!modalActive ? 'map-container' : 'modal-map-container'}>
-            <MyMap
-              doctors={dataDoctors}
-              activeDoctorId={activeDoctorId}
-              onMarkerEnter={setActiveDoctorId}
-              onMarkerLeave={() => setActiveDoctorId(null)}
-              doctorRefs={doctorRefs}
-            >
-              {!modalActive ? (
-                <div className="overlay" onClick={() => setModalActive(true)}>
-                  <i className="pi pi-arrows-alt arrow-alt"></i>
-                </div>
-              ) : (
-                <i className="pi pi-times x-map" onClick={() => setModalActive(false)}></i>
-              )}
-            </MyMap>
-          </div>
+          {dataDoctors.length > 0 && (
+            <div className={!modalActive ? 'map-container' : 'modal-map-container'}>
+              <MyMap
+                doctors={dataDoctors}
+                activeDoctorId={activeDoctorId}
+                onMarkerEnter={setActiveDoctorId}
+                onMarkerLeave={() => setActiveDoctorId(null)}
+                doctorRefs={doctorRefs}
+              >
+                {!modalActive ? (
+                  <div className="overlay" onClick={() => setModalActive(true)}>
+                    <i className="pi pi-arrows-alt arrow-alt"></i>
+                  </div>
+                ) : (
+                  <i className="pi pi-times x-map" onClick={() => setModalActive(false)}></i>
+                )}
+              </MyMap>
+            </div>
+          )}
         </div>
       </div>
     </div>

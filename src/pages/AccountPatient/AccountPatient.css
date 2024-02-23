@@ -7,6 +7,7 @@
   align-items: flex-start;
   background-color: rgb(14, 175, 167);
 }
+
 .wrapp-search-img {
   display: flex;
   width: 100%;
@@ -26,7 +27,6 @@
   width: 720px;
   height: 60px;
   justify-content: space-between;
-
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
@@ -67,19 +67,22 @@
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1300px) {
   .wrapp-search-img {
     position: relative;
     align-items: center;
     justify-content: center;
   }
+
   .div-search {
     position: absolute;
     height: 300px;
   }
+  
   .form-search {
     flex-direction: column;
   }
+
   .img-doctors {
     width: 700px;
     height: 500px;
@@ -92,10 +95,12 @@
     width: 600px;
     height: 400px;
   }
+
   .div-search {
     font-size: 22px;
     height: 250px;
   }
+
   .form-search {
     height: 180px;
     width: 400px;
@@ -106,6 +111,7 @@
   .logo-white {
     display: none;
   }
+
   .header-patient-account {
     justify-content: flex-end;
   }
@@ -115,26 +121,30 @@
   .form-search {
     width: 90vw;
   }
+
   .h2-patient-account,
   .h3-patient-account,
   .img-doctors {
     display: none;
   }
+
   .wrapp-search-img {
     flex: 1;
   }
 }
 
-@media (min-width: 1450px) {
+@media (min-width: 1570px) {
   .img-doctors {
     width: 800px;
     height: 500px;
   }
 }
-@media (min-width: 1800px) {
+
+@media (min-width: 2060px) {
   .div-search {
     transform: scale(1.2);
   }
+
   .img-doctors {
     width: 1000px;
     height: 620px;

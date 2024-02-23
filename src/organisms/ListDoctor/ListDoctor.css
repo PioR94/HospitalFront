@@ -1,5 +1,7 @@
 .list-doctor-wrap {
-  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   min-height: 100vh;
   background-color: #f5f5f5;
 }
@@ -22,6 +24,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 2%;
+  margin-bottom: 20px;
 }
 
 .container-search {
@@ -31,22 +34,24 @@
   width: 500px;
   min-width: 150px;
   justify-content: space-between;
-  /* background-color: rebeccapurple; */
 }
+
 .input-wrapp {
-  flex: 1;
   display: flex;
+  width: calc(100% - 50px);
 }
+
 .button-search {
   background-color: white !important;
   height: 50px !important;
   width: 50px !important;
 }
-.container-list-map {
+.co ntainer-list-map {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
+
 .modal-container-list-map {
   display: flex;
   position: fixed;
@@ -59,11 +64,13 @@
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
+
 .wrapp-ul-map {
   display: flex;
   justify-content: center;
   width: 100%;
 }
+
 .modal-wrapp-ul-map {
   display: flex;
   position: relative;
@@ -73,6 +80,7 @@
   justify-content: center;
   background-color: white;
 }
+
 .modal-doctor-ul {
   min-width: 400px;
   flex: 1;
@@ -84,11 +92,13 @@
   width: 300px;
   height: 600px;
 }
+
 .modal-map-container {
   flex: 2;
   position: sticky;
   top: 0;
 }
+
 .x-map {
   display: flex;
   position: absolute;
@@ -105,17 +115,37 @@
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
+
 .icon-user {
   font-size: 30px;
 }
+
 .arrow-visible {
   display: none;
   color: white;
-  margin-right: 5px;
   font-size: 20px;
+  width: 20px;
 }
+
 .logo-list {
   width: 200px;
+}
+
+.message {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.dropdown-placeholder-shrink {
+  width: 100%;
+}
+
+.input-find-doctor {
+  width: 50%;
+  margin-right: 5px;
 }
 
 @media (max-width: 1450px) {
@@ -127,6 +157,7 @@
   .logo-list {
     display: none;
   }
+
   .list-doctor-header {
     justify-content: space-between;
   }
@@ -134,14 +165,24 @@
 @media (max-width: 620px) {
   .arrow-visible {
     display: block;
-    margin-right: 8px;
+    margin-right: 5px;
   }
+
   .input-invisible {
     display: none !important;
   }
+
+  .input-find-doctor {
+    width: 100%;
+  }
+
   .container-search {
-    width: 85%;
+    width: 80%;
     min-width: 250px;
     margin-left: 10px;
+  }
+
+  .input-wrapp {
+    width: calc(100% - 80px);
   }
 }

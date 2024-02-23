@@ -1,24 +1,26 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { FreeTermDay } from '../../molecules/FreeTermDay/FreeTermDay';
 import './FreeTermWeek.css';
-import { changeClass, getDayName, getMonthName } from '../../utils/functions/function';
+import { getDayName, getMonthName } from '../../utils/functions/get-day-month-name';
 import { addDays } from 'date-fns';
 import { FreeTermWeekProps } from '../../types/props/props';
+import { changeClass } from '../../utils/functions/change-class';
+import { useMoveArrows } from '../../hooks/components/FreeTermWeek/useMoveArrows';
 
 export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekProps) => {
-  const [counter, setCounter] = useState(0);
-  const [initialDate, setInitialDate] = useState(new Date());
+  const { counter, initialDate, moveRight, moveLeft } = useMoveArrows();
 
   const renderDays = useMemo(() => {
     const days = [];
 
     let nextDate = initialDate;
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       let dayOfWeek = nextDate.getDay();
       let numberDay = nextDate.getUTCDate();
       let month = nextDate.getMonth();
       let year = nextDate.getFullYear();
+
       days[i] = (
         <div key={`${year}-${month}-${numberDay}`}>
           <FreeTermDay
@@ -39,32 +41,16 @@ export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekPr
     return days;
   }, [initialDate]);
 
-  const moveRight = (): void => {
-    if (counter < 50) {
-      setInitialDate(addDays(initialDate, 4));
-      setCounter(counter + 1);
-    }
-  };
-
-  const moveLeft = (): void => {
-    if (counter > 0) {
-      setInitialDate(addDays(initialDate, -4));
-      setCounter(counter - 1);
-    }
-  };
-
   return (
-    <>
-      <div className="free-term-week">
-        <div className={changeClass(counter === 0, 'move-left-none', 'move-left')} onClick={moveLeft}>
-          <i className="pi pi-angle-left" />
-        </div>
-        {renderDays}
-
-        <div className={changeClass(counter === 50, 'move-right-none', 'move-right')} onClick={moveRight}>
-          <i className="pi pi-angle-right" />
-        </div>
+    <div className="free-term-week">
+      <div className={changeClass(counter === 0, 'move-left-none', 'move-left')} onClick={moveLeft}>
+        <i className="pi pi-angle-left" />
       </div>
-    </>
+      {renderDays}
+
+      <div className={changeClass(counter === 20, 'move-right-none', 'move-right')} onClick={moveRight}>
+        <i className="pi pi-angle-right" />
+      </div>
+    </div>
   );
 };

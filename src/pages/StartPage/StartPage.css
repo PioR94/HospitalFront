@@ -28,26 +28,32 @@
   font-family: 'Yu Gothic Medium';
   margin-left: 20px;
 }
+
 .slogan-png-container {
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-grow: 1;
 }
+
 .slogan-h2 {
   font-size: 50px;
   font-family: 'Yu Gothic';
 }
+
 .dropdowns {
   white-space: nowrap;
   margin-top: 20px;
 }
+
 .slogan-h2-up {
   white-space: nowrap;
 }
+
 .slogan-h2-down {
   white-space: nowrap;
 }
+
 .slogan-h2-third {
   color: #345ddd;
   white-space: nowrap;
@@ -64,6 +70,7 @@
   width: 230px;
   margin: 20px 0 0 60px;
 }
+
 .png {
   background-image: url('/public/doctors12.jpg');
   width: 450px;
@@ -101,39 +108,48 @@
   .png {
     transform: scale(0.8);
   }
+
   .slogan-h2 {
     font-size: 25px;
   }
+
   .slogan-h3 {
     font-size: 10px;
   }
 }
+
 @media (max-width: 700px) {
   .new-logo {
     display: none;
   }
+
   .main-header {
     justify-content: center;
   }
+
   .slogan-png-container {
     position: relative;
     justify-content: center;
   }
+
   .slogan {
     position: absolute;
     z-index: 1;
     transform: scale(1.1);
   }
+
   .png {
     position: absolute;
     opacity: 0.1;
     transform: scale(1.2);
   }
+
   .slogan-h2 {
     font-size: 30px;
     color: rgb(102, 101, 101);
     text-shadow: 1px 3px 1px #fff;
   }
+
   .slogan-h2-third {
     color: #345ddd;
   }
@@ -143,9 +159,11 @@
   .slogan {
     margin-left: 7%;
   }
+
   .slogan-h2 {
     font-size: 25px;
   }
+
   .check-register {
     margin-right: 10px;
 
@@ -155,6 +173,7 @@
   .check-logout {
     transform: scale(1);
   }
+
   .png {
     transform: scale(0.9);
   }
@@ -164,9 +183,11 @@
   .png {
     transform: scale(0.9);
   }
+
   .slogan-h2 {
     font-size: 30px;
   }
+
   .slogan-h3 {
     font-size: 13px;
   }
@@ -175,9 +196,11 @@
   .png {
     transform: scale(1);
   }
+
   .slogan-h2 {
     font-size: 35px;
   }
+
   .slogan-h3 {
     font-size: 13px;
   }
@@ -187,9 +210,11 @@
   .png {
     transform: scale(1);
   }
+
   .slogan-h2 {
     font-size: 40px;
   }
+
   .slogan-h3 {
     font-size: 13px;
   }
@@ -199,9 +224,11 @@
   .png {
     transform: scale(1);
   }
+
   .slogan-h2 {
     font-size: 45px;
   }
+
   .slogan-h3 {
     font-size: 14px;
   }
@@ -212,9 +239,11 @@
     transform: scale(1.2);
     margin-top: 20px;
   }
+
   .slogan-h2 {
     font-size: 55px;
   }
+
   .slogan-h3 {
     font-size: 15px;
   }
@@ -225,9 +254,11 @@
     transform: scale(1.5);
     margin-top: 20px;
   }
+
   .slogan-h2 {
     font-size: 55px;
   }
+  
   .slogan-h3 {
     font-size: 15px;
   }

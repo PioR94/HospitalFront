@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './FreeTermHour.css';
 import { Modal } from '../../molecules/Modal/Modal';
-import { baseUrlPayment, baseUrlTerm, sendAndReceiveData, sendData } from '../../api';
+import { baseUrlPayment, sendAndReceiveData } from '../../api';
 import { Term } from '../../types/terms/term';
-import { useAppSelector } from '../../hooks/redux';
-import { selectId, selectLastName, selectName } from '../../redux/selectors';
+import { useAppSelector } from '../../hooks/common/redux';
 import { loadStripe } from '@stripe/stripe-js';
 
 const STRIPE_PUBLIC_KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY as string;
@@ -12,10 +11,11 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr, nameDr, lastNameDr, className, price }: Term) => {
   const [display, setDisplay] = useState(false);
+
   const [classNameState, setClassNameState] = useState(className);
-  const idPt = useAppSelector(selectId);
-  const namePt = useAppSelector(selectName);
-  const lastNamePt = useAppSelector(selectLastName);
+
+  const { idUser, name, lastName } = useAppSelector((state) => state.user);
+
   const dataTerm: Term = {
     id,
     hour,
@@ -24,28 +24,30 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
     month,
     year,
     idDr,
-    idPt,
+    idPt: idUser,
     nameDr,
     lastNameDr,
-    namePt,
-    lastNamePt,
+    namePt: name,
+    lastNamePt: lastName,
     price,
   };
 
   const handleCheckout = async () => {
     const stripe = await stripePromise;
+
     if (stripe === null) {
       console.error('Stripe has not been initialized');
       return;
     }
     sessionStorage.setItem('data-term', JSON.stringify(dataTerm));
+
     const session = await sendAndReceiveData(price, baseUrlPayment, 'create-checkout-session');
 
     await stripe.redirectToCheckout({ sessionId: session.id });
   };
 
   return (
-    <>
+    <div>
       <div onClick={() => setDisplay((prev) => !prev)} className={classNameState}>
         {hour}
       </div>
@@ -60,6 +62,6 @@ export const FreeTermHour = ({ id, dayOfWeek, hour, numberDay, month, year, idDr
           year={year}
         />
       ) : null}
-    </>
+    </div>
   );
 };

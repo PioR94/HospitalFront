@@ -9,7 +9,7 @@
   margin-bottom: 20px;
 }
 
-._divWeek {
+.div-week {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,6 +17,7 @@
   float: left;
   transition: 2s linear;
 }
+
 .button-week {
   margin-top: 10px;
 }
