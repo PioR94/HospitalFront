@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Day } from '../../molecules/Day/Day';
 import './Week.css';
 import { getDayName } from '../../utils/functions/get-day-month-name';
@@ -14,7 +14,9 @@ export const Week = ({ idDr }: WeekProps) => {
   const reduxHours = useAppSelector((state: RootState) => state.schedule.hours);
 
   const { getAvailableHoursDay } = useAvailableHours();
-
+  useEffect(() => {
+    console.log(idDr);
+  }, [idDr]);
   useInitializeData(idDr);
 
   const daysList = useMemo(() => {
@@ -25,7 +27,6 @@ export const Week = ({ idDr }: WeekProps) => {
     }
     return days;
   }, [idDr, getAvailableHoursDay]);
-
 
   return (
     <div className="container-week">

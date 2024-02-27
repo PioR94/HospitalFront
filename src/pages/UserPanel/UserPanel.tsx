@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'primeicons/primeicons.css';
 import './UserPanel.css';
 import { Avatar } from 'primereact/avatar';
@@ -18,6 +18,10 @@ export const UserPanel = ({ role }: Role) => {
   const [activeComponent, setActiveComponent] = useState<string>('');
 
   const { idUser } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    console.log(idUser);
+  }, [idUser]);
 
   return (
     <div className="bg-panel">
