@@ -22,11 +22,17 @@ My Doctor is an interactive platform that enables patients to book medical appoi
 
 ## Technologies
 
-- React.js
-- Redux for state management
-- React Router for navigation
-- Google Maps API for maps and location services
-- Stripe API for payment processing
+- **React.js**
+- **@reduxjs/toolkit**
+- **React Router**
+- **TypeScript**
+- **Google Maps API**
+- **Stripe API**
+- **React Hook Form**
+- **React Query**
+- **Date-fns**
+- **ESLint**
+- **Prettier**
 
 ## Test Accounts
 
@@ -57,6 +63,14 @@ cd HospitalFront
 npm install
 npm start
 ```
+
+Create a .env file in the root directory of the project and add the following environment variables:
+
+REACT_APP_BASE_URL=<your-backend-api-url>
+REACT_APP_GOOGLE_MAPS_API_KEY=<your-google-maps-api-key>
+REACT_APP_STRIPE_PUBLIC_KEY=<your-stripe-public-key>
+
+
 ## Backend Support
 
 This application requires a backend service for full functionality. Download the backend application from [Backend Repository](https://github.com/PioR94/HospitalBack).
