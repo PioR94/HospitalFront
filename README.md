@@ -66,9 +66,9 @@ npm start
 
 Create a .env file in the root directory of the project and add the following environment variables:
 
-REACT_APP_BASE_URL=<your-backend-api-url>
-REACT_APP_GOOGLE_MAPS_API_KEY=<your-google-maps-api-key>
-REACT_APP_STRIPE_PUBLIC_KEY=<your-stripe-public-key>
+- REACT_APP_BASE_URL=your-backend-api-url
+- REACT_APP_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
+- REACT_APP_STRIPE_PUBLIC_KEY=your-stripe-public-key
 
 
 ## Backend Support
