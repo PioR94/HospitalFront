@@ -1,30 +1,30 @@
 import { useState } from 'react';
 import { Option } from '../../../types/options/option';
-import { baseUrlDoctor, baseUrlPatient } from '../../../api';
 
 export const useStartPage = () => {
   const [selectedOption1, setSelectedOption1] = useState<Option | null>(null);
   const [selectedOption2, setSelectedOption2] = useState<Option | null>(null);
 
+  const hostUrl = process.env.React_APP_HOST;
   const options1 = [
     {
       name: 'doktor',
-      link1: `${baseUrlDoctor}/add`,
+      link1: `${hostUrl}/doctor/add`,
     },
     {
       name: 'pacjent',
-      link1: `${baseUrlPatient}/add`,
+      link1: `${hostUrl}/patient/add`,
     },
   ];
 
   const options2 = [
     {
       name: 'doktor',
-      link2: `${baseUrlDoctor}/log`,
+      link2: `${hostUrl}/doctor/log`,
     },
     {
       name: 'pacjent',
-      link2: `${baseUrlPatient}/log`,
+      link2: `${hostUrl}/patient/log`,
     },
   ];
 
