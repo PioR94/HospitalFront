@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Option } from '../../types/options/option';
+import { Option } from '../../../types/options/option';
+import { baseUrlDoctor, baseUrlPatient } from '../../../api';
 
 export const useStartPage = () => {
   const [selectedOption1, setSelectedOption1] = useState<Option | null>(null);
@@ -8,22 +9,22 @@ export const useStartPage = () => {
   const options1 = [
     {
       name: 'doktor',
-      link1: `http://localhost:3000/doctor/add`,
+      link1: `${baseUrlDoctor}/add`,
     },
     {
       name: 'pacjent',
-      link1: `http://localhost:3000/patient/add`,
+      link1: `${baseUrlPatient}/add`,
     },
   ];
 
   const options2 = [
     {
       name: 'doktor',
-      link2: `http://localhost:3000/doctor/log`,
+      link2: `${baseUrlDoctor}/log`,
     },
     {
       name: 'pacjent',
-      link2: `http://localhost:3000/patient/log`,
+      link2: `${baseUrlPatient}/log`,
     },
   ];
 
@@ -41,5 +42,5 @@ export const useStartPage = () => {
     }
   };
 
-  return { handleOptionChange1, handleOptionChange2, options1, options2};
+  return { handleOptionChange1, handleOptionChange2, options1, options2 };
 };
