@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Option } from '../../../types/options/option';
-import { baseUrlDoctor, baseUrlPatient } from '../../../api';
 
 export const useStartPage = () => {
   const [selectedOption1, setSelectedOption1] = useState<Option | null>(null);
@@ -9,22 +8,22 @@ export const useStartPage = () => {
   const options1 = [
     {
       name: 'doktor',
-      link1: `${baseUrlDoctor}/add`,
+      link1: `doctor/add`,
     },
     {
       name: 'pacjent',
-      link1: `${baseUrlPatient}/add`,
+      link1: `patient/add`,
     },
   ];
 
   const options2 = [
     {
       name: 'doktor',
-      link2: `${baseUrlDoctor}/log`,
+      link2: `doctor/log`,
     },
     {
       name: 'pacjent',
-      link2: `${baseUrlPatient}/log`,
+      link2: `patient/log`,
     },
   ];
 
