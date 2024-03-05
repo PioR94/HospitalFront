@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './StartPage.css';
 import { Dropdown } from 'primereact/dropdown';
-import { useStartPage } from '../../hooks/components/useStartPage';
+import { useStartPage } from '../../hooks/components/StartPage/useStartPage';
 
 export const StartPage = () => {
   const { handleOptionChange1, handleOptionChange2, options1, options2 } = useStartPage();
