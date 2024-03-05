@@ -5,25 +5,26 @@ export const useStartPage = () => {
   const [selectedOption1, setSelectedOption1] = useState<Option | null>(null);
   const [selectedOption2, setSelectedOption2] = useState<Option | null>(null);
 
+  const hostUrl = process.env.React_APP_HOST;
   const options1 = [
     {
       name: 'doktor',
-      link1: `doctor/add`,
+      link1: `${hostUrl}/doctor/add`,
     },
     {
       name: 'pacjent',
-      link1: `patient/add`,
+      link1: `${hostUrl}/patient/add`,
     },
   ];
 
   const options2 = [
     {
       name: 'doktor',
-      link2: `doctor/log`,
+      link2: `${hostUrl}/doctor/log`,
     },
     {
       name: 'pacjent',
-      link2: `patient/log`,
+      link2: `${hostUrl}/patient/log`,
     },
   ];
 
