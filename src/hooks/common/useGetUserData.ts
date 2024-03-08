@@ -19,7 +19,6 @@ export const useGetUserData = () => {
     if (token) {
       sendToken(token, url, 'get-user')
         .then((userData: UserState) => {
-          console.log(userData);
           (Object.keys(userData) as Array<keyof UserState>).forEach((key) => {
             dispatch(setField({ field: key, value: userData[key] }));
           });

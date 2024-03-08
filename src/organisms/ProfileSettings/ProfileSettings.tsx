@@ -45,7 +45,7 @@ const ProfileSettings: React.FC = () => {
       id: idUser,
       ...data,
     };
-    console.log(dataProfile);
+
     updateData(dataProfile, url, 'profile-settings');
   };
 

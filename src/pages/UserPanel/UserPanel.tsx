@@ -19,10 +19,6 @@ export const UserPanel = ({ role }: Role) => {
 
   const { idUser } = useAppSelector((state) => state.user);
 
-  useEffect(() => {
-    console.log(idUser);
-  }, [idUser]);
-
   return (
     <div className="bg-panel">
       <div className="wrap-panel">

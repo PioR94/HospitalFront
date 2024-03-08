@@ -46,8 +46,6 @@ export const useLoginUser = (role: string) => {
         navigate('../doctor/panel');
       }
     }
-
-    console.log(token);
   }, [token]);
 
   return { clickRegister, onSubmit, register, handleSubmit };

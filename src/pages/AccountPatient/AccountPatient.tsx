@@ -18,10 +18,6 @@ export const AccountPatient = () => {
 
   const { citySuggestions, setInputText } = useCitySuggestions();
 
-  useEffect(() => {
-    console.log(citySuggestions);
-  }, [citySuggestions]);
-
   return (
     <div className="container-patient-account">
       <header className="header-patient-account">

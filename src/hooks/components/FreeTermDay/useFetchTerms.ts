@@ -25,7 +25,7 @@ export const useFetchTerms = (dayOfWeek: string, numberDay: string, idDr: string
     const fetchReservationTerms = sendAndReceiveData(termData, baseUrlTerm, 'terms');
 
     const [freeTermsData, reservationTermsData] = await Promise.all([fetchFreeTerms, fetchReservationTerms]);
-    console.log(freeTermsData);
+   
     const modifiedFreeTerms = freeTermsData.map((item: ScheduleHour) => ({
       ...item,
       id: item.hour + numberDay + month + year + idDr,
