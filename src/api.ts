@@ -1,10 +1,10 @@
 const baseUrl = process.env.REACT_APP_BASE_URL;
-export const baseUrlDoctor: string = `${baseUrl}/doctor`;
-export const baseUrlPatient: string = `${baseUrl}/patient`;
-export const baseUrlTerm = `${baseUrl}/term`;
-export const baseUrlSpecialization = `${baseUrl}/specialization`;
-export const baseUrlSchedule = `${baseUrl}/schedule`;
-export const baseUrlPayment = `${baseUrl}/payment`;
+export const baseUrlDoctor: string = `${baseUrl}doctor`;
+export const baseUrlPatient: string = `${baseUrl}patient`;
+export const baseUrlTerm = `${baseUrl}term`;
+export const baseUrlSpecialization = `${baseUrl}specialization`;
+export const baseUrlSchedule = `${baseUrl}schedule`;
+export const baseUrlPayment = `${baseUrl}payment`;
 
 
 export const sendData = (data: any, baseUrlArgument: string, path: string) => {
