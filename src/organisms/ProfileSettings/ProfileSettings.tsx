@@ -9,7 +9,7 @@ import { baseUrlSpecialization, downloadData, updateData } from '../../api';
 import {} from 'react-redux';
 import { chooseValue } from '../../utils/functions/choose-value';
 import { FormProfileSettings } from '../../types/forms/forms';
-import { useAppSelector } from '../../hooks/common/redux';
+import { useAppSelector } from '../../hooks/redux';
 
 const ProfileSettings: React.FC = () => {
   const role = sessionStorage.getItem('role');

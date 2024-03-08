@@ -4,7 +4,7 @@ import { Role } from '../../types/role/role';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
-import { useLoginUser } from '../../hooks/components/LoginUser/useLoginUser';
+import { useLoginUser } from './useLoginUser';
 
 export const LoginUser = ({ role }: Role) => {
   const { clickRegister, onSubmit, register, handleSubmit } = useLoginUser(role);

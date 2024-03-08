@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Option } from '../../../types/options/option';
+import { Option } from '../../types/options/option';
 
 export const useStartPage = () => {
   const [selectedOption1, setSelectedOption1] = useState<Option | null>(null);

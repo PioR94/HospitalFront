@@ -1,9 +1,9 @@
 import { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { InputsLog } from '../../../types/hook-form/inputs';
-import { sendAndReceiveData } from '../../../api';
-import { chooseValue } from '../../../utils/functions/choose-value';
+import { InputsLog } from '../../types/hook-form/inputs';
+import { sendAndReceiveData } from '../../api';
+import { chooseValue } from '../../utils/functions/choose-value';
 
 export const useLoginUser = (role: string) => {
   const url = chooseValue(role) || '';

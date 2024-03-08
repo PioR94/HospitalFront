@@ -4,10 +4,10 @@ import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
-import { useGetUserData } from '../../hooks/common/useGetUserData';
-import { useAccountPatient } from '../../hooks/components/AccountPatient/useAccountPatient';
-import { useSpecializations } from '../../hooks/common/useSpecializations';
-import { useCitySuggestions } from '../../hooks/common/useCitySuggestions';
+import { useGetUserData } from '../../hooks/useGetUserData';
+import { useAccountPatient } from './useAccountPatient';
+import { useSpecializations } from '../../hooks/useSpecializations';
+import { useCitySuggestions } from '../../hooks/useCitySuggestions';
 
 export const AccountPatient = () => {
   useGetUserData();

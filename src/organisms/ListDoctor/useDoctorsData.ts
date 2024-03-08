@@ -1,6 +1,6 @@
 import { useState, useEffect, SyntheticEvent } from 'react';
-import { baseUrlDoctor, sendAndReceiveData } from '../../../api';
-import { useAppSelector } from '../../common/redux';
+import { baseUrlDoctor, sendAndReceiveData } from '../../api';
+import { useAppSelector } from '../../hooks/redux';
 
 export const useDoctorsData = () => {
   const [dataDoctors, setDataDoctors] = useState([]);

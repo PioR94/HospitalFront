@@ -3,7 +3,7 @@ import './FreeTermHour.css';
 import { Modal } from '../../molecules/Modal/Modal';
 import { baseUrlPayment, sendAndReceiveData } from '../../api';
 import { Term } from '../../types/terms/term';
-import { useAppSelector } from '../../hooks/common/redux';
+import { useAppSelector } from '../../hooks/redux';
 import { loadStripe } from '@stripe/stripe-js';
 
 const STRIPE_PUBLIC_KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY as string;

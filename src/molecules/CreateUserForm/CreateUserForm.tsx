@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent} from 'react';
+import React, { BaseSyntheticEvent } from 'react';
 import './CreateUserForm.css';
 import { sendData } from '../../api';
 import { Dropdown } from 'primereact/dropdown';
@@ -9,7 +9,7 @@ import { chooseValue } from '../../utils/functions/choose-value';
 import { Button } from 'primereact/button';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { InputsAddForm, InputsLog } from '../../types/hook-form/inputs';
-import { useSpecializations } from '../../hooks/common/useSpecializations';
+import { useSpecializations } from '../../hooks/useSpecializations';
 
 export const CreateUserForm = ({ role }: Role) => {
   const { specializations } = useSpecializations();

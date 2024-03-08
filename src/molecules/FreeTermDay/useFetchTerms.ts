@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
-import { baseUrlSchedule, baseUrlTerm, sendAndReceiveData } from '../../../api';
-import { ScheduleHour } from '../../../types/terms/term';
-import { mergeArrays } from '../../../utils/functions/merge-arrays';
+import { baseUrlSchedule, baseUrlTerm, sendAndReceiveData } from '../../api';
+import { ScheduleHour } from '../../types/terms/term';
+import { mergeArrays } from '../../utils/functions/merge-arrays';
 
 interface FetchTermsResult {
   sortedArray: ScheduleHour[];
@@ -25,7 +25,7 @@ export const useFetchTerms = (dayOfWeek: string, numberDay: string, idDr: string
     const fetchReservationTerms = sendAndReceiveData(termData, baseUrlTerm, 'terms');
 
     const [freeTermsData, reservationTermsData] = await Promise.all([fetchFreeTerms, fetchReservationTerms]);
-   
+
     const modifiedFreeTerms = freeTermsData.map((item: ScheduleHour) => ({
       ...item,
       id: item.hour + numberDay + month + year + idDr,

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Doctor } from '../../../types/users/user';
+import { Doctor } from '../../types/users/user';
 
 export const useDoctorRefs = (dataDoctors: Doctor[]) => {
   const doctorRefs = useRef<(HTMLLIElement | null)[]>([]);

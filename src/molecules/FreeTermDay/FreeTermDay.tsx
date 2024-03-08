@@ -3,7 +3,7 @@ import { FreeTermHour } from '../../atoms/FreeTermHour/FreeTermHour';
 import './FreeTermDay.css';
 import { ScheduleHour } from '../../types/terms/term';
 import { FreeTermDayProps } from '../../types/props/props';
-import { useFetchTerms } from '../../hooks/components/FreeTermDay/useFetchTerms';
+import { useFetchTerms } from './useFetchTerms';
 
 export const FreeTermDay = ({ dayOfWeek, numberDay, month, year, idDr, nameDr, lastNameDr, price }: FreeTermDayProps) => {
   const [terms, setTerms] = useState<JSX.Element[] | undefined>([]);

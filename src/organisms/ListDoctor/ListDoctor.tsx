@@ -10,12 +10,12 @@ import { MyMap } from '../MyMap/MyMap';
 import { useNavigate } from 'react-router-dom';
 import { Doctor } from '../../types/users/user';
 import { Card } from 'primereact/card';
-import { useGetUserData } from '../../hooks/common/useGetUserData';
-import { useAppSelector } from '../../hooks/common/redux';
-import { useDoctorsData } from '../../hooks/components/ListDoctor/useDoctorsData';
-import { useCitySuggestions } from '../../hooks/common/useCitySuggestions';
-import { useSpecializations } from '../../hooks/common/useSpecializations';
-import { useDoctorRefs } from '../../hooks/components/ListDoctor/useDoctorRefs';
+import { useGetUserData } from '../../hooks/useGetUserData';
+import { useAppSelector } from '../../hooks/redux';
+import { useDoctorsData } from './useDoctorsData';
+import { useCitySuggestions } from '../../hooks/useCitySuggestions';
+import { useSpecializations } from '../../hooks/useSpecializations';
+import { useDoctorRefs } from './useDoctorRefs';
 
 const libs = ['places'];
 

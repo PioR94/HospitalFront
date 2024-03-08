@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/hooks/common/useSpecializations.ts"]
+  "include": ["src", "src/hooks/useSpecializations.ts"]
 }
