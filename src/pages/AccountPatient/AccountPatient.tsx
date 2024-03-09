@@ -4,10 +4,10 @@ import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { updateCity, updateSpecialization } from '../../redux/search-slice';
-import { useGetUserData } from '../../hooks/common/useGetUserData';
-import { useAccountPatient } from '../../hooks/components/AccountPatient/useAccountPatient';
-import { useSpecializations } from '../../hooks/common/useSpecializations';
-import { useCitySuggestions } from '../../hooks/common/useCitySuggestions';
+import { useGetUserData } from '../../hooks/useGetUserData';
+import { useAccountPatient } from './useAccountPatient';
+import { useSpecializations } from '../../hooks/useSpecializations';
+import { useCitySuggestions } from '../../hooks/useCitySuggestions';
 
 export const AccountPatient = () => {
   useGetUserData();
@@ -18,16 +18,12 @@ export const AccountPatient = () => {
 
   const { citySuggestions, setInputText } = useCitySuggestions();
 
-  useEffect(() => {
-    console.log(citySuggestions);
-  }, [citySuggestions]);
-
   return (
     <div className="container-patient-account">
       <header className="header-patient-account">
         <img src="logo-white.svg" alt="logo" className="logo-white" />
         <div className="div-menu">
-          <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 25 }} onClick={() => navigate('../patient/panel')} />
+          <Button label="Moje konto" text raised style={{ color: 'white', fontSize: 22 }} onClick={() => navigate('../patient/panel')} />
         </div>
       </header>
       <div className="wrapp-search-img">

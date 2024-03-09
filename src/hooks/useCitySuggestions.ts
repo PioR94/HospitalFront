@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { baseUrlPatient, sendAndReceiveData } from '../../api';
+import { baseUrlPatient, sendAndReceiveData } from '../api';
 
 export const useCitySuggestions = () => {
   const [inputText, setInputText] = useState('');

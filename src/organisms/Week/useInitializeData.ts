@@ -1,7 +1,7 @@
-import { baseUrlSchedule, sendAndReceiveData } from '../../../api';
-import { addReduxHours } from '../../../redux/schedule-slice';
-import { useAppDispatch, useAppSelector } from '../../common/redux';
-import { RootState } from '../../../redux/store';
+import { baseUrlSchedule, sendAndReceiveData } from '../../api';
+import { addReduxHours } from '../../redux/schedule-slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { RootState } from '../../redux/store';
 import { useQuery } from 'react-query';
 
 export const useInitializeData = (idDr: string) => {

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { setField } from '../../redux/user-slice';
-import { sendToken } from '../../api';
-import { UserState } from '../../types/redux/user-state';
+import { setField } from '../redux/user-slice';
+import { sendToken } from '../api';
+import { UserState } from '../types/redux/user-state';
 import { useAppDispatch } from './redux';
-import { chooseValue } from '../../utils/functions/choose-value';
+import { chooseValue } from '../utils/functions/choose-value';
 import { useNavigate } from 'react-router-dom';
 
 export const useGetUserData = () => {
@@ -19,7 +19,6 @@ export const useGetUserData = () => {
     if (token) {
       sendToken(token, url, 'get-user')
         .then((userData: UserState) => {
-          console.log(userData);
           (Object.keys(userData) as Array<keyof UserState>).forEach((key) => {
             dispatch(setField({ field: key, value: userData[key] }));
           });

@@ -6,7 +6,7 @@ import StarRatings from 'react-star-ratings';
 import 'primeicons/primeicons.css';
 import { OneDoctorProps } from '../../types/props/props';
 import { changeClass } from '../../utils/functions/change-class';
-import { useOneDoctor } from '../../hooks/components/OneDoctor/useOneDoctor';
+import { useOneDoctor } from './useOneDoctor';
 
 export const OneDoctor = ({ idDr, nameDr, lastNameDr, specialization, street, city, price, alwaysInvisible }: OneDoctorProps) => {
   const [wrapp, setWrapp] = useState(false);

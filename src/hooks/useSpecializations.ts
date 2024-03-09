@@ -1,4 +1,4 @@
-import { baseUrlSpecialization, downloadData } from '../../api';
+import { baseUrlSpecialization, downloadData } from '../api';
 import { useQuery } from 'react-query';
 
 export const useSpecializations = () => {

@@ -14,7 +14,6 @@
 
 .main-header {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: flex-start;
   padding-right: 5%;
@@ -37,7 +36,7 @@
 }
 
 .slogan-h2 {
-  font-size: 50px;
+  font-size: 40px;
   font-family: 'Yu Gothic';
 }
 
@@ -67,28 +66,26 @@
 }
 
 .new-logo {
-  width: 230px;
+  width: 180px;
   margin: 20px 0 0 60px;
 }
 
 .png {
   background-image: url('/public/doctors12.jpg');
   width: 450px;
-  height: 490px;
+  height: 450px;
   background-repeat: no-repeat;
 }
 
 .check-register {
   margin-right: 45px;
   border: none !important;
-  transform: scale(1.2);
 }
 
 .check-logout {
   font-weight: bold !important;
   border-color: #345ddd !important;
   border-radius: 20px !important;
-  transform: scale(1.2);
 }
 
 .check-logout > .p-dropdown-trigger {
@@ -106,11 +103,11 @@
 
 @media (max-width: 850px) {
   .png {
-    transform: scale(0.8);
+    transform: scale(0.8) translate(-40px);
   }
 
   .slogan-h2 {
-    font-size: 25px;
+    font-size: 30px;
   }
 
   .slogan-h3 {
@@ -118,7 +115,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .new-logo {
     display: none;
   }
@@ -141,7 +138,7 @@
   .png {
     position: absolute;
     opacity: 0.1;
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 
   .slogan-h2 {
@@ -185,7 +182,7 @@
   }
 
   .slogan-h2 {
-    font-size: 30px;
+    font-size: 35px;
   }
 
   .slogan-h3 {
@@ -258,7 +255,7 @@
   .slogan-h2 {
     font-size: 55px;
   }
-  
+
   .slogan-h3 {
     font-size: 15px;
   }

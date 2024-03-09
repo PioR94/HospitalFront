@@ -5,18 +5,16 @@ import { getDayName } from '../../utils/functions/get-day-month-name';
 import { baseUrlSchedule, updateData } from '../../api';
 import { Button } from 'primereact/button';
 import { WeekProps } from '../../types/props/props';
-import { useAvailableHours } from '../../hooks/components/Week/useAvailableHours';
-import { useInitializeData } from '../../hooks/components/Week/useInitializeData';
-import { useAppSelector } from '../../hooks/common/redux';
+import { useAvailableHours } from './useAvailableHours';
+import { useInitializeData } from './useInitializeData';
+import { useAppSelector } from '../../hooks/redux';
 import { RootState } from '../../redux/store';
 
 export const Week = ({ idDr }: WeekProps) => {
   const reduxHours = useAppSelector((state: RootState) => state.schedule.hours);
 
   const { getAvailableHoursDay } = useAvailableHours();
-  useEffect(() => {
-    console.log(idDr);
-  }, [idDr]);
+
   useInitializeData(idDr);
 
   const daysList = useMemo(() => {

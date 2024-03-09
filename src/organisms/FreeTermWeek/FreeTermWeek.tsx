@@ -5,7 +5,7 @@ import { getDayName, getMonthName } from '../../utils/functions/get-day-month-na
 import { addDays } from 'date-fns';
 import { FreeTermWeekProps } from '../../types/props/props';
 import { changeClass } from '../../utils/functions/change-class';
-import { useMoveArrows } from '../../hooks/components/FreeTermWeek/useMoveArrows';
+import { useMoveArrows } from './useMoveArrows';
 
 export const FreeTermWeek = ({ idDr, nameDr, lastNameDr, price }: FreeTermWeekProps) => {
   const { counter, initialDate, moveRight, moveLeft } = useMoveArrows();

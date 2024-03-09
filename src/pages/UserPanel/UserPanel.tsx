@@ -5,10 +5,10 @@ import { Avatar } from 'primereact/avatar';
 import { useNavigate } from 'react-router-dom';
 import { Week } from '../../organisms/Week/Week';
 import { Visits } from '../../molecules/Visits/Visits';
-import { useAppSelector } from '../../hooks/common/redux';
+import { useAppSelector } from '../../hooks/redux';
 import ProfileSettings from '../../organisms/ProfileSettings/ProfileSettings';
 import { Role } from '../../types/role/role';
-import { useGetUserData } from '../../hooks/common/useGetUserData';
+import { useGetUserData } from '../../hooks/useGetUserData';
 
 export const UserPanel = ({ role }: Role) => {
   const navigate = useNavigate();
@@ -18,10 +18,6 @@ export const UserPanel = ({ role }: Role) => {
   const [activeComponent, setActiveComponent] = useState<string>('');
 
   const { idUser } = useAppSelector((state) => state.user);
-
-  useEffect(() => {
-    console.log(idUser);
-  }, [idUser]);
 
   return (
     <div className="bg-panel">

@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../common/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useNavigate } from 'react-router-dom';
-import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../../api';
+import { baseUrlPatient, baseUrlSpecialization, downloadData, sendAndReceiveData } from '../../api';
 import { useQuery } from 'react-query';
 
 export const useAccountPatient = () => {
@@ -21,5 +21,5 @@ export const useAccountPatient = () => {
     navigate('../find-doctor');
   };
 
-  return { onSubmit, city, specialization, dispatch, navigate, };
+  return { onSubmit, city, specialization, dispatch, navigate };
 };

@@ -6,7 +6,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Month } from '../../utils/constants/month-and-day';
 import { VisitTable } from '../../types/terms/term';
-import { useAppSelector } from '../../hooks/common/redux';
+import { useAppSelector } from '../../hooks/redux';
 
 export const Visits = () => {
   const [visits, setVisits] = useState<VisitTable[]>([]);
@@ -50,8 +50,8 @@ export const Visits = () => {
   return (
     <DataTable value={visits} tableStyle={{ minWidth: '50rem' }}>
       <Column field="date" header="Data"></Column>
-      <Column field="lastName" header="Last Name"></Column>
-      <Column field="name" header="Name"></Column>
+      <Column field="lastName" header="Nazwisko"></Column>
+      <Column field="name" header="Imię"></Column>
     </DataTable>
   );
 };
