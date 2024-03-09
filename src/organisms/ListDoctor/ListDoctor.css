@@ -19,7 +19,7 @@
 .list-doctor-header {
   display: flex;
   width: 100%;
-  height: 80px;
+  height: 60px;
   background-color: #008b8b;
   align-items: center;
   justify-content: space-between;
@@ -30,7 +30,6 @@
 .container-search {
   display: flex;
   align-items: center;
-  height: 50px;
   width: 500px;
   min-width: 150px;
   justify-content: space-between;
@@ -43,10 +42,10 @@
 
 .button-search {
   background-color: white !important;
-  height: 50px !important;
-  width: 50px !important;
+  height: 40px !important;
+  width: 40px !important;
 }
-.co ntainer-list-map {
+.container-list-map {
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -90,7 +89,7 @@
   position: sticky;
   top: 0;
   width: 300px;
-  height: 600px;
+  height: 550px;
 }
 
 .modal-map-container {
@@ -117,7 +116,7 @@
 }
 
 .icon-user {
-  font-size: 30px;
+  font-size: 26px;
 }
 
 .arrow-visible {
@@ -128,7 +127,7 @@
 }
 
 .logo-list {
-  width: 200px;
+  width: 160px;
 }
 
 .message {
@@ -145,15 +144,14 @@
 
 .input-find-doctor {
   width: 50%;
-  margin-right: 5px;
 }
 
-@media (max-width: 1450px) {
+@media (max-width: 1220px) {
   .map-container {
     display: none;
   }
 }
-@media (max-width: 850px) {
+@media (max-width: 780px) {
   .logo-list {
     display: none;
   }
