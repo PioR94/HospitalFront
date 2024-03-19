@@ -12,20 +12,21 @@ export const useLoginUser = (role: string) => {
 
   const [token, setToken] = useState('');
 
+  const defaultValues = {
+    login: role === 'patient' ? 'Jan123' : 'abittner',
+    password: '12345678',
+  };
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<InputsLog>();
+  } = useForm<InputsLog>({
+    defaultValues,
+  });
 
-  const clickRegister = () => {
-    if (role === 'doctor') {
-      navigate('../doctor/add');
-    } else if (role === 'patient') {
-      navigate('../patient/add');
-    }
-  };
+  const clickRegister = () => navigate(`../${role}/add`);
 
   const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
     event?.preventDefault();
