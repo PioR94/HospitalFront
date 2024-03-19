@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent } from 'react';
 import './CreateUserForm.css';
-import { sendData } from '../../api';
+import { sendAndReceiveData, sendData } from '../../api';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { InputMask } from 'primereact/inputmask';
@@ -10,9 +10,12 @@ import { Button } from 'primereact/button';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { InputsAddForm, InputsLog } from '../../types/hook-form/inputs';
 import { useSpecializations } from '../../hooks/useSpecializations';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateUserForm = ({ role }: Role) => {
   const { specializations } = useSpecializations();
+
+  const navigate = useNavigate();
 
   const url = chooseValue(role) || '';
 
@@ -29,7 +32,11 @@ export const CreateUserForm = ({ role }: Role) => {
   const onSubmit: SubmitHandler<InputsLog> = (data: InputsLog, event: BaseSyntheticEvent | undefined) => {
     event?.preventDefault();
 
-    sendData(data, url, 'add');
+    sendAndReceiveData(data, url, 'add').then((r) => {
+      if (r.statusCode === 201) {
+        navigate(`../${role}/log`);
+      }
+    });
   };
 
   return (
